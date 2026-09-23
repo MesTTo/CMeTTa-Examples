@@ -4,6 +4,13 @@
 
 ## Unreleased
 
+- Write chapter 8's socket twin in C against POSIX sockets: C runs the same
+  program on its own listener, client, accepted connection and IPv6 datagram
+  socket, and each engine answer is held against what C's sockets say through
+  `getsockopt`, `getsockname`, `getpeername`, `poll`, `read`, `write`,
+  `sendto` and `recvfrom`; refusals are the kernel's answer to the same
+  operation or the precondition the library states.
+
 - Write chapter 8's URI twin in C: uriparser, C's RFC 3986 library, for the
   strict grammar and section 5.2 resolution; RFC 3986 appendix B's regular
   expression for components, absent told from empty; section 6.2.2
