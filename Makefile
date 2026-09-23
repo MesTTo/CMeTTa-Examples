@@ -58,6 +58,7 @@ $(LIBRARY_TWINS)/38-http_lib: PACKAGES = libcurl
 $(LIBRARY_TWINS)/39-uri_lib: PACKAGES = liburiparser libutf8proc
 $(LIBRARY_TWINS)/41-compression_lib: PACKAGES = zlib libarchive
 $(LIBRARY_TWINS)/42-database_lib: PACKAGES = gmp
+$(LIBRARY_TWINS)/43-testing_lib: PACKAGES = gmp
 $(LIBRARY_TWINS)/42-database_lib: CPPFLAGS += $(SQLITE_CFLAGS)
 $(LIBRARY_TWINS)/42-database_lib: LDLIBS += $(SQLITE_LIBS)
 PACKAGE_CFLAGS = $(if $(PACKAGES),$(patsubst -I%,-isystem %,$(shell pkg-config --cflags $(PACKAGES))))

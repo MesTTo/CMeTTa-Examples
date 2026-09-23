@@ -4,6 +4,15 @@
 
 ## Unreleased
 
+- Write chapter 8's testing twin in C: range is a half-open interval
+  counted in GMP, so a bound past int64 walks the same loop;
+  cartesian-power is an odometer whose last place turns fastest; forall is an
+  all-of loop whose check holds when True is among its answers, foldall a
+  count and once the first witness. A bag assertion is the two counted
+  differences subtraction-atom makes, and a caught failure is held against
+  the missing and excess bags C computes. Each forall form of the original
+  is a C loop over the engine's generator, proving its check on every value.
+
 - Write chapter 8's database twin in C against SQLite: a store is a
   directory holding one SQLite file under SQLite's exclusive locking mode, so
   a second owner is refused for the store's lifetime; values keep insertion
