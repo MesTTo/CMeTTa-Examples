@@ -4,6 +4,15 @@
 
 ## Unreleased
 
+- Write chapter 8's URI twin in C: uriparser, C's RFC 3986 library, for the
+  strict grammar and section 5.2 resolution; RFC 3986 appendix B's regular
+  expression for components, absent told from empty; section 6.2.2
+  normalization in C, dots removed only from anchored paths and a leading
+  double slash without an authority spelled `/.//`, where uriparser's
+  normalizer departs from the library; SWI's per-context character classes
+  for encoding, and strict UTF-8 through utf8proc for decoding. uriparser's
+  headers are staged like cJSON's.
+
 - Write chapter 8's HTTP twin in C against libcurl: every request the
   engine's client makes to the engine's server, C makes too, and the status,
   fields and bytes are held against what libcurl read, fields matched
