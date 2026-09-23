@@ -4,6 +4,12 @@
 
 ## Unreleased
 
+- Write chapter 8's math twin in C: GMP for counts, gcd and lcm, exact
+  ratios, SWI's rationalizing rule, integer roots and modular powers; libm
+  by name for the real functions; `fpclassify` for classes. Rounding an
+  exact value to a double once, and its square root, now live in
+  `exact_oracle.h`, shared with the vector twin.
+
 - Write chapter 8's logging twin in C: RFC 5424's severities as `syslog(3)`
   names them, a C topic table with exact names, the line format, and the
   delivery rule that checks a level always and applies a handler only while
