@@ -4,6 +4,11 @@
 
 ## Unreleased
 
+- Write chapter 8's process twin in C: C runs the same programs itself with
+  `posix_spawnp`, pipes read by `poll(2)` and `waitpid(2)`, watches its own
+  started processes with `WNOHANG` and `kill(2)`, and never reaps or signals
+  the engine's children, which share its process.
+
 - Write chapter 8's system twin in C over the process the engine shares
   with it: C reads the engine's environment writes with `getenv`, the whole
   environment as `environ`, the working directory with `getcwd`, the cores
