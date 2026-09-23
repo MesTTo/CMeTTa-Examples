@@ -4,6 +4,16 @@
 
 ## Unreleased
 
+- Write chapter 8's first thirteen shipped-library twins in C, each library
+  held against the C facility that does the same job: `string.h` and `stdio`
+  for text and files, PCRE2 for regex with `pcre2demo.c`'s global loop, cJSON
+  for JSON documents, paths, lines and files, libcrypto for digests, HMACs
+  and the PBKDF2 password records C verifies from their own fields, `time.h`
+  for calendars, a C ring buffer for the finger tree, C tables for
+  documentation, the textbook algorithms and a decimal bignum for
+  combinatorics, a C map for dictionaries, and GMP for vectors rounded once
+  exactly as the library rounds them.
+
 - Link a program's C libraries through one rule: a program names its
   pkg-config packages in `PACKAGES`, and the build rule compiles against and
   links them, so the per-program flags the OpenBLAS example spelled out are
