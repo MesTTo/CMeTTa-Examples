@@ -4,6 +4,14 @@
 
 ## Unreleased
 
+- Write chapter 8's HTTP twin in C against libcurl: every request the
+  engine's client makes to the engine's server, C makes too, and the status,
+  fields and bytes are held against what libcurl read, fields matched
+  case-insensitively and repeated ones in order. One C description of a
+  request builds the engine's options, drives libcurl and decides each
+  refusal by RFC 9110's rules; the lifecycle refusals run inside
+  `mt_transaction`. libcurl's headers are staged like cJSON's.
+
 - Write chapter 8's statistics twin in C over GMP rationals: every moment
   exact until one rounding, and only where a float was observed; quantiles at
   CPython's positions, the geometric mean summing binary exponents apart from
