@@ -236,20 +236,14 @@ static char *field_line(const char *name, const char *value)
     return line;
 }
 
-/* The request made through libcurl; false when it could not be made. It
-   drops the Accept field libcurl sends by default, the wildcard media
-   range, since the engine's client sends no Accept field and the request is
-   meant to be the same one. With it the engine's server answers 500 on
-   every route, because SWI parses a wildcard media type as an unbound
-   variable its field conversion cannot read [measured 2026-09-24:
-   ai-tmp/probe/accept.c, libcurl's defaults 500, without Accept 200;
-   source: swipl-devel packages/http/http_header.pl, type//1, tag V10.1.14;
-   lib/lib_http/lib_http.pl, native_data/2]. */
+/* The request made through libcurl, with libcurl's default fields; false
+   when it could not be made. Its wildcard Accept field reaches the engine's
+   handler as "*" since lib a5bd767, where the server had answered it 500. */
 static bool fetch(const request *r, exchange *x)
 {
     *x = (exchange){ 0 };
     CURL *curl = curl_easy_init();
-    struct curl_slist *fields = curl_slist_append(NULL, "Accept:");
+    struct curl_slist *fields = NULL;
     char method[16], *line;
     unsigned char *body = NULL;
     size_t i;
