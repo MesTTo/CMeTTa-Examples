@@ -37,6 +37,13 @@
   function and to the equation mt_lower installs. The lane now reads the
   corpus's claim helpers from common.h instead of listing them, and a twin
   rebuilds when a header it shares with its neighbours changes.
+- Write chapter 8's first section, twenty-one twins over atoms, lists and
+  folds. Folds, maps and filters are held against C loops over the same
+  arrays through function pointers; alpha membership and dedupe against
+  mt_unify and mt_alpha_eq; sorting against qsort with mt_order; atom-subst
+  against mt_unify and mt_substitute; closures are mt_function values
+  carrying their context; and the partial applications print through the
+  handles cmetta holds them as.
 
 ## Initial corpus
 
