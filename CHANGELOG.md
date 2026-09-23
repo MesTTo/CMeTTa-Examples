@@ -4,6 +4,13 @@
 
 ## Unreleased
 
+- Write chapter 8's shipped-library twins 25 and 26 in C: graphs as a sorted
+  vertex array and an adjacency matrix rebuilt from vertex and edge lists,
+  with Warshall's closure and Kahn's layered topological order; and Unicode
+  against utf8proc, the library the engine's own binding links, through its
+  named normalization functions, `utf8proc_map` with the same refusals, the
+  property table read as SWI's binding reads it, and its grapheme breaks.
+
 - Write chapter 8's shipped-library twins 23 and 24 in C: sets as children
   kept in the standard order, with membership by `bsearch` and the four
   combinations as one merge keeping chosen Venn regions; and pairs as a
