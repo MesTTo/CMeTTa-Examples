@@ -4,6 +4,10 @@
 
 ## Unreleased
 
+- The vector twin counts a BigRational as a number: its own number test
+  predated the BigRational kind and refused one the library accepts. One
+  test now lives in `exact_oracle.h`, and the statistics twin uses it too.
+
 - Write chapter 8's compression twin in C against zlib and libarchive: C
   inflates what the engine compressed and runs the same file program in a
   directory of its own, staging and publishing by `rename(2)`; archives are

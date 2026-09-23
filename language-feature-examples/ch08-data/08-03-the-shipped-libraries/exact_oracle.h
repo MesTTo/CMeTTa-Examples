@@ -1,9 +1,9 @@
-/* Purpose: GMP as the oracle for the libraries that round exact numbers to
- *   doubles, shared by 13-vector_lib, 35-math_lib and 37-statistics_lib: an
- *   exact rational
- *   rounded once to the nearest double at the final binary64 quantum, ties
- *   to even, so a subnormal rounds once too, and the square root of an exact
- *   rational through a 109-bit integer root rounded to odd first, which keeps
+/* Purpose: GMP as the oracle for the twins that read numbers exactly and
+ *   round them to doubles, shared by 13-vector_lib, 35-math_lib and
+ *   37-statistics_lib: which atoms are numbers, an exact rational rounded
+ *   once to the nearest double at the final binary64 quantum, ties to even,
+ *   so a subnormal rounds once too, and the square root of an exact rational
+ *   through a 109-bit integer root rounded to odd first, which keeps
  *   rounding once. Static inline, so a twin that uses part of it compiles
  *   clean.
  * Assumes: GMP, and common.h included first with MT_SHORTHAND.
@@ -85,6 +85,13 @@ static inline double root(const mpq_t v)
     double out = positive_float(scaled_n, scaled_d);
     mpz_clears(a, b, whole, r, check, one, scaled_n, scaled_d, NULL);
     return out;
+}
+
+/* A MeTTa Number: the five kinds C splits the wire's one number tag into. */
+static inline bool is_number(const mt_atom *x)
+{
+    mt_kind k = mt_kind_of(x);
+    return k == MT_INT || k == MT_BIGINT || k == MT_RATIONAL || k == MT_BIGRATIONAL || k == MT_FLOAT;
 }
 
 /* A number atom as the exact rational it is: an integer or a ratio of any

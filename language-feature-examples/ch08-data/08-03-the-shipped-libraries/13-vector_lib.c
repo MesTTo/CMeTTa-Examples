@@ -182,11 +182,6 @@ static mt_atom *ints(size_t n, const int64_t *xs)
    integer at least zero; a component, or a value to fill with, a number. */
 static mt_atom *verdict(bool holds) { return mt_sym(holds ? "accepted" : "refused"); }
 static bool a_count(const mt_atom *n) { return mt_kind_of(n) == MT_INT && mt_int(n) >= 0; }
-static bool a_number(const mt_atom *x)
-{
-    mt_kind k = mt_kind_of(x);
-    return k == MT_INT || k == MT_FLOAT || k == MT_RATIONAL || k == MT_BIGINT;
-}
 static mt_atom *guarded(mt_atom *goal) { return E("if-error", E("catch", goal), "refused", "accepted"); }
 
 #define V2(a, b) reals(2, (const double[]){ a, b })
@@ -297,10 +292,10 @@ int main(void)
     /* Refusals, before anything is produced. */
     mt_atom *minus_one = HOLD(mt_num(-1)), *bad = HOLD(mt_sym("bad")), *half = HOLD(mt_real(1.5));
     check_answers("a negative count", mt_eval(m, guarded(E("vector-fill", mt_keep(minus_one), 7))), verdict(a_count(minus_one)));
-    check_answers("a value that is no number", mt_eval(m, guarded(E("vector-fill", 0, mt_keep(bad)))), verdict(a_number(bad)));
+    check_answers("a value that is no number", mt_eval(m, guarded(E("vector-fill", 0, mt_keep(bad)))), verdict(is_number(bad)));
     check_answers("a fractional count", mt_eval(m, guarded(E("random-normal-vector", mt_keep(half)))), verdict(a_count(half)));
     check_answers("a component that is no number", mt_eval(m, guarded(E("random-normal-vector", 0, E(mt_keep(bad))))),
-                  verdict(a_number(bad)));
+                  verdict(is_number(bad)));
     mt_atom *first = mt_one(mt_eval(m, E("with-seed", 17, E("random-float", 0, 1))));
     mt_atom *after = mt_one(mt_eval(m, E("with-seed", 17, E("if-error", E("catch", E("random-normal-vector", 3,
                                                      E("quote", E(E("random-float", 0, 1))))), E("random-float", 0, 1), 0))));

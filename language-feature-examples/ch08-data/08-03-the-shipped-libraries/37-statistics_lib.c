@@ -45,8 +45,7 @@ static bool read_sample(const mt_atom *data, sample *s)
     for (size_t i = 0; i < mt_len(data); i++) {
         const mt_atom *x = mt_at(data, i);
         mt_kind kind = mt_kind_of(x);
-        bool number = kind == MT_INT || kind == MT_BIGINT || kind == MT_RATIONAL || kind == MT_BIGRATIONAL || kind == MT_FLOAT;
-        if (!number || (kind == MT_FLOAT && !isfinite(mt_float(x)))) {
+        if (!is_number(x) || (kind == MT_FLOAT && !isfinite(mt_float(x)))) {
             release(s);
             return false;
         }
