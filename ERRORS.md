@@ -123,6 +123,10 @@ from the runner to obtain a passing result.
 - A post-commit drift check initially selected the verification tree's own
   `HEAD` instead of the new repository revision. The output exposed the older
   snapshot; checkout and drift checks were repeated using the explicit commit.
+- A byte-exact provenance audit reported `AssertionError: basics/atom_values.c`:
+  the patch application also normalized surplus EOF whitespace in earlier files.
+  Comparing after that whitespace normalization confirmed that every change
+  was an evidence reference or trailing whitespace; no program body changed.
 
 The duplication audit found one six-line clone, 0.2% of handwritten code:
 the include, identity callback and opening of `main` in the annotation and
