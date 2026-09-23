@@ -4,6 +4,20 @@
 
 ## Unreleased
 
+- Write chapter 8's database twin in C against SQLite: a store is a
+  directory holding one SQLite file under SQLite's exclusive locking mode, so
+  a second owner is refused for the store's lifetime; values keep insertion
+  order as their MeTTa source, removal takes the first alpha-identical row, a
+  file that is no store is refused whole with its bytes kept, and a sync
+  policy with no name is refused before anything is created. The original's
+  segment lets and unify run on a C matcher that follows the engine's rules:
+  two leaves match when identical or, both numbers, by `=:=`, exactly, or as
+  the nearest doubles when a float is involved, as SWI rounds them; a
+  pattern's `(:= X)` becomes a `==/2` guard settled after the match; a
+  search backtracks by cutting its bindings back to a mark. Stored equations
+  are summed exactly in GMP, and `exact_oracle.h` now also gives a number's
+  nearest double.
+
 - The vector twin counts a BigRational as a number: its own number test
   predated the BigRational kind and refused one the library accepts. One
   test now lives in `exact_oracle.h`, and the statistics twin uses it too.

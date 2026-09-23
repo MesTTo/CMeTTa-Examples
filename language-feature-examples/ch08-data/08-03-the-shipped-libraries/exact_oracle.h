@@ -1,11 +1,11 @@
 /* Purpose: GMP as the oracle for the twins that read numbers exactly and
- *   round them to doubles, shared by 13-vector_lib, 35-math_lib and
- *   37-statistics_lib: which atoms are numbers, an exact rational rounded
- *   once to the nearest double at the final binary64 quantum, ties to even,
- *   so a subnormal rounds once too, and the square root of an exact rational
- *   through a 109-bit integer root rounded to odd first, which keeps
- *   rounding once. Static inline, so a twin that uses part of it compiles
- *   clean.
+ *   round them to doubles, shared by 13-vector_lib, 35-math_lib,
+ *   37-statistics_lib and 42-database_lib: which atoms are numbers, an
+ *   exact rational rounded once to the nearest double at the final binary64
+ *   quantum, ties to even, so a subnormal rounds once too, and the square
+ *   root of an exact rational through a 109-bit integer root rounded to odd
+ *   first, which keeps rounding once. Static inline, so a twin that uses
+ *   part of it compiles clean.
  * Assumes: GMP, and common.h included first with MT_SHORTHAND.
  */
 #ifndef EXACT_ORACLE_H
@@ -106,6 +106,19 @@ static inline void exact(mpq_t q, const mt_atom *x)
     case MT_RATIONAL: { mt_ratio r = mt_ratio_of(x); mpq_set_si(q, (long)r.num, (unsigned long)r.den); mpq_canonicalize(q); break; }
     default: mpq_set_d(q, mt_float(x)); break;
     }
+}
+
+/* A number atom as the nearest double, ties to even: a float is itself, and
+   an exact number rounds once, to an infinity past the largest double. */
+static inline double nearest(const mt_atom *x)
+{
+    if (mt_kind_of(x) == MT_FLOAT) return mt_float(x);
+    mpq_t q;
+    mpq_init(q);
+    exact(q, x);
+    double out = rounded(q);
+    mpq_clear(q);
+    return out;
 }
 
 /* GMP's own text back to GMP's allocator. */
