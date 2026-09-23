@@ -4,6 +4,13 @@
 
 ## Unreleased
 
+- Write chapter 8's markup twin in C against libxml2: a strict parse that
+  refuses what a recovering one would repair and any external entity,
+  libxml2's serializer for writing, and the selector language walked in the
+  order SWI's `xpath/3` enumerates. A bare HTML fragment is read the way SWI
+  reads one, nesting unclosed tags, which libxml2's recovering XML reader
+  also does; its HTML parser follows HTML's tree builder instead.
+
 - Write chapter 8's YAML twin in C against libyaml, the library under SWI's
   yaml package: event parsing so an untagged plain scalar is told from a
   tagged or quoted one, the YAML 1.2 core schema's resolution table as the
