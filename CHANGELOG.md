@@ -4,6 +4,13 @@
 
 ## Unreleased
 
+- Write chapter 8's statistics twin in C over GMP rationals: every moment
+  exact until one rounding, and only where a float was observed; quantiles at
+  CPython's positions, the geometric mean summing binary exponents apart from
+  mantissa logs, ranks averaging ties, modes grouped by identity, and the
+  variance's own equation read back out of the space and applied. The wide
+  ratio 1/2^2000 is held in C as a BigRational, which cmetta 23bce3e added.
+
 - Write chapter 8's random twin in C, treating randomness as an input: for
   a seed C takes the engine's own uniform stream and runs the library's
   gamma, beta and Weibull recipes over it in C, exact where the library is

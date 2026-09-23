@@ -1,5 +1,6 @@
 /* Purpose: GMP as the oracle for the libraries that round exact numbers to
- *   doubles, shared by 13-vector_lib and 35-math_lib: an exact rational
+ *   doubles, shared by 13-vector_lib, 35-math_lib and 37-statistics_lib: an
+ *   exact rational
  *   rounded once to the nearest double at the final binary64 quantum, ties
  *   to even, so a subnormal rounds once too, and the square root of an exact
  *   rational through a 109-bit integer root rounded to odd first, which keeps
@@ -86,16 +87,26 @@ static inline double root(const mpq_t v)
     return out;
 }
 
-/* A number atom as the exact rational it is: an integer of any width, a
-   ratio, or a double, which is a dyadic rational. */
+/* A number atom as the exact rational it is: an integer or a ratio of any
+   width, whose wide kinds carry the canonical text mpq_set_str() reads, or a
+   double, which is a dyadic rational. */
 static inline void exact(mpq_t q, const mt_atom *x)
 {
     switch (mt_kind_of(x)) {
     case MT_INT: mpq_set_si(q, (long)mt_int(x), 1); break;
-    case MT_BIGINT: mpq_set_str(q, mt_name(x), 10); break;
+    case MT_BIGINT:
+    case MT_BIGRATIONAL: mpq_set_str(q, mt_name(x), 10); break;
     case MT_RATIONAL: { mt_ratio r = mt_ratio_of(x); mpq_set_si(q, (long)r.num, (unsigned long)r.den); mpq_canonicalize(q); break; }
     default: mpq_set_d(q, mt_float(x)); break;
     }
+}
+
+/* GMP's own text back to GMP's allocator. */
+static inline void gmp_release(char *text)
+{
+    void (*release)(void *, size_t);
+    mp_get_memory_functions(NULL, NULL, &release);
+    release(text, strlen(text) + 1);
 }
 
 /* An exact integer atom from GMP: an Int when it fits, a BigInt when not. */
@@ -103,9 +114,18 @@ static inline mt_atom *integer_of(const mpz_t z)
 {
     char *digits = mpz_get_str(NULL, 10, z);
     mt_atom *out = mt_bigint(digits);
-    void (*release)(void *, size_t);
-    mp_get_memory_functions(NULL, NULL, &release);
-    release(digits, strlen(digits) + 1);
+    gmp_release(digits);
+    return out;
+}
+
+/* An exact rational atom from a canonical mpq: GMP writes N/D, or N alone
+   for a whole one, and the constructor for that text picks the kind the value
+   is, Int, BigInt, Rational or BigRational. */
+static inline mt_atom *rational_of(const mpq_t q)
+{
+    char *text = mpq_get_str(NULL, 10, q);
+    mt_atom *out = strchr(text, '/') ? mt_bigrational(text) : mt_bigint(text);
+    gmp_release(text);
     return out;
 }
 
