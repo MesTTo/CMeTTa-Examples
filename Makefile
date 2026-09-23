@@ -56,6 +56,7 @@ $(LIBRARY_TWINS)/36-random_lib: PACKAGES = gmp
 $(LIBRARY_TWINS)/37-statistics_lib: PACKAGES = gmp
 $(LIBRARY_TWINS)/38-http_lib: PACKAGES = libcurl
 $(LIBRARY_TWINS)/39-uri_lib: PACKAGES = liburiparser libutf8proc
+$(LIBRARY_TWINS)/41-compression_lib: PACKAGES = zlib libarchive
 PACKAGE_CFLAGS = $(if $(PACKAGES),$(patsubst -I%,-isystem %,$(shell pkg-config --cflags $(PACKAGES))))
 PACKAGE_LIBS = $(if $(PACKAGES),$(shell pkg-config --libs $(PACKAGES)))
 $(SQL_PROGRAMS): CPPFLAGS += $(SQLITE_CFLAGS)

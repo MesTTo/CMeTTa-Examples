@@ -4,6 +4,14 @@
 
 ## Unreleased
 
+- Write chapter 8's compression twin in C against zlib and libarchive: C
+  inflates what the engine compressed and runs the same file program in a
+  directory of its own, staging and publishing by `rename(2)`; archives are
+  read seekably with a gzip layer decoded first, names follow PKWARE's
+  APPNOTE through C's own central-directory reader and iconv's CP437, and
+  extraction refuses the library's unportable names before publishing.
+  libarchive's headers are staged like cJSON's.
+
 - Write chapter 8's socket twin in C against POSIX sockets: C runs the same
   program on its own listener, client, accepted connection and IPv6 datagram
   socket, and each engine answer is held against what C's sockets say through
