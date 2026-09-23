@@ -4,6 +4,13 @@
 
 ## Unreleased
 
+- Write chapter 8's shipped-library twins 21 and 22 in C: the sorted map and
+  the priority queue against rows C keeps in the standard order with
+  `mt_compare`, Okasaki's two-stack queue, and the finger tree's sequence as
+  an array; and the functional utilities against C operations over functions
+  that answer any number of values, walked depth first so a branching
+  function gives C the engine's alternatives in the engine's order.
+
 - Write chapter 8's shipped-library twins 18 to 20 in C: strings against
   utf8proc over codepoints with Wagner-Fischer, SWI's ISub, its paragraph
   filler and its interpolation spelled in C; files against POSIX, with C's
