@@ -6,33 +6,16 @@
  *   verified the way C would: split at its dollars, the salt decoded from
  *   base64, PBKDF2-HMAC-SHA512 derived again for the stated iterations and
  *   compared with the digest the record carries.
- * Assumes: libcrypto 3, found through pkg-config.
+ * Assumes: libcrypto 3, found through pkg-config; hex and digests come from
+ *   crypto_oracle.h, which 16-the_prolog_rung shares.
  * Guarantees: all eighteen claims of the original hold [tested: make twins;
  *   commit=WORKTREE].
  */
 #define MT_SHORTHAND
 #include "common.h"
-#include <openssl/crypto.h>
-#include <openssl/evp.h>
+#include "crypto_oracle.h"
 
 enum { MOST = 64 };
-
-/* Bytes as lowercase hex, the spelling lib_crypto answers in. */
-static mt_atom *hex(const unsigned char *bytes, size_t n)
-{
-    char out[2 * MOST + 1];
-    for (size_t i = 0; i < n; i++) snprintf(out + 2 * i, 3, "%02x", bytes[i]);
-    out[2 * n] = '\0';
-    return mt_text(out);
-}
-
-static mt_atom *digest(const char *algorithm, const void *data, size_t n)
-{
-    unsigned char md[MOST];
-    size_t length;
-    require("EVP_Q_digest", EVP_Q_digest(NULL, algorithm, NULL, data, n, md, &length));
-    return hex(md, length);
-}
 
 static mt_atom *hmac(const char *algorithm, const void *key, size_t key_n, const void *data, size_t data_n)
 {

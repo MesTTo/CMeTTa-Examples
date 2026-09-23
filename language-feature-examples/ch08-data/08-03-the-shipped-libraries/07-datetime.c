@@ -15,14 +15,7 @@
 #define MT_SHORTHAND
 #include "common.h"
 #include <math.h>
-#include <time.h>
-
-static struct tm utc(time_t t)
-{
-    struct tm tm;
-    require("gmtime_r", gmtime_r(&t, &tm) != NULL);
-    return tm;
-}
+#include "time_oracle.h"
 
 static struct tm civil(int year, int month, int day)
 {
@@ -33,16 +26,6 @@ static time_t timestamp(int year, int month, int day)
 {
     struct tm tm = civil(year, month, day);
     return timegm(&tm);
-}
-
-/* strftime's text for t in UTC, as a symbol, the kind the engine names a
-   weekday or a month with. */
-static mt_atom *named(time_t t, const char *format)
-{
-    char out[64];
-    struct tm tm = utc(t);
-    require("strftime", strftime(out, sizeof out, format, &tm) > 0);
-    return mt_sym(out);
 }
 
 static double parsed(const char *text, const char *format)

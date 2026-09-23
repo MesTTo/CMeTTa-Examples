@@ -4,6 +4,15 @@
 
 ## Unreleased
 
+- Write chapter 8's shipped-library twins 14 to 17 in C: reflection with C
+  sets over the engine's enumerations, cJSON over `surface-json` and a C
+  rewrite walk for `atom-replace`; the finger tree's internals against the
+  Hinze-Paterson operations in C; the libraries' underscore spellings against
+  the same oracles as their libraries' own twins; and CSV against an RFC 4180
+  reader and writer in C over the bytes on disk. The oracles two twins share
+  now live once, in `pcre_oracle.h`, `crypto_oracle.h`, `time_oracle.h` and
+  `conformance_report.h` beside them.
+
 - Write chapter 8's first thirteen shipped-library twins in C, each library
   held against the C facility that does the same job: `string.h` and `stdio`
   for text and files, PCRE2 for regex with `pcre2demo.c`'s global loop, cJSON
