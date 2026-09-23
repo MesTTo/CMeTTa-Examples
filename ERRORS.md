@@ -120,6 +120,9 @@ from the runner to obtain a passing result.
   `borrowed_storage.c`, `daemon.c`, `native_iterator.c`, `reentrant_events.c`,
   `standing_queries.c`, `space_lifetime.c` and `pln_uncertain_reasoning.c`.
   Removed only their surplus trailing blank lines before committing.
+- A post-commit drift check initially selected the verification tree's own
+  `HEAD` instead of the new repository revision. The output exposed the older
+  snapshot; checkout and drift checks were repeated using the explicit commit.
 
 The duplication audit found one six-line clone, 0.2% of handwritten code:
 the include, identity callback and opening of `main` in the annotation and
