@@ -4,6 +4,15 @@
 
 ## Unreleased
 
+- Write chapter 8's shipped-library twins 18 to 20 in C: strings against
+  utf8proc over codepoints with Wagner-Fischer, SWI's ISub, its paragraph
+  filler and its interpolation spelled in C; files against POSIX, with C's
+  own `FILE*` beside each engine handle, `fts(3)` for walks, `fnmatch(3)`
+  under CPython's glob selector for globs, `realpath(3)` and posixpath's
+  lexical rules; and spaces against C's model of each space matched with
+  `mt_unify`, under the multiset and remove-every-copy rules measured on the
+  engine.
+
 - Write chapter 8's shipped-library twins 14 to 17 in C: reflection with C
   sets over the engine's enumerations, cJSON over `surface-json` and a C
   rewrite walk for `atom-replace`; the finger tree's internals against the
