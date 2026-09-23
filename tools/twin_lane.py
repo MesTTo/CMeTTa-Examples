@@ -90,12 +90,22 @@ SOURCE_DOORS = ("mt_run", "mt_do", "mt_load", "mt_parse", "mt_parsen", "mt_forms
 FORM_LITERAL = re.compile(r'^\s*!?\(.*\)\s*$|\$[A-Za-z_]', re.S)
 
 #: Calls whose string arguments are text or a label, never structure.
+def claim_helpers(header: Path) -> frozenset[str]:
+    """The corpus's claim helpers, whose first argument is a claim's words:
+    every function and macro common.h declares with `claim` or `what` as its
+    first parameter. Read rather than listed, so a helper added there is text
+    here too; the list this replaced had missed check_answers_ and
+    check_list_, the array forms behind check_answers and check_list."""
+    source = header.read_text(encoding="utf-8")
+    functions = re.findall(r"^\s*\w+\s+(\w+)\s*\(\s*const char \*(?:claim|what)\b", source, re.M)
+    macros = re.findall(r"^#define\s+(\w+)\(\s*(?:claim|what)\b", source, re.M)
+    return frozenset(functions + macros)
+
+
 TEXT_CALLS = frozenset({
     "mt_text", "mt_textn", "T", "printf", "fprintf", "puts", "fputs", "snprintf",
-    "check", "check_int", "check_real", "check_text", "check_atom",
-    "check_answers", "check_list", "check_none", "require", "strcmp", "strncmp", "strstr",
-    "mt_fail", "mt_error_set", "perror",
-})
+    "strcmp", "strncmp", "strstr", "mt_fail", "mt_error_set", "perror",
+}) | claim_helpers(ROOT / "common.h")
 
 
 # ---------------------------------------------------------------- the original

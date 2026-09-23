@@ -24,6 +24,9 @@ SOURCES := $(shell find $(HANDWRITTEN) $(TWINS_DIR) -name '*.c' \
 PROGRAMS := $(patsubst %.c,build/%,$(SOURCES))
 TWIN_PROGRAMS := $(filter build/$(TWINS_DIR)/%,$(PROGRAMS))
 HAND_PROGRAMS := $(filter-out $(TWIN_PROGRAMS),$(PROGRAMS))
+# A twin may include a header shared with its neighbours, as an import is.
+TWIN_HEADERS := $(shell find $(TWINS_DIR) -name '*.h' 2>/dev/null)
+$(TWIN_PROGRAMS): $(TWIN_HEADERS)
 
 SQLITE_CFLAGS ?= $(shell pkg-config --cflags sqlite3 2>/dev/null)
 SQLITE_LIBS ?= $(shell pkg-config --libs sqlite3 2>/dev/null)

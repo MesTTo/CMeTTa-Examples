@@ -1,0 +1,54 @@
+/* Purpose: each arm of a conditional binds on its own. Four functions whose
+ *   arms bind a name with let* are written once as macro bodies over their
+ *   operators: expanded with C's ?: and comma operator they are C functions,
+ *   and expanded to MeTTa tokens they are the equations mt_lower installs.
+ *   The engine's answers must be the C functions' answers.
+ * Guarantees: all five claims of the original hold [tested: make twins;
+ *   commit=WORKTREE].
+ */
+#define MT_SHORTHAND
+#include "common.h"
+
+/* Comparisons as functions, so C compiles a < a as the question the
+   original asks rather than folding it as a tautology. */
+static bool less(int64_t a, int64_t b) { return a < b; }
+static bool greater(int64_t a, int64_t b) { return a > b; }
+
+/* let* ((name value)) body: in C the comma operator runs the binding and
+   yields the body. */
+#define C_LET(name, value, body) ((void)(value), (body))
+#define M_LET(name, value, body) (let* ((name value)) body)
+#define C_IF(c, t, e) ((c) ? (t) : (e))
+#define M_IF(c, t, e) (if c t e)
+#define C_LT(a, b) less(a, b)
+#define M_LT(a, b) (< a b)
+#define C_GT(a, b) greater(a, b)
+#define M_GT(a, b) (> a b)
+
+#define PICK_ELSE(IF, LT, GT, LET, a, b) IF(LT(a, a), LET($c, a, a), b)
+#define PICK_THEN(IF, LT, GT, LET, a, b) IF(GT(a, 0), LET($c, a, a), b)
+#define BOTH(IF, LT, GT, LET, a, b) IF(GT(a, b), LET($c, 1, a), LET($d, 1, b))
+
+static int64_t pick_else(int64_t a, int64_t b) { return PICK_ELSE(C_IF, C_LT, C_GT, C_LET, a, b); }
+static int64_t pick_then(int64_t a, int64_t b) { return PICK_THEN(C_IF, C_LT, C_GT, C_LET, a, b); }
+static int64_t both(int64_t a, int64_t b) { return BOTH(C_IF, C_LT, C_GT, C_LET, a, b); }
+
+/* A case over a boolean with a True and a False arm is ?: as well. */
+static int64_t case_else(int64_t a, int64_t b) { return less(a, a) ? a : b; }
+
+int main(void)
+{
+    metta *m = open_engine();
+    require("pick-else", mt_lower(m, (pick-else $a $b), PICK_ELSE(M_IF, M_LT, M_GT, M_LET, $a, $b)));
+    require("pick-then", mt_lower(m, (pick-then $a $b), PICK_THEN(M_IF, M_LT, M_GT, M_LET, $a, $b)));
+    require("case-else", mt_lower(m, (case-else $a $b),
+                                  (case (< $a $a) ((True (let* (($c $a)) $a)) (False $b)))));
+    require("both", mt_lower(m, (both $a $b), BOTH(M_IF, M_LT, M_GT, M_LET, $a, $b)));
+
+    check_answers("(pick-else 1 2)", mt_eval(m, E("pick-else", 1, 2)), pick_else(1, 2));
+    check_answers("(pick-then 1 2)", mt_eval(m, E("pick-then", 1, 2)), pick_then(1, 2));
+    check_answers("(case-else 3 4)", mt_eval(m, E("case-else", 3, 4)), case_else(3, 4));
+    check_answers("(both 5 2)", mt_eval(m, E("both", 5, 2)), both(5, 2));
+    check_answers("(both 2 5)", mt_eval(m, E("both", 2, 5)), both(2, 5));
+    return done(m);
+}
