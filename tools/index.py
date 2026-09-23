@@ -27,7 +27,10 @@ BEGIN, END = "<!-- coverage:begin -->", "<!-- coverage:end -->"
 
 def purpose(path: Path) -> str:
     """A program's Purpose field, as one line."""
-    hit = re.search(r"/\* Purpose: (.*?)(?:\n \* [A-Z][a-z-]+:|\*/)", path.read_text(), re.S)
+    # A field starts where a line has one space after its asterisk, and a
+    # continuation is indented further, so Purpose ends at the next field,
+    # whatever its name: Owns resources, or a lane note such as text:.
+    hit = re.search(r"/\* Purpose: (.*?)(?:\n \* \S|\*/)", path.read_text(), re.S)
     if not hit:
         raise SystemExit(f"{path.relative_to(ROOT)} has no Purpose field")
     text = " ".join(line.strip(" *") for line in hit.group(1).splitlines())
