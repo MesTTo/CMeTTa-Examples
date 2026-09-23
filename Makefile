@@ -31,8 +31,18 @@ $(TWIN_PROGRAMS): $(TWIN_HEADERS)
 SQLITE_CFLAGS ?= $(shell pkg-config --cflags sqlite3 2>/dev/null)
 SQLITE_LIBS ?= $(shell pkg-config --libs sqlite3 2>/dev/null)
 SQL_PROGRAMS := build/integration/sqlite_space build/integration/persistent_migration build/gallery/journaled_observed_store
-build/gallery/symbolic_tensors: CPPFLAGS += $(patsubst -I%,-isystem %,$(shell pkg-config --cflags openblas))
-build/gallery/symbolic_tensors: LDLIBS += $(shell pkg-config --libs openblas)
+# A program that links a C library beyond libc names that library's pkg-config
+# packages, the one fact per program; the build rule below compiles and links
+# them. A twin that holds a shipped library against the C library doing the
+# same job is the usual case.
+LIBRARY_TWINS := build/$(TWINS_DIR)/ch08-data/08-03-the-shipped-libraries
+build/gallery/symbolic_tensors: PACKAGES = openblas
+$(LIBRARY_TWINS)/04-regex_lib: PACKAGES = libpcre2-8
+$(LIBRARY_TWINS)/05-json_lib: PACKAGES = libcjson
+$(LIBRARY_TWINS)/06-crypto_lib: PACKAGES = libcrypto
+$(LIBRARY_TWINS)/13-vector_lib: PACKAGES = gmp
+PACKAGE_CFLAGS = $(if $(PACKAGES),$(patsubst -I%,-isystem %,$(shell pkg-config --cflags $(PACKAGES))))
+PACKAGE_LIBS = $(if $(PACKAGES),$(shell pkg-config --libs $(PACKAGES)))
 $(SQL_PROGRAMS): CPPFLAGS += $(SQLITE_CFLAGS)
 $(SQL_PROGRAMS): LDLIBS += $(SQLITE_LIBS)
 $(SQL_PROGRAMS): build/support/sqlite_store.o
@@ -68,7 +78,7 @@ build/tools/original: tools/original.c build/lane.o
 
 build/%: %.c common.h lane.h build/common.o build/lane.o $(CMETTA_DIR)/libcmetta.so
 	@mkdir -p $(@D)
-	$(CC) $(CPPFLAGS) $(CFLAGS) $< build/common.o build/lane.o $(filter build/support/%.o,$^) $(LDFLAGS) $(LDLIBS) -o $@
+	$(CC) $(CPPFLAGS) $(PACKAGE_CFLAGS) $(CFLAGS) $< build/common.o build/lane.o $(filter build/support/%.o,$^) $(LDFLAGS) $(LDLIBS) $(PACKAGE_LIBS) -o $@
 
 # The hand-written programs prove their own claims; the twins are run by the
 # lane, beside their originals, so each is compared as well as run.

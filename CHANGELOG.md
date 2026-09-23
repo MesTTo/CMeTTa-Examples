@@ -4,6 +4,12 @@
 
 ## Unreleased
 
+- Link a program's C libraries through one rule: a program names its
+  pkg-config packages in `PACKAGES`, and the build rule compiles against and
+  links them, so the per-program flags the OpenBLAS example spelled out are
+  one line each. The library twins of chapter 8 link PCRE2, cJSON, libcrypto
+  and GMP this way.
+
 - Run each twin from the engine tree, where its original runs and where the
   Python lane runs its twins, so a path an original writes relative to the
   tree, a fixture beside it, names the same file in C. Twins ran from this

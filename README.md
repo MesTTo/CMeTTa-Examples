@@ -42,9 +42,10 @@ what exists, and [COVERAGE.md](COVERAGE.md) lists the rest.
 
 ## Running them
 
-You need a C11 compiler, Make, Python 3, pkg-config, SQLite's development
-files, OpenBLAS, and the patched SWI-Prolog 10 the engine runs on, first on
-your `PATH`; the engine refuses a stock SWI-Prolog when it boots, and
+You need a C11 compiler, Make, Python 3, pkg-config, the development files
+of the C libraries the programs link (SQLite, OpenBLAS, PCRE2, cJSON,
+OpenSSL's libcrypto and GMP, each found through pkg-config), and the patched
+SWI-Prolog 10 the engine runs on, first on your `PATH`; the engine refuses a stock SWI-Prolog when it boots, and
 [docs/patched-host.md](https://github.com/MesTTo/MeTTa/blob/main/docs/patched-host.md)
 shows how to build and declare the patched one. Clone MeTTa beside this
 repository: its `examples/` are the originals the twins are held against, and
