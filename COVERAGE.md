@@ -11,7 +11,7 @@ Every MeTTa original the Python seat twins has a C twin at the same path or an `
 | `ch03-atoms-and-expressions` | 6 | 6 | 6 | 0 | 0 |
 | `ch04-spaces-and-matching` | 21 | 19 | 19 | 0 | 0 |
 | `ch05-equations-and-evaluation` | 26 | 26 | 26 | 0 | 0 |
-| `ch06-many-answers` | 10 | 10 | 0 | 0 | 0 |
+| `ch06-many-answers` | 10 | 10 | 10 | 0 | 0 |
 | `ch07-control-flow` | 44 | 42 | 0 | 0 | 0 |
 | `ch08-data` | 70 | 70 | 0 | 0 | 0 |
 | `ch09-types` | 24 | 21 | 0 | 0 | 0 |
@@ -26,11 +26,11 @@ Every MeTTa original the Python seat twins has a C twin at the same path or an `
 | `ch19-spaces-backed-by-anything` | 10 | 10 | 0 | 0 | 0 |
 | `ch20-extending-the-engine` | 52 | 38 | 0 | 0 | 0 |
 | `ch22-a-reasoner-you-can-serve` | 33 | 27 | 0 | 0 | 0 |
-| **all** | 366 | 323 | 51 | 0 | 0 |
+| **all** | 366 | 323 | 61 | 0 | 0 |
 
 ## Residue
 
-272 originals the Python seat twins have neither a C twin nor a residue entry yet.
+262 originals the Python seat twins have neither a C twin nor a residue entry yet.
 
 
 ## The Python seat's own examples
