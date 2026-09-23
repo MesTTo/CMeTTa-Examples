@@ -4,6 +4,10 @@
 
 ## Unreleased
 
+- Write chapter 8's UUID twin in C against libuuid: random and time-based
+  generation, the name-based generators over its namespace templates,
+  parsing and lower-case text, and the version, variant and time fields.
+
 - Write chapter 8's process twin in C: C runs the same programs itself with
   `posix_spawnp`, pipes read by `poll(2)` and `waitpid(2)`, watches its own
   started processes with `WNOHANG` and `kill(2)`, and never reaps or signals
