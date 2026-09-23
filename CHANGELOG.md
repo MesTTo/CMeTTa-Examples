@@ -4,6 +4,11 @@
 
 ## Unreleased
 
+- Write chapter 8's logging twin in C: RFC 5424's severities as `syslog(3)`
+  names them, a C topic table with exact names, the line format, and the
+  delivery rule that checks a level always and applies a handler only while
+  its topic is on.
+
 - Write chapter 8's UUID twin in C against libuuid: random and time-based
   generation, the name-based generators over its namespace templates,
   parsing and lower-case text, and the version, variant and time fields.
