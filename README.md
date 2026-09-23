@@ -12,24 +12,35 @@ A wrong result exits unsuccessfully, including builds with `NDEBUG`.
 
 ## Build and run
 
-You need a C11 compiler, Make, SWI-Prolog 10 with development headers, Git,
-Python 3 for build tooling, pkg-config, SQLite development files and OpenBLAS.
-CMake is needed for the installed CMake consumer. No Python runtime is embedded.
+You need a C11 compiler, Make, Git, Python 3 for build tooling, pkg-config,
+SQLite development files and OpenBLAS, and the patched SWI-Prolog 10 the MeTTa
+engine runs on, first on your `PATH`. The engine refuses a stock SWI-Prolog
+when it boots; [docs/patched-host.md](https://github.com/MesTTo/MeTTa/blob/main/docs/patched-host.md)
+shows how to build and declare the patched one, and its install carries the
+development headers. CMake is needed for the installed CMake consumer. No
+Python runtime is embedded.
 
-Set the two paths to your MeTTa checkout and its C component. The component
-must include the fixes listed in [ERRORS.md](ERRORS.md), including `mt_matcher`
+Clone MeTTa beside this repository. Its C component, `extensions/cmetta`,
+includes every repair listed in [ERRORS.md](ERRORS.md), such as `mt_matcher`
 and `mt_effect_plan`.
 
 ```sh
-export CMETTA_ENGINE=/home/user/Dev/PyPeTTa1/PeTTa/ai-tmp/wt-merge
-export CMETTA_DIR="$CMETTA_ENGINE/extensions/cmetta"
+git clone --recurse-submodules https://github.com/MesTTo/MeTTa.git ../MeTTa
 make surface
 make -j8 all
 make check JOBS=4
 make check-consumers
 ```
 
-Run these commands from this repository root. To run one example:
+Run these commands from this repository root. For a MeTTa checkout somewhere
+else, name it and its C component:
+
+```sh
+export CMETTA_ENGINE="$HOME/src/MeTTa"
+export CMETTA_DIR="$CMETTA_ENGINE/extensions/cmetta"
+```
+
+To run one example:
 
 ```sh
 ./build/basics/first_steps
