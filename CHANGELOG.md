@@ -4,6 +4,13 @@
 
 ## Unreleased
 
+- Write chapter 8's shipped-library twins 23 and 24 in C: sets as children
+  kept in the standard order, with membership by `bsearch` and the four
+  combinations as one merge keeping chosen Venn regions; and pairs as a
+  relation read with projections, a stable insertion sort, groups as runs of
+  equal keys and lookup by term identity. Twins 21 and 22 no longer leak the
+  temporaries they handed to borrowing helpers.
+
 - Write chapter 8's shipped-library twins 21 and 22 in C: the sorted map and
   the priority queue against rows C keeps in the standard order with
   `mt_compare`, Okasaki's two-stack queue, and the finger tree's sequence as

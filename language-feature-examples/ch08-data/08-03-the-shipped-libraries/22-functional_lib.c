@@ -412,10 +412,11 @@ int main(void)
     require("grade", mt_def(m, (mt_op){ .name = "grade", .arity = 1, .effect = MT_PURE, .fn = applied, .user = &graded }));
 
     /* zip stops at the shorter collection; unzip inverts it. */
+    mt_atom *none = mt_unit(), *just_a = E("a");
     mt_atom *nums = E(1, 2, 3), *abc = E("a", "b", "c"), *ab = E("a", "b"), *pairs = E(E(1, "a"), E(2, "b")), *one_two = E(1, 2);
     check_answers("zip", mt_eval(m, E("zip", mt_keep(nums), mt_keep(abc))), zipped(nums, abc));
     check_answers("zip stops at the shorter", mt_eval(m, E("zip", mt_keep(nums), mt_keep(ab))), zipped(nums, ab));
-    check_answers("zip with nothing", mt_eval(m, E("zip", mt_unit(), E("a"))), zipped(mt_unit(), E("a")));
+    check_answers("zip with nothing", mt_eval(m, E("zip", mt_unit(), mt_keep(just_a))), zipped(none, just_a));
     check_answers("unzip", mt_eval(m, E("unzip", mt_keep(pairs))), unzipped(pairs));
     mt_atom *rezipped = zipped(one_two, ab);
     check_answers("unzip inverts zip", mt_eval(m, E("unzip", E("zip", mt_keep(one_two), mt_keep(ab)))), unzipped(rezipped));
@@ -431,7 +432,7 @@ int main(void)
     /* chunk cuts, window slides. */
     check_answers("chunk", mt_eval(m, E("chunk", mt_keep(five), 2)), pieces(five, 2, 2, true));
     check_answers("chunk evenly", mt_eval(m, E("chunk", mt_keep(four), 2)), pieces(four, 2, 2, true));
-    check_answers("no chunks of nothing", mt_eval(m, E("chunk", mt_unit(), 2)), pieces(mt_unit(), 2, 2, true));
+    check_answers("no chunks of nothing", mt_eval(m, E("chunk", mt_unit(), 2)), pieces(none, 2, 2, true));
     check_answers("window", mt_eval(m, E("window", mt_keep(four), 2)), pieces(four, 2, 1, false));
     check_answers("one whole window", mt_eval(m, E("window", mt_keep(nums), 3)), pieces(nums, 3, 1, false));
     check_answers("no window wider than the collection", mt_eval(m, E("window", mt_keep(one_two), 3)), pieces(one_two, 3, 1, false));
@@ -448,7 +449,7 @@ int main(void)
 
     /* partition reads the verdict. */
     check_answers("partition", mt_eval(m, E("partition", "odd?", mt_keep(four))), partitioned(odd, four));
-    check_answers("partition of nothing", mt_eval(m, E("partition", "odd?", mt_unit())), partitioned(odd, mt_unit()));
+    check_answers("partition of nothing", mt_eval(m, E("partition", "odd?", mt_unit())), partitioned(odd, none));
     check_answers("a lambda test", mt_eval(m, E("partition", lambda(E(V("x")), E(">", V("x"), 10)), mt_keep(one_two))),
                   partitioned(above_ten, one_two));
     mt_atom *chars = E(T("a"), T("1"));
@@ -459,7 +460,7 @@ int main(void)
     mt_atom *scores = E(80, 20, 90), *shuffled = E(3, 1, 2), *rows = E(E("b", 1), E("a", 1), E("c", 0));
     check_answers("group-by", mt_eval(m, E("group-by", "odd?", mt_keep(four))), only(grouped(odd, four)));
     check_answers("group-by grade", mt_eval(m, E("group-by", "grade", mt_keep(scores))), only(grouped(grade, scores)));
-    check_answers("no groups of nothing", mt_eval(m, E("group-by", "odd?", mt_unit())), only(grouped(odd, mt_unit())));
+    check_answers("no groups of nothing", mt_eval(m, E("group-by", "odd?", mt_unit())), only(grouped(odd, none)));
     check_answers("sort-by", mt_eval(m, E("sort-by", "double", mt_keep(shuffled))), sorted_by(twice, shuffled));
     check_answers("a stable sort", mt_eval(m, E("sort-by", lambda(E(V("p")), E("index-atom", V("p"), 1)), mt_keep(rows))),
                   sorted_by(second, rows));
@@ -467,10 +468,10 @@ int main(void)
     /* scan answers the running results; unfold grows a seed. */
     mt_atom *start = mt_num(0);
     check_answers("scan", mt_eval(m, E("scan", "+", 0, mt_keep(nums))), only(scanned(sum, start, nums)));
-    check_answers("scan of nothing is the start", mt_eval(m, E("scan", "+", 0, mt_unit())), only(scanned(sum, start, mt_unit())));
+    check_answers("scan of nothing is the start", mt_eval(m, E("scan", "+", 0, mt_unit())), only(scanned(sum, start, none)));
     check_answers("scan with a lambda",
                   mt_eval(m, E("scan", lambda(E(V("acc"), V("x")), E("cons-atom", V("x"), V("acc"))), mt_unit(), mt_keep(one_two))),
-                  only(scanned(cons_onto, mt_unit(), one_two)));
+                  only(scanned(cons_onto, none, one_two)));
     mt_atom *first_seed = mt_num(1);
     check_answers("unfold",
                   mt_eval(m, E("unfold", lambda(E(V("n")), E("if", E("<", V("n"), 4), E(V("n"), E("+", V("n"), 1)), E("empty"))), 1)),
@@ -592,7 +593,7 @@ int main(void)
     check_answers("pipe keeps data", mt_eval(m, E("pipe", E(lambda(E(V("data")), E("quote", V("data")))), E("quote", mt_keep(arith)))),
                   only(piped(identity_stage, 1, arith)));
 
-    mt_atom *held[] = { nums, abc, ab, pairs, one_two, lone, four, five, nested, inner, deep, hollow, chars, scores, shuffled, rows,
+    mt_atom *held[] = { none, just_a, nums, abc, ab, pairs, one_two, lone, four, five, nested, inner, deep, hollow, chars, scores, shuffled, rows,
                         start, first_seed, three, five_only, zero_one, seed, one_arg, arith, error, literal, heads, wrapped,
                         with_three, just_arith, a };
     for (size_t i = 0; i < sizeof held / sizeof *held; i++) mt_drop(held[i]);

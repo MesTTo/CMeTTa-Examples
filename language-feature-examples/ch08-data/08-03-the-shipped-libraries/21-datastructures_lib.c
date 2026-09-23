@@ -270,7 +270,8 @@ int main(void)
     require("durian is absent", lookup(&book, durian) == NULL);
     check_none("an absent key has no answer", mt_eval(m, E("map-get", mt_keep(prices), mt_keep(durian))));
     check_answers("map-get-or", mt_eval(m, E("map-get-or", mt_keep(prices), mt_keep(durian), 0)), (int64_t)0);
-    check_answers("map-has", mt_eval(m, E("map-has", mt_keep(prices), "apple")), B(lookup(&book, S("apple")) != NULL));
+    mt_atom *apple = S("apple");
+    check_answers("map-has", mt_eval(m, E("map-has", mt_keep(prices), mt_keep(apple))), B(lookup(&book, apple) != NULL));
     check_answers("map-has nothing", mt_eval(m, E("map-has", mt_keep(prices), mt_keep(durian))), B(lookup(&book, durian) != NULL));
     check_answers("map-min", mt_eval(m, E("map-min", mt_keep(prices))), pair_at(&book, 0));
     check_answers("map-max", mt_eval(m, E("map-max", mt_keep(prices))), pair_at(&book, book.n - 1));
@@ -421,7 +422,7 @@ int main(void)
     check_answers("a recipe specialized to one map", mt_eval(m, E("map-pairs", E(specialized, mt_keep(plum)))),
                   pairs_done(without(&book, plum)));
 
-    mt_atom *held[] = { fruit, pear, durian, prices, six, raised, k, v, twice, number, chores, work, tie, zero, rise, two, boil,
+    mt_atom *held[] = { fruit, pear, durian, apple, prices, six, raised, k, v, twice, number, chores, work, tie, zero, rise, two, boil,
                         early, ties, one, c, a, repeated, same_var, loose, two_vars, x, sum, literal, empty_queue, empty_map,
                         choices[0], choices[1], plum };
     for (size_t i = 0; i < sizeof held / sizeof *held; i++) mt_drop(held[i]);
