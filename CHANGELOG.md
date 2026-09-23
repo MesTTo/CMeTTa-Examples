@@ -44,6 +44,11 @@
   against mt_unify and mt_substitute; closures are mt_function values
   carrying their context; and the partial applications print through the
   handles cmetta holds them as.
+- Write chapter 8's sequence-variable section, five twins sharing
+  segments.h, where seg("x") spells (:seg $x) and a run is a slice view of
+  the children. The splits a two-gap pattern enumerates are checked against
+  the separator positions a C loop finds, and a caught refusal is read apart
+  as the original reads it.
 
 ## Initial corpus
 
