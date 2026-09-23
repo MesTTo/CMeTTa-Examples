@@ -54,6 +54,30 @@ metta *open_engine(void)
     return runtime;
 }
 
+/* Join source fragments before one run so program order and source identity
+ * retain the engine's semantics. Time and space: O(B), B source bytes.
+ */
+void check_program(metta *runtime, const char *const *fragments, size_t count)
+{
+    size_t bytes = 1;
+    for (size_t i = 0; i < count; ++i) {
+        size_t length = strlen(fragments[i]);
+        check("source size fits", length <= SIZE_MAX - bytes);
+        bytes += length;
+    }
+    char *source = malloc(bytes);
+    check("allocate source", source != NULL);
+    size_t at = 0;
+    for (size_t i = 0; i < count; ++i) {
+        size_t length = strlen(fragments[i]);
+        memcpy(source + at, fragments[i], length); at += length;
+    }
+    source[at] = '\0';
+    bool success = mt_do(runtime, source);
+    free(source);
+    check("all embedded result assertions", success && mt_ok());
+}
+
 int done(metta *runtime, const char *name)
 {
     size_t count = atomic_load(&checks);

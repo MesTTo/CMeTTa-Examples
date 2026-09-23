@@ -14,6 +14,7 @@
 void check(const char *label, bool condition);
 void check_atom(const char *label, const mt_atom *actual, const char *expected);
 void check_answers(const char *label, mt_answers *answers, const char *expected);
+void check_program(metta *runtime, const char *const *fragments, size_t count);
 metta *open_engine(void);
 int done(metta *runtime, const char *name);
 #endif

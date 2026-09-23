@@ -1,0 +1,2174 @@
+[
+  {
+    "program": "build/basics/atom_values",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_basics_atom_values.log"
+  },
+  {
+    "program": "build/basics/first_steps",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_basics_first_steps.log"
+  },
+  {
+    "program": "build/basics/source_forms",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_basics_source_forms.log"
+  },
+  {
+    "program": "build/basics/unification",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_basics_unification.log"
+  },
+  {
+    "program": "build/data/array_marshalling",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_data_array_marshalling.log"
+  },
+  {
+    "program": "build/data/counted_text",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_data_counted_text.log"
+  },
+  {
+    "program": "build/data/exact_numbers",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_data_exact_numbers.log"
+  },
+  {
+    "program": "build/data/snapshot",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_data_snapshot.log"
+  },
+  {
+    "program": "build/data/struct_marshalling",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_data_struct_marshalling.log"
+  },
+  {
+    "program": "build/gallery/ecosystem_graph",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_gallery_ecosystem_graph.log"
+  },
+  {
+    "program": "build/gallery/family_algebras",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_gallery_family_algebras.log"
+  },
+  {
+    "program": "build/gallery/journaled_observed_store",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_gallery_journaled_observed_store.log"
+  },
+  {
+    "program": "build/gallery/linda_coordination",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_gallery_linda_coordination.log"
+  },
+  {
+    "program": "build/gallery/symbolic_tensors",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_gallery_symbolic_tensors.log"
+  },
+  {
+    "program": "build/integration/arena_values",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_integration_arena_values.log"
+  },
+  {
+    "program": "build/integration/borrowed_storage",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_integration_borrowed_storage.log"
+  },
+  {
+    "program": "build/integration/callback_errors",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_integration_callback_errors.log"
+  },
+  {
+    "program": "build/integration/callback_reentry",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_integration_callback_reentry.log"
+  },
+  {
+    "program": "build/integration/daemon",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_integration_daemon.log"
+  },
+  {
+    "program": "build/integration/embedding_lifetime",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_integration_embedding_lifetime.log"
+  },
+  {
+    "program": "build/integration/exact_names",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_integration_exact_names.log"
+  },
+  {
+    "program": "build/integration/installed_consumer",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_integration_installed_consumer.log"
+  },
+  {
+    "program": "build/integration/multishot_solving",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_integration_multishot_solving.log"
+  },
+  {
+    "program": "build/integration/native_iterator",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_integration_native_iterator.log"
+  },
+  {
+    "program": "build/integration/object_lifetime",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_integration_object_lifetime.log"
+  },
+  {
+    "program": "build/integration/persistent_migration",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_integration_persistent_migration.log"
+  },
+  {
+    "program": "build/integration/registration_lifecycle",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_integration_registration_lifecycle.log"
+  },
+  {
+    "program": "build/integration/routing_equations",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_integration_routing_equations.log"
+  },
+  {
+    "program": "build/integration/shared_extension",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_integration_shared_extension.log"
+  },
+  {
+    "program": "build/integration/sqlite_space",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_integration_sqlite_space.log"
+  },
+  {
+    "program": "build/integration/threads",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_integration_threads.log"
+  },
+  {
+    "program": "build/language-feature-examples/a_gap_query_and_its_index",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_a_gap_query_and_its_index.log"
+  },
+  {
+    "program": "build/language-feature-examples/a_librarys_declared_types",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_a_librarys_declared_types.log"
+  },
+  {
+    "program": "build/language-feature-examples/add_atom_fun_space",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_add_atom_fun_space.log"
+  },
+  {
+    "program": "build/language-feature-examples/add_reducts_and_containment",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_add_reducts_and_containment.log"
+  },
+  {
+    "program": "build/language-feature-examples/admission_pools",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_admission_pools.log"
+  },
+  {
+    "program": "build/language-feature-examples/alpha_member",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_alpha_member.log"
+  },
+  {
+    "program": "build/language-feature-examples/alpha_unique_atom",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_alpha_unique_atom.log"
+  },
+  {
+    "program": "build/language-feature-examples/and_or",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_and_or.log"
+  },
+  {
+    "program": "build/language-feature-examples/and_then_or_else",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_and_then_or_else.log"
+  },
+  {
+    "program": "build/language-feature-examples/assert_answers",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_assert_answers.log"
+  },
+  {
+    "program": "build/language-feature-examples/assertion_difference",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_assertion_difference.log"
+  },
+  {
+    "program": "build/language-feature-examples/atomops",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_atomops.log"
+  },
+  {
+    "program": "build/language-feature-examples/backward_arithmetic",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_backward_arithmetic.log"
+  },
+  {
+    "program": "build/language-feature-examples/bit_operations",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_bit_operations.log"
+  },
+  {
+    "program": "build/language-feature-examples/booleansolver",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_booleansolver.log"
+  },
+  {
+    "program": "build/language-feature-examples/builin_types",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_builin_types.log"
+  },
+  {
+    "program": "build/language-feature-examples/callquoteevalreduce",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_callquoteevalreduce.log"
+  },
+  {
+    "program": "build/language-feature-examples/callquoteevalreduce2",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_callquoteevalreduce2.log"
+  },
+  {
+    "program": "build/language-feature-examples/carrier_vocabulary",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_carrier_vocabulary.log"
+  },
+  {
+    "program": "build/language-feature-examples/case",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_case.log"
+  },
+  {
+    "program": "build/language-feature-examples/case2",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_case2.log"
+  },
+  {
+    "program": "build/language-feature-examples/case_duals",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_case_duals.log"
+  },
+  {
+    "program": "build/language-feature-examples/casecomputed",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_casecomputed.log"
+  },
+  {
+    "program": "build/language-feature-examples/caseconstrain",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_caseconstrain.log"
+  },
+  {
+    "program": "build/language-feature-examples/caseempty",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_caseempty.log"
+  },
+  {
+    "program": "build/language-feature-examples/casenew",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_casenew.log"
+  },
+  {
+    "program": "build/language-feature-examples/catalog",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_catalog.log"
+  },
+  {
+    "program": "build/language-feature-examples/chain",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_chain.log"
+  },
+  {
+    "program": "build/language-feature-examples/channels_pools_and_the_machine",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_channels_pools_and_the_machine.log"
+  },
+  {
+    "program": "build/language-feature-examples/class_decorators",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_class_decorators.log"
+  },
+  {
+    "program": "build/language-feature-examples/class_dispatch",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_class_dispatch.log"
+  },
+  {
+    "program": "build/language-feature-examples/class_entities",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_class_entities.log"
+  },
+  {
+    "program": "build/language-feature-examples/class_grains",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_class_grains.log"
+  },
+  {
+    "program": "build/language-feature-examples/class_prototypes",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_class_prototypes.log"
+  },
+  {
+    "program": "build/language-feature-examples/class_values",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_class_values.log"
+  },
+  {
+    "program": "build/language-feature-examples/cli_lib",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_cli_lib.log"
+  },
+  {
+    "program": "build/language-feature-examples/collapse",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_collapse.log"
+  },
+  {
+    "program": "build/language-feature-examples/combinatorics_lib",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_combinatorics_lib.log"
+  },
+  {
+    "program": "build/language-feature-examples/comments",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_comments.log"
+  },
+  {
+    "program": "build/language-feature-examples/compiled_overloads",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_compiled_overloads.log"
+  },
+  {
+    "program": "build/language-feature-examples/compose",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_compose.log"
+  },
+  {
+    "program": "build/language-feature-examples/compression_lib",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_compression_lib.log"
+  },
+  {
+    "program": "build/language-feature-examples/conformance",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_conformance.log"
+  },
+  {
+    "program": "build/language-feature-examples/constanthead",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_constanthead.log"
+  },
+  {
+    "program": "build/language-feature-examples/constraint_domains",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_constraint_domains.log"
+  },
+  {
+    "program": "build/language-feature-examples/constructive_negation",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_constructive_negation.log"
+  },
+  {
+    "program": "build/language-feature-examples/crypto_lib",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_crypto_lib.log"
+  },
+  {
+    "program": "build/language-feature-examples/csv_lib",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_csv_lib.log"
+  },
+  {
+    "program": "build/language-feature-examples/curry",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_curry.log"
+  },
+  {
+    "program": "build/language-feature-examples/cut",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_cut.log"
+  },
+  {
+    "program": "build/language-feature-examples/database_lib",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_database_lib.log"
+  },
+  {
+    "program": "build/language-feature-examples/datastructures_fingertree",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_datastructures_fingertree.log"
+  },
+  {
+    "program": "build/language-feature-examples/datastructures_lib",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_datastructures_lib.log"
+  },
+  {
+    "program": "build/language-feature-examples/datetime",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_datetime.log"
+  },
+  {
+    "program": "build/language-feature-examples/decons_and_substitution",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_decons_and_substitution.log"
+  },
+  {
+    "program": "build/language-feature-examples/derived_forms",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_derived_forms.log"
+  },
+  {
+    "program": "build/language-feature-examples/dict_lib",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_dict_lib.log"
+  },
+  {
+    "program": "build/language-feature-examples/dispatch_policies",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_dispatch_policies.log"
+  },
+  {
+    "program": "build/language-feature-examples/doc_lib",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_doc_lib.log"
+  },
+  {
+    "program": "build/language-feature-examples/documentation_as_data",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_documentation_as_data.log"
+  },
+  {
+    "program": "build/language-feature-examples/dont_eval_type",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_dont_eval_type.log"
+  },
+  {
+    "program": "build/language-feature-examples/empty",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_empty.log"
+  },
+  {
+    "program": "build/language-feature-examples/encoding_lib",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_encoding_lib.log"
+  },
+  {
+    "program": "build/language-feature-examples/engine_surface",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_engine_surface.log"
+  },
+  {
+    "program": "build/language-feature-examples/eval",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_eval.log"
+  },
+  {
+    "program": "build/language-feature-examples/evalc",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_evalc.log"
+  },
+  {
+    "program": "build/language-feature-examples/event_catalog",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_event_catalog.log"
+  },
+  {
+    "program": "build/language-feature-examples/exp_and_seeded_randomness",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_exp_and_seeded_randomness.log"
+  },
+  {
+    "program": "build/language-feature-examples/factorial",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_factorial.log"
+  },
+  {
+    "program": "build/language-feature-examples/fib",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_fib.log"
+  },
+  {
+    "program": "build/language-feature-examples/fibadd",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_fibadd.log"
+  },
+  {
+    "program": "build/language-feature-examples/fibsmart",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_fibsmart.log"
+  },
+  {
+    "program": "build/language-feature-examples/fibsmartimport",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_fibsmartimport.log"
+  },
+  {
+    "program": "build/language-feature-examples/file_lib",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_file_lib.log"
+  },
+  {
+    "program": "build/language-feature-examples/fingertree_internals",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_fingertree_internals.log"
+  },
+  {
+    "program": "build/language-feature-examples/foldall",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_foldall.log"
+  },
+  {
+    "program": "build/language-feature-examples/foldallmatch",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_foldallmatch.log"
+  },
+  {
+    "program": "build/language-feature-examples/foldallspacecount",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_foldallspacecount.log"
+  },
+  {
+    "program": "build/language-feature-examples/forall",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_forall.log"
+  },
+  {
+    "program": "build/language-feature-examples/foreign_rules",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_foreign_rules.log"
+  },
+  {
+    "program": "build/language-feature-examples/functional_lib",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_functional_lib.log"
+  },
+  {
+    "program": "build/language-feature-examples/functionhead",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_functionhead.log"
+  },
+  {
+    "program": "build/language-feature-examples/functionhead2",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_functionhead2.log"
+  },
+  {
+    "program": "build/language-feature-examples/functionhead3",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_functionhead3.log"
+  },
+  {
+    "program": "build/language-feature-examples/functionremoval",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_functionremoval.log"
+  },
+  {
+    "program": "build/language-feature-examples/functionremovalspec",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_functionremovalspec.log"
+  },
+  {
+    "program": "build/language-feature-examples/functiontypes",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_functiontypes.log"
+  },
+  {
+    "program": "build/language-feature-examples/git_import",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_git_import.log"
+  },
+  {
+    "program": "build/language-feature-examples/graph_lib",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_graph_lib.log"
+  },
+  {
+    "program": "build/language-feature-examples/guarded_rules",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_guarded_rules.log"
+  },
+  {
+    "program": "build/language-feature-examples/he_assert",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_he_assert.log"
+  },
+  {
+    "program": "build/language-feature-examples/he_atomspace",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_he_atomspace.log"
+  },
+  {
+    "program": "build/language-feature-examples/he_equalreduct",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_he_equalreduct.log"
+  },
+  {
+    "program": "build/language-feature-examples/he_error",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_he_error.log"
+  },
+  {
+    "program": "build/language-feature-examples/he_evaluation",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_he_evaluation.log"
+  },
+  {
+    "program": "build/language-feature-examples/he_math",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_he_math.log"
+  },
+  {
+    "program": "build/language-feature-examples/he_minimalmetta",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_he_minimalmetta.log"
+  },
+  {
+    "program": "build/language-feature-examples/he_quoting",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_he_quoting.log"
+  },
+  {
+    "program": "build/language-feature-examples/he_types",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_he_types.log"
+  },
+  {
+    "program": "build/language-feature-examples/holbenchmark",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_holbenchmark.log"
+  },
+  {
+    "program": "build/language-feature-examples/holfunctions",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_holfunctions.log"
+  },
+  {
+    "program": "build/language-feature-examples/holfunctions_intrinsicop",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_holfunctions_intrinsicop.log"
+  },
+  {
+    "program": "build/language-feature-examples/http_lib",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_http_lib.log"
+  },
+  {
+    "program": "build/language-feature-examples/hyperpose_primes",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_hyperpose_primes.log"
+  },
+  {
+    "program": "build/language-feature-examples/identity",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_identity.log"
+  },
+  {
+    "program": "build/language-feature-examples/if",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_if.log"
+  },
+  {
+    "program": "build/language-feature-examples/if2",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_if2.log"
+  },
+  {
+    "program": "build/language-feature-examples/if3",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_if3.log"
+  },
+  {
+    "program": "build/language-feature-examples/if4",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_if4.log"
+  },
+  {
+    "program": "build/language-feature-examples/if_branch_binding",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_if_branch_binding.log"
+  },
+  {
+    "program": "build/language-feature-examples/if_decons_expr",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_if_decons_expr.log"
+  },
+  {
+    "program": "build/language-feature-examples/ifcasenondet",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_ifcasenondet.log"
+  },
+  {
+    "program": "build/language-feature-examples/ifsimple",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_ifsimple.log"
+  },
+  {
+    "program": "build/language-feature-examples/implication_and_unifiability",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_implication_and_unifiability.log"
+  },
+  {
+    "program": "build/language-feature-examples/import_duplicate_cycle",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_import_duplicate_cycle.log"
+  },
+  {
+    "program": "build/language-feature-examples/import_error_surface",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_import_error_surface.log"
+  },
+  {
+    "program": "build/language-feature-examples/import_order_independence",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_import_order_independence.log"
+  },
+  {
+    "program": "build/language-feature-examples/import_relative_nested",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_import_relative_nested.log"
+  },
+  {
+    "program": "build/language-feature-examples/import_space_identity",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_import_space_identity.log"
+  },
+  {
+    "program": "build/language-feature-examples/in_an_equation_head",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_in_an_equation_head.log"
+  },
+  {
+    "program": "build/language-feature-examples/include",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_include.log"
+  },
+  {
+    "program": "build/language-feature-examples/independent_supports",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_independent_supports.log"
+  },
+  {
+    "program": "build/language-feature-examples/inherited_spaces",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_inherited_spaces.log"
+  },
+  {
+    "program": "build/language-feature-examples/interpret_and_metta_thread",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_interpret_and_metta_thread.log"
+  },
+  {
+    "program": "build/language-feature-examples/invertfunction",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_invertfunction.log"
+  },
+  {
+    "program": "build/language-feature-examples/invertpeanoplus",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_invertpeanoplus.log"
+  },
+  {
+    "program": "build/language-feature-examples/iter",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_iter.log"
+  },
+  {
+    "program": "build/language-feature-examples/json_lib",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_json_lib.log"
+  },
+  {
+    "program": "build/language-feature-examples/lambda",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_lambda.log"
+  },
+  {
+    "program": "build/language-feature-examples/let_superpose_if_case",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_let_superpose_if_case.log"
+  },
+  {
+    "program": "build/language-feature-examples/letext",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_letext.log"
+  },
+  {
+    "program": "build/language-feature-examples/letlet",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_letlet.log"
+  },
+  {
+    "program": "build/language-feature-examples/letstar",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_letstar.log"
+  },
+  {
+    "program": "build/language-feature-examples/letstarcomputed",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_letstarcomputed.log"
+  },
+  {
+    "program": "build/language-feature-examples/lib_roman_pair_helpers",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_lib_roman_pair_helpers.log"
+  },
+  {
+    "program": "build/language-feature-examples/library",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_library.log"
+  },
+  {
+    "program": "build/language-feature-examples/listhead",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_listhead.log"
+  },
+  {
+    "program": "build/language-feature-examples/logging_lib",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_logging_lib.log"
+  },
+  {
+    "program": "build/language-feature-examples/logicprog",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_logicprog.log"
+  },
+  {
+    "program": "build/language-feature-examples/logicprogset",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_logicprogset.log"
+  },
+  {
+    "program": "build/language-feature-examples/markup_lib",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_markup_lib.log"
+  },
+  {
+    "program": "build/language-feature-examples/match_snapshot",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_match_snapshot.log"
+  },
+  {
+    "program": "build/language-feature-examples/matchnested",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_matchnested.log"
+  },
+  {
+    "program": "build/language-feature-examples/matchnested2",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_matchnested2.log"
+  },
+  {
+    "program": "build/language-feature-examples/matchsingle",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_matchsingle.log"
+  },
+  {
+    "program": "build/language-feature-examples/matchtypes",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_matchtypes.log"
+  },
+  {
+    "program": "build/language-feature-examples/matespace",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_matespace.log"
+  },
+  {
+    "program": "build/language-feature-examples/matespace2",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_matespace2.log"
+  },
+  {
+    "program": "build/language-feature-examples/matespacefast",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_matespacefast.log"
+  },
+  {
+    "program": "build/language-feature-examples/math",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_math.log"
+  },
+  {
+    "program": "build/language-feature-examples/math_exp_random",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_math_exp_random.log"
+  },
+  {
+    "program": "build/language-feature-examples/math_lib",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_math_lib.log"
+  },
+  {
+    "program": "build/language-feature-examples/measure",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_measure.log"
+  },
+  {
+    "program": "build/language-feature-examples/memo_aggregate",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_memo_aggregate.log"
+  },
+  {
+    "program": "build/language-feature-examples/memo_controls",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_memo_controls.log"
+  },
+  {
+    "program": "build/language-feature-examples/memo_dependency_invalidation",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_memo_dependency_invalidation.log"
+  },
+  {
+    "program": "build/language-feature-examples/memo_multi_answer",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_memo_multi_answer.log"
+  },
+  {
+    "program": "build/language-feature-examples/memo_per_arity",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_memo_per_arity.log"
+  },
+  {
+    "program": "build/language-feature-examples/memo_same_name_multi_arity",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_memo_same_name_multi_arity.log"
+  },
+  {
+    "program": "build/language-feature-examples/memo_spaces",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_memo_spaces.log"
+  },
+  {
+    "program": "build/language-feature-examples/memo_stats",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_memo_stats.log"
+  },
+  {
+    "program": "build/language-feature-examples/memo_variant_nonground",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_memo_variant_nonground.log"
+  },
+  {
+    "program": "build/language-feature-examples/meta_types",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_meta_types.log"
+  },
+  {
+    "program": "build/language-feature-examples/metta4_prog",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_metta4_prog.log"
+  },
+  {
+    "program": "build/language-feature-examples/metta4_streams",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_metta4_streams.log"
+  },
+  {
+    "program": "build/language-feature-examples/mettaset",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_mettaset.log"
+  },
+  {
+    "program": "build/language-feature-examples/migrating_and_counting",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_migrating_and_counting.log"
+  },
+  {
+    "program": "build/language-feature-examples/minimal_metta",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_minimal_metta.log"
+  },
+  {
+    "program": "build/language-feature-examples/multicall",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_multicall.log"
+  },
+  {
+    "program": "build/language-feature-examples/multiset_operations",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_multiset_operations.log"
+  },
+  {
+    "program": "build/language-feature-examples/mutex_and_transaction",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_mutex_and_transaction.log"
+  },
+  {
+    "program": "build/language-feature-examples/myinterpreter",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_myinterpreter.log"
+  },
+  {
+    "program": "build/language-feature-examples/nars_derivation_control",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_nars_derivation_control.log"
+  },
+  {
+    "program": "build/language-feature-examples/nars_truth_functions",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_nars_truth_functions.log"
+  },
+  {
+    "program": "build/language-feature-examples/nars_tuffy",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_nars_tuffy.log"
+  },
+  {
+    "program": "build/language-feature-examples/nestedcons",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_nestedcons.log"
+  },
+  {
+    "program": "build/language-feature-examples/newtons_method",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_newtons_method.log"
+  },
+  {
+    "program": "build/language-feature-examples/nilbc",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_nilbc.log"
+  },
+  {
+    "program": "build/language-feature-examples/nop",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_nop.log"
+  },
+  {
+    "program": "build/language-feature-examples/once",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_once.log"
+  },
+  {
+    "program": "build/language-feature-examples/outputtype",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_outputtype.log"
+  },
+  {
+    "program": "build/language-feature-examples/owned_records",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_owned_records.log"
+  },
+  {
+    "program": "build/language-feature-examples/pairs_lib",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_pairs_lib.log"
+  },
+  {
+    "program": "build/language-feature-examples/parametric_spaces",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_parametric_spaces.log"
+  },
+  {
+    "program": "build/language-feature-examples/parametric_types",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_parametric_types.log"
+  },
+  {
+    "program": "build/language-feature-examples/parse",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_parse.log"
+  },
+  {
+    "program": "build/language-feature-examples/parsing_lib",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_parsing_lib.log"
+  },
+  {
+    "program": "build/language-feature-examples/partialdef",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_partialdef.log"
+  },
+  {
+    "program": "build/language-feature-examples/patrick",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_patrick.log"
+  },
+  {
+    "program": "build/language-feature-examples/patrick_iterate_fib",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_patrick_iterate_fib.log"
+  },
+  {
+    "program": "build/language-feature-examples/patrick_iterate_quad",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_patrick_iterate_quad.log"
+  },
+  {
+    "program": "build/language-feature-examples/peano",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_peano.log"
+  },
+  {
+    "program": "build/language-feature-examples/peanofast",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_peanofast.log"
+  },
+  {
+    "program": "build/language-feature-examples/permutations",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_permutations.log"
+  },
+  {
+    "program": "build/language-feature-examples/pln_derivation_control",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_pln_derivation_control.log"
+  },
+  {
+    "program": "build/language-feature-examples/pln_formulas",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_pln_formulas.log"
+  },
+  {
+    "program": "build/language-feature-examples/pln_roman",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_pln_roman.log"
+  },
+  {
+    "program": "build/language-feature-examples/plntest",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_plntest.log"
+  },
+  {
+    "program": "build/language-feature-examples/plntestdirect",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_plntestdirect.log"
+  },
+  {
+    "program": "build/language-feature-examples/post_add_hooks",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_post_add_hooks.log"
+  },
+  {
+    "program": "build/language-feature-examples/pre_add_hooks",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_pre_add_hooks.log"
+  },
+  {
+    "program": "build/language-feature-examples/process_lib",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_process_lib.log"
+  },
+  {
+    "program": "build/language-feature-examples/program_order",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_program_order.log"
+  },
+  {
+    "program": "build/language-feature-examples/random_lib",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_random_lib.log"
+  },
+  {
+    "program": "build/language-feature-examples/reader_tokens",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_reader_tokens.log"
+  },
+  {
+    "program": "build/language-feature-examples/reading_forms",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_reading_forms.log"
+  },
+  {
+    "program": "build/language-feature-examples/recursive_types",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_recursive_types.log"
+  },
+  {
+    "program": "build/language-feature-examples/recursive_types2",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_recursive_types2.log"
+  },
+  {
+    "program": "build/language-feature-examples/reference_loading",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_reference_loading.log"
+  },
+  {
+    "program": "build/language-feature-examples/reference_maps",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_reference_maps.log"
+  },
+  {
+    "program": "build/language-feature-examples/reference_rows",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_reference_rows.log"
+  },
+  {
+    "program": "build/language-feature-examples/reflect_lib",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_reflect_lib.log"
+  },
+  {
+    "program": "build/language-feature-examples/regex_lib",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_regex_lib.log"
+  },
+  {
+    "program": "build/language-feature-examples/registering_prolog_predicates",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_registering_prolog_predicates.log"
+  },
+  {
+    "program": "build/language-feature-examples/relational_arithmetic",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_relational_arithmetic.log"
+  },
+  {
+    "program": "build/language-feature-examples/relational_integer_division",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_relational_integer_division.log"
+  },
+  {
+    "program": "build/language-feature-examples/repr",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_repr.log"
+  },
+  {
+    "program": "build/language-feature-examples/restricted_spaces",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_restricted_spaces.log"
+  },
+  {
+    "program": "build/language-feature-examples/roman",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_roman.log"
+  },
+  {
+    "program": "build/language-feature-examples/roman_general_operators",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_roman_general_operators.log"
+  },
+  {
+    "program": "build/language-feature-examples/scale",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_scale.log"
+  },
+  {
+    "program": "build/language-feature-examples/scallop_readme",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_scallop_readme.log"
+  },
+  {
+    "program": "build/language-feature-examples/sealed",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_sealed.log"
+  },
+  {
+    "program": "build/language-feature-examples/seeking_and_sizing",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_seeking_and_sizing.log"
+  },
+  {
+    "program": "build/language-feature-examples/segments",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_segments.log"
+  },
+  {
+    "program": "build/language-feature-examples/selfprog",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_selfprog.log"
+  },
+  {
+    "program": "build/language-feature-examples/sets_lib",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_sets_lib.log"
+  },
+  {
+    "program": "build/language-feature-examples/single_answer",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_single_answer.log"
+  },
+  {
+    "program": "build/language-feature-examples/smartdispatch",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_smartdispatch.log"
+  },
+  {
+    "program": "build/language-feature-examples/socket_lib",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_socket_lib.log"
+  },
+  {
+    "program": "build/language-feature-examples/soft",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_soft.log"
+  },
+  {
+    "program": "build/language-feature-examples/soft_aggregation_underneath",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_soft_aggregation_underneath.log"
+  },
+  {
+    "program": "build/language-feature-examples/sorted_constructors",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_sorted_constructors.log"
+  },
+  {
+    "program": "build/language-feature-examples/sorting_and_deduplication",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_sorting_and_deduplication.log"
+  },
+  {
+    "program": "build/language-feature-examples/spacefunction",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_spacefunction.log"
+  },
+  {
+    "program": "build/language-feature-examples/spaces",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_spaces.log"
+  },
+  {
+    "program": "build/language-feature-examples/spaces2",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_spaces2.log"
+  },
+  {
+    "program": "build/language-feature-examples/spaces3",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_spaces3.log"
+  },
+  {
+    "program": "build/language-feature-examples/spaces_find",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_spaces_find.log"
+  },
+  {
+    "program": "build/language-feature-examples/spaces_lib",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_spaces_lib.log"
+  },
+  {
+    "program": "build/language-feature-examples/spaces_removeallatoms",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_spaces_removeallatoms.log"
+  },
+  {
+    "program": "build/language-feature-examples/spaces_succeedspredicate",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_spaces_succeedspredicate.log"
+  },
+  {
+    "program": "build/language-feature-examples/specialize",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_specialize.log"
+  },
+  {
+    "program": "build/language-feature-examples/specialize_recursive_wrap",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_specialize_recursive_wrap.log"
+  },
+  {
+    "program": "build/language-feature-examples/specializecyclic",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_specializecyclic.log"
+  },
+  {
+    "program": "build/language-feature-examples/specializefunctiontypes",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_specializefunctiontypes.log"
+  },
+  {
+    "program": "build/language-feature-examples/state",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_state.log"
+  },
+  {
+    "program": "build/language-feature-examples/statistics_lib",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_statistics_lib.log"
+  },
+  {
+    "program": "build/language-feature-examples/strategy_internals",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_strategy_internals.log"
+  },
+  {
+    "program": "build/language-feature-examples/streamops",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_streamops.log"
+  },
+  {
+    "program": "build/language-feature-examples/string",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_string.log"
+  },
+  {
+    "program": "build/language-feature-examples/string_comments",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_string_comments.log"
+  },
+  {
+    "program": "build/language-feature-examples/string_lib",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_string_lib.log"
+  },
+  {
+    "program": "build/language-feature-examples/subtyping",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_subtyping.log"
+  },
+  {
+    "program": "build/language-feature-examples/super",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_super.log"
+  },
+  {
+    "program": "build/language-feature-examples/supercollapse",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_supercollapse.log"
+  },
+  {
+    "program": "build/language-feature-examples/superpose_nested",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_superpose_nested.log"
+  },
+  {
+    "program": "build/language-feature-examples/superpose_primes",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_superpose_primes.log"
+  },
+  {
+    "program": "build/language-feature-examples/swi_term_doors",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_swi_term_doors.log"
+  },
+  {
+    "program": "build/language-feature-examples/system_lib",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_system_lib.log"
+  },
+  {
+    "program": "build/language-feature-examples/tabling_doors",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_tabling_doors.log"
+  },
+  {
+    "program": "build/language-feature-examples/tabling_equation_change",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_tabling_equation_change.log"
+  },
+  {
+    "program": "build/language-feature-examples/tabling_fib",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_tabling_fib.log"
+  },
+  {
+    "program": "build/language-feature-examples/tabling_space_write",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_tabling_space_write.log"
+  },
+  {
+    "program": "build/language-feature-examples/tabling_statistics",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_tabling_statistics.log"
+  },
+  {
+    "program": "build/language-feature-examples/tagged_fixpoint",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_tagged_fixpoint.log"
+  },
+  {
+    "program": "build/language-feature-examples/take",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_take.log"
+  },
+  {
+    "program": "build/language-feature-examples/testing_lib",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_testing_lib.log"
+  },
+  {
+    "program": "build/language-feature-examples/tests",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_tests.log"
+  },
+  {
+    "program": "build/language-feature-examples/text_lib",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_text_lib.log"
+  },
+  {
+    "program": "build/language-feature-examples/the_clock_and_the_command_line",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_the_clock_and_the_command_line.log"
+  },
+  {
+    "program": "build/language-feature-examples/the_fence",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_the_fence.log"
+  },
+  {
+    "program": "build/language-feature-examples/the_measure_algebra_underneath",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_the_measure_algebra_underneath.log"
+  },
+  {
+    "program": "build/language-feature-examples/the_module_doors",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_the_module_doors.log"
+  },
+  {
+    "program": "build/language-feature-examples/the_one_sided_fragment",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_the_one_sided_fragment.log"
+  },
+  {
+    "program": "build/language-feature-examples/the_prolog_rung",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_the_prolog_rung.log"
+  },
+  {
+    "program": "build/language-feature-examples/the_prolog_rung_under_lib_thread",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_the_prolog_rung_under_lib_thread.log"
+  },
+  {
+    "program": "build/language-feature-examples/the_two_sided_fragments",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_the_two_sided_fragments.log"
+  },
+  {
+    "program": "build/language-feature-examples/thin_forms",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_thin_forms.log"
+  },
+  {
+    "program": "build/language-feature-examples/thread_lib",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_thread_lib.log"
+  },
+  {
+    "program": "build/language-feature-examples/thread_linda",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_thread_linda.log"
+  },
+  {
+    "program": "build/language-feature-examples/throwing_and_tracing",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_throwing_and_tracing.log"
+  },
+  {
+    "program": "build/language-feature-examples/tilepuzzle",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_tilepuzzle.log"
+  },
+  {
+    "program": "build/language-feature-examples/time_and_pragmas",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_time_and_pragmas.log"
+  },
+  {
+    "program": "build/language-feature-examples/translatepredicate",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_translatepredicate.log"
+  },
+  {
+    "program": "build/language-feature-examples/translatorrule",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_translatorrule.log"
+  },
+  {
+    "program": "build/language-feature-examples/translatorrule_cost",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_translatorrule_cost.log"
+  },
+  {
+    "program": "build/language-feature-examples/translatorrule_direction",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_translatorrule_direction.log"
+  },
+  {
+    "program": "build/language-feature-examples/translatorrule_fib",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_translatorrule_fib.log"
+  },
+  {
+    "program": "build/language-feature-examples/translatorrule_for",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_translatorrule_for.log"
+  },
+  {
+    "program": "build/language-feature-examples/translatorrule_guard",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_translatorrule_guard.log"
+  },
+  {
+    "program": "build/language-feature-examples/translatorrule_refusal",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_translatorrule_refusal.log"
+  },
+  {
+    "program": "build/language-feature-examples/twostage",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_twostage.log"
+  },
+  {
+    "program": "build/language-feature-examples/type_casts_that_hold",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_type_casts_that_hold.log"
+  },
+  {
+    "program": "build/language-feature-examples/types",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_types.log"
+  },
+  {
+    "program": "build/language-feature-examples/types_dependent",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_types_dependent.log"
+  },
+  {
+    "program": "build/language-feature-examples/types_nondet",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_types_nondet.log"
+  },
+  {
+    "program": "build/language-feature-examples/typing_rules",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_typing_rules.log"
+  },
+  {
+    "program": "build/language-feature-examples/unicode_lib",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_unicode_lib.log"
+  },
+  {
+    "program": "build/language-feature-examples/unify",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_unify.log"
+  },
+  {
+    "program": "build/language-feature-examples/unify_eval_branches",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_unify_eval_branches.log"
+  },
+  {
+    "program": "build/language-feature-examples/unwind_cleanup",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_unwind_cleanup.log"
+  },
+  {
+    "program": "build/language-feature-examples/uri_lib",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_uri_lib.log"
+  },
+  {
+    "program": "build/language-feature-examples/uuid_lib",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_uuid_lib.log"
+  },
+  {
+    "program": "build/language-feature-examples/variadic_arrow_faces",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_variadic_arrow_faces.log"
+  },
+  {
+    "program": "build/language-feature-examples/variadic_arrow_signature",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_variadic_arrow_signature.log"
+  },
+  {
+    "program": "build/language-feature-examples/vector_lib",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_vector_lib.log"
+  },
+  {
+    "program": "build/language-feature-examples/walrus",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_walrus.log"
+  },
+  {
+    "program": "build/language-feature-examples/weighted_subset_posterior",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_weighted_subset_posterior.log"
+  },
+  {
+    "program": "build/language-feature-examples/xor",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_xor.log"
+  },
+  {
+    "program": "build/language-feature-examples/yaml_lib",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_language-feature-examples_yaml_lib.log"
+  },
+  {
+    "program": "build/live/reentrant_events",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_live_reentrant_events.log"
+  },
+  {
+    "program": "build/live/standing_queries",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_live_standing_queries.log"
+  },
+  {
+    "program": "build/operations/annotation_contracts",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_operations_annotation_contracts.log"
+  },
+  {
+    "program": "build/operations/cells",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_operations_cells.log"
+  },
+  {
+    "program": "build/operations/effect_ranks",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_operations_effect_ranks.log"
+  },
+  {
+    "program": "build/operations/engine_controls",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_operations_engine_controls.log"
+  },
+  {
+    "program": "build/operations/error_handling",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_operations_error_handling.log"
+  },
+  {
+    "program": "build/operations/explaining_a_query",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_operations_explaining_a_query.log"
+  },
+  {
+    "program": "build/operations/lowering",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_operations_lowering.log"
+  },
+  {
+    "program": "build/operations/prepared_queries",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_operations_prepared_queries.log"
+  },
+  {
+    "program": "build/operations/property_instances",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_operations_property_instances.log"
+  },
+  {
+    "program": "build/operations/runtime_configuration",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_operations_runtime_configuration.log"
+  },
+  {
+    "program": "build/operations/space_lifetime",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_operations_space_lifetime.log"
+  },
+  {
+    "program": "build/operations/transactions",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_operations_transactions.log"
+  },
+  {
+    "program": "build/reasoning/evolutionary_search",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_reasoning_evolutionary_search.log"
+  },
+  {
+    "program": "build/reasoning/gradient_algebra",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_reasoning_gradient_algebra.log"
+  },
+  {
+    "program": "build/reasoning/literature_discovery",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_reasoning_literature_discovery.log"
+  },
+  {
+    "program": "build/reasoning/pln_uncertain_reasoning",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_reasoning_pln_uncertain_reasoning.log"
+  },
+  {
+    "program": "build/reasoning/regex_matching",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_reasoning_regex_matching.log"
+  },
+  {
+    "program": "build/reasoning/uncertain_perception",
+    "exit": 0,
+    "checked": true,
+    "log": "build/logs/build_reasoning_uncertain_perception.log"
+  }
+]

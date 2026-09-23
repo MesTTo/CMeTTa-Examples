@@ -1,0 +1,63 @@
+surface: 156 declarations, all defined
+docs: every mt_ name in README.md and llms.txt is in the header
+version: 1.0.0, and mt_version() agrees
+hardening: GNU_RELRO and BIND_NOW on both shared libraries
+ERROR: [Thread main] MeTTa assertion failed: (assertEqual 1 2)
+ERROR: [Thread main]   missing: (2)
+ERROR: [Thread main]   excess: (1)
+ERROR: [Thread main] MeTTa assertion failed: (assertEqual 1 2)
+ERROR: [Thread main]   missing: (2)
+ERROR: [Thread main]   excess: (1)
+543 checks, 0 failures
+bad boot exception barrier ok
+apostrophe boot path ok
+qlf boot: 7695 predicates, identical from source and from .qlf
+qlf boot regimes ok
+transactional eager growth ok
+% [1/4] cmetta_cursor_lif..stroys_after_unlock ...... passed (0.002 sec)
+% [2/4] cmetta_cursor_lif..stroys_after_unlock ...... passed (0.000 sec)
+% [3/4] cmetta_cursor_lif..stroys_after_unlock ...... passed (0.000 sec)
+% [4/4] cmetta_cursor_lif.._ownership_transfer ...... passed (0.000 sec)
+closed cursors 2000: registry bytes 0, records 0, atoms 14762 (initial 0/0/14762)
+closed cursors 10000: registry bytes 0, records 0, atoms 14762 (initial 0/0/14762)
+closed cursors 20000: registry bytes 0, records 0, atoms 14762 (initial 0/0/14762)
+cursor ids 32008 then 32009; 43205 concurrent vs 66005 sequential open inferences
+cursor restart ids 34410 then 1 remain generation-safe
+runtime predicate restart ok
+internal range, list, stats and limit contracts ok
+batch add 2000 atoms: 62035 sequential vs 24054 batch inferences
+unification and substitution contracts ok
+seam: points, rows, ownership, a C provider, a rendering and the loader
+CASE allocation failures
+CASE provenance
+CASE borrowing
+CASE teardown
+CASE dag sweep
+CASE numeric conversion
+CASE box failures
+ownership: 242 allocation failure positions released completely
+ownership: allocator provenance, borrowed spans, deep teardown, DAG sweep and exact numbers passed
+CASE native iterators close on every exit
+CASE engine iterators keep arguments until close
+iterators: suspension, interleaving, close, callable values and late refusal passed
+CASE transactions and speculation restore engine state and registrations
+CASE every scope enclosing C registry mutation must retain its own rollback owner
+transactions: isolated source, commit, rollback, nesting, speculation, cursor ownership and registry restoration passed
+CASE foreign spaces preserve typed rows and captured transaction ownership
+providers: typed objects, candidate unification, multiplicity, late errors, capability refusal, transactions and retained replacement passed
+CASE UTF-8 terms and names preserve their bytes and reject malformed input
+CASE native atoms preserve identity through the engine
+native parity: UTF-8, 64 unification pairs, canonical integers, borrowed transport, unevaluated forms and occurrence removal passed
+CASE standing queries observe committed changes and retain callback ownership
+subscriptions: matching, both edges, commit buffering, rollback, failure and reentrant cancellation passed
+CASE extension initialization publishes atomically or rolls back
+extensions: separate shared objects, initialization rollback and live calls passed
+matchers: refusal, bindings, streams, errors and ownership passed
+structural hash contracts ok
+thread attach, isolated errors, mt_of and detach ok
+kit long-string and bounded-escape contracts ok
+examples/hello ok
+examples/ops ok
+examples/stream ok
+examples/lower ok
+examples/language ok

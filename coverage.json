@@ -1,0 +1,690 @@
+{
+  "purpose": "Account for the Python example source roster and the C-native alternatives.",
+  "python_revision": "9c22a25c772c12b5d5f8057aabe6ac5cba7bcb20",
+  "roster": [
+    "basics/first_steps.py",
+    "data/array_interop.py",
+    "gallery/ecosystem_graph.py",
+    "gallery/family_algebras.py",
+    "gallery/git_like_worlds.py",
+    "gallery/journaled_observed_store.py",
+    "gallery/linda_coordination.py",
+    "gallery/symbolic_tensors.py",
+    "integration/cmetta_space.py",
+    "integration/duckdb_space.py",
+    "integration/multishot_solving.py",
+    "integration/networkx_space.py",
+    "integration/persistent_migration.py",
+    "integration/provider_policy.py",
+    "integration/provider_worlds.py",
+    "integration/python_objects.py",
+    "integration/registration_lifecycle.py",
+    "integration/remote_controls.py",
+    "integration/routing_equations.py",
+    "integration/sqlite_space.py",
+    "integration/web_routes.py",
+    "language-feature-examples/ch03-atoms-and-expressions/01-comments.py",
+    "language-feature-examples/ch03-atoms-and-expressions/02-string.py",
+    "language-feature-examples/ch03-atoms-and-expressions/03-string_comments.py",
+    "language-feature-examples/ch03-atoms-and-expressions/04-repr.py",
+    "language-feature-examples/ch03-atoms-and-expressions/05-parse.py",
+    "language-feature-examples/ch03-atoms-and-expressions/06-reading_forms.py",
+    "language-feature-examples/ch04-spaces-and-matching/04-01-a-space-is-where-a-program-lives/01-spaces.py",
+    "language-feature-examples/ch04-spaces-and-matching/04-01-a-space-is-where-a-program-lives/02-spaces2.py",
+    "language-feature-examples/ch04-spaces-and-matching/04-01-a-space-is-where-a-program-lives/03-spaces3.py",
+    "language-feature-examples/ch04-spaces-and-matching/04-01-a-space-is-where-a-program-lives/04-spaces_find.py",
+    "language-feature-examples/ch04-spaces-and-matching/04-01-a-space-is-where-a-program-lives/05-spaces_succeedspredicate.py",
+    "language-feature-examples/ch04-spaces-and-matching/04-01-a-space-is-where-a-program-lives/06-spaces_removeallatoms.py",
+    "language-feature-examples/ch04-spaces-and-matching/04-01-a-space-is-where-a-program-lives/07-add_atom_fun_space.py",
+    "language-feature-examples/ch04-spaces-and-matching/04-01-a-space-is-where-a-program-lives/08-spacefunction.py",
+    "language-feature-examples/ch04-spaces-and-matching/04-01-a-space-is-where-a-program-lives/09-selfprog.py",
+    "language-feature-examples/ch04-spaces-and-matching/04-01-a-space-is-where-a-program-lives/12-add_reducts_and_containment.py",
+    "language-feature-examples/ch04-spaces-and-matching/04-01-a-space-is-where-a-program-lives/13-migrating_and_counting.py",
+    "language-feature-examples/ch04-spaces-and-matching/04-02-patterns-and-bindings/01-matchsingle.py",
+    "language-feature-examples/ch04-spaces-and-matching/04-02-patterns-and-bindings/02-matchnested.py",
+    "language-feature-examples/ch04-spaces-and-matching/04-02-patterns-and-bindings/03-matchnested2.py",
+    "language-feature-examples/ch04-spaces-and-matching/04-02-patterns-and-bindings/04-match_snapshot.py",
+    "language-feature-examples/ch04-spaces-and-matching/04-02-patterns-and-bindings/05-constanthead.py",
+    "language-feature-examples/ch04-spaces-and-matching/04-02-patterns-and-bindings/06-listhead.py",
+    "language-feature-examples/ch04-spaces-and-matching/04-02-patterns-and-bindings/07-unify.py",
+    "language-feature-examples/ch04-spaces-and-matching/04-02-patterns-and-bindings/08-unify_eval_branches.py",
+    "language-feature-examples/ch05-equations-and-evaluation/05-01-an-equation-is-a-rewrite/01-identity.py",
+    "language-feature-examples/ch05-equations-and-evaluation/05-01-an-equation-is-a-rewrite/02-twostage.py",
+    "language-feature-examples/ch05-equations-and-evaluation/05-01-an-equation-is-a-rewrite/03-program_order.py",
+    "language-feature-examples/ch05-equations-and-evaluation/05-01-an-equation-is-a-rewrite/04-partialdef.py",
+    "language-feature-examples/ch05-equations-and-evaluation/05-01-an-equation-is-a-rewrite/05-smartdispatch.py",
+    "language-feature-examples/ch05-equations-and-evaluation/05-01-an-equation-is-a-rewrite/06-functionhead.py",
+    "language-feature-examples/ch05-equations-and-evaluation/05-01-an-equation-is-a-rewrite/07-functionhead2.py",
+    "language-feature-examples/ch05-equations-and-evaluation/05-01-an-equation-is-a-rewrite/08-functionhead3.py",
+    "language-feature-examples/ch05-equations-and-evaluation/05-01-an-equation-is-a-rewrite/09-multicall.py",
+    "language-feature-examples/ch05-equations-and-evaluation/05-01-an-equation-is-a-rewrite/10-unwind_cleanup.py",
+    "language-feature-examples/ch05-equations-and-evaluation/05-01-an-equation-is-a-rewrite/11-single_answer.py",
+    "language-feature-examples/ch05-equations-and-evaluation/05-02-changing-the-equations/01-dispatch_policies.py",
+    "language-feature-examples/ch05-equations-and-evaluation/05-02-changing-the-equations/02-functionremoval.py",
+    "language-feature-examples/ch05-equations-and-evaluation/05-02-changing-the-equations/03-functionremovalspec.py",
+    "language-feature-examples/ch05-equations-and-evaluation/05-02-changing-the-equations/04-specialize.py",
+    "language-feature-examples/ch05-equations-and-evaluation/05-02-changing-the-equations/05-specialize_recursive_wrap.py",
+    "language-feature-examples/ch05-equations-and-evaluation/05-02-changing-the-equations/06-specializecyclic.py",
+    "language-feature-examples/ch05-equations-and-evaluation/05-02-changing-the-equations/07-specializefunctiontypes.py",
+    "language-feature-examples/ch05-equations-and-evaluation/05-03-the-number-library/01-math.py",
+    "language-feature-examples/ch05-equations-and-evaluation/05-03-the-number-library/02-math_exp_random.py",
+    "language-feature-examples/ch05-equations-and-evaluation/05-03-the-number-library/03-exp_and_seeded_randomness.py",
+    "language-feature-examples/ch05-equations-and-evaluation/05-03-the-number-library/04-bit_operations.py",
+    "language-feature-examples/ch05-equations-and-evaluation/05-04-arithmetic-that-runs-backwards/01-backward_arithmetic.py",
+    "language-feature-examples/ch05-equations-and-evaluation/05-04-arithmetic-that-runs-backwards/02-relational_arithmetic.py",
+    "language-feature-examples/ch05-equations-and-evaluation/05-04-arithmetic-that-runs-backwards/03-constraint_domains.py",
+    "language-feature-examples/ch05-equations-and-evaluation/05-04-arithmetic-that-runs-backwards/04-relational_integer_division.py",
+    "language-feature-examples/ch06-many-answers/01-superpose_nested.py",
+    "language-feature-examples/ch06-many-answers/02-casenew.py",
+    "language-feature-examples/ch06-many-answers/03-collapse.py",
+    "language-feature-examples/ch06-many-answers/04-supercollapse.py",
+    "language-feature-examples/ch06-many-answers/05-empty.py",
+    "language-feature-examples/ch06-many-answers/06-once.py",
+    "language-feature-examples/ch06-many-answers/07-tests.py",
+    "language-feature-examples/ch06-many-answers/08-permutations.py",
+    "language-feature-examples/ch06-many-answers/09-streamops.py",
+    "language-feature-examples/ch06-many-answers/10-mettaset.py",
+    "language-feature-examples/ch07-control-flow/07-01-if-and-booleans/01-ifsimple.py",
+    "language-feature-examples/ch07-control-flow/07-01-if-and-booleans/02-if.py",
+    "language-feature-examples/ch07-control-flow/07-01-if-and-booleans/03-if2.py",
+    "language-feature-examples/ch07-control-flow/07-01-if-and-booleans/04-if3.py",
+    "language-feature-examples/ch07-control-flow/07-01-if-and-booleans/05-if4.py",
+    "language-feature-examples/ch07-control-flow/07-01-if-and-booleans/06-if_branch_binding.py",
+    "language-feature-examples/ch07-control-flow/07-01-if-and-booleans/07-and_or.py",
+    "language-feature-examples/ch07-control-flow/07-01-if-and-booleans/08-booleansolver.py",
+    "language-feature-examples/ch07-control-flow/07-01-if-and-booleans/09-xor.py",
+    "language-feature-examples/ch07-control-flow/07-01-if-and-booleans/10-and_then_or_else.py",
+    "language-feature-examples/ch07-control-flow/07-01-if-and-booleans/12-implication_and_unifiability.py",
+    "language-feature-examples/ch07-control-flow/07-02-case/01-case.py",
+    "language-feature-examples/ch07-control-flow/07-02-case/02-case2.py",
+    "language-feature-examples/ch07-control-flow/07-02-case/03-caseconstrain.py",
+    "language-feature-examples/ch07-control-flow/07-02-case/04-caseempty.py",
+    "language-feature-examples/ch07-control-flow/07-02-case/05-casecomputed.py",
+    "language-feature-examples/ch07-control-flow/07-02-case/06-ifcasenondet.py",
+    "language-feature-examples/ch07-control-flow/07-02-case/07-let_superpose_if_case.py",
+    "language-feature-examples/ch07-control-flow/07-03-let-and-sequencing/01-letstar.py",
+    "language-feature-examples/ch07-control-flow/07-03-let-and-sequencing/02-letlet.py",
+    "language-feature-examples/ch07-control-flow/07-03-let-and-sequencing/03-letext.py",
+    "language-feature-examples/ch07-control-flow/07-03-let-and-sequencing/04-letstarcomputed.py",
+    "language-feature-examples/ch07-control-flow/07-03-let-and-sequencing/05-metta4_prog.py",
+    "language-feature-examples/ch07-control-flow/07-03-let-and-sequencing/06-chain.py",
+    "language-feature-examples/ch07-control-flow/07-03-let-and-sequencing/07-eval.py",
+    "language-feature-examples/ch07-control-flow/07-03-let-and-sequencing/08-sealed.py",
+    "language-feature-examples/ch07-control-flow/07-03-let-and-sequencing/09-walrus.py",
+    "language-feature-examples/ch07-control-flow/07-03-let-and-sequencing/11-nop.py",
+    "language-feature-examples/ch07-control-flow/07-04-bounded-and-committed-searches/01-forall.py",
+    "language-feature-examples/ch07-control-flow/07-04-bounded-and-committed-searches/02-metta4_streams.py",
+    "language-feature-examples/ch07-control-flow/07-04-bounded-and-committed-searches/03-take.py",
+    "language-feature-examples/ch07-control-flow/07-04-bounded-and-committed-searches/04-cut.py",
+    "language-feature-examples/ch07-control-flow/07-04-bounded-and-committed-searches/05-foldall.py",
+    "language-feature-examples/ch07-control-flow/07-04-bounded-and-committed-searches/06-foldallmatch.py",
+    "language-feature-examples/ch07-control-flow/07-04-bounded-and-committed-searches/07-foldallspacecount.py",
+    "language-feature-examples/ch07-control-flow/07-05-recursion/01-factorial.py",
+    "language-feature-examples/ch07-control-flow/07-05-recursion/02-fib.py",
+    "language-feature-examples/ch07-control-flow/07-05-recursion/03-fibsmart.py",
+    "language-feature-examples/ch07-control-flow/07-05-recursion/04-fibsmartimport.py",
+    "language-feature-examples/ch07-control-flow/07-05-recursion/05-iter.py",
+    "language-feature-examples/ch07-control-flow/07-05-recursion/06-peano.py",
+    "language-feature-examples/ch07-control-flow/07-05-recursion/07-invertpeanoplus.py",
+    "language-feature-examples/ch08-data/08-01-atoms-lists-and-folds/01-nestedcons.py",
+    "language-feature-examples/ch08-data/08-01-atoms-lists-and-folds/02-holfunctions.py",
+    "language-feature-examples/ch08-data/08-01-atoms-lists-and-folds/03-holfunctions_intrinsicop.py",
+    "language-feature-examples/ch08-data/08-01-atoms-lists-and-folds/04-curry.py",
+    "language-feature-examples/ch08-data/08-01-atoms-lists-and-folds/05-lambda.py",
+    "language-feature-examples/ch08-data/08-01-atoms-lists-and-folds/06-invertfunction.py",
+    "language-feature-examples/ch08-data/08-01-atoms-lists-and-folds/07-atomops.py",
+    "language-feature-examples/ch08-data/08-01-atoms-lists-and-folds/08-alpha_member.py",
+    "language-feature-examples/ch08-data/08-01-atoms-lists-and-folds/09-alpha_unique_atom.py",
+    "language-feature-examples/ch08-data/08-01-atoms-lists-and-folds/10-multiset_operations.py",
+    "language-feature-examples/ch08-data/08-01-atoms-lists-and-folds/11-patrick.py",
+    "language-feature-examples/ch08-data/08-01-atoms-lists-and-folds/12-patrick_iterate_fib.py",
+    "language-feature-examples/ch08-data/08-01-atoms-lists-and-folds/13-patrick_iterate_quad.py",
+    "language-feature-examples/ch08-data/08-01-atoms-lists-and-folds/14-lib_roman_pair_helpers.py",
+    "language-feature-examples/ch08-data/08-01-atoms-lists-and-folds/15-roman.py",
+    "language-feature-examples/ch08-data/08-01-atoms-lists-and-folds/16-if_decons_expr.py",
+    "language-feature-examples/ch08-data/08-01-atoms-lists-and-folds/17-swi_term_doors.py",
+    "language-feature-examples/ch08-data/08-01-atoms-lists-and-folds/18-sorting_and_deduplication.py",
+    "language-feature-examples/ch08-data/08-01-atoms-lists-and-folds/19-decons_and_substitution.py",
+    "language-feature-examples/ch08-data/08-01-atoms-lists-and-folds/20-roman_general_operators.py",
+    "language-feature-examples/ch08-data/08-01-atoms-lists-and-folds/21-compose.py",
+    "language-feature-examples/ch08-data/08-02-sequence-variables/01-segments.py",
+    "language-feature-examples/ch08-data/08-02-sequence-variables/02-in-an-equation-head.py",
+    "language-feature-examples/ch08-data/08-02-sequence-variables/03-the-one-sided-fragment.py",
+    "language-feature-examples/ch08-data/08-02-sequence-variables/04-the-two-sided-fragments.py",
+    "language-feature-examples/ch08-data/08-02-sequence-variables/05-the-fence.py",
+    "language-feature-examples/ch08-data/08-03-the-shipped-libraries/01-library.py",
+    "language-feature-examples/ch08-data/08-03-the-shipped-libraries/02-datastructures_fingertree.py",
+    "language-feature-examples/ch08-data/08-03-the-shipped-libraries/03-text_lib.py",
+    "language-feature-examples/ch08-data/08-03-the-shipped-libraries/04-regex_lib.py",
+    "language-feature-examples/ch08-data/08-03-the-shipped-libraries/05-json_lib.py",
+    "language-feature-examples/ch08-data/08-03-the-shipped-libraries/06-crypto_lib.py",
+    "language-feature-examples/ch08-data/08-03-the-shipped-libraries/07-datetime.py",
+    "language-feature-examples/ch08-data/08-03-the-shipped-libraries/08-doc_lib.py",
+    "language-feature-examples/ch08-data/08-03-the-shipped-libraries/09-conformance.py",
+    "language-feature-examples/ch08-data/08-03-the-shipped-libraries/10-documentation_as_data.py",
+    "language-feature-examples/ch08-data/08-03-the-shipped-libraries/11-combinatorics_lib.py",
+    "language-feature-examples/ch08-data/08-03-the-shipped-libraries/12-dict_lib.py",
+    "language-feature-examples/ch08-data/08-03-the-shipped-libraries/13-vector_lib.py",
+    "language-feature-examples/ch08-data/08-03-the-shipped-libraries/14-reflect_lib.py",
+    "language-feature-examples/ch08-data/08-03-the-shipped-libraries/15-fingertree_internals.py",
+    "language-feature-examples/ch08-data/08-03-the-shipped-libraries/16-the_prolog_rung.py",
+    "language-feature-examples/ch08-data/08-03-the-shipped-libraries/17-csv_lib.py",
+    "language-feature-examples/ch08-data/08-03-the-shipped-libraries/18-string_lib.py",
+    "language-feature-examples/ch08-data/08-03-the-shipped-libraries/19-file_lib.py",
+    "language-feature-examples/ch08-data/08-03-the-shipped-libraries/20-spaces_lib.py",
+    "language-feature-examples/ch08-data/08-03-the-shipped-libraries/21-datastructures_lib.py",
+    "language-feature-examples/ch08-data/08-03-the-shipped-libraries/22-functional_lib.py",
+    "language-feature-examples/ch08-data/08-03-the-shipped-libraries/23-sets_lib.py",
+    "language-feature-examples/ch08-data/08-03-the-shipped-libraries/24-pairs_lib.py",
+    "language-feature-examples/ch08-data/08-03-the-shipped-libraries/25-graph_lib.py",
+    "language-feature-examples/ch08-data/08-03-the-shipped-libraries/26-unicode_lib.py",
+    "language-feature-examples/ch08-data/08-03-the-shipped-libraries/27-parsing_lib.py",
+    "language-feature-examples/ch08-data/08-03-the-shipped-libraries/28-yaml_lib.py",
+    "language-feature-examples/ch08-data/08-03-the-shipped-libraries/29-markup_lib.py",
+    "language-feature-examples/ch08-data/08-03-the-shipped-libraries/30-encoding_lib.py",
+    "language-feature-examples/ch08-data/08-03-the-shipped-libraries/31-system_lib.py",
+    "language-feature-examples/ch08-data/08-03-the-shipped-libraries/32-process_lib.py",
+    "language-feature-examples/ch08-data/08-03-the-shipped-libraries/33-uuid_lib.py",
+    "language-feature-examples/ch08-data/08-03-the-shipped-libraries/34-logging_lib.py",
+    "language-feature-examples/ch08-data/08-03-the-shipped-libraries/35-math_lib.py",
+    "language-feature-examples/ch08-data/08-03-the-shipped-libraries/36-random_lib.py",
+    "language-feature-examples/ch08-data/08-03-the-shipped-libraries/37-statistics_lib.py",
+    "language-feature-examples/ch08-data/08-03-the-shipped-libraries/38-http_lib.py",
+    "language-feature-examples/ch08-data/08-03-the-shipped-libraries/39-uri_lib.py",
+    "language-feature-examples/ch08-data/08-03-the-shipped-libraries/40-socket_lib.py",
+    "language-feature-examples/ch08-data/08-03-the-shipped-libraries/41-compression_lib.py",
+    "language-feature-examples/ch08-data/08-03-the-shipped-libraries/42-database_lib.py",
+    "language-feature-examples/ch08-data/08-03-the-shipped-libraries/43-testing_lib.py",
+    "language-feature-examples/ch08-data/08-03-the-shipped-libraries/44-cli_lib.py",
+    "language-feature-examples/ch09-types/01-types.py",
+    "language-feature-examples/ch09-types/02-builin_types.py",
+    "language-feature-examples/ch09-types/03-functiontypes.py",
+    "language-feature-examples/ch09-types/04-outputtype.py",
+    "language-feature-examples/ch09-types/05-meta_types.py",
+    "language-feature-examples/ch09-types/06-dont_eval_type.py",
+    "language-feature-examples/ch09-types/08-parametric_types.py",
+    "language-feature-examples/ch09-types/09-recursive_types.py",
+    "language-feature-examples/ch09-types/10-recursive_types2.py",
+    "language-feature-examples/ch09-types/11-subtyping.py",
+    "language-feature-examples/ch09-types/12-types_dependent.py",
+    "language-feature-examples/ch09-types/13-types_nondet.py",
+    "language-feature-examples/ch09-types/14-matchtypes.py",
+    "language-feature-examples/ch09-types/15-engine_surface.py",
+    "language-feature-examples/ch09-types/16-typing_rules.py",
+    "language-feature-examples/ch09-types/18-compiled_overloads.py",
+    "language-feature-examples/ch09-types/20-type_casts_that_hold.py",
+    "language-feature-examples/ch09-types/21-a_librarys_declared_types.py",
+    "language-feature-examples/ch09-types/22-variadic_arrow_signature.py",
+    "language-feature-examples/ch09-types/23-variadic_arrow_faces.py",
+    "language-feature-examples/ch09-types/24-sorted_constructors.py",
+    "language-feature-examples/ch10-errors-and-refusals/01-he_error.py",
+    "language-feature-examples/ch10-errors-and-refusals/02-throwing_and_tracing.py",
+    "language-feature-examples/ch11-python-as-a-notation/01-python.py",
+    "language-feature-examples/ch11-python-as-a-notation/02-python_booleans.py",
+    "language-feature-examples/ch11-python-as-a-notation/03-python_import.py",
+    "language-feature-examples/ch11-python-as-a-notation/05-py_numpy.py",
+    "language-feature-examples/ch11-python-as-a-notation/06-door_combinations.py",
+    "language-feature-examples/ch11-python-as-a-notation/09-compiled_structural_vocabulary.py",
+    "language-feature-examples/ch11-python-as-a-notation/10-torch-library-surface.py",
+    "language-feature-examples/ch12-testing/01-he_assert.py",
+    "language-feature-examples/ch12-testing/02-he_equalreduct.py",
+    "language-feature-examples/ch12-testing/03-assertion_difference.py",
+    "language-feature-examples/ch12-testing/04-assert_answers.py",
+    "language-feature-examples/ch14-seeing-your-program/01-time_and_pragmas.py",
+    "language-feature-examples/ch14-seeing-your-program/03-the_clock_and_the_command_line.py",
+    "language-feature-examples/ch15-writing-transactions-and-worlds/01-mutex_and_transaction.py",
+    "language-feature-examples/ch15-writing-transactions-and-worlds/02-state.py",
+    "language-feature-examples/ch15-writing-transactions-and-worlds/03-pre_add_hooks.py",
+    "language-feature-examples/ch15-writing-transactions-and-worlds/04-admission_pools.py",
+    "language-feature-examples/ch15-writing-transactions-and-worlds/05-post_add_hooks.py",
+    "language-feature-examples/ch15-writing-transactions-and-worlds/07-owned_records.py",
+    "language-feature-examples/ch16-events-and-standing-queries/01-event_catalog.py",
+    "language-feature-examples/ch17-concurrency-and-the-loop/01-thread_lib.py",
+    "language-feature-examples/ch17-concurrency-and-the-loop/02-thread_linda.py",
+    "language-feature-examples/ch17-concurrency-and-the-loop/03-hyperpose_primes.py",
+    "language-feature-examples/ch17-concurrency-and-the-loop/04-thin_forms.py",
+    "language-feature-examples/ch17-concurrency-and-the-loop/05-channels_pools_and_the_machine.py",
+    "language-feature-examples/ch17-concurrency-and-the-loop/06-the_prolog_rung_under_lib_thread.py",
+    "language-feature-examples/ch17-concurrency-and-the-loop/08-class_grains.py",
+    "language-feature-examples/ch17-concurrency-and-the-loop/09-class_values.py",
+    "language-feature-examples/ch17-concurrency-and-the-loop/10-class_entities.py",
+    "language-feature-examples/ch17-concurrency-and-the-loop/11-class_dispatch.py",
+    "language-feature-examples/ch17-concurrency-and-the-loop/12-class_prototypes.py",
+    "language-feature-examples/ch17-concurrency-and-the-loop/13-class_decorators.py",
+    "language-feature-examples/ch18-performance/18-01-larger-workloads/01-scale.py",
+    "language-feature-examples/ch18-performance/18-01-larger-workloads/02-holbenchmark.py",
+    "language-feature-examples/ch18-performance/18-01-larger-workloads/03-superpose_primes.py",
+    "language-feature-examples/ch18-performance/18-01-larger-workloads/04-peanofast.py",
+    "language-feature-examples/ch18-performance/18-01-larger-workloads/05-matespacefast.py",
+    "language-feature-examples/ch18-performance/18-01-larger-workloads/06-a-gap-query-and-its-index.py",
+    "language-feature-examples/ch18-performance/18-02-memoisation-and-tabling/01-memo_multi_answer.py",
+    "language-feature-examples/ch18-performance/18-02-memoisation-and-tabling/02-memo_aggregate.py",
+    "language-feature-examples/ch18-performance/18-02-memoisation-and-tabling/03-memo_per_arity.py",
+    "language-feature-examples/ch18-performance/18-02-memoisation-and-tabling/04-memo_same_name_multi_arity.py",
+    "language-feature-examples/ch18-performance/18-02-memoisation-and-tabling/05-memo_variant_nonground.py",
+    "language-feature-examples/ch18-performance/18-02-memoisation-and-tabling/06-memo_dependency_invalidation.py",
+    "language-feature-examples/ch18-performance/18-02-memoisation-and-tabling/07-memo_spaces.py",
+    "language-feature-examples/ch18-performance/18-02-memoisation-and-tabling/08-memo_stats.py",
+    "language-feature-examples/ch18-performance/18-02-memoisation-and-tabling/09-tabling_fib.py",
+    "language-feature-examples/ch18-performance/18-02-memoisation-and-tabling/10-tabling_equation_change.py",
+    "language-feature-examples/ch18-performance/18-02-memoisation-and-tabling/11-tabling_space_write.py",
+    "language-feature-examples/ch18-performance/18-02-memoisation-and-tabling/12-tabling_statistics.py",
+    "language-feature-examples/ch18-performance/18-02-memoisation-and-tabling/17-memo_controls.py",
+    "language-feature-examples/ch18-performance/18-02-memoisation-and-tabling/18-tabling_doors.py",
+    "language-feature-examples/ch19-spaces-backed-by-anything/19-01-spaces-of-your-own/01-inherited_spaces.py",
+    "language-feature-examples/ch19-spaces-backed-by-anything/19-01-spaces-of-your-own/02-restricted_spaces.py",
+    "language-feature-examples/ch19-spaces-backed-by-anything/19-01-spaces-of-your-own/03-parametric_spaces.py",
+    "language-feature-examples/ch19-spaces-backed-by-anything/19-01-spaces-of-your-own/04-super.py",
+    "language-feature-examples/ch19-spaces-backed-by-anything/19-01-spaces-of-your-own/05-evalc.py",
+    "language-feature-examples/ch19-spaces-backed-by-anything/19-01-spaces-of-your-own/06-a-shared-space-on-redis.py",
+    "language-feature-examples/ch19-spaces-backed-by-anything/19-02-a-space-in-c/01-c_space.py",
+    "language-feature-examples/ch19-spaces-backed-by-anything/19-03-a-builtin-in-c/01-c_extension.py",
+    "language-feature-examples/ch19-spaces-backed-by-anything/19-03-a-builtin-in-c/02-handle.py",
+    "language-feature-examples/ch19-spaces-backed-by-anything/19-04-a-space-on-mork/01-mm2-operators.py",
+    "language-feature-examples/ch20-extending-the-engine/20-01-translator-rules/01-translatorrule.py",
+    "language-feature-examples/ch20-extending-the-engine/20-01-translator-rules/02-translatorrule_direction.py",
+    "language-feature-examples/ch20-extending-the-engine/20-01-translator-rules/03-translatorrule_guard.py",
+    "language-feature-examples/ch20-extending-the-engine/20-01-translator-rules/04-translatorrule_cost.py",
+    "language-feature-examples/ch20-extending-the-engine/20-01-translator-rules/05-translatorrule_for.py",
+    "language-feature-examples/ch20-extending-the-engine/20-01-translator-rules/06-translatorrule_fib.py",
+    "language-feature-examples/ch20-extending-the-engine/20-01-translator-rules/07-translatorrule_refusal.py",
+    "language-feature-examples/ch20-extending-the-engine/20-01-translator-rules/08-derived_forms.py",
+    "language-feature-examples/ch20-extending-the-engine/20-02-metta-written-in-metta/01-callquoteevalreduce.py",
+    "language-feature-examples/ch20-extending-the-engine/20-02-metta-written-in-metta/02-callquoteevalreduce2.py",
+    "language-feature-examples/ch20-extending-the-engine/20-02-metta-written-in-metta/03-myinterpreter.py",
+    "language-feature-examples/ch20-extending-the-engine/20-02-metta-written-in-metta/04-minimal_metta.py",
+    "language-feature-examples/ch20-extending-the-engine/20-02-metta-written-in-metta/05-he_minimalmetta.py",
+    "language-feature-examples/ch20-extending-the-engine/20-02-metta-written-in-metta/06-he_evaluation.py",
+    "language-feature-examples/ch20-extending-the-engine/20-02-metta-written-in-metta/07-he_quoting.py",
+    "language-feature-examples/ch20-extending-the-engine/20-02-metta-written-in-metta/08-he_atomspace.py",
+    "language-feature-examples/ch20-extending-the-engine/20-02-metta-written-in-metta/09-he_types.py",
+    "language-feature-examples/ch20-extending-the-engine/20-02-metta-written-in-metta/10-he_math.py",
+    "language-feature-examples/ch20-extending-the-engine/20-02-metta-written-in-metta/12-interpret_and_metta_thread.py",
+    "language-feature-examples/ch20-extending-the-engine/20-02-metta-written-in-metta/13-strategy_internals.py",
+    "language-feature-examples/ch20-extending-the-engine/20-03-prolog-underneath/01-translatepredicate.py",
+    "language-feature-examples/ch20-extending-the-engine/20-03-prolog-underneath/03-foreign_rules.py",
+    "language-feature-examples/ch20-extending-the-engine/20-03-prolog-underneath/04-registering_prolog_predicates.py",
+    "language-feature-examples/ch20-extending-the-engine/20-03-prolog-underneath/05-the-module-doors.py",
+    "language-feature-examples/ch20-extending-the-engine/20-04-modules-and-the-catalog/01-import_order_independence.py",
+    "language-feature-examples/ch20-extending-the-engine/20-04-modules-and-the-catalog/02-import_relative_nested.py",
+    "language-feature-examples/ch20-extending-the-engine/20-04-modules-and-the-catalog/03-import_duplicate_cycle.py",
+    "language-feature-examples/ch20-extending-the-engine/20-04-modules-and-the-catalog/04-import_error_surface.py",
+    "language-feature-examples/ch20-extending-the-engine/20-04-modules-and-the-catalog/05-import_space_identity.py",
+    "language-feature-examples/ch20-extending-the-engine/20-04-modules-and-the-catalog/06-git_import.py",
+    "language-feature-examples/ch20-extending-the-engine/20-04-modules-and-the-catalog/08-catalog.py",
+    "language-feature-examples/ch20-extending-the-engine/20-04-modules-and-the-catalog/09-carrier_vocabulary.py",
+    "language-feature-examples/ch20-extending-the-engine/20-04-modules-and-the-catalog/10-include.py",
+    "language-feature-examples/ch20-extending-the-engine/20-04-modules-and-the-catalog/11-reference_rows.py",
+    "language-feature-examples/ch20-extending-the-engine/20-04-modules-and-the-catalog/12-reference_maps.py",
+    "language-feature-examples/ch20-extending-the-engine/20-04-modules-and-the-catalog/13-reference_loading.py",
+    "language-feature-examples/ch20-extending-the-engine/20-06-files-and-processes/05-seeking-and-sizing.py",
+    "language-feature-examples/ch20-extending-the-engine/20-07-tokens-and-the-reader/01-reader-tokens.py",
+    "language-feature-examples/ch22-a-reasoner-you-can-serve/22-01-logic-programs/01-logicprog.py",
+    "language-feature-examples/ch22-a-reasoner-you-can-serve/22-01-logic-programs/02-logicprogset.py",
+    "language-feature-examples/ch22-a-reasoner-you-can-serve/22-01-logic-programs/03-constructive_negation.py",
+    "language-feature-examples/ch22-a-reasoner-you-can-serve/22-01-logic-programs/04-nilbc.py",
+    "language-feature-examples/ch22-a-reasoner-you-can-serve/22-01-logic-programs/05-scallop_readme.py",
+    "language-feature-examples/ch22-a-reasoner-you-can-serve/22-01-logic-programs/06-case-duals.py",
+    "language-feature-examples/ch22-a-reasoner-you-can-serve/22-01-logic-programs/07-tagged_fixpoint.py",
+    "language-feature-examples/ch22-a-reasoner-you-can-serve/22-01-logic-programs/08-guarded_rules.py",
+    "language-feature-examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/01-measure.py",
+    "language-feature-examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/02-soft.py",
+    "language-feature-examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/03-plntest.py",
+    "language-feature-examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/04-plntestdirect.py",
+    "language-feature-examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/06-pln_roman.py",
+    "language-feature-examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/09-nars_tuffy.py",
+    "language-feature-examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/11-weighted_subset_posterior.py",
+    "language-feature-examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/13-the_measure_algebra_underneath.py",
+    "language-feature-examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/14-soft_aggregation_underneath.py",
+    "language-feature-examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/15-independent_supports.py",
+    "language-feature-examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/16-nars_truth_functions.py",
+    "language-feature-examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/17-nars_derivation_control.py",
+    "language-feature-examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/18-pln_formulas.py",
+    "language-feature-examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/19-pln_derivation_control.py",
+    "language-feature-examples/ch22-a-reasoner-you-can-serve/22-03-search/01-newtons_method.py",
+    "language-feature-examples/ch22-a-reasoner-you-can-serve/22-03-search/02-tilepuzzle.py",
+    "language-feature-examples/ch22-a-reasoner-you-can-serve/22-03-search/03-matespace.py",
+    "language-feature-examples/ch22-a-reasoner-you-can-serve/22-03-search/04-matespace2.py",
+    "language-feature-examples/ch22-a-reasoner-you-can-serve/22-03-search/05-fibadd.py",
+    "language-feature-examples/examples/ch11-python-as-a-notation/_fixtures/python_import_file.py",
+    "language-feature-examples/examples/ch18-performance/18-03-algebra-carriers/01-algebra_tower.py",
+    "language-feature-examples/examples/ch18-performance/18-03-algebra-carriers/02-gradient_algebra.py",
+    "language-feature-examples/examples/ch20-extending-the-engine/20-04-modules-and-the-catalog/_fixtures/imports/relative/subdir/python_helper.py",
+    "live/standing_queries.py",
+    "operations/annotation_contracts.py",
+    "operations/concurrency_handles.py",
+    "operations/effect_ranks.py",
+    "operations/engine_controls.py",
+    "operations/error_handling.py",
+    "operations/explaining_a_query.py",
+    "operations/property_instances.py",
+    "operations/python_definitions.py",
+    "operations/runtime_configuration.py",
+    "operations/saga_compensation.py",
+    "reasoning/custom_matchers.py",
+    "reasoning/evolutionary_search.py",
+    "reasoning/literature_discovery.py",
+    "reasoning/neurosymbolic_addition.py",
+    "reasoning/pln_uncertain_reasoning.py"
+  ],
+  "topical": [
+    {
+      "python": "basics/first_steps.py",
+      "status": "native",
+      "c": [
+        "basics/first_steps.c"
+      ],
+      "detail": "The C example asserts the corresponding behavior through the public C surface."
+    },
+    {
+      "python": "data/array_interop.py",
+      "status": "adapted",
+      "c": [
+        "data/array_marshalling.c",
+        "data/counted_text.c",
+        "integration/borrowed_storage.c",
+        "gallery/symbolic_tensors.c"
+      ],
+      "detail": "Explicit buffers, child vectors and CBLAS replace Python array interchange protocols; no Arrow or NumPy adapter is claimed."
+    },
+    {
+      "python": "gallery/ecosystem_graph.py",
+      "status": "adapted",
+      "c": [
+        "gallery/ecosystem_graph.c"
+      ],
+      "detail": "C breadth-first search replaces NetworkX over the same graph task."
+    },
+    {
+      "python": "gallery/family_algebras.py",
+      "status": "adapted",
+      "c": [
+        "gallery/family_algebras.c"
+      ],
+      "detail": "C enumerates weighted answers in four directions; Python counting aggregates and proof reinterpretation are host presentations."
+    },
+    {
+      "python": "gallery/git_like_worlds.py",
+      "status": "gap",
+      "c": [],
+      "detail": "Immutable world reification, two-sided diff and commit are Python-owned algorithms. The shared engine lacks a complete world service; duplicating that implementation in C would create a separate semantic authority."
+    },
+    {
+      "python": "gallery/journaled_observed_store.py",
+      "status": "adapted",
+      "c": [
+        "gallery/journaled_observed_store.c"
+      ],
+      "detail": "SQLite WAL owns durability and recovery; C owns the provider and declares its event contract."
+    },
+    {
+      "python": "gallery/linda_coordination.py",
+      "status": "native",
+      "c": [
+        "gallery/linda_coordination.c"
+      ],
+      "detail": "The C example asserts the corresponding behavior through the public C surface."
+    },
+    {
+      "python": "gallery/symbolic_tensors.py",
+      "status": "adapted",
+      "c": [
+        "gallery/symbolic_tensors.c"
+      ],
+      "detail": "CBLAS replaces NumPy; the symbolic double-transpose cancellation reaches one GEMM."
+    },
+    {
+      "python": "integration/cmetta_space.py",
+      "status": "adapted",
+      "c": [
+        "integration/embedding_lifetime.c",
+        "integration/sqlite_space.c"
+      ],
+      "detail": "A C application directly embeds the engine rather than invoking a sibling runtime as a subprocess."
+    },
+    {
+      "python": "integration/duckdb_space.py",
+      "status": "adapted",
+      "c": [
+        "integration/sqlite_space.c"
+      ],
+      "detail": "SQLite is the C-native SQL instance; DuckDB-specific analytics and the Python table bridge are not exercised."
+    },
+    {
+      "python": "integration/multishot_solving.py",
+      "status": "native",
+      "c": [
+        "integration/multishot_solving.c"
+      ],
+      "detail": "The C example asserts the corresponding behavior through the public C surface."
+    },
+    {
+      "python": "integration/networkx_space.py",
+      "status": "adapted",
+      "c": [
+        "gallery/ecosystem_graph.c"
+      ],
+      "detail": "A C graph projection replaces the NetworkX object provider."
+    },
+    {
+      "python": "integration/persistent_migration.py",
+      "status": "native",
+      "c": [
+        "integration/persistent_migration.c"
+      ],
+      "detail": "The C example asserts the corresponding behavior through the public C surface."
+    },
+    {
+      "python": "integration/provider_policy.py",
+      "status": "native",
+      "c": [
+        "integration/sqlite_space.c"
+      ],
+      "detail": "The C example asserts the corresponding behavior through the public C surface."
+    },
+    {
+      "python": "integration/provider_worlds.py",
+      "status": "gap",
+      "c": [],
+      "detail": "Python provider world replay and lineage need the same missing shared world service. C demonstrates closed transactions and snapshots, which do not claim immutable branching."
+    },
+    {
+      "python": "integration/python_objects.py",
+      "status": "native",
+      "c": [
+        "integration/object_lifetime.c",
+        "data/struct_marshalling.c"
+      ],
+      "detail": "The C example asserts the corresponding behavior through the public C surface."
+    },
+    {
+      "python": "integration/registration_lifecycle.py",
+      "status": "adapted",
+      "c": [
+        "integration/registration_lifecycle.c"
+      ],
+      "detail": "C inspects declared points and explicitly unregisters callbacks; Python package entry-point discovery and reflectors are host-specific."
+    },
+    {
+      "python": "integration/remote_controls.py",
+      "status": "adapted",
+      "c": [
+        "integration/daemon.c",
+        "integration/sqlite_space.c"
+      ],
+      "detail": "Socket lifecycle and provider refusal are exercised; the Python HTTP remote-space protocol, authorization middleware and cursor quotas have no C service in this surface."
+    },
+    {
+      "python": "integration/routing_equations.py",
+      "status": "native",
+      "c": [
+        "integration/routing_equations.c"
+      ],
+      "detail": "The C example asserts the corresponding behavior through the public C surface."
+    },
+    {
+      "python": "integration/sqlite_space.py",
+      "status": "adapted",
+      "c": [
+        "integration/sqlite_space.c"
+      ],
+      "detail": "C owns prepared statements and savepoints; candidate scans leave unification to the engine. Python TableBridge SQL pushdown and lazy object-field projection are not replicated."
+    },
+    {
+      "python": "integration/web_routes.py",
+      "status": "adapted",
+      "c": [
+        "integration/routing_equations.c",
+        "integration/daemon.c"
+      ],
+      "detail": "C serves framed requests over a local socket and routes equations; Python HTTP route discovery and decorators are not present."
+    },
+    {
+      "python": "live/standing_queries.py",
+      "status": "native",
+      "c": [
+        "live/standing_queries.c",
+        "live/reentrant_events.c"
+      ],
+      "detail": "The C example asserts the corresponding behavior through the public C surface."
+    },
+    {
+      "python": "operations/annotation_contracts.py",
+      "status": "adapted",
+      "c": [
+        "operations/annotation_contracts.c"
+      ],
+      "detail": "Explicit arrow types govern C argument evaluation; C preprocessing supports lowering, while Python bytecode source-span and closure reflection have no runtime C equivalent."
+    },
+    {
+      "python": "operations/concurrency_handles.py",
+      "status": "native",
+      "c": [
+        "integration/threads.c",
+        "integration/daemon.c",
+        "gallery/linda_coordination.c"
+      ],
+      "detail": "The C example asserts the corresponding behavior through the public C surface."
+    },
+    {
+      "python": "operations/effect_ranks.py",
+      "status": "native",
+      "c": [
+        "operations/effect_ranks.c"
+      ],
+      "detail": "The C example asserts the corresponding behavior through the public C surface."
+    },
+    {
+      "python": "operations/engine_controls.py",
+      "status": "native",
+      "c": [
+        "operations/engine_controls.c"
+      ],
+      "detail": "The C example asserts the corresponding behavior through the public C surface."
+    },
+    {
+      "python": "operations/error_handling.py",
+      "status": "native",
+      "c": [
+        "operations/error_handling.c",
+        "integration/callback_errors.c"
+      ],
+      "detail": "The C example asserts the corresponding behavior through the public C surface."
+    },
+    {
+      "python": "operations/explaining_a_query.py",
+      "status": "adapted",
+      "c": [
+        "operations/explaining_a_query.c"
+      ],
+      "detail": "The language explain form supplies the plan; C measures actual query work with mt_stats. Python EXPLAIN ANALYZE packaging is not a separate C API."
+    },
+    {
+      "python": "operations/property_instances.py",
+      "status": "native",
+      "c": [
+        "operations/property_instances.c"
+      ],
+      "detail": "The C example asserts the corresponding behavior through the public C surface."
+    },
+    {
+      "python": "operations/python_definitions.py",
+      "status": "native",
+      "c": [
+        "operations/lowering.c"
+      ],
+      "detail": "The C example asserts the corresponding behavior through the public C surface."
+    },
+    {
+      "python": "operations/runtime_configuration.py",
+      "status": "adapted",
+      "c": [
+        "operations/runtime_configuration.c"
+      ],
+      "detail": "C owns startup memory and query limits; presentation rows are explicitly replaced in the catalog. Python settings descriptors are host-specific."
+    },
+    {
+      "python": "operations/saga_compensation.py",
+      "status": "gap",
+      "c": [],
+      "detail": "Saga receipt capture and replay live in the Python host. Shared engine transaction and compensation lookup hooks do not supply the complete recovery protocol."
+    },
+    {
+      "python": "reasoning/custom_matchers.py",
+      "status": "native",
+      "c": [
+        "reasoning/regex_matching.c"
+      ],
+      "detail": "The C example asserts the corresponding behavior through the public C surface."
+    },
+    {
+      "python": "reasoning/evolutionary_search.py",
+      "status": "native",
+      "c": [
+        "reasoning/evolutionary_search.c"
+      ],
+      "detail": "The C example asserts the corresponding behavior through the public C surface."
+    },
+    {
+      "python": "reasoning/literature_discovery.py",
+      "status": "adapted",
+      "c": [
+        "reasoning/literature_discovery.c"
+      ],
+      "detail": "C cosine matching and the engine tagged fixpoint preserve the vocabulary gap, two evidence paths and provenance polynomial; vectors are the same synthetic observations."
+    },
+    {
+      "python": "reasoning/neurosymbolic_addition.py",
+      "status": "adapted",
+      "c": [
+        "reasoning/uncertain_perception.c"
+      ],
+      "detail": "C sensor probabilities and the exact sum constraint demonstrate posterior sharpening; the FabricPC/JAX training loop is package-specific and is not ported."
+    },
+    {
+      "python": "reasoning/pln_uncertain_reasoning.py",
+      "status": "native",
+      "c": [
+        "reasoning/pln_uncertain_reasoning.c"
+      ],
+      "detail": "The C example asserts the corresponding behavior through the public C surface."
+    }
+  ],
+  "nested": [
+    {
+      "python": "language-feature-examples/examples/ch18-performance/18-03-algebra-carriers/01-algebra_tower.py",
+      "status": "adapted",
+      "c": ["gallery/family_algebras.c", "language-feature-examples/carrier_vocabulary.c"],
+      "detail": "C exercises the shared carriers and catalog. Python lawless-plan metadata, rate sampling, linear-evidence bookkeeping and amplitude orchestration remain host-owned algorithms; this is partial carrier coverage."
+    },
+    {
+      "python": "language-feature-examples/examples/ch18-performance/18-03-algebra-carriers/02-gradient_algebra.py",
+      "status": "adapted",
+      "c": ["reasoning/gradient_algebra.c"],
+      "detail": "C dual-number callbacks preserve value 6 and derivative 3 through the two-rule tagged derivation. PyTorch autograd, DLPack and pettorch module interoperability are not present in the C host."
+    }
+  ],
+  "additional_gaps": [
+    "Automatically maintained answer views remain a Python-owned maintenance algorithm; data/snapshot.c asserts only immutable collected answers."
+  ]
+}
