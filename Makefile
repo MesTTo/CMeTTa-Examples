@@ -52,6 +52,7 @@ $(LIBRARY_TWINS)/29-markup_lib: PACKAGES = libxml-2.0
 $(LIBRARY_TWINS)/30-encoding_lib: PACKAGES = libcrypto libutf8proc
 $(LIBRARY_TWINS)/33-uuid_lib: PACKAGES = uuid libcrypto
 $(LIBRARY_TWINS)/35-math_lib: PACKAGES = gmp
+$(LIBRARY_TWINS)/36-random_lib: PACKAGES = gmp
 PACKAGE_CFLAGS = $(if $(PACKAGES),$(patsubst -I%,-isystem %,$(shell pkg-config --cflags $(PACKAGES))))
 PACKAGE_LIBS = $(if $(PACKAGES),$(shell pkg-config --libs $(PACKAGES)))
 $(SQL_PROGRAMS): CPPFLAGS += $(SQLITE_CFLAGS)

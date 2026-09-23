@@ -4,6 +4,12 @@
 
 ## Unreleased
 
+- Write chapter 8's random twin in C, treating randomness as an input: for
+  a seed C takes the engine's own uniform stream and runs the library's
+  gamma, beta and Weibull recipes over it in C, exact where the library is
+  exact; properties of any draw C checks on the engine's draw, and a seed's
+  determinism by comparing two runs.
+
 - Write chapter 8's math twin in C: GMP for counts, gcd and lcm, exact
   ratios, SWI's rationalizing rule, integer roots and modular powers; libm
   by name for the real functions; `fpclassify` for classes. Rounding an
