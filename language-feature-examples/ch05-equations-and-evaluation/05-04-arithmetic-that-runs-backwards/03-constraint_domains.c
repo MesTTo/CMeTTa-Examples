@@ -5,8 +5,9 @@
  *   because its reader has no rational literal; it decides entailment, fails
  *   on a contradiction and keeps a disequation. The constraints an answer
  *   still carries come back through residual-goals as a Prolog curly term,
- *   an engine value with no MeTTa structure that C holds as a handle and
- *   reads through mt_show, as the original reads it through repr. CLP(B) labels
+ *   which arrives in the wire grammar as the expression ({} (, ...)) and
+ *   compares as a term, since a C expectation is data and never evaluated,
+ *   where MeTTa source reads it through repr. CLP(B) labels
  *   "exactly one of two" and decides tautologies, and the engine's own and,
  *   or and not enumerate the same way without it.
  * Guarantees: all eleven claims of the original hold [tested: make twins;
@@ -42,11 +43,10 @@ int main(void)
     check_answers("a disequation over the rationals",
                   mt_eval(m, WHERE(clpq(E("=", V("d"), 1)),
                                    WHERE(clpq(E("=", V("e"), 2)), clpq(E("=\\=", V("d"), V("e")))))), B(true));
-    mt_atom *carried = mt_one(mt_eval(m, WHERE(clpq(E(">=", V("f"), 0)),
-                                               WHERE(clpq(E("=<", V("f"), 3)), E("residual-goals", V("f"))))));
-    check_text("what an answer still carries, in the engine's rendering", mt_show(carried),
-               "(({} (, (>= $_0 0) (=< $_0 3))))");
-    mt_drop(carried);
+    check_answers("what an answer still carries",
+                  mt_eval(m, WHERE(clpq(E(">=", V("f"), 0)), WHERE(clpq(E("=<", V("f"), 3)),
+                                                                   E("residual-goals", V("f"))))),
+                  E(E("{}", E(",", E(">=", V("g"), 0), E("=<", V("g"), 3)))));
 
     /* CLP(B): exactly one of two, labelled; then two formulas decided. */
     check_answers("exactly one of m and n",

@@ -57,15 +57,11 @@ int main(void)
             mt_add(m, E("=", E("wrapper", V("f"), V("list")), E("map-flat", V("f"), V("list")))));
     check_answers("a wrapper specializes through", mt_eval(m, E("wrapper", E("+", 1), E(1, 2, 3))), E(2, 3, 4));
     require("(= (wrapper2 $f) (id $f))", mt_add(m, E("=", E("wrapper2", V("f")), E("id", V("f")))));
-    /* A partial application has no MeTTa structure, so C holds it as a
-       handle: it prints as the engine prints it and still applies. */
+    /* A partial application arrives in the wire grammar every seat reads,
+       as the expression (partial F Args), so C compares it as a term. */
     mt_atom *partial = mt_one(mt_eval(m, E("wrapper2", E("+", 1))));
-    mt_atom *plus_one = mt_one(mt_eval(m, E("+", 1)));
-    check("wrapper2 hands back the partial (+ 1) itself",
-          mt_kind_of(partial) == MT_HANDLE && mt_eq(partial, plus_one));
-    check_text("which the engine prints as a partial", mt_show(partial), "(partial + (1))");
-    check_int("and which still adds one", mt_one_int(mt_eval(m, E(partial, 41))), 42);
-    mt_drop(plus_one);
+    check_atom("wrapper2 hands back the partial (+ 1) itself", mt_keep(partial), mt_one(mt_eval(m, E("+", 1))));
+    check_atom("the expression C builds for it", partial, E("partial", "+", E(1)));
 
     /* (= (trickyspec $f) (if (= ($f 1) 2) (trickyspec (+ 2)) ($f 1))) */
     require("define trickyspec", mt_add(m, E("=", E("trickyspec", V("f")),

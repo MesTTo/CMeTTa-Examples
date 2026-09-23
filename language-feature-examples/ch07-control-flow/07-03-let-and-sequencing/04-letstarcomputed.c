@@ -4,8 +4,8 @@
  *   pattern that does not match gives no answer; noeval hands bindings to a
  *   definition that evaluates its arguments; bindings that are not pairs are
  *   refused, which C sees as MT_ERROR on the cursor; and (let* foo ok) is no
- *   binding at all but a partial application, which C holds as a handle and
- *   reads through mt_show.
+ *   binding at all but a partial application, which arrives as the
+ *   expression (partial let* (foo ok)) and compares as the term C builds.
  * Guarantees: all eight claims of the original hold [tested: make twins;
  *   commit=WORKTREE].
  */
@@ -37,8 +37,7 @@ int main(void)
     mt_list_free(refused);
     mt_clear();
 
-    mt_atom *unapplied = mt_one(mt_eval(m, E("let*", "foo", "ok")));
-    check_text("no list is no bindings: a partial application", mt_show(unapplied), "(partial let* (foo ok))");
-    mt_drop(unapplied);
+    check_answers("no list is no bindings: a partial application", mt_eval(m, E("let*", "foo", "ok")),
+                  E("partial", "let*", E("foo", "ok")));
     return done(m);
 }

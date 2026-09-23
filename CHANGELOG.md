@@ -49,6 +49,10 @@
   the children. The splits a two-gap pattern enumerates are checked against
   the separator positions a C loop finds, and a caught refusal is read apart
   as the original reads it.
+- Read partial applications, refusal payloads and residual goals as the
+  expressions CMeTTa now decodes them as, in the wire grammar every seat
+  shares: the twins compare them against terms C builds and read a payload
+  by position with mt_at, where they held opaque handles.
 
 ## Initial corpus
 
