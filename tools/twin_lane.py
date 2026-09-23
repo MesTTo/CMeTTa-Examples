@@ -3,7 +3,8 @@ cannot drift from its program without this lane going red.
 
 A twin is an ordinary C program at its original's path, with `.c` for
 `.metta`. The lane runs the original through the C seat (build/tools/original)
-and the twin in its own process, and compares what the two answer:
+and the twin in its own process, both from the engine tree, and compares
+what the two answer:
 
   claims   the original states one claim per assert-family `!` form; the twin
            proves one per check_* call it survives, so it must prove at least
@@ -376,7 +377,10 @@ def check_one(twin: Path, engine: Path, entries: list[dict]) -> Verdict:
         find(f"was not built: {binary} is missing; run make all")
         return verdict
     left = execute([str(RUNNER), verdict.example], engine)
-    right = execute([str(binary)], ROOT)
+    # A twin runs where its original runs, the engine tree, as the Python
+    # lane runs its twins, so a path an original writes relative to the tree,
+    # a fixture beside it, names the same file in C.
+    right = execute([str(binary)], engine)
     if left.returncode != 0:
         tail = [line for line in left.output.splitlines() if line.strip()][-2:]
         find(f"the original failed to run (exit {left.returncode}): "
