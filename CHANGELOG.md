@@ -4,6 +4,11 @@
 
 ## Unreleased
 
+- Write chapter 8's system twin in C over the process the engine shares
+  with it: C reads the engine's environment writes with `getenv`, the whole
+  environment as `environ`, the working directory with `getcwd`, the cores
+  with SWI's own `sysconf` call, and runs each write before it looks.
+
 - Write chapter 8's encoding twin in C: UTF-8 through utf8proc, hex by hand
   in C, and base64 through libcrypto in the standard and url alphabets. The
   base64 twin 06 decoded privately now lives in `crypto_oracle.h` beside its
