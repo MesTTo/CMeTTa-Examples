@@ -47,6 +47,7 @@ $(LIBRARY_TWINS)/18-string_lib: PACKAGES = libutf8proc
 $(LIBRARY_TWINS)/22-functional_lib: PACKAGES = libutf8proc
 $(LIBRARY_TWINS)/26-unicode_lib: PACKAGES = libutf8proc
 $(LIBRARY_TWINS)/27-parsing_lib: PACKAGES = libutf8proc
+$(LIBRARY_TWINS)/28-yaml_lib: PACKAGES = yaml-0.1
 PACKAGE_CFLAGS = $(if $(PACKAGES),$(patsubst -I%,-isystem %,$(shell pkg-config --cflags $(PACKAGES))))
 PACKAGE_LIBS = $(if $(PACKAGES),$(shell pkg-config --libs $(PACKAGES)))
 $(SQL_PROGRAMS): CPPFLAGS += $(SQLITE_CFLAGS)

@@ -4,6 +4,12 @@
 
 ## Unreleased
 
+- Write chapter 8's YAML twin in C against libyaml, the library under SWI's
+  yaml package: event parsing so an untagged plain scalar is told from a
+  tagged or quoted one, the YAML 1.2 core schema's resolution table as the
+  POSIX regular expressions the specification gives, and the event emitter
+  with the settings SWI's writer passes.
+
 - Write chapter 8's parsing twin in C: a list-of-successes parser, Hutton and
   Meijer's model, run by a table of forms that C extends at run time as the
   original adds a `parsing-form` row, with functions inside grammars resolved
