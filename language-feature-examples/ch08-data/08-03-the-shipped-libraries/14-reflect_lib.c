@@ -172,20 +172,6 @@ static bool well_formed(const mt_atom *rules)
     return true;
 }
 
-/* A value as the engine answers it: Empty is the language's empty result, so
-   a value that is Empty itself is no answer at all, while Empty inside an
-   expression is data. */
-static void check_value(const char *claim, mt_answers *got, mt_atom *value)
-{
-    mt_atom *empty = mt_sym("Empty");
-    if (mt_eq(value, empty)) {
-        mt_drop(value);
-        check_none(claim, got);
-    } else
-        check_answers(claim, got, value);
-    mt_drop(empty);
-}
-
 static mt_atom *verdict(bool holds) { return mt_sym(holds ? "accepted" : "refused"); }
 
 static mt_atom *repeated(size_t n, mt_atom *x)

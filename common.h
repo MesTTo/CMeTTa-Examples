@@ -58,6 +58,11 @@ void check_list_(const char *claim, mt_list list, size_t count, mt_atom **want);
 /* No answer at all. CONSUMES the cursor. */
 void check_none(const char *claim, mt_answers *answers);
 
+/* Exactly this one value, where a value that is Empty is no answer at all:
+   the engine answers a top-level Empty with nothing, and inside an expression
+   Empty stays data. CONSUMES the cursor and TAKES the value. */
+void check_value(const char *claim, mt_answers *answers, mt_atom *value);
+
 /* A status the program needs before it can go on: a door that must succeed.
    Not a claim, and never counted as one. */
 void require(const char *what, bool ok);

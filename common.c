@@ -129,6 +129,18 @@ void check_none(const char *claim, mt_answers *answers)
     proved();
 }
 
+void check_value(const char *claim, mt_answers *answers, mt_atom *value)
+{
+    mt_atom *empty = mt_sym("Empty");
+    bool nothing = value && mt_eq(value, empty);
+    mt_drop(empty);
+    if (nothing) {
+        mt_drop(value);
+        check_none(claim, answers);
+    } else
+        check_answers_(claim, answers, 1, &value);
+}
+
 int done_(metta *runtime, const char *file)
 {
     size_t count = atomic_load(&claims);

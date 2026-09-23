@@ -4,6 +4,13 @@
 
 ## Unreleased
 
+- Write chapter 8's parsing twin in C: a list-of-successes parser, Hutton and
+  Meijer's model, run by a table of forms that C extends at run time as the
+  original adds a `parsing-form` row, with functions inside grammars resolved
+  through a C table and a stalled repetition raised as a flag the parse
+  reads. `check_value`, the check that a value Empty is no answer at all, now
+  lives once in `common.h` for every program.
+
 - Write chapter 8's shipped-library twins 25 and 26 in C: graphs as a sorted
   vertex array and an adjacency matrix rebuilt from vertex and edge lists,
   with Warshall's closure and Kahn's layered topological order; and Unicode

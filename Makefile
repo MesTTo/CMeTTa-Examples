@@ -46,6 +46,7 @@ $(LIBRARY_TWINS)/16-the_prolog_rung: PACKAGES = libpcre2-8 libcrypto
 $(LIBRARY_TWINS)/18-string_lib: PACKAGES = libutf8proc
 $(LIBRARY_TWINS)/22-functional_lib: PACKAGES = libutf8proc
 $(LIBRARY_TWINS)/26-unicode_lib: PACKAGES = libutf8proc
+$(LIBRARY_TWINS)/27-parsing_lib: PACKAGES = libutf8proc
 PACKAGE_CFLAGS = $(if $(PACKAGES),$(patsubst -I%,-isystem %,$(shell pkg-config --cflags $(PACKAGES))))
 PACKAGE_LIBS = $(if $(PACKAGES),$(shell pkg-config --libs $(PACKAGES)))
 $(SQL_PROGRAMS): CPPFLAGS += $(SQLITE_CFLAGS)
