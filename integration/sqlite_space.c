@@ -1,35 +1,54 @@
-/* Purpose: query a SQL bag, reject a reserved write and roll back a transaction.
- * Owns resources: provider owns SQLite; cursor retention delays its release.
- * Guarantees: actual SQL state and MeTTa answers agree [tested: make check; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
- * Open Obligations: None.
+/* Purpose: a space that is a SQL table. &sql's atoms are rows; the engine
+ *   unifies what the provider's cursor yields, so a repeated variable joins
+ *   on equal fields and duplicates stay duplicates; a transaction that fails
+ *   rolls the rows back through SQL savepoints; the provider refuses a
+ *   reserved head; and a cursor still open keeps the connection alive after
+ *   the provider is withdrawn.
+ * Owns resources: the provider owns the SQLite connection.
+ * Guarantees: each of those behaviours is checked against the SQL state
+ *   [tested: make check; commit=WORKTREE].
  */
+#define MT_SHORTHAND
 #include "support/sqlite_store.h"
+
 static mt_status abandoned(metta *m, void *user)
 {
     (void)m;
-    if (!mt_add((mt_space *)user, mt_expr("edge", "a", "z"))) return mt_error();
+    if (!mt_add((mt_space *)user, E("edge", "a", "z"))) return mt_error();
     return MT_FAIL;
 }
+
 int main(void)
 {
-    metta *m = open_engine(); size_t released = 0;
+    metta *m = open_engine();
+    size_t released = 0;
     sql_open(m, "&sql", ":memory:", &released);
-    mt_space *space = mt_space_open(m, "&sql"); check("space handle", space != NULL);
-    check("first row", mt_add(space, mt_expr("edge", "a", "b")));
-    check("second row", mt_add(space, mt_expr("edge", "b", "b")));
-    check("duplicate row", mt_add(space, mt_expr("edge", "a", "b")));
-    check_answers("diagonal unification", mt_eval(space, mt_parse("(match &sql (edge $x $x) $x)")), "b");
-    check_answers("SQL bag", mt_match(space, mt_parse("(edge a b)")), "(edge a b) (edge a b)");
-    check("rollback status", mt_transaction(m, abandoned, space) == MT_FAIL);
-    check_answers("rollback removed row", mt_match(space, mt_parse("(edge a z)")), "");
-    check("policy rejects write", !mt_add(space, mt_expr("system", "private")));
-    check("policy reason survives", mt_errmsg() && strstr(mt_errmsg(), "system facts are reserved")); mt_clear();
-    check("remove one occurrence", mt_del(space, mt_expr("edge", "a", "b")));
-    check_answers("duplicate survives", mt_match(space, mt_parse("(edge a b)")), "(edge a b)");
-    mt_answers *rows = mt_atoms(space); check("open retained SQL cursor", rows != NULL && mt_next(rows));
-    check("withdraw provider", mt_provider_close(m, "&sql"));
-    check("cursor retains connection", released == 0);
-    mt_answers_free(rows); check("abandoned cursor releases connection", released == 1);
-    mt_space_close(space);
-    return done(m, "sqlite_space");
+    mt_space *sql = mt_space_open(m, "&sql");
+    require("open &sql", sql != NULL);
+    require("a row", mt_add(sql, E("edge", "a", "b")));
+    require("a loop", mt_add(sql, E("edge", "b", "b")));
+    require("a duplicate row", mt_add(sql, E("edge", "a", "b")));
+
+    check_answers("a repeated variable joins on equal fields",
+                  mt_eval(sql, E("match", mt_spaceref("&sql"), E("edge", V("x"), V("x")), V("x"))), "b");
+    check_answers("duplicates stay duplicates", mt_match(sql, E("edge", "a", "b")),
+                  E("edge", "a", "b"), E("edge", "a", "b"));
+    check("a failed transaction reports MT_FAIL", mt_transaction(m, abandoned, sql) == MT_FAIL);
+    check_none("and its row was rolled back", mt_match(sql, E("edge", "a", "z")));
+
+    mt_clear();
+    check("the provider refuses a reserved head", !mt_add(sql, E("system", "private")));
+    check("in its own words", mt_errmsg() && strstr(mt_errmsg(), "system facts are reserved"));
+    mt_clear();
+    require("remove one occurrence", mt_del(sql, E("edge", "a", "b")));
+    check_answers("the duplicate survives", mt_match(sql, E("edge", "a", "b")), E("edge", "a", "b"));
+
+    mt_answers *rows = mt_atoms(sql);
+    require("hold a cursor open", rows != NULL && mt_next(rows) != NULL);
+    require("withdraw the provider", mt_provider_close(m, "&sql"));
+    check_int("the open cursor keeps the connection", (int64_t)released, 0);
+    mt_answers_free(rows);
+    check_int("closing it releases the connection", (int64_t)released, 1);
+    mt_space_close(sql);
+    return done(m);
 }

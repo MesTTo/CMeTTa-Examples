@@ -1,26 +1,38 @@
-/* Purpose: Keep native identity and release its payload exactly once.
- * Owns resources: local C handles are released before exit; a failed check
- *   terminates the example process.
- * Guarantees: the assertions below hold [tested: make check; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
- * Open Obligations: None.
+/* Purpose: a live C value in the space. mt_object() carries a pointer by
+ *   reference under a type name the engine's get-type reads; stored and
+ *   matched back it is the same pointer, and mt_object_free() releases the
+ *   payload once, deterministically, without waiting for blob collection.
+ * Owns resources: the payload, released by its callback.
+ * Guarantees: identity survives a round trip, its type is Counter, and the
+ *   payload is released exactly once [tested: make check; commit=WORKTREE].
  */
+#define MT_SHORTHAND
 #include "common.h"
+
 static unsigned released;
-static void release_object(void *p) { ++released; free(p); }
+static void release_payload(void *payload)
+{
+    released++;
+    free(payload);
+}
+
 int main(void)
 {
     metta *m = open_engine();
-    int *value = malloc(sizeof(*value));
-    check("allocate payload", value != NULL); *value = 42;
-    mt_atom *object = mt_object(value, "Counter", release_object);
-    check("construct object", object != NULL);
-    check("store borrowed identity", mt_add(m, mt_expr("holds", mt_keep(object))));
-    mt_atom *row = mt_one(mt_match(m, mt_expr("holds", mt_var("x"))));
-    check("same pointer returned", mt_value(mt_at(row, 1)) == value);
-    check_answers("native type reaches engine", mt_eval(m, mt_expr("get-type", mt_keep(object))), "Counter");
-    check("remove engine fact", mt_del(m, mt_expr("holds", mt_keep(object))));
+    int *counter = malloc(sizeof *counter);
+    require("allocate the payload", counter != NULL);
+    *counter = 42;
+    mt_atom *object = mt_object(counter, "Counter", release_payload);
+    require("box the payload", object != NULL);
+
+    require("store it", mt_add(m, E("holds", mt_keep(object))));
+    mt_atom *row = mt_one(mt_match(m, E("holds", V("x"))));
+    check("the same pointer comes back", row && mt_value(mt_at(row, 1)) == counter);
     mt_drop(row);
-    check("deterministic engine release", mt_object_free(object));
-    check("payload released once", released == 1);
-    return done(m, "object_lifetime");
+    check_answers("its type is the name it was boxed under",
+                  mt_eval(m, E("get-type", mt_keep(object))), "Counter");
+    require("remove the fact", mt_del(m, E("holds", mt_keep(object))));
+    require("release the object now", mt_object_free(object));
+    check_int("the payload is released once", released, 1);
+    return done(m);
 }

@@ -1,19 +1,23 @@
-/* Purpose: Read uncertain modus-ponens truth values through the C surface.
- * Owns resources: local handles and host storage are released before success;
- *   a failed assertion terminates this example process.
- * Guarantees: results are asserted [tested: make check; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
- * Open Obligations: None.
+/* Purpose: PLN from C. lib_pln's modus ponens combines an implication's
+ *   truth value with its premise's, and the answer's (stv strength
+ *   confidence) is read back as two C doubles.
+ * Guarantees: strength follows the premise and confidence stays strictly
+ *   between 0 and 1 [tested: make check; commit=WORKTREE].
  */
+#define MT_SHORTHAND
 #include "common.h"
+
 int main(void)
 {
     metta *m = open_engine();
-    check("load PLN", mt_do(m, "!(import! &self (library lib_pln))"));
-    mt_atom *result = mt_one(mt_run(m, "!(Truth_ModusPonens (stv 1.0 0.95) (stv 0.6 0.9))"));
-    check("truth value structure", mt_len(result) == 3 && strcmp(mt_name(mt_at(result, 0)), "stv") == 0);
-    double strength = mt_float(mt_at(result, 1)), confidence = mt_float(mt_at(result, 2));
-    check("modus ponens strength", strength == 0.6);
-    check("uncertainty retained", confidence > 0.0 && confidence < 1.0);
-    mt_drop(result);
-    return done(m, "pln_uncertain_reasoning");
+    require("import lib_pln",
+            mt_one_truth(mt_eval(m, E("import!", "&self", E("library", "lib_pln")))));
+    mt_atom *truth = mt_one(mt_eval(m, E("Truth_ModusPonens", E("stv", 1.0, 0.95), E("stv", 0.6, 0.9))));
+    require("a truth value", truth != NULL && mt_len(truth) == 3);
+    check_text("it is an stv", mt_name(mt_at(truth, 0)), "stv");
+    double strength = mt_float(mt_at(truth, 1)), confidence = mt_float(mt_at(truth, 2));
+    check_real("the strength is the premise's", strength, 0.6);
+    check("and confidence stays uncertain", confidence > 0.0 && confidence < 1.0);
+    mt_drop(truth);
+    return done(m);
 }

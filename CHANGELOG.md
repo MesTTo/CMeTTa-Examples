@@ -1,7 +1,20 @@
-<!-- Purpose: record shipped corpus behavior.
-Open Obligations: see ERRORS.md for shared-runtime issues. -->
+<!-- Purpose: record what changed in the corpus and why. -->
 
 # Changelog
+
+## Unreleased
+
+- Replace the 311 generated language twins with twins written by hand in C,
+  each at its MeTTa original's path. The generated twins pasted the original's
+  source into string arrays and ran it; `tools/generate.py` and `corpus.json`
+  are gone with them, and the fixtures they carried stay as files.
+- Add `tools/twin_lane.py`, which runs each original through the C seat and
+  its twin in its own process and requires the twin to prove as many claims,
+  to define what the original defines, and to leave the same atoms in `&self`;
+  `tools/twin_lane_selftest.py` plants eight twins to prove it refuses drift.
+- Rewrite the embedding examples to build terms with the constructors rather
+  than parse MeTTa text, and split `require`, a status a program needs, from
+  the claims it proves.
 
 ## Initial corpus
 

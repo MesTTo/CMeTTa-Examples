@@ -1,26 +1,34 @@
-/* Purpose: Bound a divergent query and read engine counters.
- * Owns resources: local C handles are released before exit; a failed check
- *   terminates the example process.
- * Guarantees: the assertions below hold [tested: make check; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
- * Open Obligations: None.
+/* Purpose: bound and measure. An endless generator is stopped by an inference
+ *   budget, which a cursor reports as MT_LIMIT rather than as exhaustion or a
+ *   fault, and two samples of the engine's counters price a finite question.
+ * Guarantees: the bound stops the stream with MT_LIMIT, and a measured
+ *   evaluation spends inferences [tested: make check; commit=WORKTREE].
  */
+#define MT_SHORTHAND
 #include "common.h"
+
 int main(void)
 {
     metta *m = open_engine();
-    check("define unbounded source", mt_do(m, "(= (from $n) (superpose ($n (from (+ $n 1)))))"));
-    check("set inference bound", mt_limit(m, (mt_limits){.inferences = 5000}));
-    mt_answers *answers = mt_eval(m, mt_expr("from", 0));
-    check("open bounded cursor", answers != NULL);
+    /* (= (from $n) (superpose ($n (from (+ $n 1))))) */
+    require("define an endless generator", mt_add(m, E("=", E("from", V("n")),
+        E("superpose", E(V("n"), E("from", E("+", V("n"), 1)))))));
+    require("bound every cursor", mt_limit(m, (mt_limits){ .inferences = 5000 }));
+    mt_answers *answers = mt_eval(m, E("from", 0));
+    require("open the cursor", answers != NULL);
     const mt_atom *answer;
     mt_status status;
-    while ((status = mt_step(answers, &answer)) == MT_ROW) {}
-    check("limit differs from exhaustion", status == MT_LIMIT && mt_error() == MT_LIMIT);
-    mt_answers_free(answers); mt_clear();
-    check("clear bound", mt_limit(m, (mt_limits){0}));
+    size_t taken = 0;
+    while ((status = mt_step(answers, &answer)) == MT_ROW) taken++;
+    check("the bound stops it, and says so", status == MT_LIMIT && mt_error() == MT_LIMIT);
+    check("after some answers", taken > 0);
+    mt_answers_free(answers);
+    mt_clear();
+    require("lift the bound", mt_limit(m, (mt_limits){0}));
+
     mt_stats before = mt_stats_now(m);
-    check_answers("finite evaluation", mt_run(m, "!(+ 20 22)"), "42");
+    check_int("a finite question", mt_one_int(mt_eval(m, E("+", 20, 22))), 42);
     mt_stats spent = mt_stats_since(before, mt_stats_now(m));
-    check("engine work counted", spent.inferences > 0);
-    return done(m, "engine_controls");
+    check("is priced in inferences", spent.inferences > 0);
+    return done(m);
 }

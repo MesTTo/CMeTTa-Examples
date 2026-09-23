@@ -1,10 +1,12 @@
-/* Purpose: reject false and absent checks under NDEBUG.
- * Guarantees: both invocations fail [tested: make check-helpers; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
- * Open Obligations: None.
+/* Purpose: prove the claim helpers refuse, with NDEBUG defined, a false claim
+ *   and a program that claimed nothing.
+ * Guarantees: both invocations exit nonzero with a FAIL line
+ *   [tested: make check-helpers; commit=WORKTREE].
  */
 #include "common.h"
+
 int main(int argc, char **argv)
 {
-    if (argc == 2 && strcmp(argv[1], "false") == 0) check("planted false claim", false);
-    return done(NULL, "unchecked");
+    if (argc == 2 && strcmp(argv[1], "false") == 0) check("a planted false claim", false);
+    return done(NULL);
 }

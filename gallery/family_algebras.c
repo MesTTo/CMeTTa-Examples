@@ -1,31 +1,49 @@
-/* Purpose: Ask a family relation in every direction under five carriers.
- * Owns resources: local handles and host storage are released before success;
- *   a failed assertion terminates this example process.
- * Guarantees: results are asserted [tested: make check; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
- * Open Obligations: None.
+/* Purpose: one family program asked in every direction under five algebras.
+ *   ancestor is two equations built as terms, and mt_eval_under() answers
+ *   each result paired with its coefficient in the chosen carrier, so the
+ *   same derivations are counted, costed, traced, ranked and weighed.
+ * Guarantees: every direction keeps its answer count and every coefficient
+ *   is its carrier's identity for these one-derivation answers
+ *   [tested: make check; commit=WORKTREE].
  */
+#define MT_SHORTHAND
 #include "common.h"
+
 int main(void)
 {
     metta *m = open_engine();
-    check("family program", mt_do(m, "(Parent Tom Bob) (Parent Bob Ann) "
-        "(= (ancestor $x $y) (match &self (Parent $x $y) True)) "
-        "(= (ancestor $x $y) (match &self (Parent $x $z) (ancestor $z $y)))"));
-    const char *carriers[] = {"counting", "tropical", "prov", "ranked", "prob"};
-    const char *identities[] = {"1", "0", "one", "1", "1"};
-    const char *queries[] = {"(ancestor Tom Ann)", "(ancestor $x Ann)", "(ancestor Tom $y)", "(ancestor $x $y)"};
-    const size_t counts[] = {1,2,2,3};
-    for (size_t a = 0; a < sizeof(carriers)/sizeof(carriers[0]); ++a) {
-        for (size_t q = 0; q < sizeof(queries)/sizeof(queries[0]); ++q) {
-            mt_list rows = mt_all(mt_eval_under(m, mt_sym(carriers[a]), mt_parse(queries[q])));
-            check("each direction retains its answer multiplicity", mt_ok() && rows.len == counts[q]);
-            for (size_t i = 0; i < rows.len; ++i) {
-                check("answer carries coefficient", mt_len(rows.items[i]) == 2);
-                check_atom("ancestor proof", mt_at(rows.items[i], 0), "True");
-                check_atom("carrier identity", mt_at(rows.items[i], 1), identities[a]);
-            }
+    require("(Parent Tom Bob)", mt_add(m, E("Parent", "Tom", "Bob")));
+    require("(Parent Bob Ann)", mt_add(m, E("Parent", "Bob", "Ann")));
+    /* (= (ancestor $x $y) (match &self (Parent $x $y) True))
+       (= (ancestor $x $y) (match &self (Parent $x $z) (ancestor $z $y))) */
+    require("ancestor, directly", mt_add(m, E("=", E("ancestor", V("x"), V("y")),
+        E("match", "&self", E("Parent", V("x"), V("y")), B(true)))));
+    require("ancestor, through a parent", mt_add(m, E("=", E("ancestor", V("x"), V("y")),
+        E("match", "&self", E("Parent", V("x"), V("z")), E("ancestor", V("z"), V("y"))))));
+
+    struct { const char *carrier; mt_atom *identity; } algebras[] = {
+        { "counting", N(1) }, { "tropical", N(0) }, { "prov", S("one") },
+        { "ranked", N(1) },   { "prob", N(1) },
+    };
+    struct { mt_atom *goal; size_t answers; } directions[] = {
+        { E("ancestor", "Tom", "Ann"), 1 },     /* is it so? */
+        { E("ancestor", V("x"), "Ann"), 2 },    /* who are Ann's ancestors? */
+        { E("ancestor", "Tom", V("y")), 2 },    /* whose ancestor is Tom? */
+        { E("ancestor", V("x"), V("y")), 3 },   /* every pair */
+    };
+    for (size_t a = 0; a < 5; a++) {
+        for (size_t d = 0; d < 4; d++) {
+            mt_list rows = mt_all(mt_eval_under(m, S(algebras[a].carrier), mt_keep(directions[d].goal)));
+            check("each direction keeps its answer count", mt_ok() && rows.len == directions[d].answers);
+            for (size_t i = 0; i < rows.len; i++)
+                check("each answer is True with the carrier's identity",
+                      mt_len(rows.items[i]) == 2 &&
+                      mt_alpha_eq(mt_at(rows.items[i], 0), B(true)) &&
+                      mt_alpha_eq(mt_at(rows.items[i], 1), algebras[a].identity));
             mt_list_free(rows);
         }
     }
-    return done(m, "family_algebras");
+    for (size_t a = 0; a < 5; a++) mt_drop(algebras[a].identity);
+    for (size_t d = 0; d < 4; d++) mt_drop(directions[d].goal);
+    return done(m);
 }

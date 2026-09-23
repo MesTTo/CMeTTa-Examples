@@ -1,36 +1,49 @@
-/* Purpose: Attach joined C workers and isolate their error states.
- * Owns resources: local handles and host storage are released before success;
- *   a failed assertion terminates this example process.
- * Guarantees: results are asserted [tested: make check; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
- * Open Obligations: None.
+/* Purpose: C threads share one engine. Each worker attaches, evaluates on
+ *   its own, and keeps its own error state: a conversion error one worker
+ *   records is invisible to the others and to the main thread.
+ * Owns resources: four joined threads.
+ * Guarantees: every worker's answer is right and no error crosses threads
+ *   [tested: make check; commit=WORKTREE].
  */
+#define MT_SHORTHAND
 #include "common.h"
 #include <pthread.h>
-typedef struct { metta *runtime; int input; int64_t output; } job;
-static void *worker(void *user)
+
+typedef struct job { metta *runtime; int64_t input, output; bool own_error; } job;
+
+static void *work(void *user)
 {
     job *j = user;
-    check("attach worker", mt_thread_attach());
+    if (!mt_thread_attach()) return NULL;
     mt_clear();
-    j->output = mt_one_int(mt_eval(j->runtime, mt_expr("+", j->input, 10)));
-    check("worker result", mt_ok() && j->output == j->input + 10);
-    if (j->input % 2) {
-        mt_atom *wrong = mt_sym("not-an-integer"); (void)mt_int(wrong); mt_drop(wrong);
-        check("worker owns its conversion error", mt_error() == MT_MISUSE);
+    j->output = mt_one_int(mt_eval(j->runtime, E("+", j->input, 10)));
+    if (j->input % 2) {                    /* odd workers make a mistake of their own */
+        mt_atom *word = S("not-a-number");
+        (void)mt_int(word);
+        mt_drop(word);
+        j->own_error = mt_error() == MT_MISUSE;
+    } else {
+        j->own_error = mt_ok();
     }
     mt_thread_detach();
     return NULL;
 }
+
 int main(void)
 {
     metta *m = open_engine();
-    job jobs[] = {{m, 1, 0}, {m, 2, 0}, {m, 3, 0}, {m, 4, 0}};
-    pthread_t threads[sizeof(jobs)/sizeof(jobs[0])];
-    for (size_t i = 0; i < sizeof(jobs)/sizeof(jobs[0]); ++i)
-        check("start worker", pthread_create(&threads[i], NULL, worker, &jobs[i]) == 0);
-    for (size_t i = 0; i < sizeof(jobs)/sizeof(jobs[0]); ++i)
-        check("join worker", pthread_join(threads[i], NULL) == 0);
-    check("worker errors did not cross threads", mt_ok());
-    check("main thread remains usable", mt_one_int(mt_run(m, "!(+ 20 22)")) == 42);
-    return done(m, "threads");
+    job jobs[4];
+    pthread_t threads[4];
+    for (int64_t i = 0; i < 4; i++) {
+        jobs[i] = (job){ .runtime = m, .input = i + 1 };
+        require("start a worker", pthread_create(&threads[i], NULL, work, &jobs[i]) == 0);
+    }
+    for (size_t i = 0; i < 4; i++) require("join a worker", pthread_join(threads[i], NULL) == 0);
+    for (size_t i = 0; i < 4; i++) {
+        check_int("each worker's answer", jobs[i].output, jobs[i].input + 10);
+        check("each worker saw only its own error state", jobs[i].own_error);
+    }
+    check("no worker's error reached the main thread", mt_ok());
+    check_int("and the main thread still answers", mt_one_int(mt_eval(m, E("+", 20, 22))), 42);
+    return done(m);
 }

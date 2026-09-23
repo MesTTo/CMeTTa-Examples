@@ -1,41 +1,59 @@
-/* Purpose: extend a reachability program between solves and toggle external facts.
- * Owns resources: scopes template writes in a transaction and releases its runtime.
- * Guarantees: shortest horizon is three and failed grounding rolls back
- *   [tested: make check; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
- * Open Obligations: None.
+/* Purpose: solve, extend, solve again. reach is grounded one horizon at a
+ *   time: each round asks whether d is reachable within t steps, and if not,
+ *   adds the equation for t+1 inside a transaction, the way an incremental
+ *   solver grounds one more part of a program between solves. An external
+ *   fact is assigned and withdrawn between solves, and a grounding that fails
+ *   rolls back whole.
+ * Guarantees: d is first reached at horizon 3, and the failed grounding
+ *   leaves nothing behind [tested: make check; commit=WORKTREE].
  */
+#define MT_SHORTHAND
 #include "common.h"
-typedef struct part { int horizon; } part;
-static mt_status ground(metta *m, void *user)
+
+/* (= (reach $x t) (match &self (edge $y $x) (once (reach $y t-1)))) */
+static mt_status ground_horizon(metta *m, void *user)
 {
-    int t = ((part *)user)->horizon;
-    mt_atom *head = mt_expr("reach", mt_var("x"), t);
-    mt_atom *body = mt_expr("match", mt_spaceref("&self"), mt_parse("(edge $y $x)"),
-        mt_expr("once", mt_expr("reach", mt_var("y"), t-1)));
-    return mt_add(m, mt_expr("=", head, body)) ? MT_OK : mt_error();
+    int64_t t = *(const int64_t *)user;
+    mt_atom *rule = E("=", E("reach", V("x"), t),
+                      E("match", "&self", E("edge", V("y"), V("x")),
+                        E("once", E("reach", V("y"), t - 1))));
+    return mt_add(m, rule) ? MT_OK : mt_error();
 }
-static mt_status abort_part(metta *m, void *user)
-{ (void)user; if (!mt_add(m, mt_expr("transient", 1))) return mt_error(); return MT_FAIL; }
+
+static mt_status abandoned_part(metta *m, void *user)
+{
+    (void)user;
+    if (!mt_add(m, E("transient", 1))) return mt_error();
+    return MT_FAIL;                      /* roll the part back */
+}
+
 int main(void)
 {
     metta *m = open_engine();
-    check("base program", mt_do(m,
-      "!(add-atom &metta (dispatch-policy reach NoMatchEnum NoMatchFail)) "
-      "(edge a b) (edge b c) (edge c d) (= (reach a 0) True)"));
-    part p = {0};
+    require("reach answers nothing where no equation matches",
+            mt_add(mt_catalog(m), E("dispatch-policy", "reach", "NoMatchEnum", "NoMatchFail")));
+    static const char *const edges[][2] = { {"a", "b"}, {"b", "c"}, {"c", "d"} };
+    for (size_t i = 0; i < 3; i++) require("store an edge", mt_add(m, E("edge", edges[i][0], edges[i][1])));
+    require("(= (reach a 0) True)", mt_add(m, E("=", E("reach", "a", 0), B(true))));
+
+    int64_t horizon = 0;
     for (;;) {
-        mt_list rows = mt_all(mt_eval(m, mt_expr("reach", "d", p.horizon)));
-        check("solve succeeds as an operation", mt_ok()); bool reached = rows.len != 0; mt_list_free(rows);
-        if (reached) break;
-        ++p.horizon; check("graph horizon", p.horizon <= 3);
-        check("ground next part atomically", mt_transaction(m, ground, &p) == MT_OK);
+        mt_list reached = mt_all(mt_eval(m, E("reach", "d", horizon)));
+        require("solve", mt_ok());
+        bool done_here = reached.len != 0;
+        mt_list_free(reached);
+        if (done_here || horizon == 3) break;
+        horizon++;
+        require("ground the next horizon", mt_transaction(m, ground_horizon, &horizon) == MT_OK);
     }
-    check("shortest horizon", p.horizon == 3);
-    check("assign external", mt_add(m, mt_expr("blocked", "c")));
-    check_answers("external visible", mt_match(m, mt_parse("(blocked $x)")), "(blocked c)");
-    check("withdraw external", mt_del(m, mt_expr("blocked", "c")));
-    check_answers("external gone", mt_match(m, mt_parse("(blocked $x)")), "");
-    check("aborted template", mt_transaction(m, abort_part, NULL) == MT_FAIL);
-    check_answers("aborted grounding leaves no fact", mt_match(m, mt_parse("(transient $x)")), "");
-    return done(m, "multishot_solving");
+    check_int("d is first reached at horizon 3", horizon, 3);
+
+    require("assign an external fact", mt_add(m, E("blocked", "c")));
+    check_answers("it is visible to the next solve", mt_match(m, E("blocked", V("x"))), E("blocked", "c"));
+    require("withdraw it", mt_del(m, E("blocked", "c")));
+    check_none("and gone after", mt_match(m, E("blocked", V("x"))));
+
+    check("a failed part reports MT_FAIL", mt_transaction(m, abandoned_part, NULL) == MT_FAIL);
+    check_none("and leaves no fact", mt_match(m, E("transient", V("x"))));
+    return done(m);
 }

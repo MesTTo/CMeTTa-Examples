@@ -1,19 +1,21 @@
-/* Purpose: Keep collected answers unchanged after later writes.
- * Owns resources: local C handles are released before exit; a failed check
- *   terminates the example process.
- * Guarantees: the assertions below hold [tested: make check; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
- * Open Obligations: None.
+/* Purpose: mt_all() is a snapshot. The collected list is the program's own,
+ *   so a write after collecting changes the space and not the list.
+ * Guarantees: the snapshot keeps one row while the space grows to two
+ *   [tested: make check; commit=WORKTREE].
  */
+#define MT_SHORTHAND
 #include "common.h"
+
 int main(void)
 {
     metta *m = open_engine();
-    check("initial item", mt_add(m, mt_expr("item", 1)));
+    require("store (item 1)", mt_add(m, E("item", 1)));
     mt_list snapshot = mt_all(mt_atoms(m));
-    check("second item", mt_add(m, mt_expr("item", 2)));
-    check("snapshot has one row", snapshot.len == 1);
-    check_atom("original row retained", snapshot.items[0], "(item 1)");
-    check("live space has two rows", mt_count(m) == 2);
+    require("store (item 2)", mt_add(m, E("item", 2)));
+
+    check_int("the snapshot still holds one row", (int64_t)snapshot.len, 1);
+    check("and it is (item 1)", snapshot.len == 1 && mt_alpha_eq(snapshot.items[0], E("item", 1)));
+    check_int("while the space holds two", (int64_t)mt_count(m), 2);
     mt_list_free(snapshot);
-    return done(m, "snapshot");
+    return done(m);
 }

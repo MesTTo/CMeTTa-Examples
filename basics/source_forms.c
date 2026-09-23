@@ -1,21 +1,27 @@
-/* Purpose: Read complete forms without executing directives.
- * Owns resources: local C handles are released before exit; a failed check
- *   terminates the example process.
- * Guarantees: the assertions below hold [tested: make check; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
- * Open Obligations: None.
+/* Purpose: reading source without running it. mt_forms() answers every
+ *   top-level form of a text as atoms, a `!` form's body included, and writes
+ *   nothing; mt_parse() refuses text that is not a whole form.
+ * text: the program's subject is MeTTa source text as a reader receives it.
+ * Guarantees: two forms read, nothing is stored, a broken form is refused
+ *   with a status [tested: make check; commit=WORKTREE].
  */
+#define MT_SHORTHAND
 #include "common.h"
+
 int main(void)
 {
     metta *m = open_engine();
     mt_list forms = mt_forms("(fact 7) !(+ 20 22)");
-    check("reader returns two forms", forms.len == 2);
-    check_atom("first form", forms.items[0], "(fact 7)");
-    check_atom("directive body is data", forms.items[1], "(+ 20 22)");
-    check("reading has no writes", mt_count(m) == 0);
+    check_int("the reader answers two forms", (int64_t)forms.len, 2);
+    check("the first is the fact", forms.len == 2 && mt_alpha_eq(forms.items[0], E("fact", 7)));
+    check("the directive's body is data, not 42",
+          forms.len == 2 && mt_alpha_eq(forms.items[1], E("+", 20, 22)));
     mt_list_free(forms);
-    mt_atom *invalid = mt_parse("(unfinished");
-    check("syntax failure is reported", invalid == NULL && !mt_ok());
+    check_int("reading wrote nothing", (int64_t)mt_count(m), 0);
+
     mt_clear();
-    return done(m, "source_forms");
+    mt_atom *broken = mt_parse("(unfinished");
+    check("a broken form is refused with a status", broken == NULL && mt_error() == MT_ERROR);
+    mt_clear();
+    return done(m);
 }

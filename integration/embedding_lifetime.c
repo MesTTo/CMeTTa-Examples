@@ -1,20 +1,25 @@
-/* Purpose: Own the runtime inside a pre-existing C application.
- * Owns resources: local C handles are released before exit; a failed check
- *   terminates the example process.
- * Guarantees: the assertions below hold [tested: make check; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
- * Open Obligations: None.
+/* Purpose: the engine lives inside a program that was already running. Atoms
+ *   are C memory: one is built before the engine opens, an answer is kept
+ *   after it closes, and both stay readable.
+ * Guarantees: a pre-boot atom takes part in an evaluation and the answer
+ *   outlives mt_close() [tested: make check; commit=WORKTREE].
  */
+#define MT_SHORTHAND
 #include "common.h"
+
 int main(void)
 {
     int64_t application_total = 10;
-    mt_atom *input = mt_num(32); /* C atoms need no running engine. */
-    check("pre-boot value", mt_int(input) == 32);
+    mt_atom *input = N(32);                 /* no engine is running yet */
+    check_int("an atom needs no engine", mt_int(input), 32);
+
     metta *m = open_engine();
-    mt_atom *answer = mt_one(mt_eval(m, mt_expr("+", application_total, input)));
-    check("application uses result", mt_int(answer) == 42);
+    mt_atom *answer = mt_one(mt_eval(m, E("+", application_total, input)));
+    check_int("the application's value takes part", mt_int(answer), 42);
     mt_close(m);
-    check("retained atoms outlive runtime", mt_int(answer) == 42 && mt_ok());
+    require("close the engine", mt_ok());
+
+    check_int("the answer outlives the engine", mt_int(answer), 42);
     mt_drop(answer);
-    return done(NULL, "embedding_lifetime");
+    return done(NULL);
 }

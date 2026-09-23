@@ -1,67 +1,96 @@
-/* Purpose: project edge atoms into a C graph and return a shortest path as data.
- * Owns resources: callback owns its adjacency matrix, queue and answer snapshot.
- * Assumes: vertices are nonnegative contiguous integer identifiers.
- * Guarantees: breadth-first search returns the unique shortest path and the
- *   result is queryable knowledge [tested: make check; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
- * Open Obligations: None.
+/* Purpose: a C graph algorithm over MeTTa facts. shortest-path is a C
+ *   function the engine calls: it reads the (edge from to) facts, runs a
+ *   breadth-first search in C arrays, and answers the path as an atom the
+ *   program then stores as knowledge like any other fact.
+ * Assumes: vertices are small nonnegative integers.
+ * Owns resources: the callback owns its adjacency matrix, queue and parent
+ *   array, freed on every path.
+ * Guarantees: the unique shortest path 0-1-2-3 is found and queryable, and a
+ *   route against the edges' direction answers nothing [tested: make check;
+ *   commit=WORKTREE].
  */
+#define MT_SHORTHAND
 #include "common.h"
-/* Dense graph BFS: O(V^2+E) time and O(V^2) space, V vertices and E edges. */
+
+/* Breadth-first search on a dense matrix. Time O(V^2 + E), space O(V^2) for
+   V vertices and E edges. */
 static mt_status shortest(mt_call *call, void *user)
 {
-    (void)user; metta *m = mt_of(call);
-    mt_list edges = mt_all(mt_match(m, mt_parse("(edge $from $to)")));
+    (void)user;
+    mt_list edges = mt_all(mt_match(mt_of(call), E("edge", V("from"), V("to"))));
     if (!mt_ok()) return mt_error();
     size_t vertices = 0;
-    for (size_t i = 0; i < edges.len; ++i) for (size_t j = 1; j <= 2; ++j) {
-        int64_t v = mt_int(mt_at(edges.items[i], j));
-        if (!mt_ok() || v < 0 || (uint64_t)v >= SIZE_MAX) {
-            mt_list_free(edges); return mt_fail(call, "graph needs nonnegative vertex identifiers");
+    mt_clear();
+    for (size_t i = 0; i < edges.len; i++)
+        for (size_t end = 1; end <= 2; end++) {
+            int64_t v = mt_int(mt_at(edges.items[i], end));
+            if (v >= 0 && (size_t)v >= vertices) vertices = (size_t)v + 1;
         }
-        if ((size_t)v >= vertices) vertices = (size_t)v + 1;
-    }
     int64_t from = mt_int(mt_arg(call, 0)), to = mt_int(mt_arg(call, 1));
-    if (!mt_ok() || from < 0 || to < 0 || (uint64_t)from >= vertices || (uint64_t)to >= vertices ||
-        vertices > SIZE_MAX / vertices || vertices > SIZE_MAX / sizeof(size_t)) {
-        mt_list_free(edges); return mt_fail(call, "graph vertex or allocation is out of range");
+    if (!mt_ok() || from < 0 || to < 0 || (size_t)from >= vertices || (size_t)to >= vertices) {
+        mt_list_free(edges);
+        return mt_fail(call, "shortest-path wants vertices the edges name");
     }
-    bool *matrix = calloc(vertices * vertices, sizeof(*matrix));
-    size_t *queue = malloc(vertices * sizeof(*queue)), *parent = malloc(vertices * sizeof(*parent));
-    check("allocate C graph", matrix && queue && parent);
-    for (size_t i = 0; i < vertices; ++i) parent[i] = SIZE_MAX;
-    for (size_t i = 0; i < edges.len; ++i)
-        matrix[(size_t)mt_int(mt_at(edges.items[i],1))*vertices+(size_t)mt_int(mt_at(edges.items[i],2))] = true;
+    bool *adjacent = calloc(vertices * vertices, sizeof *adjacent);
+    size_t *queue = malloc(vertices * sizeof *queue);
+    size_t *parent = malloc(vertices * sizeof *parent);
+    if (!adjacent || !queue || !parent) {
+        free(adjacent); free(queue); free(parent);
+        mt_list_free(edges);
+        return mt_fail(call, "out of memory for the graph");
+    }
+    for (size_t i = 0; i < edges.len; i++)
+        adjacent[(size_t)mt_int(mt_at(edges.items[i], 1)) * vertices +
+                 (size_t)mt_int(mt_at(edges.items[i], 2))] = true;
     mt_list_free(edges);
-    size_t begin = 0, end = 1; queue[0] = (size_t)from; parent[from] = (size_t)from;
-    while (begin < end) {
-        size_t v = queue[begin++];
-        for (size_t w = 0; w < vertices; ++w) if (matrix[v*vertices+w] && parent[w] == SIZE_MAX) {
-            parent[w] = v; queue[end++] = w;
-        }
+
+    for (size_t v = 0; v < vertices; v++) parent[v] = SIZE_MAX;
+    size_t head = 0, tail = 0;
+    queue[tail++] = (size_t)from;
+    parent[from] = (size_t)from;
+    while (head < tail) {
+        size_t v = queue[head++];
+        for (size_t w = 0; w < vertices; w++)
+            if (adjacent[v * vertices + w] && parent[w] == SIZE_MAX) {
+                parent[w] = v;
+                queue[tail++] = w;
+            }
     }
-    mt_atom *answer = NULL;
+
+    mt_status status = MT_FAIL;           /* unreachable: no answer */
     if (parent[to] != SIZE_MAX) {
         size_t length = 1;
-        for (size_t v = (size_t)to; v != (size_t)from; v = parent[v]) ++length;
-        mt_atom **parts = mt_calloc(length+1, sizeof(*parts)); check("allocate path", parts != NULL);
-        parts[0] = mt_sym("Path");
-        size_t v = (size_t)to;
-        for (size_t i = length; i > 0; --i) { parts[i] = mt_num((int64_t)v); v = parent[v]; }
-        answer = mt_exprv(length+1, parts); mt_free(parts);
+        for (size_t v = (size_t)to; v != (size_t)from; v = parent[v]) length++;
+        mt_atom **steps = mt_calloc(length + 1, sizeof *steps);
+        if (!steps) {
+            status = mt_fail(call, "out of memory for the path");
+        } else {
+            steps[0] = S("Path");
+            size_t v = (size_t)to;
+            for (size_t i = length; i > 0; i--, v = parent[v]) steps[i] = N((int64_t)v);
+            status = mt_answer(call, mt_exprv(length + 1, steps));
+            mt_free(steps);
+        }
     }
-    free(matrix); free(queue); free(parent);
-    return answer ? mt_answer(call, answer) : MT_FAIL;
+    free(adjacent); free(queue); free(parent);
+    return status;
 }
+
 int main(void)
 {
     metta *m = open_engine();
-    check("graph facts", mt_do(m, "(edge 0 1) (edge 1 2) (edge 2 3) (edge 0 4) (edge 4 5) (edge 5 6) (edge 6 3)"));
-    check("publish graph algorithm", mt_def(m, (mt_op){.name="shortest-path", .arity=2, .effect=MT_LOOKUP, .fn=shortest}));
-    mt_atom *path = mt_one(mt_eval(m, mt_expr("shortest-path", 0, 3)));
-    check_atom("unique shortest path", path, "(Path 0 1 2 3)");
-    check("store computed path", mt_add(m, path));
-    check_answers("algorithm result becomes knowledge", mt_match(m, mt_parse("(Path $a $b $c $d)")), "(Path 0 1 2 3)");
-    check_answers("unreachable directed route", mt_eval(m, mt_expr("shortest-path", 3, 0)), "");
-    check("withdraw graph algorithm", mt_undef(m, "shortest-path"));
-    return done(m, "ecosystem_graph");
+    static const int64_t edges[][2] = { {0, 1}, {1, 2}, {2, 3}, {0, 4}, {4, 5}, {5, 6}, {6, 3} };
+    for (size_t i = 0; i < sizeof edges / sizeof edges[0]; i++)
+        require("store an edge", mt_add(m, E("edge", edges[i][0], edges[i][1])));
+    require("publish shortest-path", mt_def(m, (mt_op){ .name = "shortest-path", .arity = 2,
+                                                        .effect = MT_LOOKUP, .fn = shortest }));
+
+    mt_atom *path = mt_one(mt_eval(m, E("shortest-path", 0, 3)));
+    check("the unique shortest path is 0 1 2 3", mt_alpha_eq(path, E("Path", 0, 1, 2, 3)));
+    require("store the path as knowledge", mt_add(m, path));
+    check_answers("the computed path is now a fact",
+                  mt_match(m, E("Path", V("a"), V("b"), V("c"), V("d"))), E("Path", 0, 1, 2, 3));
+    check_none("no route runs against the edges", mt_eval(m, E("shortest-path", 3, 0)));
+    require("withdraw shortest-path", mt_undef(m, "shortest-path"));
+    return done(m);
 }

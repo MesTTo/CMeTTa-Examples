@@ -1,22 +1,35 @@
-/* Purpose: preserve an Atom argument while reducing an ordinary value argument.
- * Owns resources: callback arguments are borrowed; answers retain their atoms.
- * Guarantees: declared arrow types control evaluation at the C boundary
- *   [tested: make check; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
- * Open Obligations: None.
+/* Purpose: a type decides what a C function receives. Two C functions answer
+ *   their argument unchanged; one is declared (-> Atom Atom), so it receives
+ *   its argument as written, and the other (-> Number Number), so the engine
+ *   reduces the argument first. The declarations are atoms like any other.
+ * Guarantees: (written-term (+ 20 22)) is (+ 20 22) and
+ *   (reduced-value (+ 20 22)) is 42 [tested: make check; commit=WORKTREE].
  */
+#define MT_SHORTHAND
 #include "common.h"
-static mt_status identity(mt_call *call, void *user)
-{ (void)user; return mt_answer(call, mt_keep(mt_arg(call, 0))); }
+
+static mt_status same(mt_call *call, void *user)
+{
+    (void)user;
+    return mt_answer(call, mt_keep(mt_arg(call, 0)));
+}
+
 int main(void)
 {
     metta *m = open_engine();
-    check("publish atom function", mt_def(m, (mt_op){.name="written-term", .arity=1, .effect=MT_PURE, .fn=identity}));
-    check("publish value function", mt_def(m, (mt_op){.name="reduced-value", .arity=1, .effect=MT_PURE, .fn=identity}));
-    check("declare argument contracts", mt_do(m,
-        "(: written-term (-> Atom Atom)) (: reduced-value (-> Number Number))"));
-    check_answers("Atom stays written", mt_run(m, "!(written-term (+ 20 22))"), "(+ 20 22)");
-    check_answers("Number is reduced", mt_run(m, "!(reduced-value (+ 20 22))"), "42");
-    check("withdraw atom function", mt_undef(m, "written-term"));
-    check("withdraw value function", mt_undef(m, "reduced-value"));
-    return done(m, "annotation_contracts");
+    static const struct { const char *name, *type; } functions[] = {
+        { "written-term", "Atom" }, { "reduced-value", "Number" },
+    };
+    for (size_t i = 0; i < 2; i++) {
+        require("publish", mt_def(m, (mt_op){ .name = functions[i].name, .arity = 1,
+                                              .effect = MT_PURE, .fn = same }));
+        require("declare its type",   /* (: name (-> T T)) */
+                mt_add(m, E(":", functions[i].name, E("->", functions[i].type, functions[i].type))));
+    }
+    check_answers("an Atom argument arrives as written",
+                  mt_eval(m, E("written-term", E("+", 20, 22))), E("+", 20, 22));
+    check_answers("a Number argument arrives reduced",
+                  mt_eval(m, E("reduced-value", E("+", 20, 22))), 42);
+    for (size_t i = 0; i < 2; i++) require("withdraw", mt_undef(m, functions[i].name));
+    return done(m);
 }

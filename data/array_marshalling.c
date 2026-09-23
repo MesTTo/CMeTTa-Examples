@@ -1,24 +1,32 @@
-/* Purpose: Transfer an arbitrary-length C array into an expression.
- * Owns resources: local C handles are released before exit; a failed check
- *   terminates the example process.
- * Guarantees: the assertions below hold [tested: make check; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
- * Open Obligations: None.
+/* Purpose: a C array becomes an expression of any length. mt_exprv() takes
+ *   the children and copies the vector, so the array stays the caller's, and
+ *   the expression crosses the engine and back element for element.
+ * Owns resources: the child vector is mt_calloc'd and freed after mt_exprv().
+ * Guarantees: every element round-trips, in order [tested: make check;
+ *   commit=WORKTREE].
  */
+#define MT_SHORTHAND
 #include "common.h"
+
 int main(void)
 {
     metta *m = open_engine();
-    const int64_t values[] = {3, 5, 8, 13};
-    size_t count = sizeof(values) / sizeof(values[0]);
-    mt_atom **children = mt_calloc(count, sizeof(*children));
-    check("allocate child vector", children != NULL);
-    for (size_t i = 0; i < count; ++i) children[i] = mt_num(values[i]);
-    mt_atom *array = mt_exprv(count, children);
-    mt_free(children); /* exprv takes children, but copies the vector. */
-    check("array length", mt_len(array) == count);
-    for (size_t i = 0; i < count; ++i)
-        check("each element round-trips", mt_int(mt_at(array, i)) == values[i]);
-    check_answers("array crosses engine", mt_eval(m, mt_expr("superpose", mt_keep(array))), "3 5 8 13");
-    mt_drop(array);
-    return done(m, "array_marshalling");
+    static const int64_t values[] = { 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377,
+                                      610, 987, 1597, 2584, 4181, 6765, 10946 };
+    const size_t count = sizeof values / sizeof values[0];   /* more than mt_expr's 16 */
+
+    mt_atom **children = mt_calloc(count, sizeof *children);
+    require("allocate the child vector", children != NULL);
+    for (size_t i = 0; i < count; i++) children[i] = N(values[i]);
+    mt_atom *sequence = mt_exprv(count, children);
+    mt_free(children);     /* mt_exprv took the children and copied the vector */
+
+    check_int("every element is a child", (int64_t)mt_len(sequence), (int64_t)count);
+    mt_list back = mt_all(mt_eval(m, E("superpose", mt_keep(sequence))));
+    bool same = back.len == count;
+    for (size_t i = 0; same && i < count; i++) same = mt_int(back.items[i]) == values[i];
+    check("the engine answers each element, in order", same && mt_ok());
+    mt_list_free(back);
+    mt_drop(sequence);
+    return done(m);
 }

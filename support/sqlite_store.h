@@ -1,7 +1,6 @@
-/* Purpose: expose a SQLite-backed candidate provider to the C examples.
- * Owns resources: sql_open transfers the connection to mt_provider_open;
- *   sql_exec borrows it until the provider is closed.
- * Open Obligations: None.
+/* Purpose: the SQLite-backed space the SQL examples share.
+ * Owns resources: sql_open() hands the connection to mt_provider_open();
+ *   sql_exec() borrows it until the provider is closed.
  */
 #ifndef SQL_STORE_H
 #define SQL_STORE_H

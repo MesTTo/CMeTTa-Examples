@@ -1,20 +1,29 @@
-/* Purpose: Round-trip UTF-8 text containing an embedded NUL.
- * Owns resources: local C handles are released before exit; a failed check
- *   terminates the example process.
- * Guarantees: the assertions below hold [tested: make check; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
- * Open Obligations: None.
+/* Purpose: text is counted bytes, not a C string. mt_textn() carries an
+ *   embedded NUL that strlen() would stop at, and mt_write_dup() then
+ *   mt_parsen() round-trip all of it through the engine's writer and reader.
+ * text: the program's subject is the source spelling of a text atom.
+ * Guarantees: all three bytes survive the round trip [tested: make check;
+ *   commit=WORKTREE].
  */
+#define MT_SHORTHAND
 #include "common.h"
+
 int main(void)
 {
     metta *m = open_engine();
-    const char bytes[] = {'a', '\0', 'b', '\0'};
-    mt_atom *text = mt_textn(bytes, 3);
+    static const char bytes[] = { 'a', '\0', 'b' };
+    mt_atom *text = mt_textn(bytes, sizeof bytes);
+    check_int("the length counts the NUL", (int64_t)mt_name_len(text), 3);
+
     mt_string written = mt_write_dup(text);
-    check("owned counted source", written.data != NULL);
-    mt_atom *copy = mt_parsen(written.data, written.len);
-    check("all bytes survive", mt_eq(text, copy) && mt_name_len(copy) == 3 &&
-          memcmp(mt_name(copy), bytes, 3) == 0);
-    mt_free(written.data); mt_drop(copy); mt_drop(text);
-    return done(m, "counted_text");
+    require("write the text", written.data != NULL);
+    mt_atom *read = mt_parsen(written.data, written.len);
+    mt_free(written.data);
+    check("all three bytes survive the round trip",
+          read && mt_name_len(read) == sizeof bytes &&
+          memcmp(mt_name(read), bytes, sizeof bytes) == 0);
+    check_atom("and the atom is the same atom", read, mt_keep(text));
+
+    check_answers("the engine hands the bytes back", mt_eval(m, mt_keep(text)), text);
+    return done(m);
 }

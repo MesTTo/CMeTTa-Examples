@@ -1,24 +1,36 @@
-/* Purpose: classify C callbacks explicitly and inspect the language effect rows.
- * Owns resources: registrations are withdrawn before their user data expires.
- * Guarantees: the engine reports each declared rank [tested: make check; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
- * Open Obligations: None.
+/* Purpose: a C function declares what it does. Five copies of one function
+ *   are published under the five effect classes, and the engine's effect
+ *   plan, read without running anything, reports each class as declared.
+ * Guarantees: every class survives registration into the plan [tested: make
+ *   check; commit=WORKTREE].
  */
+#define MT_SHORTHAND
 #include "common.h"
-static mt_status identity(mt_call *call, void *user)
-{ (void)user; return mt_answer(call, mt_keep(mt_arg(call, 0))); }
+
+static mt_status same(mt_call *call, void *user)
+{
+    (void)user;
+    return mt_answer(call, mt_keep(mt_arg(call, 0)));
+}
+
 int main(void)
 {
     metta *m = open_engine();
-    const mt_effect effects[] = {MT_PURE, MT_LOOKUP, MT_NONDET, MT_WRITES, MT_IO};
-    const char *names[] = {"pure-id", "read-id", "many-id", "write-id", "io-id"};
-    for (size_t i = 0; i < sizeof(effects)/sizeof(effects[0]); ++i) {
-        check("declare callback effect", mt_def(m, (mt_op){.name=names[i], .arity=1, .effect=effects[i], .fn=identity}));
-        check_answers("callback result", mt_eval(m, mt_expr(names[i], 42)), "42");
-        mt_atom *report = mt_effect_plan(m, mt_expr(names[i], 42));
-        check("plan present", report != NULL);
-        check_atom("declared effect survives registration", mt_at(report, 1), mt_effect_str(effects[i]));
-        check("operation roster", mt_len(mt_at(report, 2)) == 1); mt_drop(report);
-        check("withdraw callback", mt_undef(m, names[i]));
+    static const struct { const char *name; mt_effect effect; } ranks[] = {
+        { "pure-id", MT_PURE }, { "read-id", MT_LOOKUP }, { "many-id", MT_NONDET },
+        { "write-id", MT_WRITES }, { "io-id", MT_IO },
+    };
+    for (size_t i = 0; i < 5; i++) {
+        require("publish", mt_def(m, (mt_op){ .name = ranks[i].name, .arity = 1,
+                                              .effect = ranks[i].effect, .fn = same }));
+        check_answers("it answers", mt_eval(m, E(ranks[i].name, 42)), 42);
+        mt_atom *plan = mt_effect_plan(m, E(ranks[i].name, 42));
+        require("plan it", plan != NULL);
+        check("the plan reports the declared class",
+              mt_alpha_eq(mt_at(plan, 1), S(mt_effect_str(ranks[i].effect))) &&
+              mt_len(mt_at(plan, 2)) == 1);
+        mt_drop(plan);
+        require("withdraw", mt_undef(m, ranks[i].name));
     }
-    return done(m, "effect_ranks");
+    return done(m);
 }

@@ -1,26 +1,38 @@
-/* Purpose: Apply symmetric bindings and preserve repeated-variable constraints.
- * Owns resources: local C handles are released before exit; a failed check
- *   terminates the example process.
- * Guarantees: the assertions below hold [tested: make check; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
- * Open Obligations: None.
+/* Purpose: unification in C, with no engine call. mt_unify() binds variables
+ *   on either side, mt_substitute() applies the bindings to a template, and a
+ *   repeated variable demands equal fields.
+ * Guarantees: the template instantiates, and (pair $x $x) refuses (pair 1 2)
+ *   [tested: make check; commit=WORKTREE].
  */
+#define MT_SHORTHAND
 #include "common.h"
+
 int main(void)
 {
     metta *m = open_engine();
-    mt_atom *pattern = mt_expr("Parent", mt_var("parent"), mt_var("child"));
-    mt_atom *fact = mt_expr("Parent", "Tom", "Bob");
+    mt_atom *pattern = E("Parent", V("parent"), V("child"));
+    mt_atom *fact = E("Parent", "Tom", "Bob");
     mt_bindings *bindings = mt_unify(pattern, fact);
-    check("unification succeeds", bindings != NULL);
-    mt_atom *template = mt_expr("Cares", mt_var("parent"), mt_var("child"));
-    mt_atom *answer = mt_substitute(template, bindings);
-    check_atom("substituted template", answer, "(Cares Tom Bob)");
-    mt_drop(answer); mt_drop(template); mt_bindings_free(bindings);
-    mt_drop(pattern); mt_drop(fact);
-    pattern = mt_expr("pair", mt_var("x"), mt_var("x"));
-    fact = mt_expr("pair", 1, 2);
-    bindings = mt_unify(pattern, fact);
-    check("repeated variable refuses unequal fields", bindings == NULL && mt_ok());
-    mt_drop(pattern); mt_drop(fact);
-    return done(m, "unification");
+    require("the fact unifies", bindings != NULL);
+    mt_atom *template = E("Cares", V("parent"), V("child"));
+    check_atom("the bindings fill the template", mt_substitute(template, bindings),
+               E("Cares", "Tom", "Bob"));
+    mt_drop(template);
+    mt_bindings_free(bindings);
+    mt_drop(pattern);
+    mt_drop(fact);
+
+    mt_atom *diagonal = E("pair", V("x"), V("x"));
+    mt_atom *unequal = E("pair", 1, 2);
+    mt_clear();
+    check("a repeated variable refuses unequal fields, without an error",
+          mt_unify(diagonal, unequal) == NULL && mt_ok());
+    mt_drop(diagonal);
+    mt_drop(unequal);
+
+    /* The engine's own unify agrees. */
+    check_answers("and so does the engine",
+                  mt_eval(m, E("unify", E("pair", V("x"), V("x")), E("pair", 1, 2), "same", "different")),
+                  "different");
+    return done(m);
 }

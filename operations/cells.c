@@ -1,18 +1,21 @@
-/* Purpose: Share a mutable engine cell through retained C atoms.
- * Owns resources: local C handles are released before exit; a failed check
- *   terminates the example process.
- * Guarantees: the assertions below hold [tested: make check; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
- * Open Obligations: None.
+/* Purpose: a mutable cell is an atom C holds. new-state answers the cell,
+ *   and the same atom, kept with mt_keep(), is passed to get-state and
+ *   change-state! for every read and write.
+ * Guarantees: the cell reads 0, takes 7 with True, and reads 7 [tested: make check;
+ *   commit=WORKTREE].
  */
+#define MT_SHORTHAND
 #include "common.h"
+
 int main(void)
 {
     metta *m = open_engine();
-    mt_atom *cell = mt_one(mt_eval(m, mt_expr("new-state", 0)));
-    check("cell created", cell != NULL);
-    check_answers("initial state", mt_eval(m, mt_expr("get-state", mt_keep(cell))), "0");
-    check_answers("change state", mt_eval(m, mt_expr("change-state!", mt_keep(cell), 7)), "True");
-    check_answers("updated state", mt_eval(m, mt_expr("get-state", mt_keep(cell))), "7");
+    mt_atom *cell = mt_one(mt_eval(m, E("new-state", 0)));
+    require("create a cell", cell != NULL);
+    check_int("it starts at 0", mt_one_int(mt_eval(m, E("get-state", mt_keep(cell)))), 0);
+    check_answers("change-state! answers True",
+                  mt_eval(m, E("change-state!", mt_keep(cell), 7)), B(true));
+    check_int("and it reads 7", mt_one_int(mt_eval(m, E("get-state", mt_keep(cell)))), 7);
     mt_drop(cell);
-    return done(m, "cells");
+    return done(m);
 }

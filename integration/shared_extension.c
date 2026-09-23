@@ -1,15 +1,22 @@
-/* Purpose: load a separately compiled C plugin and invoke its callback.
- * Owns resources: mt_close releases the runtime's plugin reference.
- * Guarantees: plugin output and missing-library errors are checked [tested: make check; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
- * Open Obligations: None.
+/* Purpose: a separately compiled plugin extends the seat. mt_extension()
+ *   loads build/plugins/arithmetic.so, calls its mt_extension_init(), and
+ *   the function it registers is called like any other; a missing plugin is
+ *   refused by name.
+ * Owns resources: the runtime keeps the plugin loaded until exit.
+ * Guarantees: (plugin-triple 14) is 42, and a missing path is named in the
+ *   refusal [tested: make check; commit=WORKTREE].
  */
+#define MT_SHORTHAND
 #include "common.h"
+
 int main(void)
 {
     metta *m = open_engine();
-    check("load shared extension", mt_extension(m, "build/plugins/arithmetic.so"));
-    check_answers("plugin calls back into engine", mt_run(m, "!(plugin-triple 14)"), "42");
-    check("missing DSO is an error", !mt_extension(m, "build/plugins/absent.so") && !mt_ok());
-    check("missing path is named", mt_errmsg() && strstr(mt_errmsg(), "absent.so")); mt_clear();
-    return done(m, "shared_extension");
+    require("load the plugin", mt_extension(m, "build/plugins/arithmetic.so"));
+    check_int("its function answers", mt_one_int(mt_eval(m, E("plugin-triple", 14))), 42);
+    mt_clear();
+    check("a missing plugin is refused", !mt_extension(m, "build/plugins/absent.so") && !mt_ok());
+    check("naming the path", mt_errmsg() && strstr(mt_errmsg(), "absent.so") != NULL);
+    mt_clear();
+    return done(m);
 }

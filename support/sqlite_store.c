@@ -1,11 +1,15 @@
-/* Purpose: map complete atoms to SQLite rows with nested transaction savepoints.
+/* Purpose: a space whose atoms are SQLite rows, with nested transactions as
+ *   savepoints, shared by the SQL examples.
  * Owns resources: a provider owns its connection; each cursor finalizes its
  *   statement on exhaustion, error or abandonment; release closes the database.
- * Guarded by: examples serialize provider access on the owning C thread.
- * Decides: preserve bag multiplicity; candidate scans leave unification to MeTTa.
- * Guarantees: rollback and retained-cursor cleanup are checked by sqlite_space
- *   [tested: make check; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
- * Open Obligations: None.
+ * Guarded by: the examples use a provider from the thread that owns it.
+ * Decides: rows keep bag multiplicity, and a match yields every row as a
+ *   candidate, leaving unification to the engine.
+ * text: a row stores an atom as its MeTTa source spelling, written by
+ *   mt_write_dup() and read back by mt_parse(), which is what a text column
+ *   holding atoms is.
+ * Guarantees: rollback and retained-cursor cleanup are checked by
+ *   integration/sqlite_space.c [tested: make check; commit=WORKTREE].
  */
 #include "sqlite_store.h"
 typedef struct sql_cursor { sql_store *store; sqlite3_stmt *statement; } sql_cursor;
@@ -104,18 +108,19 @@ static mt_status rollback(void *user)
 static void release(void *user)
 {
     sql_store *store = user;
-    check("all SQL statements closed", sqlite3_close(store->db) == SQLITE_OK);
+    require("close the database with no statement open", sqlite3_close(store->db) == SQLITE_OK);
     if (store->released) ++*store->released;
     free(store);
 }
 
 sql_store *sql_open(metta *m, const char *name, const char *path, size_t *released)
 {
-    sql_store *store = calloc(1, sizeof(*store)); check("allocate SQL provider", store != NULL);
-    check("open database", sqlite3_open(path, &store->db) == SQLITE_OK);
+    sql_store *store = calloc(1, sizeof(*store));
+    require("allocate the SQL provider", store != NULL);
+    require("open the database", sqlite3_open(path, &store->db) == SQLITE_OK);
     store->released = released;
-    check("create bag table", sql_exec(store, "CREATE TABLE IF NOT EXISTS facts(atom TEXT NOT NULL)") == MT_OK);
-    check("publish SQL provider", mt_provider_open(m, name, (mt_provider){
+    require("create the bag table", sql_exec(store, "CREATE TABLE IF NOT EXISTS facts(atom TEXT NOT NULL)") == MT_OK);
+    require("publish the SQL provider", mt_provider_open(m, name, (mt_provider){
         .user=store, .add=add, .remove=remove_one, .match=match, .clear=clear,
         .begin=begin, .commit=commit, .rollback=rollback, .release=release}));
     return store;

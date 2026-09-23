@@ -1,90 +1,143 @@
-/* Purpose: fail on wrong results even when NDEBUG disables C assert.
- * Owns resources: check_answers consumes its cursor and parsed expectations;
- *   done closes the runtime. A failed check terminates the example process.
- * Guarded by: the assertion counter is atomic for joined worker examples.
- * Guarantees: success requires a checked result [tested: make check-helpers; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
- * Open Obligations: None.
+/* Purpose: prove claims whatever NDEBUG says, and report what the twin lane
+ *   compares: the claims a program proved, the definitions and C operations
+ *   it made visible, and the atoms its &self holds.
+ * Owns resources: done() closes the runtime; every check that takes an atom or
+ *   a cursor releases it on every path. A failed claim ends the process.
+ * Guarded by: the claim counter is atomic, because worker threads prove
+ *   claims too; everything else runs on the thread that calls done().
+ * Guarantees: the space report is the same function for a twin and for the
+ *   original's runner, tools/original.c, so the two sides of the lane cannot
+ *   canonicalise atoms two ways [tested: make twins; commit=WORKTREE].
  */
 #include "common.h"
+#include "lane.h"
+#include <inttypes.h>
+#include <stdarg.h>
 #include <stdatomic.h>
 
-static atomic_size_t checks;
+static atomic_size_t claims;
+static uint64_t inferences_at_open;
 
-void check(const char *label, bool condition)
+static void fail(const char *claim, const char *detail, ...)
 {
-    if (!condition) {
-        fprintf(stderr, "FAIL %s: %s (%s)\n", label,
-                mt_errmsg() ? mt_errmsg() : "unexpected result",
-                mt_status_str(mt_error()));
-        exit(EXIT_FAILURE);
+    va_list args;
+    fprintf(stderr, "FAIL %s", claim);
+    if (detail) {
+        fputs(": ", stderr);
+        va_start(args, detail);
+        vfprintf(stderr, detail, args);
+        va_end(args);
     }
-    atomic_fetch_add(&checks, 1);
+    fputc('\n', stderr);
+    if (mt_errmsg()) fprintf(stderr, "  engine: %s (%s)\n", mt_errmsg(),
+                             mt_status_str(mt_error()));
+    exit(EXIT_FAILURE);
 }
 
-void check_atom(const char *label, const mt_atom *actual, const char *expected)
-{
-    mt_atom *wanted = mt_parse(expected);
-    check(label, actual && wanted && mt_eq(actual, wanted) && mt_ok());
-    mt_drop(wanted);
-}
-
-void check_answers(const char *label, mt_answers *answers, const char *expected)
-{
-    check("open answer cursor", answers != NULL);
-    mt_list wanted = mt_forms(expected);
-    mt_list actual = mt_all(answers);
-    check(label, mt_ok() && actual.len == wanted.len);
-    for (size_t i = 0; i < actual.len; ++i) {
-        if (!mt_eq(actual.items[i], wanted.items[i])) {
-            fprintf(stderr, "%s row %zu: got %s; expected %s\n", label, i,
-                    mt_show(actual.items[i]), mt_show(wanted.items[i]));
-            check(label, false);
-        }
-    }
-    check(label, mt_ok());
-    mt_list_free(actual);
-    mt_list_free(wanted);
-}
+static void proved(void) { atomic_fetch_add(&claims, 1); }
 
 metta *open_engine(void)
 {
     mt_clear();
     metta *runtime = mt_open(NULL);
-    if (!runtime) check("open embedded engine", false);
+    if (!runtime) fail("open the engine", NULL);
+    inferences_at_open = mt_stats_now(runtime).inferences;
     return runtime;
 }
 
-/* Join source fragments before one run so program order and source identity
- * retain the engine's semantics. Time and space: O(B), B source bytes.
- */
-void check_program(metta *runtime, const char *const *fragments, size_t count)
+void require(const char *what, bool ok)
 {
-    size_t bytes = 1;
-    for (size_t i = 0; i < count; ++i) {
-        size_t length = strlen(fragments[i]);
-        check("source size fits", length <= SIZE_MAX - bytes);
-        bytes += length;
-    }
-    char *source = malloc(bytes);
-    check("allocate source", source != NULL);
-    size_t at = 0;
-    for (size_t i = 0; i < count; ++i) {
-        size_t length = strlen(fragments[i]);
-        memcpy(source + at, fragments[i], length); at += length;
-    }
-    source[at] = '\0';
-    bool success = mt_do(runtime, source);
-    free(source);
-    check("all embedded result assertions", success && mt_ok());
+    if (!ok) fail(what, "a door the program needs refused");
 }
 
-int done(metta *runtime, const char *name)
+void check(const char *claim, bool holds)
 {
-    size_t count = atomic_load(&checks);
-    check("at least one result was checked", count > 0);
-    check("no unhandled error", mt_ok());
-    mt_close(runtime);
-    check("engine closed", mt_ok());
-    printf("OK %s (%zu checks)\n", name, count);
+    if (!holds) fail(claim, NULL);
+    proved();
+}
+
+void check_int(const char *claim, int64_t got, int64_t want)
+{
+    if (got != want)
+        fail(claim, "got %" PRId64 ", want %" PRId64, got, want);
+    proved();
+}
+
+void check_real(const char *claim, double got, double want)
+{
+    if (!(got == want)) fail(claim, "got %.17g, want %.17g", got, want);
+    proved();
+}
+
+void check_text(const char *claim, const char *got, const char *want)
+{
+    if (!got || strcmp(got, want) != 0)
+        fail(claim, "got \"%s\", want \"%s\"", got ? got : "(null)", want);
+    proved();
+}
+
+void check_atom(const char *claim, mt_atom *got, mt_atom *want)
+{
+    bool holds = got && want && mt_alpha_eq(got, want);
+    if (!holds) {
+        char *g = mt_show_dup(got), *w = mt_show_dup(want);
+        mt_drop(got);
+        mt_drop(want);
+        fail(claim, "got %s, want %s", g ? g : "(null)", w ? w : "(null)");
+    }
+    mt_drop(got);
+    mt_drop(want);
+    proved();
+}
+
+/* Time: sum of the answers' sizes for the walk, plus one alpha comparison per
+   expected answer. */
+void check_answers_(const char *claim, mt_answers *answers, size_t count,
+                    mt_atom **want)
+{
+    mt_list got = mt_all(answers);
+    bool holds = mt_ok() && got.len == count;
+    for (size_t i = 0; holds && i < count; i++)
+        holds = want[i] && mt_alpha_eq(got.items[i], want[i]);
+    if (!holds) {
+        fprintf(stderr, "  got %zu answer(s):", got.len);
+        for (size_t i = 0; i < got.len; i++)
+            fprintf(stderr, " %s", mt_show(got.items[i]));
+        fprintf(stderr, "\n  want %zu:", count);
+        for (size_t i = 0; i < count; i++)
+            fprintf(stderr, " %s", want[i] ? mt_show(want[i]) : "(null)");
+        fputc('\n', stderr);
+    }
+    mt_list_free(got);
+    for (size_t i = 0; i < count; i++) mt_drop(want[i]);
+    if (!holds) fail(claim, "the answers differ");
+    proved();
+}
+
+void check_none(const char *claim, mt_answers *answers)
+{
+    mt_list got = mt_all(answers);
+    bool holds = mt_ok() && got.len == 0;
+    if (!holds && got.len)
+        fprintf(stderr, "  first of %zu: %s\n", got.len, mt_show(got.items[0]));
+    mt_list_free(got);
+    if (!holds) fail(claim, "wanted no answer");
+    proved();
+}
+
+int done_(metta *runtime, const char *file)
+{
+    size_t count = atomic_load(&claims);
+    uint64_t spent = runtime ? mt_stats_now(runtime).inferences - inferences_at_open : 0;
+    if (count == 0) fail("prove at least one claim", "%s checked nothing", file);
+    if (!mt_ok()) fail("leave no error unhandled", NULL);
+    printf("LANE-CLAIMS %zu\n", count);
+    printf("LANE-INFERENCES %" PRIu64 "\n", spent);
+    if (runtime) {
+        lane_report(runtime);
+        mt_close(runtime);
+        if (!mt_ok()) fail("close the engine", NULL);
+    }
+    printf("OK %s (%zu claims)\n", file, count);
     return EXIT_SUCCESS;
 }

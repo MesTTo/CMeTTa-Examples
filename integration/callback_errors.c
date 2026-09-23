@@ -1,10 +1,12 @@
-/* Purpose: Return explicit callback errors and recover for the next request.
- * Owns resources: local C handles are released before exit; a failed check
- *   terminates the example process.
- * Guarantees: the assertions below hold [tested: make check; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
- * Open Obligations: None.
+/* Purpose: a C function refuses with words. mt_fail() turns a bad argument
+ *   into an engine error whose message reaches the caller as a status, and
+ *   the next request after a refusal is served normally.
+ * Guarantees: the refusal's reason crosses back, and the function still
+ *   answers afterwards [tested: make check; commit=WORKTREE].
  */
+#define MT_SHORTHAND
 #include "common.h"
+
 static mt_status positive(mt_call *call, void *user)
 {
     (void)user;
@@ -12,17 +14,21 @@ static mt_status positive(mt_call *call, void *user)
     int64_t value = mt_int(mt_arg(call, 0));
     if (!mt_ok()) return mt_fail(call, "positive expects an integer");
     if (value < 0) return mt_fail(call, "positive refuses negative input");
-    return mt_answer(call, mt_num(value));
+    return mt_answer(call, N(value));
 }
+
 int main(void)
 {
     metta *m = open_engine();
-    check("publish positive", mt_def(m, (mt_op){.name="positive", .arity=1, .effect=MT_PURE, .fn=positive}));
-    mt_answers *bad = mt_run(m, "!(positive -1)");
-    check("reason crosses FFI", !bad && mt_error() == MT_ERROR &&
-          strstr(mt_errmsg(), "negative input") != NULL);
+    require("publish positive", mt_def(m, (mt_op){ .name = "positive", .arity = 1,
+                                                   .effect = MT_PURE, .fn = positive }));
     mt_clear();
-    check_answers("later request succeeds", mt_run(m, "!(positive 42)"), "42");
-    check("withdraw operation", mt_undef(m, "positive"));
-    return done(m, "callback_errors");
+    mt_atom *refused = mt_first(mt_eval(m, E("positive", -1)));
+    check("the refusal is an error status", refused == NULL && mt_error() == MT_ERROR);
+    check("carrying the function's own words",
+          mt_errmsg() && strstr(mt_errmsg(), "negative input") != NULL);
+    mt_clear();
+    check_int("the next request is served", mt_one_int(mt_eval(m, E("positive", 42))), 42);
+    require("withdraw positive", mt_undef(m, "positive"));
+    return done(m);
 }
