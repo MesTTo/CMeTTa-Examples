@@ -1,5 +1,5 @@
 /* Purpose: share always-enabled assertions and engine cleanup across examples.
- * Guarantees: done refuses an unchecked example [tested: make check-helpers; commit=WORKTREE].
+ * Guarantees: done refuses an unchecked example [tested: make check-helpers; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
  * Open Obligations: None.
  */
 #ifndef EXAMPLES_COMMON_H

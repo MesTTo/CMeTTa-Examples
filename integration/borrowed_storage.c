@@ -1,7 +1,7 @@
 /* Purpose: Borrow immutable C storage with an explicit last-owner callback.
  * Owns resources: local handles and host storage are released before success;
  *   a failed assertion terminates this example process.
- * Guarantees: results are asserted [tested: make check; commit=WORKTREE].
+ * Guarantees: results are asserted [tested: make check; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
  * Open Obligations: None.
  */
 #include "common.h"

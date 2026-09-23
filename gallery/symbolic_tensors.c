@@ -2,7 +2,7 @@
  * Owns resources: callback arrays are freed before returning owned result atoms.
  * Assumes: pkg-config openblas supplies cblas.h and its library.
  * Guarantees: numeric result, call count and shape refusal are checked
- *   [tested: make check; commit=WORKTREE].
+ *   [tested: make check; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
  * Open Obligations: None.
  */
 #include "common.h"

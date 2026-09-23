@@ -4,7 +4,7 @@
  * Guarded by: examples serialize provider access on the owning C thread.
  * Decides: preserve bag multiplicity; candidate scans leave unification to MeTTa.
  * Guarantees: rollback and retained-cursor cleanup are checked by sqlite_space
- *   [tested: make check; commit=WORKTREE].
+ *   [tested: make check; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
  * Open Obligations: None.
  */
 #include "sqlite_store.h"

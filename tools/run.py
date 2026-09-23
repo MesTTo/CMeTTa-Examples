@@ -1,6 +1,6 @@
 """Purpose: run the discovered C executable roster and retain every verdict.
 Owns resources: joins all child processes; logs and temporary files stay in this tree.
-Guarantees: no failed or unchecked process counts as success [tested: make check; commit=WORKTREE].
+Guarantees: no failed or unchecked process counts as success [tested: make check; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
 Open Obligations: None.
 """
 import argparse

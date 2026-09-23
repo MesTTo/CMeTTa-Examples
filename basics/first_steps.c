@@ -1,7 +1,7 @@
 /* Purpose: Run source, construct terms and query joined facts.
  * Owns resources: local C handles are released before exit; a failed check
  *   terminates the example process.
- * Guarantees: the assertions below hold [tested: make check; commit=WORKTREE].
+ * Guarantees: the assertions below hold [tested: make check; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
  * Open Obligations: None.
  */
 #include "common.h"
@@ -26,4 +26,3 @@ int main(void)
     check_answers("nondeterministic values", mt_eval(m, mt_expr("superpose", mt_expr(1, 2, 3))), "1 2 3");
     return done(m, "first_steps");
 }
-

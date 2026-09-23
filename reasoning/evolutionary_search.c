@@ -1,7 +1,7 @@
 /* Purpose: evolve C bit genomes while MeTTa owns population facts and stopping.
  * Owns resources: each generation drains its old fact snapshot and replaces it.
  * Decides: deterministic xorshift variation and elitism make the run reproducible.
- * Guarantees: fitness improves and population size is preserved [tested: make check; commit=WORKTREE].
+ * Guarantees: fitness improves and population size is preserved [tested: make check; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
  * Open Obligations: None.
  */
 #include "common.h"

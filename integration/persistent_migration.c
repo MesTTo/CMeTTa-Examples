@@ -1,6 +1,6 @@
 /* Purpose: migrate a durable atom head once and reopen the resulting schema.
  * Owns resources: closes both providers and removes the temporary database.
- * Guarantees: reopening needs no alias [tested: make check; commit=WORKTREE].
+ * Guarantees: reopening needs no alias [tested: make check; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
  * Open Obligations: None.
  */
 #include "support/sqlite_store.h"

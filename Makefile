@@ -1,6 +1,6 @@
 # Purpose: discover, compile and execute every standalone C example.
 # Assumes: CMETTA_DIR contains a built CMeTTa surface and its public header.
-# Guarantees: check stops on a failed program [tested: make check; commit=WORKTREE].
+# Guarantees: check stops on a failed program [tested: make check; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
 # Open Obligations: None.
 CMETTA_DIR ?= $(abspath ../PeTTa/extensions/cmetta)
 CMETTA_ENGINE ?= $(abspath $(CMETTA_DIR)/../..)

@@ -1,6 +1,6 @@
 /* Purpose: query a SQL bag, reject a reserved write and roll back a transaction.
  * Owns resources: provider owns SQLite; cursor retention delays its release.
- * Guarantees: actual SQL state and MeTTa answers agree [tested: make check; commit=WORKTREE].
+ * Guarantees: actual SQL state and MeTTa answers agree [tested: make check; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
  * Open Obligations: None.
  */
 #include "support/sqlite_store.h"

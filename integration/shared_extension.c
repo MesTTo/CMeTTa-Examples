@@ -1,6 +1,6 @@
 /* Purpose: load a separately compiled C plugin and invoke its callback.
  * Owns resources: mt_close releases the runtime's plugin reference.
- * Guarantees: plugin output and missing-library errors are checked [tested: make check; commit=WORKTREE].
+ * Guarantees: plugin output and missing-library errors are checked [tested: make check; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
  * Open Obligations: None.
  */
 #include "common.h"

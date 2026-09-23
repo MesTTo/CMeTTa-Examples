@@ -1,7 +1,7 @@
 /* Purpose: carry a value and derivative through two tagged rules into C.
  * Owns resources: callback arguments are borrowed; results transfer to the engine.
  * Guarantees: differentiating 3*x at x=2 gives value 6 and derivative 3
- *   [tested: make check; commit=WORKTREE].
+ *   [tested: make check; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
  * Open Obligations: tensor-runtime interoperability is outside this C example.
  */
 #include "common.h"

@@ -1,6 +1,6 @@
 /* Purpose: route requests and compose middleware through ordinary equations.
  * Owns resources: releases the engine after checked requests.
- * Guarantees: route precedence and missing routes are checked [tested: make check; commit=WORKTREE].
+ * Guarantees: route precedence and missing routes are checked [tested: make check; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
  * Open Obligations: None.
  */
 #include "common.h"

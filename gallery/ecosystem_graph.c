@@ -2,7 +2,7 @@
  * Owns resources: callback owns its adjacency matrix, queue and answer snapshot.
  * Assumes: vertices are nonnegative contiguous integer identifiers.
  * Guarantees: breadth-first search returns the unique shortest path and the
- *   result is queryable knowledge [tested: make check; commit=WORKTREE].
+ *   result is queryable knowledge [tested: make check; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
  * Open Obligations: None.
  */
 #include "common.h"

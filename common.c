@@ -2,7 +2,7 @@
  * Owns resources: check_answers consumes its cursor and parsed expectations;
  *   done closes the runtime. A failed check terminates the example process.
  * Guarded by: the assertion counter is atomic for joined worker examples.
- * Guarantees: success requires a checked result [tested: make check-helpers; commit=WORKTREE].
+ * Guarantees: success requires a checked result [tested: make check-helpers; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
  * Open Obligations: None.
  */
 #include "common.h"

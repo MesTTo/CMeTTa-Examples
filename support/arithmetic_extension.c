@@ -1,6 +1,6 @@
 /* Purpose: export a CMeTTa plugin entry point from an independently linked DSO.
  * Owns resources: the runtime retains the DSO while its registered code is live.
- * Guarantees: shared_extension checks the published operation [tested: make check; commit=WORKTREE].
+ * Guarantees: shared_extension checks the published operation [tested: make check; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
  * Open Obligations: None.
  */
 #include <cmetta.h>

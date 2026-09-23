@@ -1,5 +1,5 @@
 # Purpose: discover installed CMeTTa through CMake's imported pkg-config target.
-# Guarantees: CTest runs the asserted consumer [tested: make check-consumers; commit=WORKTREE].
+# Guarantees: CTest runs the asserted consumer [tested: make check-consumers; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
 # Open Obligations: None.
 cmake_minimum_required(VERSION 3.18)
 project(cmetta_consumer C)

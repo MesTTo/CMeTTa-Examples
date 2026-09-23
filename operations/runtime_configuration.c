@@ -1,7 +1,7 @@
 /* Purpose: set a startup stack budget and rewrite live catalog settings.
  * Owns resources: closes the configured process runtime.
  * Decides: this small host reserves a 256 MiB SWI stack ceiling.
- * Guarantees: runtime limits and catalog values are observable [tested: make check; commit=WORKTREE].
+ * Guarantees: runtime limits and catalog values are observable [tested: make check; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
  * Open Obligations: None.
  */
 #include "common.h"

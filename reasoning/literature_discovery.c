@@ -2,7 +2,7 @@
  * Owns resources: releases the grounded similarity matcher after query closure.
  * Decides: synthetic vectors and claims demonstrate inference, not treatment advice.
  * Guarantees: a vocabulary gap needs similarity and two paths retain citations
- *   [tested: make check; commit=WORKTREE].
+ *   [tested: make check; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
  * Open Obligations: None.
  */
 #include "common.h"

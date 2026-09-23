@@ -1,7 +1,7 @@
 /* Purpose: preserve an Atom argument while reducing an ordinary value argument.
  * Owns resources: callback arguments are borrowed; answers retain their atoms.
  * Guarantees: declared arrow types control evaluation at the C boundary
- *   [tested: make check; commit=WORKTREE].
+ *   [tested: make check; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
  * Open Obligations: None.
  */
 #include "common.h"

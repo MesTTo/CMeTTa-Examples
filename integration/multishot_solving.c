@@ -1,7 +1,7 @@
 /* Purpose: extend a reachability program between solves and toggle external facts.
  * Owns resources: scopes template writes in a transaction and releases its runtime.
  * Guarantees: shortest horizon is three and failed grounding rolls back
- *   [tested: make check; commit=WORKTREE].
+ *   [tested: make check; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
  * Open Obligations: None.
  */
 #include "common.h"

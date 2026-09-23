@@ -1,7 +1,7 @@
 /* Purpose: Keep native identity and release its payload exactly once.
  * Owns resources: local C handles are released before exit; a failed check
  *   terminates the example process.
- * Guarantees: the assertions below hold [tested: make check; commit=WORKTREE].
+ * Guarantees: the assertions below hold [tested: make check; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
  * Open Obligations: None.
  */
 #include "common.h"
@@ -24,4 +24,3 @@ int main(void)
     check("payload released once", released == 1);
     return done(m, "object_lifetime");
 }
-

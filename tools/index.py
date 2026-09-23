@@ -1,6 +1,6 @@
 """Purpose: derive the example index and coverage tables from their source rosters.
 Guarantees: --check rejects stale documents and missing counterparts
-[tested: make generated-check; commit=WORKTREE].
+[tested: make generated-check; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
 Open Obligations: None.
 """
 import argparse

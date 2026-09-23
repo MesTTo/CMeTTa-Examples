@@ -1,6 +1,6 @@
 /* Purpose: read a query plan as atoms and measure the query that it describes.
  * Owns resources: releases plan, answer collection and runtime.
- * Guarantees: explanations and measured answers are checked [tested: make check; commit=WORKTREE].
+ * Guarantees: explanations and measured answers are checked [tested: make check; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
  * Open Obligations: None.
  */
 #include "common.h"

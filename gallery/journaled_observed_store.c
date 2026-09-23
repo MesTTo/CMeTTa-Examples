@@ -1,7 +1,7 @@
 /* Purpose: commit observed facts into SQLite WAL and reopen durable rows.
  * Owns resources: closes providers before removing the temporary database.
  * Decides: SQLite owns journal recovery; notifications observe committed changes.
- * Guarantees: replay preserves committed rows [tested: make check; commit=WORKTREE].
+ * Guarantees: replay preserves committed rows [tested: make check; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
  * Open Obligations: None.
  */
 #include "support/sqlite_store.h"

@@ -1,7 +1,7 @@
 /* Purpose: Preserve unsigned integers and canonical rational values.
  * Owns resources: local C handles are released before exit; a failed check
  *   terminates the example process.
- * Guarantees: the assertions below hold [tested: make check; commit=WORKTREE].
+ * Guarantees: the assertions below hold [tested: make check; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
  * Open Obligations: rational source round trips are blocked in the shared
  *   reader; this file checks numeric fields directly. See ERRORS.md.
  */

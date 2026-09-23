@@ -1,7 +1,7 @@
 /* Purpose: Call MeTTa again from the C callback invoked by MeTTa.
  * Owns resources: local C handles are released before exit; a failed check
  *   terminates the example process.
- * Guarantees: the assertions below hold [tested: make check; commit=WORKTREE].
+ * Guarantees: the assertions below hold [tested: make check; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
  * Open Obligations: None.
  */
 #include "common.h"
@@ -23,4 +23,3 @@ int main(void)
     check("withdraw callback", mt_undef(m, "delegate"));
     return done(m, "callback_reentry");
 }
-

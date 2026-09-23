@@ -1,6 +1,6 @@
 /* Purpose: classify C callbacks explicitly and inspect the language effect rows.
  * Owns resources: registrations are withdrawn before their user data expires.
- * Guarantees: the engine reports each declared rank [tested: make check; commit=WORKTREE].
+ * Guarantees: the engine reports each declared rank [tested: make check; commit=6022c3f48b6dc64752c6e49cfe9d985c7ac7a4e9].
  * Open Obligations: None.
  */
 #include "common.h"
