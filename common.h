@@ -48,6 +48,13 @@ void check_atom(const char *claim, mt_atom *got, mt_atom *want);
 void check_answers_(const char *claim, mt_answers *answers, size_t count,
                     mt_atom **want);
 
+/* The same claim over a list the program already holds, such as one it
+   sorted with qsort(..., mt_order). TAKES the list and every expectation. */
+#define check_list(claim, list, ...)                                      \
+    check_list_((claim), (list), MT_NARG(__VA_ARGS__),                    \
+                (mt_atom *[]){ MT_MAP(__VA_ARGS__) })
+void check_list_(const char *claim, mt_list list, size_t count, mt_atom **want);
+
 /* No answer at all. CONSUMES the cursor. */
 void check_none(const char *claim, mt_answers *answers);
 

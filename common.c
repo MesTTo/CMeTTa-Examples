@@ -95,7 +95,11 @@ void check_atom(const char *claim, mt_atom *got, mt_atom *want)
 void check_answers_(const char *claim, mt_answers *answers, size_t count,
                     mt_atom **want)
 {
-    mt_list got = mt_all(answers);
+    check_list_(claim, mt_all(answers), count, want);
+}
+
+void check_list_(const char *claim, mt_list got, size_t count, mt_atom **want)
+{
     bool holds = mt_ok() && got.len == count;
     for (size_t i = 0; holds && i < count; i++)
         holds = want[i] && mt_alpha_eq(got.items[i], want[i]);

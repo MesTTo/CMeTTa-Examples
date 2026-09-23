@@ -93,7 +93,7 @@ FORM_LITERAL = re.compile(r'^\s*!?\(.*\)\s*$|\$[A-Za-z_]', re.S)
 TEXT_CALLS = frozenset({
     "mt_text", "mt_textn", "T", "printf", "fprintf", "puts", "fputs", "snprintf",
     "check", "check_int", "check_real", "check_text", "check_atom",
-    "check_answers", "check_none", "require", "strcmp", "strncmp", "strstr",
+    "check_answers", "check_list", "check_none", "require", "strcmp", "strncmp", "strstr",
     "mt_fail", "mt_error_set", "perror",
 })
 

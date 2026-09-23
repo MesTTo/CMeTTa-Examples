@@ -20,7 +20,7 @@ what exists, and [COVERAGE.md](COVERAGE.md) lists the rest.
 | `ch01-getting-started` | 2 | 0 | 0 | 0 | 0 |
 | `ch02-programming-a-family-tree` | 4 | 0 | 0 | 0 | 0 |
 | `ch03-atoms-and-expressions` | 6 | 6 | 6 | 0 | 0 |
-| `ch04-spaces-and-matching` | 21 | 19 | 0 | 0 | 0 |
+| `ch04-spaces-and-matching` | 21 | 19 | 19 | 0 | 0 |
 | `ch05-equations-and-evaluation` | 26 | 26 | 1 | 0 | 0 |
 | `ch06-many-answers` | 10 | 10 | 0 | 0 | 0 |
 | `ch07-control-flow` | 44 | 42 | 0 | 0 | 0 |
@@ -37,7 +37,7 @@ what exists, and [COVERAGE.md](COVERAGE.md) lists the rest.
 | `ch19-spaces-backed-by-anything` | 10 | 10 | 0 | 0 | 0 |
 | `ch20-extending-the-engine` | 52 | 38 | 0 | 0 | 0 |
 | `ch22-a-reasoner-you-can-serve` | 33 | 27 | 0 | 0 | 0 |
-| **all** | 366 | 323 | 7 | 0 | 0 |
+| **all** | 366 | 323 | 26 | 0 | 0 |
 <!-- coverage:end -->
 
 ## Running them
