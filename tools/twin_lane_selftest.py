@@ -6,8 +6,10 @@ instead of passing every twin.
 
 Assumes: `make all` has built build/common.o, build/lane.o and
 build/tools/original; the engine tree is --engine.
-Guarantees: exits nonzero unless every planted defect is reported and the two
-planted good twins are not [tested: make check; commit=WORKTREE].
+Guarantees: exits nonzero unless every planted defect is reported, the two
+planted good twins are not, and derived() reads a clause as the specializer's
+exactly when its own head carries the mark [tested: make check;
+commit=WORKTREE].
 Owns resources: a scratch tree under ai-tmp/, removed on success and kept on
 failure for inspection.
 """
@@ -62,6 +64,22 @@ CASES = {
     "engine-bypass": (REPR, """
     for (int i = 0; i < 6; i++) check("printed", true);
     (void)m;""", "under the floor"),
+    "drift-beside-derived": (IDENTITY, """
+    require("define", mt_add(m, E("=", E("f", V("x")), E("*", V("x"), 1))));
+    require("a clause named as the specializer names its own",
+            mt_add(m, E("=", E("f_Spec_k1", V("x")), E("*", V("x"), V("x")))));
+    check_int("(f 1)", mt_one_int(mt_eval(m, E("f", 1))), 1);""",
+                             "stored content differs"),
+}
+
+#: atom -> whether the lane reads it as a clause the specializer derived: only
+#: an equation or declaration whose own head carries the mark
+DERIVED = {
+    "(= (map-flat_Spec_k1 $f $l) (map-flat $f $l))": True,
+    "(: f_Spec_k2 (-> Number Number))": True,
+    "(= (map-flat $f $l) ($f $l))": False,
+    "(= (f $x) (g_Spec_k1 $x))": False,
+    "(holds f_Spec_k1)": False,
 }
 
 SQUARE = """
@@ -86,7 +104,8 @@ def main() -> int:
     lane.BUILD = scratch / "build"
     lane.RUNNER = lane.ROOT / "build" / "tools" / "original"
 
-    wrong = []
+    wrong = [f"derived({atom!r}) answered {not want}"
+             for atom, want in DERIVED.items() if lane.derived(atom) != want]
     for name, (original, body, expected) in CASES.items():
         twin = lane.TWINS / f"{original}.c"
         binary = lane.BUILD / "language-feature-examples" / original
@@ -112,7 +131,8 @@ def main() -> int:
         twin.unlink()
     for line in wrong:
         print(f"SELFTEST {line}")
-    print(f"{len(CASES) - len(wrong)}/{len(CASES)} planted cases judged as expected")
+    judged = len(CASES) + len(DERIVED)
+    print(f"{judged - len(wrong)}/{judged} planted cases judged as expected")
     if not wrong:
         shutil.rmtree(scratch, ignore_errors=True)
     return 1 if wrong else 0

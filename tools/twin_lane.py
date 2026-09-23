@@ -12,8 +12,8 @@ and the twin in its own process, and compares what the two answer:
            equation head in the twin's &self or a C operation it published
   content  the atoms the two &self spaces hold are one multiset, up to
            variable renaming, except where the twin's C operation carries the
-           original's equations for that head, or the twin declares the exact
-           difference as a Divergence
+           original's equations for that head, a clause is one the specializer
+           derived, or the twin declares the exact difference as a Divergence
   engine   a twin reaches the engine (20 inferences or more) unless it says
            why not with an `engine-free:` note
   source   no program runs MeTTa source text: no mt_run, mt_do, mt_load,
@@ -296,6 +296,22 @@ def surplus(these: list[str], those: list[str]) -> list[str]:
     return sorted(atom for atom, n in extra.items() for _ in range(n))
 
 
+#: How the specializer names a clause it DERIVED, which no side authored
+#: [source: engine/specializer.pl, `atom_concat(HV, '_Spec_k', Prefix)`;
+#: commit=49e2b250d451d01715f78ab91465e2d1842dee8d]. Its key records the call
+#: as it reached the engine, so the same call derives different clauses from
+#: source and from a C-built goal: (map-flat (+ 1) (1 2 3)) from source is keyed
+#: on partial(+,[1]) and from mt_eval on partial(+,[_]), each answering
+#: (2 3 4) [measured 2026-09-24: ch05 04-specialize, the original's and the
+#: twin's &self]. A derived clause is compilation state, not stored content.
+DERIVED_MARK = "_Spec_"
+
+
+def derived(atom: str) -> bool:
+    hit = re.match(r"^\((?:=|:) \(?([^\s()]+)", atom)
+    return bool(hit and DERIVED_MARK in hit.group(1))
+
+
 def carried_by_op(atom: str, ops: set[str]) -> bool:
     """Whether a stored atom is an equation or declaration for a head the twin
     publishes as a C operation, which carries that definition instead."""
@@ -371,7 +387,7 @@ def check_one(twin: Path, engine: Path, entries: list[dict]) -> Verdict:
 
     ops = set(right.ops)
     hidden = sorted(h for h in set(left.heads) - set(right.heads)
-                    if h.split("/")[0] not in ops and "_Spec_" not in h)
+                    if h.split("/")[0] not in ops and DERIVED_MARK not in h)
     if hidden:
         find("defines " + " ".join(hidden) + " as neither an equation nor a "
              "published C operation, so a definition the original makes "
@@ -395,8 +411,8 @@ def check_one(twin: Path, engine: Path, entries: list[dict]) -> Verdict:
                  f"over the enumeration cap); pin it with `Divergence {pinned}:`")
         return verdict
     example_only = [a for a in surplus(left.atoms, right.atoms)
-                    if not carried_by_op(a, ops)]
-    twin_only = surplus(right.atoms, left.atoms)
+                    if not carried_by_op(a, ops) and not derived(a)]
+    twin_only = [a for a in surplus(right.atoms, left.atoms) if not derived(a)]
     if not example_only and not twin_only:
         verdict.storage = "carried"
         if "divergence" in told:

@@ -15,6 +15,14 @@
 - Rewrite the embedding examples to build terms with the constructors rather
   than parse MeTTa text, and split `require`, a status a program needs, from
   the claims it proves.
+- Write chapter 5's twenty-six twins in C: equations built as terms or
+  lowered from one-body macros beside the C function they mirror, the -math
+  family and the bit operations checked row by row against libm and C's own
+  operators, seeded draws compared like two runs after srand, and arithmetic
+  run backwards through CMeTTa's new mt_solve, which reads each unknown by
+  name. The lane no longer compares clauses the specializer derives, whose
+  keys differ between a source call and a C-built one; its selftest proves
+  that exclusion reaches only a clause whose own head carries the mark.
 
 ## Initial corpus
 
