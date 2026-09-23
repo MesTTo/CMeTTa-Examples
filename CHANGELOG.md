@@ -4,6 +4,11 @@
 
 ## Unreleased
 
+- Write chapter 8's encoding twin in C: UTF-8 through utf8proc, hex by hand
+  in C, and base64 through libcrypto in the standard and url alphabets. The
+  base64 twin 06 decoded privately now lives in `crypto_oracle.h` beside its
+  hex, for both twins.
+
 - Write chapter 8's markup twin in C against libxml2: a strict parse that
   refuses what a recovering one would repair and any external entity,
   libxml2's serializer for writing, and the selector language walked in the

@@ -6,8 +6,9 @@
  *   verified the way C would: split at its dollars, the salt decoded from
  *   base64, PBKDF2-HMAC-SHA512 derived again for the stated iterations and
  *   compared with the digest the record carries.
- * Assumes: libcrypto 3, found through pkg-config; hex and digests come from
- *   crypto_oracle.h, which 16-the_prolog_rung shares.
+ * Assumes: libcrypto 3, found through pkg-config; hex, digests and base64
+ *   come from crypto_oracle.h, which 16-the_prolog_rung and 30-encoding_lib
+ *   share.
  * Guarantees: all eighteen claims of the original hold [tested: make twins;
  *   commit=WORKTREE].
  */
@@ -34,19 +35,6 @@ static mt_atom *octets(const unsigned char *bytes, size_t n)
     return mt_exprv(n, kids);
 }
 
-/* Unpadded base64, which the record uses, padded back to a multiple of four
-   for EVP_DecodeBlock, whose count then includes the padding it decoded. */
-static size_t unbase64(const char *text, size_t n, unsigned char *out)
-{
-    char padded[2 * MOST];
-    size_t whole = (n + 3) / 4 * 4;
-    memcpy(padded, text, n);
-    memset(padded + n, '=', whole - n);
-    int decoded = EVP_DecodeBlock(out, (const unsigned char *)padded, (int)whole);
-    require("EVP_DecodeBlock", decoded >= 0);
-    return (size_t)decoded - (whole - n);
-}
-
 /* Whether password matches a $pbkdf2-sha512$t=<iterations>$<salt>$<digest>
    record [source: lib/lib_crypto/lib_crypto.pl, 'crypto-password-hash';
    commit=33c2d50c84b24c1a2c906225600e2a4ffdb662f1]. */
@@ -59,8 +47,8 @@ static bool verified(const char *password, const char *record)
     require("a PBKDF2-SHA512 record", scheme && strcmp(scheme, "pbkdf2-sha512") == 0 && cost &&
                                       strncmp(cost, "t=", 2) == 0 && salt64 && digest64);
     unsigned char salt[MOST], stored[MOST], derived[MOST];
-    size_t salt_n = unbase64(salt64, strlen(salt64), salt), stored_n = unbase64(digest64, strlen(digest64), stored);
-    require("a 64-byte digest", stored_n == 64);
+    long salt_n = unbase64(salt64, strlen(salt64), false, salt), stored_n = unbase64(digest64, strlen(digest64), false, stored);
+    require("the record's base64 decodes, to a 64-byte digest", salt_n >= 0 && stored_n == 64);
     require("PKCS5_PBKDF2_HMAC",
             PKCS5_PBKDF2_HMAC(password, (int)strlen(password), salt, (int)salt_n, atoi(cost + 2),
                               EVP_sha512(), (int)stored_n, derived));
