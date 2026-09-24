@@ -4,6 +4,16 @@
 
 ## Unreleased
 
+- Write chapter 9's type twins in C. Declarations come from C tables and
+  each claim that is a lookup is derived from them: a symbol's types, an
+  arrow's result where the arguments fit, and subtyping's widening run as
+  the rounds the original describes, a diamond's join appended once per
+  path. The built-in operations' arrows are read from C's own prototypes
+  through `_Generic`: double is Number, bool is Bool, and an atom of any type
+  a type variable of its own. What is the engine's evaluation rule, such as
+  a held Atom argument or a checked result, the twin states beside the
+  expectation it writes.
+
 - `metatype()` in `common.h` names an atom's kind by the metatype
   `get-metatype` answers, measured on the engine: a space is a Symbol, since
   the engine names it by a symbol, and True, False and texts are Grounded.
