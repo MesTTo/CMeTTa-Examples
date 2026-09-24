@@ -4,6 +4,13 @@
 
 ## Unreleased
 
+- Spell the refusal once for every judge. `verdicts.h` moves from chapter
+  15 to the corpus root, because the engine reads `(refuse <words>)` in
+  three places: a write hook's verdict, a typing rule's outcome and a
+  translator rule's decline. Chapter 9's typing-rule twin now builds its
+  refusal through `refusing()`, as chapter 15's judges do and chapter 20's
+  translator rule will.
+
 - Write chapter 18's twenty twins and chapter 19's ten in C. The workload
   loaders are C loops storing their atoms through one `mt_add_all` batch,
   sharing each subterm they build, while the questions stay the originals'
