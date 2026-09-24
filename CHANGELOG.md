@@ -4,6 +4,16 @@
 
 ## Unreleased
 
+- Build the installed consumers again. `lane.c` copied the published
+  operations' names with `strdup`, which is POSIX, and `make
+  check-consumers` compiles the helpers as plain C11, so both consumers
+  failed with an implicit declaration; the names are copied through
+  `lane.c`'s own text builder now, as `head_key` copies its keys. `done()`
+  and the originals' runner flush stdout before closing the engine, so a
+  close that crashes, which SWI's halt can do when the engine created a
+  thread just before (ERRORS.md, Open), still hands the lane the claims
+  and the space report instead of discarding them with the pipe's buffer.
+
 - Refuse a program that leaves an atom unreleased. `open_engine()` gives
   cmetta a counting allocator on its thread, and `done()` fails a program
   if any block cmetta allocated for it outlives `mt_close`. A program that

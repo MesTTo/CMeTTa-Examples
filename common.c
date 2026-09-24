@@ -214,6 +214,11 @@ int done_(metta *runtime, const char *file)
     printf("LANE-INFERENCES %" PRIu64 "\n", spent);
     if (runtime) {
         lane_report(runtime);
+        /* A pipe buffers stdout, and a close that crashes discards the
+           buffer: SWI's halt can race a thread the engine created just
+           before (ERRORS.md, Open). Flushed first, the claims and the space
+           report reach the lane whatever the close does. */
+        fflush(stdout);
         mt_close(runtime);
         if (!mt_ok()) fail("close the engine", NULL);
     }

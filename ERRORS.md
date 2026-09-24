@@ -65,9 +65,17 @@ no case for that state, so the thread starts its goal while `PL_cleanup()`
 frees the module tables its goal is looked up in. `make
 runtime-halt-created-thread` in `extensions/cmetta` reproduces it without the
 engine, and it dies 16 runs of 20 with eight threads. In the corpus it shows as
-an original that uses lib_thread or a background loader exiting -11 after
-every claim passed, under a parallel lane only: twelve serial runs of each
-such program exited 0. It is the host's defect, and with the engine to be
+a program whose engine created a thread just before closing, an original or a
+twin using lib_thread or a background loader, exiting -11 after every claim
+passed, and only under a parallel lane: twelve serial runs of each such
+program exited 0. The final verification's first run caught it in chapter
+20's `13-reference_loading` twin, whose `background` load policy starts a
+loader thread; the core shows that thread in `start_thread`, `callProlog`
+and `resolveProcedure` while `mt_close`'s `PL_cleanup` is in
+`unallocModule`. `done()` and the originals' runner flush stdout before they
+close the engine, so a crash there still hands the lane every claim and the
+space report. It is the host's defect, the host the gate runs
+(`swipl-patched.2`) carries no fix for it, and with the engine to be
 replaced, no host patch is proposed.
 
 **No refusal kinds in C.** cmetta reports every engine refusal as `MT_ERROR`
@@ -92,6 +100,7 @@ prose. No twin needs the distinction yet.
 | Chapter 8's segments twin, on the same reread | Four slots enough for the answers; nothing bounded the array, so a row with more separators would write past it | The array is sized by the row's length |
 | `mt_alpha_eq(held, E(...))` in eight embedding examples | A comparison and nothing more; `mt_alpha_eq` borrows both arguments, so each expectation built in place was never released | `common.h`'s `alpha_equal` borrows the held atom and takes the expectation |
 | Chapter 22's soft twin | One atom per argument of its `SCORE` macro; the macro named each argument twice, so `mt_keep` kept a second atom built only to leak, 154 blocks | A function, which evaluates each argument once |
+| `make check-consumers`, first run in the final verification | The installed consumers to build as before; `lane.c` had copied the op names with `strdup` since the lane's first commit, which is POSIX, and the consumers compile the helpers as plain C11, so both failed with an implicit declaration. The target had not been run since that commit | `lane.c` copies through its own text builder, as `head_key` does |
 | An answer printed (chapter 8), a space reference handed to a helper (chapter 17), a report's child kept (chapter 18) | Released by the call that used them; each call borrowed, and nothing dropped the owner | Each owner is named and dropped; `done()` now fails any program that leaves a block cmetta allocated |
 
 ## Before the rewrite: the generated corpus

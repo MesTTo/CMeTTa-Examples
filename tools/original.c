@@ -40,6 +40,7 @@ int main(int argc, char **argv)
     }
     printf("LANE-INFERENCES %" PRIu64 "\n", mt_stats_now(m).inferences - before);
     lane_report(m);
+    fflush(stdout); /* the report survives a close that crashes, as in common.c's done_() */
     mt_close(m);
     return mt_ok() ? 0 : 1;
 }

@@ -226,7 +226,9 @@ void lane_report(metta *runtime)
             keys = realloc(keys, cap * sizeof *keys);
             if (!keys) { fputs("lane: out of memory\n", stderr); exit(1); }
         }
-        keys[n++] = strdup(row->name);
+        text name = {0};
+        puts_text(&name, row->name);
+        keys[n++] = name.data;
     }
     print_sorted_unique("LANE-OPS", keys, n);
 
