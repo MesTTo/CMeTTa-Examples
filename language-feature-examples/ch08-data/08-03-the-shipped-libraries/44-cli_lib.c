@@ -712,17 +712,6 @@ static char *help_of(const mt_atom *spec)
     return help.s;
 }
 
-/* The metatype MeTTa names an atom's kind by. */
-static const char *metatype(const mt_atom *x)
-{
-    switch (mt_kind_of(x)) {
-    case MT_SYMBOL: return "Symbol";
-    case MT_VARIABLE: return "Variable";
-    case MT_EXPR: return "Expression";
-    default: return "Grounded";
-    }
-}
-
 static mt_atom *verdict(bool holds) { return S(holds ? "fine" : "refused"); }
 static mt_answers *guarded(metta *m, mt_atom *goal) { return mt_eval(m, E("if-error", E("catch", goal), "refused", "fine")); }
 

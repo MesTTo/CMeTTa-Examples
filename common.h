@@ -1,5 +1,6 @@
-/* Purpose: the claim checks every example states its results through, and the
- *   report its last line hands the twin lane.
+/* Purpose: the claim checks every example states its results through, the
+ *   report its last line hands the twin lane, and the metatype MeTTa names an
+ *   atom's kind by.
  * Assumes: one runtime per process, opened by open_engine() and closed by
  *   done(); claims may be checked from attached worker threads.
  * Guarantees:
@@ -62,6 +63,14 @@ void check_none(const char *claim, mt_answers *answers);
    the engine answers a top-level Empty with nothing, and inside an expression
    Empty stays data. CONSUMES the cursor and TAKES the value. */
 void check_value(const char *claim, mt_answers *answers, mt_atom *value);
+
+/* The metatype get-metatype answers for an atom of this kind: Symbol for a
+   symbol and for a space, which the engine names by a symbol; Variable;
+   Expression, the empty one included; Grounded for every value, True and
+   False and texts among them [measured 2026-09-24: build/tools/original on
+   True, "s", &self, (), 1.5]. A symbol the engine resolves to a built-in
+   operation, such as +, is Grounded to the engine and a symbol to C. */
+const char *metatype(const mt_atom *atom);
 
 /* A status the program needs before it can go on: a door that must succeed.
    Not a claim, and never counted as one. */

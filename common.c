@@ -36,6 +36,17 @@ static void fail(const char *claim, const char *detail, ...)
 
 static void proved(void) { atomic_fetch_add(&claims, 1); }
 
+const char *metatype(const mt_atom *atom)
+{
+    switch (mt_kind_of(atom)) {
+    case MT_SYMBOL:
+    case MT_SPACE: return "Symbol";
+    case MT_VARIABLE: return "Variable";
+    case MT_EXPR: return "Expression";
+    default: return "Grounded";
+    }
+}
+
 metta *open_engine(void)
 {
     mt_clear();

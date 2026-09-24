@@ -4,6 +4,12 @@
 
 ## Unreleased
 
+- `metatype()` in `common.h` names an atom's kind by the metatype
+  `get-metatype` answers, measured on the engine: a space is a Symbol, since
+  the engine names it by a symbol, and True, False and texts are Grounded.
+  The functional and CLI twins held their own copies, and the functional
+  one called a space Grounded.
+
 - Write chapter 8's CLI twin in C: an option parser written from lib_cli's
   own grammar, since getopt_long clusters `-vn` and reads `-vtrue` as five
   flags where the library refuses one and attaches the other. Declarations

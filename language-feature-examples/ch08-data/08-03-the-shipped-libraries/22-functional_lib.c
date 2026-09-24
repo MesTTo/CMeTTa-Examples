@@ -71,11 +71,7 @@ static size_t three_wide(const mt_atom *const *a, mt_atom **out)
 
 static size_t is_expression(const mt_atom *const *a, mt_atom **out) { return out[0] = B(mt_kind_of(a[0]) == MT_EXPR), 1; }
 
-static size_t metatype(const mt_atom *const *a, mt_atom **out)
-{
-    mt_kind k = mt_kind_of(a[0]);
-    return out[0] = S(k == MT_EXPR ? "Expression" : k == MT_SYMBOL ? "Symbol" : k == MT_VARIABLE ? "Variable" : "Grounded"), 1;
-}
+static size_t metatype_of(const mt_atom *const *a, mt_atom **out) { return out[0] = S(metatype(a[0])), 1; }
 
 /* The branching heads, two equations each. */
 static size_t branch_add(const mt_atom *const *a, mt_atom **out)
@@ -579,7 +575,7 @@ int main(void)
                   mt_eval(m, E("partition", lambda(E(V("x")), E("==", E("get-metatype", V("x")), "Expression")), E("quote", mt_keep(with_three)))),
                   partitioned(is_expression, with_three));
     check_answers("group-by keeps data", mt_eval(m, E("group-by", lambda(E(V("x")), E("get-metatype", V("x"))), E("quote", mt_keep(literal)))),
-                  only(grouped(metatype, literal)));
+                  only(grouped(metatype_of, literal)));
     check_answers("sort-by keeps data", mt_eval(m, E("sort-by", lambda(E(V("x")), mt_num(0)), E("quote", mt_keep(literal)))), sorted_by(zero, literal));
     check_answers("scan keeps data",
                   mt_eval(m, E("scan", lambda(E(V("acc"), V("item")), E("quote", V("item"))), "a", E("quote", mt_keep(literal)))),
