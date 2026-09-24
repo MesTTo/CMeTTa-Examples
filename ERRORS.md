@@ -76,9 +76,11 @@ loader thread; the core shows that thread in `start_thread`, `callProlog`
 and `resolveProcedure` while `mt_close`'s `PL_cleanup` is in
 `unallocModule`. `done()` and the originals' runner flush stdout before they
 close the engine, so a crash there still hands the lane every claim and the
-space report. It is the host's defect, the host the gate runs
-(`swipl-patched.2`) carries no fix for it, and with the engine to be
-replaced, no host patch is proposed.
+space report. It is the host's defect, and it needs nothing from this
+corpus: the fix, a `PL_THREAD_CREATED` case in `exitPrologThreads()`, is in
+the native host build `swipl-patched.5`, which becomes the live host after
+gate-perf lands. Until then the gate runs `swipl-patched.2`, which lacks
+it.
 
 **No refusal kinds in C.** cmetta reports every engine refusal as `MT_ERROR`
 with its words, remedy and ground, but does not read the engine's

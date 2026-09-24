@@ -4,6 +4,12 @@
 
 ## Unreleased
 
+- ERRORS.md's open entry for SWI's halt race now names where the fix is:
+  a `PL_THREAD_CREATED` case in `exitPrologThreads()`, in the native host
+  build `swipl-patched.5`, which becomes the live host after gate-perf
+  lands. The gate runs `swipl-patched.2` until then, and the entry stays
+  open.
+
 - Record in ERRORS.md the C seat's `f76b44e`, which keeps version-control
   metadata out of `make install`. `make check-consumers` installs the seat
   into `build/prefix`, and the install had carried lib's `.git`, so `git
