@@ -28,7 +28,7 @@ what exists, and [COVERAGE.md](COVERAGE.md) lists the rest.
 | `ch09-types` | 24 | 21 | 21 | 0 | 0 |
 | `ch10-errors-and-refusals` | 2 | 2 | 2 | 0 | 0 |
 | `ch11-python-as-a-notation` | 10 | 7 | 7 | 0 | 0 |
-| `ch12-testing` | 4 | 4 | 0 | 0 | 0 |
+| `ch12-testing` | 4 | 4 | 4 | 0 | 0 |
 | `ch14-seeing-your-program` | 3 | 2 | 0 | 0 | 0 |
 | `ch15-writing-transactions-and-worlds` | 7 | 6 | 0 | 0 | 0 |
 | `ch16-events-and-standing-queries` | 1 | 1 | 0 | 0 | 0 |
@@ -37,7 +37,7 @@ what exists, and [COVERAGE.md](COVERAGE.md) lists the rest.
 | `ch19-spaces-backed-by-anything` | 10 | 10 | 0 | 0 | 0 |
 | `ch20-extending-the-engine` | 52 | 38 | 0 | 0 | 0 |
 | `ch22-a-reasoner-you-can-serve` | 33 | 27 | 0 | 0 | 0 |
-| **all** | 366 | 323 | 203 | 0 | 0 |
+| **all** | 366 | 323 | 207 | 0 | 0 |
 <!-- coverage:end -->
 
 ## Running them

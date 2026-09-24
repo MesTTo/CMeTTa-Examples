@@ -2,7 +2,7 @@
 
 # Example index
 
-254 C programs: 203 language twins, each at its MeTTa original's path, and 51 C embedding examples.
+258 C programs: 207 language twins, each at its MeTTa original's path, and 51 C embedding examples.
 
 ## Embedding examples
 
@@ -359,3 +359,12 @@
 | [06-door_combinations.c](language-feature-examples/ch11-python-as-a-notation/06-door_combinations.c) | one definition kind inside another. A define inside a define is an ordinary call, which C computes as its own twice of twice; a Python operation inside a define is one crossing, held against C's toupper; and a body can write an equation, which C builds as the atom the body adds, so the new name answers that atom's body and a match finds it. |
 | [09-compiled_structural_vocabulary.c](language-feature-examples/ch11-python-as-a-notation/09-compiled_structural_vocabulary.c) | the structural operations compiled Python shares. C keeps the alternatives as a table and collapse answers them in order, repeats kept; let* destructures a shape, whose parts C reverses itself; case selects a branch by pattern and then continues, and an answerless subject takes the Empty branch, not the first pattern; and metatype() names a symbol as get-metatype does. |
 | [10-torch-library-surface.c](language-feature-examples/ch11-python-as-a-notation/10-torch-library-surface.c) | lib_torch's tensor surface held against C's own loops over doubles, wherever torch is importable, which C asks once, as the original does, and records in &torch-status. Construction is C filling an array; the four elementwise operations are C loops; a mean is C's sum over the count; relu is fmax(0, x) and sigmoid 1 / (1 + exp(-x)). Two normal draws differ, which C tells with mt_eq. The pipeline's third is float32 on torch's side and a double on C's, so it is held within the original's tolerance. Where torch is absent the twin says so and checks only that the recorded status is the probe's verdict. |
+
+### ch12-testing
+
+| Twin | What it proves |
+|---|---|
+| [01-he_assert.c](language-feature-examples/ch12-testing/01-he_assert.c) | lib_he's assertions and the engine's bag forms, each verdict held against C's own: equal sums by C's +, alpha-equality by mt_alpha_eq, lib_he's ToResult as one comparison per answer, a bag containment as an empty bag_minus of the expected from the produced, and bag equality as containment both ways. |
+| [02-he_equalreduct.c](language-feature-examples/ch12-testing/02-he_equalreduct.c) | lib_he's small helpers, each held against C: id answers its argument, =alpha is mt_alpha_eq, and if-equal picks its branch by mt_eq. |
+| [03-assertion_difference.c](language-feature-examples/ch12-testing/03-assertion_difference.c) | a failed assertion reports which answers differ. C computes each report itself, from the bags it knows the forms produce and expect: a two-sided comparison's missing and excess bags are the two directed bag_minus differences, so a repeated answer counts every time; a one-sided containment has no excess bag; assert has a verdict and no bags at all; and a permutation fails assertEqual with two empty bags, since the collapsed tuples differ while the bags agree. The call in each report is the atom C built and evaluated. The passing forms' verdicts are C's too. |
+| [04-assert_answers.c](language-feature-examples/ch12-testing/04-assert_answers.c) | the reporting doors under the assert family. assert-answers takes a verdict, the call to report and two bags, and C computes what it reports from the same bags: nothing for a true verdict, and for a false one the missing and excess bag_minus differences; assert-includes-answers reports no excess bag. A form written over the door, assert-sorted, is held against C's own sort with mt_order: sorted answers pass, and an unsorted bag fails with two empty bags, since sorting keeps the bag. |

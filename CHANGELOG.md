@@ -4,6 +4,11 @@
 
 ## Unreleased
 
+- Write chapter 12's assertion twins in C: each verdict is C's own, and each
+  failure report is built from the bags C knows the forms compare, the
+  missing and excess bags being the two directed `bag_minus` differences,
+  which now live in `common.h`.
+
 - Write chapter 11's Python twins in C: the same py-call terms, built as
   atoms, with each answer Python gives held against C's own value (M_PI,
   toupper, llabs, C loops for numpy's aranges and torch's elementwise
