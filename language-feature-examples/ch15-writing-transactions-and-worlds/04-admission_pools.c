@@ -16,7 +16,7 @@
  *   since superproject 47855fa71 [source: examples 3372c22,
  *   metta-admission-within].
  * Guarantees: all nine claims of the original hold, with its ten
- *   unasserted forms checked as well [tested: make twins; commit=WORKTREE].
+ *   unasserted forms checked as well [tested: make twins; commit=f8d79ba7dcc38a08f3b98bae36a9ca0d9a21fb3b].
  */
 #define MT_SHORTHAND
 #include "common.h"
