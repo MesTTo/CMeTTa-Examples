@@ -1,9 +1,102 @@
 <!-- Purpose: retain each defect, failed experiment and correction found while
-building the corpus. Open Obligations: the two shared-runtime issues below. -->
+building the corpus. Open Obligations: the open issues below. -->
 
 # Errors and repairs
 
-## Repaired in CMeTTa
+## Repaired in CMeTTa while writing the twins by hand
+
+Each row is a fix the C seat needed before a twin could say what its original
+says, once the same thing worked in the Python seat or cmetta's own contract
+promised it. Each landed in `extensions/cmetta` with a regression test, its
+CHANGELOG entry and docs, and passed the seat's gate in a battery; each has a
+provenance commit after it pinning its evidence tags.
+
+| Witness | Expected and observed | Repair |
+| --- | --- | --- |
+| Copying `(= (sq $x) (* $x $x))` into another space through C | The variables to stay one variable; `(fact $u $u $w)` read back as `(fact $_ $_ $_)`, and `(sq 7)` there raised "ran backwards with more than one unknown" | `cce10b3`: name unnamed engine variables from a session counter |
+| An answer compared with the atom that describes it | `(pair $x $x)` to match an answer up to renaming; C had only `mt_eq`, by variable name | `52d89c6`: `mt_alpha_eq`, proven against the engine's `=alpha` |
+| Sorting answers in C, as msort does | An order over atoms; C atoms had none, so a program handed a list back to the engine to sort it | `27d508c`, `d1e3a98`: `mt_compare` and `mt_order` |
+| `!(wrapper2 (+ 1))` from C | The partial application `(partial + (1))`; the cursor failed on a Prolog term with no MeTTa reading | `0733adc`, `eb4a073`, `0f7fd79`, then `65b02ca`: the shared wire grammar, with only native blobs held as handles |
+| Parsing `(f $v0 ... $v15999)` | An atom; SWI aborted with "API error: invalid term_t 0" once the name walk's references filled the stacks | `6e91a33`: a frame per name lookup, and each walk's references bounded by its depth |
+| Chapter 5's arithmetic run backwards | Answers keyed by variable, the Python seat's `solve()`; C had no counterpart | `c61a645`: `mt_solve` |
+| A partial application stored in a C provider's space | The term the engine gave it back unchanged; `(match &np (stored $x) ($x 2))` answered `((partial + (1)) 2)` where the native space answers 3 | `256a3a6` |
+| `(math-rational 1 (pow-math 2 200))` | The exact ratio; C refused the wide rational and answered nothing | `23bce3e`: `MT_BIGRATIONAL` and exact comparison at any width |
+| A handle dropped on a thread with no Prolog engine | A release; the process died in SWI's `signalGCThread` | `25def05` queued such drops; `bcf14b8` erased on the dropping thread again once the required host carried the patch |
+| `(pragma! max-stack-depth 20)` then `mt_eval` (chapter 14) | 120 and a StackOverflow error; 120 and a 1 GiB host stack overflow | `34f6aa6`: evaluate in the fuel scope a runnable form runs in |
+| Effect classes named in C | One spelling; a hand enum and the generated one, held equal by a static assertion | `4d9802e`, `3f4d713`: `vocabularies.h`, generated from the engine's rows |
+| Chapter 18's `05-matespacefast` | To finish, as under the CLI and the Python seat; a stack resource error after 31 s under SWI's 1 GiB default | `4798190`: boot under `settings.h`'s 8,000,000,000 bytes and restore that ceiling |
+| memoize-exact called through cursors (chapter 18) | Hits on the second call; every call missed, `(entries 0)`, since each cursor is an engine of its own | `cfa188f`: `mt_run_goal`, eager in the runtime's own engine |
+| A parametric space (chapter 19) | A handle on `(cache &primary-kb 100)`; `mt_space_open` refused every name without an ampersand | `237fcd3`: `mt_space_of` |
+| Registering Prolog predicates (chapter 20) | The engine's one registration sequence, as the Python and Node seats cross it; C reached it only through the MeTTa-level `import_prolog_functions_from_file` | `f741cbe`: `mt_register_prolog` |
+| A C space holding a program (chapter 20) | Equations that answer; the engine refused them, since no callback can promise rules | `4cae9c8`: `mt_provider.rules` |
+| A tuple from a C array | One call; thirteen hand-written loops in twelve twins, most into fixed-size buffers | `4bb12d3`: `mt_array` |
+
+Beside those, the gate and its measurements: `4bede71` runs the gate's
+linking lanes after the lane that cleans and rebuilds the library, because
+they raced and stranger-c failed `cannot find -lcmetta`; `4b7a44b` resolves
+each bridge predicate once per runtime instead of interning it per call,
+which had moved c-bench's cursor-step row past its band; `9d72d61` decodes
+true and false by length and a fixed-size compare; `12432c3` re-pins the boot
+row's governed QLF inventory from 28 artifacts to 26; and `697eff4` adds
+`make runtime-halt-created-thread`, the reproduction of the host defect
+below.
+
+## Reported to the shared engine
+
+The engine and its libraries are not this corpus's to change, so each of these
+went to the MeTTa checkout's owner with its reproduction.
+
+| Found by | Defect | Reported |
+| --- | --- | --- |
+| Chapter 8's unicode twin | NFKC-casefold keeps U+00AD, `(97 173 98)` for `a\u00ADb`, where Unicode 16's DerivedNormalizationProps removes it and utf8proc's own casefold answers `61 62` | 2026-09-24 07:11 |
+| Chapter 8's HTTP twin | lib_http's server answers 500 to a request whose Accept field is `*/*`, libcurl's and browsers' default: SWI's `http_header` reads `*` as an unbound variable and `native_data/2` runs `=..` on it | 2026-09-24 |
+| A partial stored through the Python seat's provider | `((partial + (1)) 2)` where the native space answers 3 | 2026-09-24 |
+| Chapter 15's `04-admission_pools` | The MeTTa chain the example calls the builtin's executable specification reads only the first capacity row, `(accept)` where the builtin answers `(refuse (pool-at-capacity 2))` | 2026-09-24 11:39 |
+| `mt_register_prolog`'s refusals | No `prolog:error_message` for `metta_control_signal(value \| type \| interrupted, _)`, and the value refusal row carries the JSON crossing's ground and remedy | 2026-09-24 15:38 |
+| Chapter 22's derivation twins | lib_nars' and lib_pln's `LimitSize` never return at size 0 once the queue is empty: the test is false for `()`, and excluding the empty tuple's best candidate from `()` leaves `()` | 2026-09-24 18:41; upstream PeTTa 43705f5 has the same body, and a guard for the case that hung is planned |
+| Chapter 22's tile puzzle | The original calls `add-unique-item-or-empty`, which nothing defines, so the start board is never recorded and the claim 181441 is 9!/2 + 1 | 2026-09-24 18:41; upstream makes the same call, and the example is to record the start and claim 181440, the C twin moving with it |
+| Chapter 22's `04-matespace2` | `(superpose (collapse (match ...)))` walks its unevaluated argument, answering the symbol `collapse` before the match, where the Python twin's docstring describes a snapshot | 2026-09-24 18:41; the file is upstream's, so this is what it means, and the docstring is being corrected |
+
+## Open
+
+**SWI's halt passes over a thread still being created.** `thread_create`
+marks a thread created before `pthread_create`, and `exitPrologThreads()` has
+no case for that state, so the thread starts its goal while `PL_cleanup()`
+frees the module tables its goal is looked up in. `make
+runtime-halt-created-thread` in `extensions/cmetta` reproduces it without the
+engine, and it dies 16 runs of 20 with eight threads. In the corpus it shows as
+an original that uses lib_thread or a background loader exiting -11 after
+every claim passed, under a parallel lane only: twelve serial runs of each
+such program exited 0. It is the host's defect, and with the engine to be
+replaced, no host patch is proposed.
+
+**No refusal kinds in C.** cmetta reports every engine refusal as `MT_ERROR`
+with its words, remedy and ground, but does not read the engine's
+`metta_host_error_kind/3` table, which the Python and Node seats map to
+classes, so a C program tells a missing source from a bad value by reading
+prose. No twin needs the distinction yet.
+
+## Corrected while writing the twins
+
+| Witness | Error or mistaken expectation | Correction |
+| --- | --- | --- |
+| Chapter 22's NARS derivation twin | An expectation argument consumed the list its query argument read; C leaves the order of a call's arguments unspecified, and the engine was sent a list already emptied | The model's `limited()` copies the queue |
+| Chapter 17's sorting twins | `mt_order` wrapped in a comparator that dereferenced the elements; one standalone run passed by luck, and the lane caught the next | Pass `mt_order` to `qsort` directly, as `cmetta.h`'s example does |
+| A lane run after a failed build | 37/37 claims from a binary the failed build had left in place | Build with its status kept before reading a lane |
+| `pragma!` | A truth value; it answers the unit | `modules.h`'s `pragma()` steps every answer and requires `mt_ok()` |
+| `&rows` in a stored atom | A space reference; an `&name` atom decodes as a space only while it names one | Spell it as the symbol it is, `S("&rows")` |
+| A compound literal passed to `mt_array` | One argument; the preprocessor split it at its commas | `mt_array` takes the array as its variadic part |
+| `memoize energy` before its equation | True; memoize refuses a name that has no equation yet | Add the equation first, as the original's file loads its equations before its commands |
+| Chapter 20's claim audit | `20-07` states nineteen claims, not twenty-one, and `20-04/04-import_error_surface` had no twin | Counted from the original's top-level asserts; the twin written |
+
+## Before the rewrite: the generated corpus
+
+Everything below records the corpus as `tools/generate.py` produced it from
+`corpus.json`, with each twin pasting its original's MeTTa text into a C
+string array. Both are gone, and every twin is now written by hand, but what
+was found then stays true of that time.
+
+### Repaired in CMeTTa
 
 These commits belong to `extensions/cmetta`, separately from this repository.
 Each repair was followed by the C component's `check.sh` binding lane,
@@ -21,7 +114,7 @@ including its existing examples. The final component run also rebuilt through
 | Effect-rank twin | Obtain the joined source effect and operation list without execution; general explain metadata lacked a complete C plan door | `3a173ba`: `mt_effect_plan` delegates to the shared source planner |
 | New effect regression | Registered pure callback classified `pure`; received `EffectPlan oracleIO` | `3a173ba`: publish callback classifications in the shared catalog, compose overloads and withdraw owned rows |
 
-## Shared-runtime issues left open
+### Shared-runtime issues found then
 
 **Rational source spelling.** A constructed rational `-1/2` displays as `-1r2`,
 but the engine reader parses that spelling as `Symbol`. `mt_write_dup` correctly
@@ -53,7 +146,7 @@ here. The completed corpus sweep passed all 361 programs, including Linda.
 The final expanded sweep also passed all 362 programs. The corpus keeps normal
 cleanup and reports a future recurrence as a failure.
 
-## Corrected corpus mistakes
+### Corrected corpus mistakes
 
 | Witness | Error or mistaken expectation | Correction |
 | --- | --- | --- |
@@ -81,7 +174,7 @@ imports, imported space identity, include, reference loading/maps, predicate
 registration, module doors and the Prolog rung. No failing program was removed
 from the runner to obtain a passing result.
 
-## Failed probes and setup corrections
+### Failed probes and setup corrections
 
 - Loading libcmetta through Python `ctypes` first produced
   `undefined symbol: PL_new_atom` in SWI's `uuid.so`. Retrying with global symbol

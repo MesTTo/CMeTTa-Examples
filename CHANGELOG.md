@@ -4,6 +4,14 @@
 
 ## Unreleased
 
+- Keep ERRORS.md true to the hand-written corpus. It opens with the C seat
+  repairs this corpus needed, each with the twin or probe that showed it and
+  the commit. Then come the defects reported to the shared engine with what
+  became of each, the two issues still open (SWI's halt passing over a
+  thread still being created, and no refusal kinds in C), and the mistakes
+  corrected while writing the twins. What was found while the corpus was
+  generated follows under its own heading.
+
 - Write README.md in the Python seat's shape. Six real pairs, shortest twin
   first, each MeTTa original above its C twin: a collapse, fib under a
   budget, a parametric type, an equation as one body, a C builtin in place
