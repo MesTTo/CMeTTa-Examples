@@ -6,13 +6,14 @@
  *   lib_datastructures' queue and its add-unique-or-fail dedup. C's model is
  *   the same search over the same geometry: boards as nine bytes, a visited
  *   set indexed by each board's rank among the 9! permutations, and a count
- *   of the boards dequeued. The start board is not in the visited set at
- *   first, because the original records it with add-unique-item-or-empty,
- *   which nothing defines, so its call records nothing, and the start is
- *   met again and queued a second time: every reachable board once, 9!/2,
- *   and the start once more.
- * Guarantees: the original's claim holds [tested: make twins;
- *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
+ *   of the boards dequeued. The start board is in the visited set before the
+ *   search, as the original's bfs_all records it in &dup with
+ *   add-unique-or-fail, so every board reachable from it is dequeued once,
+ *   9!/2 of them. Before superproject 3488b9753 the original called
+ *   add-unique-item-or-empty, which nothing defines, so the start was met
+ *   again and dequeued twice, and it claimed 181441.
+ * Guarantees: the original's claim holds [tested 2026-09-24T23:32:18+10:00:
+ *   make twins].
  */
 #define MT_SHORTHAND
 #include "common.h"
@@ -72,9 +73,9 @@ static uint32_t rank(const tiles *b)
     return r;
 }
 
-/* Boards dequeued by the breadth-first search from START, the start not
-   recorded as seen until a move meets it. Time: every reachable board once,
-   each with at most four moves. */
+/* Boards dequeued by the breadth-first search from START, the start recorded
+   as seen before the first move. Time: every reachable board once, each with
+   at most four moves. */
 static int64_t dequeued(tiles start)
 {
     uint32_t permutations = 1;
@@ -83,6 +84,8 @@ static int64_t dequeued(tiles start)
     tiles *queue = malloc((permutations + 1) * sizeof *queue);
     require("room", seen && queue);
     size_t head = 0, tail = 0;
+    uint32_t first = rank(&start);
+    seen[first / 8] |= (uint8_t)(1u << (first % 8));
     queue[tail++] = start;
     while (head < tail) {
         tiles b = queue[head++];
@@ -127,13 +130,13 @@ int main(void)
                           E("bfs_loop", V("Q2"), V("N1"))))));
     require("the start",
             mt_add(m, E("=", E("bfs_all", V("Start")),
-                        E("let*", E(E(V("Pt"), E("add-unique-item-or-empty", V("Start"))), E(V("Q1"), E("enqueue", V("Start"), E("empty-queue")))),
+                        E("let*", E(E(V("Pt"), E("add-unique-or-fail", "&dup", V("Start"))), E(V("Q1"), E("enqueue", V("Start"), E("empty-queue")))),
                           E("bfs_loop", V("Q1"), 0)))));
 
     tiles start = { { BLANK, 1, 2, 3, 4, 5, 6, 7, 8 } };
     mt_atom *cells[CELLS];
     for (int i = 0; i < CELLS; i++) cells[i] = start.cell[i] == BLANK ? S("___") : N(start.cell[i]);
-    check_answers("every board once, and the start again", mt_eval(m, E("let", V("x"), E("bfs_all", mt_exprv(CELLS, cells)), V("x"))),
+    check_answers("every reachable board once", mt_eval(m, E("let", V("x"), E("bfs_all", mt_exprv(CELLS, cells)), V("x"))),
                   dequeued(start));
     return done(m);
 }

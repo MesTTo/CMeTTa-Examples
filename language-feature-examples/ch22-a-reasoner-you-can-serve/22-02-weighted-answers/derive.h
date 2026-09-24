@@ -1,8 +1,8 @@
 /* Purpose: C's model of the loop NARS and PLN run between inferences, which
  *   lib_nars and lib_pln each write over their own helpers and which is one
- *   algorithm [source: lib/lib_nars/lib.metta, StampDisjoint to NARS.Query;
- *   lib/lib_pln/lib.metta, StampDisjoint to PLN.Query;
- *   commit=8d651070dedaa190e25cc388c029172a63e967be]:
+ *   algorithm [source 2026-09-24T23:30:03+10:00: lib/lib_nars/lib.metta,
+ *   StampDisjoint to NARS.Query; lib/lib_pln/lib.metta, StampDisjoint to
+ *   PLN.Query; at superproject 99bd67a73, lib fa808bc]:
  *   - a sentence is (Sentence (term (stv f c)) (id ...)), a term, the truth
  *     held of it and the stamp of evidence behind it, and C keeps it as that
  *     atom, so two sentences are the same exactly when the engine's identity
@@ -11,7 +11,7 @@
  *     they derive carries both stamps merged and sorted;
  *   - a queue hands out its most confident sentence, the first on a tie, and
  *     is bounded by dropping its least confident until it is smaller than
- *     its size;
+ *     its size or empty, so the empty queue is its own limit at any size;
  *   - the loop runs a step budget down, or stops when no task is left.
  *   The rules are the includer's: what one ordered pair derives, in the
  *   library's rule order, and what one sentence derives alone, each as the
@@ -21,7 +21,7 @@
  * Assumes: the includer includes common.h and nars_truth.h first.
  * Guarantees: derive() leaves the queues the library's loop answers for the
  *   same queues, rules and budgets, and query() the answer the library's
- *   query picks from them [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
+ *   query picks from them [tested 2026-09-24T23:32:18+10:00: make twins].
  * Owns resources: every mt_list here owns its atoms and its array, which
  *   mt_list_free() releases.
  */
@@ -38,6 +38,9 @@ typedef struct rules {
     void (*pair)(const mt_atom *x, const mt_atom *y, mt_list *out);
     void (*alone)(const mt_atom *x, mt_list *out);
 } rules;
+
+/* The sizes a derivation bounds its task and belief queues to. */
+typedef struct bounds { size_t tasks, beliefs; } bounds;
 
 /* Append ATOM, TAKEN. */
 static inline void push(mt_list *list, mt_atom *atom)
@@ -155,10 +158,12 @@ static inline void exclude(mt_list *queue, const mt_atom *item)
     mt_drop(gone);
 }
 
-/* LimitSize: drop the least confident until fewer than SIZE remain. At size
-   zero the library keeps recursing on the empty queue, where C stops
-   [measured 2026-09-24: (LimitSize () 0) under lib_nars had not answered
-   after 60 s, where (LimitSize (one sentence) 1) answered () in 0.5 s]. */
+/* LimitSize: drop the least confident until fewer than SIZE remain or none
+   do, so at a size of 0 the queue empties and the empty queue stops it.
+   Both libraries test (== $L ()) beside the size since lib 709ab77a7, where
+   before it (LimitSize () 0) recursed on its own arguments and never
+   answered [source 2026-09-24T23:30:03+10:00: lib/lib_nars/lib.metta:229 and
+   lib/lib_pln/lib.metta:429 at superproject 99bd67a73, lib fa808bc]. */
 static inline void limit_size(mt_list *queue, size_t size)
 {
     while (!(queue->len < size) && queue->len > 0) exclude(queue, best_candidate(priority_neg, queue));
@@ -191,9 +196,8 @@ static inline mt_list set_of(const mt_list *a, const mt_list *b)
 /* NARS.Derive and PLN.Derive from step STEPS to MAX_STEPS: select the most
    confident task, combine it with every belief whose stamp is disjoint from
    its own, both ways round, add what it derives alone, and bound both
-   queues. Both queues are updated in place. */
-static inline void derive(const rules *r, mt_list *tasks, mt_list *beliefs, int64_t steps, int64_t max_steps, size_t task_size,
-                          size_t belief_size)
+   queues to SIZES. Both queues are updated in place. */
+static inline void derive(const rules *r, mt_list *tasks, mt_list *beliefs, int64_t steps, int64_t max_steps, bounds sizes)
 {
     for (; !(steps > max_steps) && tasks->len > 0; steps++) {
         const mt_atom *best = best_candidate(priority, tasks);
@@ -219,8 +223,8 @@ static inline void derive(const rules *r, mt_list *tasks, mt_list *beliefs, int6
 
         mt_list next_tasks = set_of(tasks, &derived), next_beliefs = set_of(beliefs, &derived);
         exclude(&next_tasks, selected);
-        limit_size(&next_tasks, task_size);
-        limit_size(&next_beliefs, belief_size);
+        limit_size(&next_tasks, sizes.tasks);
+        limit_size(&next_beliefs, sizes.beliefs);
         mt_list_free(*tasks), mt_list_free(*beliefs), mt_list_free(derived);
         *tasks = next_tasks, *beliefs = next_beliefs;
         mt_drop(selected);
@@ -248,10 +252,14 @@ static inline mt_atom *query(const mt_list *beliefs, const mt_atom *term)
 }
 
 /* (NAME TASKS BELIEFS STEPS) asked of the engine, NAME being NARS.Derive or
-   PLN.Derive: the two queues it ends with. */
-static inline mt_atom *engine_derive(metta *m, const char *name, const mt_list *tasks, const mt_list *beliefs, int64_t steps)
+   PLN.Derive, with BOUND's two sizes after STEPS, or none, which leaves the
+   library's configured ones: the two queues it ends with. */
+static inline mt_atom *engine_derive(metta *m, const char *name, const mt_list *tasks, const mt_list *beliefs, int64_t steps,
+                                     const bounds *bound)
 {
-    mt_atom *queues = mt_one(mt_eval(m, mt_expr(name, tuple(tasks), tuple(beliefs), steps)));
+    mt_atom *call = bound ? mt_expr(name, tuple(tasks), tuple(beliefs), steps, (int64_t)bound->tasks, (int64_t)bound->beliefs)
+                          : mt_expr(name, tuple(tasks), tuple(beliefs), steps);
+    mt_atom *queues = mt_one(mt_eval(m, call));
     require("the loop answers its two queues", queues && mt_len(queues) == 2);
     return queues;
 }

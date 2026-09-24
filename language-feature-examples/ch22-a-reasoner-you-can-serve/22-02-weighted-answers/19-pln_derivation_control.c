@@ -10,8 +10,8 @@
  *   leaves empty, or needs an Evaluation, so it derives nothing here. C runs
  *   its loop over the original's premises and holds the engine's queues and
  *   query answer to what the loop leaves.
- * Guarantees: all twenty-five claims of the original hold [tested: make
- *   twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
+ * Guarantees: all twenty-seven claims of the original hold [tested
+ *   2026-09-24T23:32:18+10:00: make twins].
  */
 #define MT_SHORTHAND
 #include "common.h"
@@ -54,13 +54,6 @@ static void pln_alone(const mt_atom *x, mt_list *out)
 }
 
 static const rules pln = { pln_pair, pln_alone };
-
-/* The loop over TASKS and BELIEFS for STEPS steps, run by C, with the
-   configured queue sizes. */
-static void run_loop(mt_list *tasks, mt_list *beliefs, int64_t steps)
-{
-    derive(&pln, tasks, beliefs, 1, steps, (size_t)config[TASK_QUEUE_SIZE].value, (size_t)config[BELIEF_QUEUE_SIZE].value);
-}
 
 int main(void)
 {
@@ -107,34 +100,47 @@ int main(void)
     check_answers("LimitSize under the bound", mt_eval(m, E("LimitSize", tuple(&single), 5)), limited(&single, 5));
     check_answers("LimitSize at two", mt_eval(m, E("LimitSize", tuple(&pair), 2)), limited(&pair, 2));
     check_answers("LimitSize at one", mt_eval(m, E("LimitSize", tuple(&pair), 1)), limited(&pair, 1));
+    /* At a size of 0 no count passes the bound, and the empty queue is its
+       own limit. */
+    check_answers("LimitSize at zero answers the empty queue", mt_eval(m, E("LimitSize", tuple(&none), 0)), limited(&none, 0));
     mt_list_free(single), mt_list_free(pair), mt_drop(quiet), mt_drop(loud);
 
     /* An implication and a fact, two steps: modus ponens gives b with both
        IDs, and the loop ends with the queues C's loop ends with. */
     mt_atom *rule = sentence(E("Implication", "a", "b"), (truth){ 1.0, 0.9 }, E(1)), *fact = sentence(S("a"), (truth){ 1.0, 0.9 }, E(2));
+    const bounds configured = { (size_t)config[TASK_QUEUE_SIZE].value, (size_t)config[BELIEF_QUEUE_SIZE].value };
     mt_list tasks = QUEUE(mt_keep(rule)), beliefs = QUEUE(mt_keep(fact));
-    mt_atom *queues = engine_derive(m, "PLN.Derive", &tasks, &beliefs, 2);
-    run_loop(&tasks, &beliefs, 2);
+    mt_atom *queues = engine_derive(m, "PLN.Derive", &tasks, &beliefs, 2, NULL);
+    derive(&pln, &tasks, &beliefs, 1, 2, configured);
     check_atom("modus ponens joins the beliefs", mt_keep(mt_at(queues, 1)), tuple(&beliefs));
     mt_list_free(tasks), mt_list_free(beliefs), mt_drop(queues);
 
     tasks = QUEUE(mt_keep(rule)), beliefs = QUEUE(mt_keep(fact));
-    queues = engine_derive(m, "PLN.Derive", &tasks, &beliefs, 0);
-    run_loop(&tasks, &beliefs, 0);
+    queues = engine_derive(m, "PLN.Derive", &tasks, &beliefs, 0, NULL);
+    derive(&pln, &tasks, &beliefs, 1, 0, configured);
     check_atom("a budget of zero keeps both queues", queues, E(tuple(&tasks), tuple(&beliefs)));
     mt_list_free(tasks), mt_list_free(beliefs);
 
     tasks = (mt_list){ NULL, 0 }, beliefs = QUEUE(mt_keep(fact));
-    queues = engine_derive(m, "PLN.Derive", &tasks, &beliefs, config[MAX_STEPS].value);
-    run_loop(&tasks, &beliefs, config[MAX_STEPS].value);
+    queues = engine_derive(m, "PLN.Derive", &tasks, &beliefs, config[MAX_STEPS].value, NULL);
+    derive(&pln, &tasks, &beliefs, 1, config[MAX_STEPS].value, configured);
     check_atom("no task stops the loop", queues, E(tuple(&tasks), tuple(&beliefs)));
+    mt_list_free(tasks), mt_list_free(beliefs);
+
+    /* Queues bounded at 0 keep nothing: the first selection derives, both
+       queues are cut to (), and the empty task queue stops the loop. */
+    const bounds nothing = { 0, 0 };
+    tasks = QUEUE(mt_keep(rule)), beliefs = QUEUE(mt_keep(fact));
+    queues = engine_derive(m, "PLN.Derive", &tasks, &beliefs, config[MAX_STEPS].value, &nothing);
+    derive(&pln, &tasks, &beliefs, 1, config[MAX_STEPS].value, nothing);
+    check_atom("queues bounded at zero keep nothing", queues, E(tuple(&tasks), tuple(&beliefs)));
     mt_list_free(tasks), mt_list_free(beliefs);
 
     /* The query: the loop over the knowledge base as both queues, then the
        most confident belief about b. */
     mt_list kb = QUEUE(mt_keep(rule), mt_keep(fact));
     tasks = QUEUE(mt_keep(rule), mt_keep(fact)), beliefs = QUEUE(mt_keep(rule), mt_keep(fact));
-    run_loop(&tasks, &beliefs, 2);
+    derive(&pln, &tasks, &beliefs, 1, 2, configured);
     mt_atom *b = S("b");
     check_answers("PLN.Query", mt_eval(m, E("PLN.Query", tuple(&kb), mt_keep(b), 2)), query(&beliefs, b));
     mt_list_free(kb), mt_list_free(tasks), mt_list_free(beliefs), mt_drop(b), mt_drop(rule), mt_drop(fact);

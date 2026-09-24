@@ -11,8 +11,8 @@
  *   none of these premises has one. C runs its loop over the original's two
  *   premises and holds the engine's beliefs to hold the sentence C's loop
  *   derives about a --> c.
- * Guarantees: all twenty-six claims of the original hold [tested: make
- *   twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
+ * Guarantees: all twenty-eight claims of the original hold [tested
+ *   2026-09-24T23:32:18+10:00: make twins].
  */
 #define MT_SHORTHAND
 #include "common.h"
@@ -103,15 +103,19 @@ int main(void)
     check_answers("LimitSize under the bound", mt_eval(m, E("LimitSize", tuple(&single), 5)), limited(&single, 5));
     check_answers("LimitSize at two", mt_eval(m, E("LimitSize", tuple(&pair), 2)), limited(&pair, 2));
     check_answers("LimitSize at one", mt_eval(m, E("LimitSize", tuple(&pair), 1)), limited(&pair, 1));
+    /* At a size of 0 no length passes the bound, and the empty queue is its
+       own limit. */
+    check_answers("LimitSize at zero answers the empty queue", mt_eval(m, E("LimitSize", tuple(&none), 0)), limited(&none, 0));
     mt_list three = QUEUE(sentence(S("a"), (truth){ 1.0, 0.1 }, E(1)), mt_keep(loud), sentence(S("c"), (truth){ 1.0, 0.5 }, E(3)));
     check_answers("LimitSize forgets the least confident", mt_eval(m, E("LimitSize", tuple(&three), 3)), limited(&three, 3));
     mt_list_free(single), mt_list_free(three), mt_list_free(pair), mt_drop(quiet), mt_drop(loud);
 
     /* The loop over a --> b and b --> c, two steps. */
     mt_atom *premise = sentence(E("-->", "a", "b"), (truth){ 1.0, 0.9 }, E(1)), *belief = sentence(E("-->", "b", "c"), (truth){ 1.0, 0.9 }, E(2));
+    const bounds configured = { (size_t)config[TASK_QUEUE_SIZE].value, (size_t)config[BELIEF_QUEUE_SIZE].value };
     mt_list tasks = QUEUE(mt_keep(premise)), beliefs = QUEUE(mt_keep(belief));
-    mt_atom *queues = engine_derive(m, "NARS.Derive", &tasks, &beliefs, 2);
-    derive(&nars, &tasks, &beliefs, 1, 2, (size_t)config[TASK_QUEUE_SIZE].value, (size_t)config[BELIEF_QUEUE_SIZE].value);
+    mt_atom *queues = engine_derive(m, "NARS.Derive", &tasks, &beliefs, 2, NULL);
+    derive(&nars, &tasks, &beliefs, 1, 2, configured);
     mt_atom *goal = E("-->", "a", "c");
     const mt_atom *derived = NULL;
     for (size_t i = 0; i < beliefs.len && !derived; i++)
@@ -123,16 +127,24 @@ int main(void)
 
     /* A budget of zero runs no step, and no task stops the loop. */
     tasks = QUEUE(mt_keep(premise)), beliefs = QUEUE(mt_keep(belief));
-    queues = engine_derive(m, "NARS.Derive", &tasks, &beliefs, 0);
-    derive(&nars, &tasks, &beliefs, 1, 0, (size_t)config[TASK_QUEUE_SIZE].value, (size_t)config[BELIEF_QUEUE_SIZE].value);
+    queues = engine_derive(m, "NARS.Derive", &tasks, &beliefs, 0, NULL);
+    derive(&nars, &tasks, &beliefs, 1, 0, configured);
     check_atom("a budget of zero keeps the beliefs", mt_keep(mt_at(queues, 1)), tuple(&beliefs));
     mt_list_free(tasks), mt_list_free(beliefs), mt_drop(queues);
 
     tasks = (mt_list){ NULL, 0 }, beliefs = QUEUE(mt_keep(belief));
-    queues = engine_derive(m, "NARS.Derive", &tasks, &beliefs, config[MAX_STEPS].value);
-    derive(&nars, &tasks, &beliefs, 1, config[MAX_STEPS].value, (size_t)config[TASK_QUEUE_SIZE].value,
-           (size_t)config[BELIEF_QUEUE_SIZE].value);
+    queues = engine_derive(m, "NARS.Derive", &tasks, &beliefs, config[MAX_STEPS].value, NULL);
+    derive(&nars, &tasks, &beliefs, 1, config[MAX_STEPS].value, configured);
     check_atom("no task stops the loop", queues, E(tuple(&tasks), tuple(&beliefs)));
+    mt_list_free(tasks), mt_list_free(beliefs);
+
+    /* Queues bounded at 0 keep nothing: the first selection derives, both
+       queues are cut to (), and the empty task queue stops the loop. */
+    const bounds nothing = { 0, 0 };
+    tasks = QUEUE(mt_keep(premise)), beliefs = QUEUE(mt_keep(belief));
+    queues = engine_derive(m, "NARS.Derive", &tasks, &beliefs, config[MAX_STEPS].value, &nothing);
+    derive(&nars, &tasks, &beliefs, 1, config[MAX_STEPS].value, nothing);
+    check_atom("queues bounded at zero keep nothing", queues, E(tuple(&tasks), tuple(&beliefs)));
     mt_list_free(tasks), mt_list_free(beliefs), mt_drop(premise), mt_drop(belief);
     return done(m);
 }

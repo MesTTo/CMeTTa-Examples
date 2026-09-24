@@ -4,6 +4,20 @@
 
 ## Unreleased
 
+- Follow the chapter 22 originals the library and example fixes of
+  superprojects `7f373da2b` and `3488b9753` changed. lib_nars' and
+  lib_pln's `LimitSize` now treat the empty queue as its own limit, so
+  `(LimitSize () 0)` answers `()` where it recursed forever; the NARS and
+  PLN derivation-control twins claim it, and the derivation whose queues
+  are bounded at 0, `(() ())`, as their originals do, and `derive.h`'s
+  comment says what the library does now. C's model already stopped at an
+  empty queue. `derive()` and `engine_derive()` take the two queue sizes as
+  one `bounds`, which the five-argument derivation needs, and the PLN
+  twin's `run_loop` wrapper goes. The tile puzzle's original records its
+  start in `&dup` with `add-unique-or-fail` and claims 181440, 9!/2; the
+  twin's `bfs_all` does the same, and C's model records the start before
+  its search.
+
 - VERIFICATION.md records the corpus at `f8d79ba` verified on superproject
   `3f3d8107a`, whose admission fix gave chapter 15's original a two-row
   section: every step passes, 323/323 twins and 3887/3887 claims, with
