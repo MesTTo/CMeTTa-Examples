@@ -36,7 +36,7 @@ int main(void)
 {
     metta *m = open_engine();
     require("publish matchtrickery", mt_def(m, (mt_op){ .name = "matchtrickery", .arity = 0,
-        .effect = MT_WRITES, .fn = matchtrickery }));
+        .effect = MT_EFFECT_CLASS_WRITES_STATE, .fn = matchtrickery }));
     check_answers("the call sees the facts it wrote",
                   mt_eval(m, E("matchtrickery")), E("bar", "a"), E("bar", "b"));
     return done(m);

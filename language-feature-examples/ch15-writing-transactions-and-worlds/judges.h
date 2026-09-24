@@ -74,7 +74,7 @@ static inline mt_status judge_fn(mt_call *call, void *user)
 
 static inline void publish(metta *m, const judge *j)
 {
-    require(j->name, mt_def(m, (mt_op){ .name = j->name, .arity = 1, .effect = MT_PURE, .fn = judge_fn, .user = (void *)j }));
+    require(j->name, mt_def(m, (mt_op){ .name = j->name, .arity = 1, .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = judge_fn, .user = (void *)j }));
 }
 
 /* (declare-pre-add! space judge) and its kin: the claim and its release. */

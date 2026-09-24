@@ -23,7 +23,7 @@ int main(void)
 {
     metta *m = open_engine();
     require("import lib_roman", mt_one_truth(mt_eval(m, E("import!", "&self", E("library", "lib_roman")))));
-    require("publish inc", mt_def(m, (mt_op){ .name = "inc", .arity = 1, .effect = MT_PURE, .fn = inc }));
+    require("publish inc", mt_def(m, (mt_op){ .name = "inc", .arity = 1, .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = inc }));
     const pair p = { 1, 9 };
     check_answers("first", mt_eval(m, E("first", "inc", atom_of(p))), atom_of(first(inc_, p)));
     check_answers("second", mt_eval(m, E("second", "inc", atom_of(p))), atom_of(second(inc_, p)));

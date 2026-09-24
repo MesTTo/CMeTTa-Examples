@@ -4,6 +4,17 @@
 
 ## Unreleased
 
+- Name every published operation's effect class by cmetta's generated
+  `enum mt_effect_class`, which replaced the hand-named `MT_PURE` through
+  `MT_IO` and `mt_effect_str` in extensions/cmetta 3f4d713: fifty-nine twins,
+  examples and shared headers, and the lane self-test's planted operation.
+  `operations/effect_ranks.c` now publishes one copy of its function per
+  member of the engine's effect-class vocabulary, counted with
+  `MT_VOCABULARY_COUNT(mt_effect_class_names)` and named from each class's
+  word, so a sixth class would be checked without an edit here. It also
+  compares the plan's class by name, where it used to leak the symbol it
+  built for the comparison.
+
 - Write chapter 17's twelve twins in C and chapter 16's one. The lib_thread
   twins share `thread_oracle.h`: inc and big? as C functions, C's own map,
   filter, all and any as the oracle every parallel collection answers as, a

@@ -30,7 +30,7 @@ int main(void)
     check_answers("(bar 42) answers itself", mt_eval(m, E("bar", 42)), E("bar", 42));
     check_answers("(bar 43) answers itself", mt_eval(m, E("bar", 43)), E("bar", 43));
     require("publish answer", mt_def(m, (mt_op){ .name = "answer", .arity = 0,
-                                                 .effect = MT_PURE, .fn = answer }));
+                                                 .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = answer }));
 
     /* (foo $x), (foo $x $y) and (bar $x), gathered and sorted in C. */
     mt_atom *patterns[] = { E("foo", V("x")), E("foo", V("x"), V("y")), E("bar", V("x")) };

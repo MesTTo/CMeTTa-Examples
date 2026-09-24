@@ -24,8 +24,8 @@ static mt_status full(mt_call *call, void *user)
 int main(void)
 {
     metta *m = open_engine();
-    require("publish wu1", mt_def(m, (mt_op){ .name = "wu1", .effect = MT_PURE, .fn = nothing }));
-    require("publish wu2", mt_def(m, (mt_op){ .name = "wu2", .effect = MT_PURE, .fn = full }));
+    require("publish wu1", mt_def(m, (mt_op){ .name = "wu1", .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = nothing }));
+    require("publish wu2", mt_def(m, (mt_op){ .name = "wu2", .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = full }));
     require("(= (wu) (superpose ((wu1) (wu2))))",
             mt_add(m, E("=", E("wu"), E("superpose", E(E("wu1"), E("wu2"))))));
     check_answers("the empty branch drops out", mt_eval(m, E("wu")), E("full"));

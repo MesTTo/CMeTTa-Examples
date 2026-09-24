@@ -162,10 +162,10 @@ int main(void)
         { "Adder-call", 2, adder_op, NULL },    { "Square-area", 1, square_op, NULL },
     };
     for (size_t i = 0; i < sizeof methods / sizeof *methods; i++)
-        require(methods[i].name, mt_def(m, (mt_op){ .name = methods[i].name, .arity = methods[i].arity, .effect = MT_PURE,
+        require(methods[i].name, mt_def(m, (mt_op){ .name = methods[i].name, .arity = methods[i].arity, .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL,
                                                     .fn = methods[i].fn, .user = methods[i].user }));
     for (size_t i = 0; i < sizeof money_methods / sizeof *money_methods; i++)
-        require(money_methods[i].head, mt_def(m, (mt_op){ .name = money_methods[i].head, .arity = 2, .effect = MT_PURE,
+        require(money_methods[i].head, mt_def(m, (mt_op){ .name = money_methods[i].head, .arity = 2, .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL,
                                                           .fn = money_op, .user = (void *)&money_methods[i] }));
     mt_atom *abstract = E(":", "Shape-area", E("->", "Shape", "Number"));
     CLASS(m, "Circle", E(":", "Circle", E("->", "Number", "Circle")));

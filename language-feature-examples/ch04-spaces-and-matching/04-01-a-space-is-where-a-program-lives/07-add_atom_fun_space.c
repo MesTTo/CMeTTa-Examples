@@ -19,7 +19,7 @@ int main(void)
 {
     metta *m = open_engine();
     require("publish space", mt_def(m, (mt_op){ .name = "space", .arity = 0,
-                                                .effect = MT_PURE, .fn = space }));
+                                                .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = space }));
     require("write through the computed space",
             mt_one_truth(mt_eval(m, E("add-atom", E("space"), E("my", "test", "atom")))));
     check_answers("the atom is in the space the function named",

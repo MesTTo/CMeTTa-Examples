@@ -22,7 +22,7 @@ int main(void)
     };
     for (size_t i = 0; i < 2; i++) {
         require("publish", mt_def(m, (mt_op){ .name = functions[i].name, .arity = 1,
-                                              .effect = MT_PURE, .fn = same }));
+                                              .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = same }));
         require("declare its type",   /* (: name (-> T T)) */
                 mt_add(m, E(":", functions[i].name, E("->", functions[i].type, functions[i].type))));
     }

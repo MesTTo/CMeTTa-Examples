@@ -35,7 +35,7 @@ int main(void)
 {
     metta *m = open_engine();
     require("publish mycalc", mt_def(m, (mt_op){ .name = "mycalc", .arity = 2,
-                                                 .effect = MT_NONDET, .fn = mycalc }));
+                                                 .effect = MT_EFFECT_CLASS_NONDETERMINISTIC_READ_ONLY, .fn = mycalc }));
     check_answers("both alternatives answer", mt_eval(m, E("mycalc", 1, 2)), 3, -1);
     return done(m);
 }

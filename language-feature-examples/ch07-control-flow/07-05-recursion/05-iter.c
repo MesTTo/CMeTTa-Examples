@@ -26,8 +26,8 @@ static mt_status iter_next(mt_call *call, void *user)
 int main(void)
 {
     metta *m = open_engine();
-    require("publish make-nat-iter", mt_def(m, (mt_op){ .name = "make-nat-iter", .effect = MT_PURE, .fn = make_nat_iter }));
-    require("publish iter-next", mt_def(m, (mt_op){ .name = "iter-next", .arity = 1, .effect = MT_PURE, .fn = iter_next }));
+    require("publish make-nat-iter", mt_def(m, (mt_op){ .name = "make-nat-iter", .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = make_nat_iter }));
+    require("publish iter-next", mt_def(m, (mt_op){ .name = "iter-next", .arity = 1, .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = iter_next }));
 
     mt_atom *seen[3];
     int64_t state = 0;

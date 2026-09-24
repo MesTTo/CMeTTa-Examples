@@ -76,7 +76,7 @@ int main(void)
 {
     metta *m = open_engine();
     size_t calls = 0;
-    require("publish gemm", mt_def(m, (mt_op){ .name = "gemm", .arity = 2, .effect = MT_PURE,
+    require("publish gemm", mt_def(m, (mt_op){ .name = "gemm", .arity = 2, .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL,
                                                .fn = gemm, .user = &calls }));
     /* (= (MM (T (T $x)) $y) (gemm $x $y)): the symbolic identity */
     require("rewrite a double transpose away",

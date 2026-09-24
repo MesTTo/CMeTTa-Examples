@@ -128,11 +128,11 @@ int main(void)
     mt_atom *ref = mt_spaceref(mt_space_name(pool));
     guard g = { .judge = &j, .pool = ref };
     const mt_op ops[] = {
-        { .name = "metta-admission-verdict", .arity = 2, .effect = MT_LOOKUP, .fn = verdict_op, .user = &j },
-        { .name = "metta-admission-typed", .arity = 3, .effect = MT_LOOKUP, .fn = typed_op, .user = &j },
-        { .name = "metta-admission-bounded", .arity = 1, .effect = MT_LOOKUP, .fn = bounded_op, .user = &j },
-        { .name = "metta-admission-within", .arity = 2, .effect = MT_LOOKUP, .fn = within_op, .user = &j },
-        { .name = "metta-pool-guard", .arity = 1, .effect = MT_LOOKUP, .fn = guard_op, .user = &g },
+        { .name = "metta-admission-verdict", .arity = 2, .effect = MT_EFFECT_CLASS_READ_ONLY_LOOKUP, .fn = verdict_op, .user = &j },
+        { .name = "metta-admission-typed", .arity = 3, .effect = MT_EFFECT_CLASS_READ_ONLY_LOOKUP, .fn = typed_op, .user = &j },
+        { .name = "metta-admission-bounded", .arity = 1, .effect = MT_EFFECT_CLASS_READ_ONLY_LOOKUP, .fn = bounded_op, .user = &j },
+        { .name = "metta-admission-within", .arity = 2, .effect = MT_EFFECT_CLASS_READ_ONLY_LOOKUP, .fn = within_op, .user = &j },
+        { .name = "metta-pool-guard", .arity = 1, .effect = MT_EFFECT_CLASS_READ_ONLY_LOOKUP, .fn = guard_op, .user = &g },
     };
     for (size_t i = 0; i < sizeof ops / sizeof *ops; i++) require(ops[i].name, mt_def(m, ops[i]));
     require("mask verdict's atom", mt_add(m, E(":", "metta-admission-verdict", E("->", "%Undefined%", "Atom", "%Undefined%"))));

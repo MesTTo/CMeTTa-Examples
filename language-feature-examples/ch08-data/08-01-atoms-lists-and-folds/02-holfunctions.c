@@ -58,9 +58,9 @@ int main(void)
     require("f1a", mt_lower(m, (f1a), (foldl-atom (1 2 3 4) 0 $acc $x (+ $acc $x))));
     require("f2a", mt_lower(m, (f2a), (map-atom (1 2 3) $x (+ $x 1))));
     require("f3a", mt_lower(m, (f3a), (filter-atom (1 2 3 4 5) $x (> $x 3))));
-    require("publish foldfun", mt_def(m, (mt_op){ .name = "foldfun", .arity = 2, .effect = MT_PURE, .fn = foldfun }));
-    require("publish mapfun", mt_def(m, (mt_op){ .name = "mapfun", .arity = 1, .effect = MT_PURE, .fn = mapfun }));
-    require("publish filterfun", mt_def(m, (mt_op){ .name = "filterfun", .arity = 1, .effect = MT_PURE, .fn = filterfun }));
+    require("publish foldfun", mt_def(m, (mt_op){ .name = "foldfun", .arity = 2, .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = foldfun }));
+    require("publish mapfun", mt_def(m, (mt_op){ .name = "mapfun", .arity = 1, .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = mapfun }));
+    require("publish filterfun", mt_def(m, (mt_op){ .name = "filterfun", .arity = 1, .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = filterfun }));
     require("f1b", mt_lower(m, (f1b), (foldl-atom (1 2 3 4) 0 foldfun)));
     require("f2b", mt_lower(m, (f2b), (map-atom (1 2 3) mapfun)));
     require("f3b", mt_lower(m, (f3b), (filter-atom (1 2 3 4 5) filterfun)));

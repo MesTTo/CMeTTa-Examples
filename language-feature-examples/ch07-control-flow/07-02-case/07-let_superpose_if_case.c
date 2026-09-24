@@ -18,7 +18,7 @@ static mt_status f(mt_call *call, void *user)
 int main(void)
 {
     metta *m = open_engine();
-    require("publish f", mt_def(m, (mt_op){ .name = "f", .arity = 1, .effect = MT_PURE, .fn = f }));
+    require("publish f", mt_def(m, (mt_op){ .name = "f", .arity = 1, .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = f }));
     require("progme", mt_lower(m, (progme),
                                (let $y (superpose (2 3 4 5))
                                     (if (> $y 2)

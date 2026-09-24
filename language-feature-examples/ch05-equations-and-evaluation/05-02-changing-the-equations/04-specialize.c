@@ -46,7 +46,7 @@ int main(void)
             require("declare its argument held", mt_add(m, E(":", mappers[i].typed, E("->", "Atom", "%Undefined%"))));
         define_mapper(m, mappers[i].call);
     }
-    require("publish p1", mt_def(m, (mt_op){ .name = "p1", .arity = 1, .effect = MT_PURE, .fn = p1 }));
+    require("publish p1", mt_def(m, (mt_op){ .name = "p1", .arity = 1, .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = p1 }));
 
     check_answers("map-flat", mt_eval(m, shape1(E("+", 1), E(1, 2, 3))), E(2, 3, 4));
     check_answers("map-flat2", mt_eval(m, shape2(E("+", 1), E(1, 2, 3))), E(2, 3, 4));

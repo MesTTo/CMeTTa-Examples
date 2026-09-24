@@ -25,7 +25,7 @@ int main(void)
     check_int("(+ 20 22) is 42", mt_one_int(mt_eval(m, E("+", 20, 22))), 42);
 
     require("publish double", mt_def(m, (mt_op){ .name = "double", .arity = 1,
-                                                 .effect = MT_PURE, .fn = twice }));
+                                                 .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = twice }));
     check_int("(double 21) is 42", mt_one_int(mt_eval(m, E("double", 21))), 42);
 
     /* Facts, and a conjunction that joins them on the shared $p. */

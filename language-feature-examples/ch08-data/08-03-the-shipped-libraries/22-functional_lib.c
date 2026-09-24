@@ -403,9 +403,9 @@ int main(void)
     require("import lib_functional", mt_one_truth(mt_eval(m, E("import!", "&self", E("library", "lib_functional")))));
     require("import lib_unicode", mt_one_truth(mt_eval(m, E("import!", "&self", E("library", "lib_unicode")))));
     static published doubled = { twice, 1 }, oddness = { odd, 1 }, graded = { grade, 1 };
-    require("double", mt_def(m, (mt_op){ .name = "double", .arity = 1, .effect = MT_PURE, .fn = applied, .user = &doubled }));
-    require("odd?", mt_def(m, (mt_op){ .name = "odd?", .arity = 1, .effect = MT_PURE, .fn = applied, .user = &oddness }));
-    require("grade", mt_def(m, (mt_op){ .name = "grade", .arity = 1, .effect = MT_PURE, .fn = applied, .user = &graded }));
+    require("double", mt_def(m, (mt_op){ .name = "double", .arity = 1, .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = applied, .user = &doubled }));
+    require("odd?", mt_def(m, (mt_op){ .name = "odd?", .arity = 1, .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = applied, .user = &oddness }));
+    require("grade", mt_def(m, (mt_op){ .name = "grade", .arity = 1, .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = applied, .user = &graded }));
 
     /* zip stops at the shorter collection; unzip inverts it. */
     mt_atom *none = mt_unit(), *just_a = E("a");

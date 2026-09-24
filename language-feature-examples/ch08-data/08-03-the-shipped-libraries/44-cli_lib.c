@@ -749,7 +749,7 @@ int main(int argc, char **argv)
                       E(E("opt", "name"), E("shortflags", E("s")), E("longflags", E("name")), E("default", T("guest"))));
     require("declare cli-main", mt_add(m, E(":", "cli-main", E("->", "Expression", "Symbol", "Expression"))));
     require("define cli-main", mt_add(m, E("=", E("cli-main", V("arguments"), V("duplicates")), E("cli-parse", mt_keep(spec), V("arguments"), V("duplicates")))));
-    require("publish cli-plus", mt_def(m, (mt_op){ .name = "cli-plus", .arity = 2, .effect = MT_PURE, .fn = cli_plus }));
+    require("publish cli-plus", mt_def(m, (mt_op){ .name = "cli-plus", .arity = 2, .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = cli_plus }));
 
     mt_atom *types[KINDS];
     for (size_t k = 0; k < KINDS; k++) types[k] = S(kind_names[k]);

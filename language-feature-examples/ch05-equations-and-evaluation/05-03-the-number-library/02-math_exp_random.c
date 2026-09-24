@@ -30,7 +30,7 @@ int main(void)
           fabs(mt_one_float(mt_eval(m, E("log-math", e, E("exp-math", 3.0)))) - 3.0) < 1.0e-12);
 
     require("publish in-range", mt_def(m, (mt_op){ .name = "in-range", .arity = 3,
-                                                 .effect = MT_PURE, .fn = in_range }));
+                                                 .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = in_range }));
     check_answers("a die lands in 1..6", mt_eval(m, E("in-range", 1, 6, E("random-int", 1, 6))), B(true));
     check_answers("a float draw lands in [0, 1]",
                   mt_eval(m, E("in-range", 0.0, 1.0, E("random-float", 0.0, 1.0))), B(true));

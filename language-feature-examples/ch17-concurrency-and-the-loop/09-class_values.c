@@ -67,7 +67,7 @@ int main(void)
         { "Point-add", 2, ADD },   { "Point-quadrant", 1, QUADRANT },
     };
     for (size_t i = 0; i < sizeof methods / sizeof *methods; i++)
-        require(methods[i].name, mt_def(m, (mt_op){ .name = methods[i].name, .arity = methods[i].arity, .effect = MT_PURE,
+        require(methods[i].name, mt_def(m, (mt_op){ .name = methods[i].name, .arity = methods[i].arity, .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL,
                                                     .fn = call_method, .user = (void *)(intptr_t)methods[i].method }));
     require("(from &Point)", mt_add(m, E("from", mt_spaceref(mt_space_name(class_space)))));
 

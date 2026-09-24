@@ -83,7 +83,7 @@ int main(void)
     for (size_t i = 0; i < sizeof edges / sizeof edges[0]; i++)
         require("store an edge", mt_add(m, E("edge", edges[i][0], edges[i][1])));
     require("publish shortest-path", mt_def(m, (mt_op){ .name = "shortest-path", .arity = 2,
-                                                        .effect = MT_LOOKUP, .fn = shortest }));
+                                                        .effect = MT_EFFECT_CLASS_READ_ONLY_LOOKUP, .fn = shortest }));
 
     mt_atom *path = mt_one(mt_eval(m, E("shortest-path", 0, 3)));
     check("the unique shortest path is 0 1 2 3", mt_alpha_eq(path, E("Path", 0, 1, 2, 3)));

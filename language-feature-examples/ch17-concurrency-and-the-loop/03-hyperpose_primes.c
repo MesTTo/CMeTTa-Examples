@@ -91,8 +91,8 @@ static mt_atom *each_of(const int64_t *xs, size_t n, mt_atom *(*f)(int64_t))
 int main(void)
 {
     metta *m = open_engine();
-    require("publish prime?", mt_def(m, (mt_op){ .name = "prime?", .arity = 1, .effect = MT_PURE, .fn = prime_op }));
-    require("publish find-divisor", mt_def(m, (mt_op){ .name = "find-divisor", .arity = 2, .effect = MT_PURE, .fn = find_divisor_op }));
+    require("publish prime?", mt_def(m, (mt_op){ .name = "prime?", .arity = 1, .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = prime_op }));
+    require("publish find-divisor", mt_def(m, (mt_op){ .name = "find-divisor", .arity = 2, .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = find_divisor_op }));
 
     const int64_t listed[] = { 3, 1, 2 };
     const size_t listed_n = sizeof listed / sizeof *listed;

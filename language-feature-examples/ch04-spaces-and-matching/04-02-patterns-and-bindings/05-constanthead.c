@@ -29,7 +29,7 @@ static mt_status h(mt_call *call, void *user)
 int main(void)
 {
     metta *m = open_engine();
-    require("publish h", mt_def(m, (mt_op){ .name = "h", .arity = 2, .effect = MT_PURE, .fn = h }));
+    require("publish h", mt_def(m, (mt_op){ .name = "h", .arity = 2, .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = h }));
     check_int("(h (justdata haha 30) 40) is 70",
               mt_one_int(mt_eval(m, E("h", E("justdata", "haha", 30), 40))), 70);
     return done(m);

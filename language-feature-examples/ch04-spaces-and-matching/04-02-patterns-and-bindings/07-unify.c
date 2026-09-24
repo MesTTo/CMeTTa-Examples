@@ -50,9 +50,9 @@ int main(void)
     /* Only the chosen branch runs. */
     probe then = { "then-ran", 3, 0 }, otherwise = { "else-ran", 4, 0 };
     require("publish then-probe", mt_def(m, (mt_op){ .name = "then-probe", .arity = 0,
-        .effect = MT_WRITES, .fn = run_probe, .user = &then }));
+        .effect = MT_EFFECT_CLASS_WRITES_STATE, .fn = run_probe, .user = &then }));
     require("publish else-probe", mt_def(m, (mt_op){ .name = "else-probe", .arity = 0,
-        .effect = MT_WRITES, .fn = run_probe, .user = &otherwise }));
+        .effect = MT_EFFECT_CLASS_WRITES_STATE, .fn = run_probe, .user = &otherwise }));
     check_int("A matches A: the then branch", mt_one_int(mt_eval(m, unify(S("A"), S("A"),
               E("then-probe"), E("else-probe")))), 3);
     check_none("and no else marker", mt_match(m, E("else-ran")));

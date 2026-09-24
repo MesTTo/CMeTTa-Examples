@@ -104,9 +104,9 @@ int main(void)
 {
     metta *m = open_engine();
     const mt_op ops[] = {
-        { .name = "tx-three", .arity = 0, .effect = MT_PURE, .fn = tx_three },
-        { .name = "tx-body", .arity = 0, .effect = MT_PURE, .fn = tx_body },
-        { .name = "spin", .arity = 1, .effect = MT_PURE, .fn = spin },
+        { .name = "tx-three", .arity = 0, .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = tx_three },
+        { .name = "tx-body", .arity = 0, .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = tx_body },
+        { .name = "spin", .arity = 1, .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = spin },
     };
     for (size_t i = 0; i < sizeof ops / sizeof *ops; i++) require(ops[i].name, mt_def(m, ops[i]));
 

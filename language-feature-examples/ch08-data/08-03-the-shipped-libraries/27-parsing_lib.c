@@ -704,8 +704,8 @@ int main(void)
     require("import lib_parsing", mt_one_truth(mt_eval(m, E("import!", "&self", E("library", "lib_parsing")))));
     require("import lib_unicode", mt_one_truth(mt_eval(m, E("import!", "&self", E("library", "lib_unicode")))));
     static published letter_p = { letter }, twice_p = { twice };
-    require("letter?", mt_def(m, (mt_op){ .name = "letter?", .arity = 1, .effect = MT_PURE, .fn = applied, .user = &letter_p }));
-    require("double", mt_def(m, (mt_op){ .name = "double", .arity = 1, .effect = MT_PURE, .fn = applied, .user = &twice_p }));
+    require("letter?", mt_def(m, (mt_op){ .name = "letter?", .arity = 1, .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = applied, .user = &letter_p }));
+    require("double", mt_def(m, (mt_op){ .name = "double", .arity = 1, .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = applied, .user = &twice_p }));
     mt_drop(registered(S("letter?"), letter));
     mt_drop(registered(S("double"), twice));
 

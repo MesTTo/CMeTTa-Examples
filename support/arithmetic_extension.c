@@ -18,5 +18,5 @@ static mt_status triple(mt_call *call, void *user)
 bool mt_extension_init(metta *m)
 {
     return mt_def(m, (mt_op){ .name = "plugin-triple", .arity = 1,
-                              .effect = MT_PURE, .fn = triple });
+                              .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = triple });
 }

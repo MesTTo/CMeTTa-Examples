@@ -42,8 +42,8 @@ static mt_status gen(mt_call *call, void *user)
 int main(void)
 {
     metta *m = open_engine();
-    require("publish range", mt_def(m, (mt_op){ .name = "range", .arity = 2, .effect = MT_PURE, .fn = range }));
-    require("publish gen", mt_def(m, (mt_op){ .name = "gen", .effect = MT_PURE, .fn = gen }));
+    require("publish range", mt_def(m, (mt_op){ .name = "range", .arity = 2, .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = range }));
+    require("publish gen", mt_def(m, (mt_op){ .name = "gen", .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = gen }));
     mt_space *s1 = mt_space_open(m, "&s1"), *s2 = mt_space_open(m, "&s2");
     require("open &s1 and &s2", s1 && s2);
 

@@ -21,7 +21,7 @@ int main(void)
 {
     metta *m = open_engine();
     require("publish positive", mt_def(m, (mt_op){ .name = "positive", .arity = 1,
-                                                   .effect = MT_PURE, .fn = positive }));
+                                                   .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = positive }));
     mt_clear();
     mt_atom *refused = mt_first(mt_eval(m, E("positive", -1)));
     check("the refusal is an error status", refused == NULL && mt_error() == MT_ERROR);

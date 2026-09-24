@@ -38,9 +38,9 @@ static bool recorded(record *r, size_t n, const char *const *want)
 int main(void)
 {
     metta *m = open_engine();
-    require("publish note", mt_def(m, (mt_op){ .name = "note", .arity = 1, .effect = MT_WRITES,
+    require("publish note", mt_def(m, (mt_op){ .name = "note", .arity = 1, .effect = MT_EFFECT_CLASS_WRITES_STATE,
                                              .fn = note, .user = &ran }));
-    require("publish note2", mt_def(m, (mt_op){ .name = "note2", .arity = 1, .effect = MT_WRITES,
+    require("publish note2", mt_def(m, (mt_op){ .name = "note2", .arity = 1, .effect = MT_EFFECT_CLASS_WRITES_STATE,
                                               .fn = note, .user = &ran2 }));
 
     check_answers("(and-then True yes)", mt_eval(m, E("and-then", B(true), "yes")), "yes");

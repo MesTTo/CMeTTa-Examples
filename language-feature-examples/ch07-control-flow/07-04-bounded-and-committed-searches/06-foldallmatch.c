@@ -39,7 +39,7 @@ int main(void)
 {
     metta *m = open_engine();
     for (size_t i = 0; i < 2; i++) require("(kb n)", mt_add(m, E("kb", KB[i])));
-    require("publish f", mt_def(m, (mt_op){ .name = "f", .effect = MT_PURE, .fn = f }));
+    require("publish f", mt_def(m, (mt_op){ .name = "f", .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = f }));
 
     check_answers("folding a match", mt_eval(m, E("foldall", "+", E("match", "&self", E("kb", V("n")), E("+", V("n"), 1)), 0)),
                   bumped_sum(KB, 2));

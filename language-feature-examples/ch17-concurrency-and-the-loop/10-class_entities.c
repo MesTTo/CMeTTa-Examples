@@ -139,10 +139,10 @@ int main(void)
     require("open &Account", accounts.space != NULL);
     require("(: Account (-> Atom Account))", mt_add(accounts.space, E(":", "Account", E("->", "Atom", "Account"))));
     require("the internal heads", mt_add(accounts.space, E("internal", "owned-by", "_field-owner", "_field-balance")));
-    const struct { const char *name; size_t arity; method method; mt_effect effect; } methods[] = {
-        { "make-Account", 2, MAKE, MT_WRITES },          { "Account-balance", 1, BALANCE, MT_LOOKUP },
-        { "Account-balance!", 2, SET_BALANCE, MT_WRITES }, { "Account-deposit", 2, DEPOSIT, MT_WRITES },
-        { "Account-withdraw", 2, WITHDRAW, MT_WRITES },
+    const struct { const char *name; size_t arity; method method; enum mt_effect_class effect; } methods[] = {
+        { "make-Account", 2, MAKE, MT_EFFECT_CLASS_WRITES_STATE },          { "Account-balance", 1, BALANCE, MT_EFFECT_CLASS_READ_ONLY_LOOKUP },
+        { "Account-balance!", 2, SET_BALANCE, MT_EFFECT_CLASS_WRITES_STATE }, { "Account-deposit", 2, DEPOSIT, MT_EFFECT_CLASS_WRITES_STATE },
+        { "Account-withdraw", 2, WITHDRAW, MT_EFFECT_CLASS_WRITES_STATE },
     };
     for (size_t i = 0; i < sizeof methods / sizeof *methods; i++)
         require(methods[i].name, mt_def(m, (mt_op){ .name = methods[i].name, .arity = methods[i].arity, .effect = methods[i].effect,

@@ -52,8 +52,8 @@ int main(void)
     require("import lib_patrick", mt_one_truth(mt_eval(m, E("import!", "&self", E("library", "lib_patrick")))));
     require("(: inc (-> Number Number))", mt_add(m, E(":", "inc", E("->", "Number", "Number"))));
     require("(: double (-> Number Number))", mt_add(m, E(":", "double", E("->", "Number", "Number"))));
-    require("publish inc", mt_def(m, (mt_op){ .name = "inc", .arity = 1, .effect = MT_PURE, .fn = inc }));
-    require("publish double", mt_def(m, (mt_op){ .name = "double", .arity = 1, .effect = MT_PURE, .fn = twice }));
+    require("publish inc", mt_def(m, (mt_op){ .name = "inc", .arity = 1, .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = inc }));
+    require("publish double", mt_def(m, (mt_op){ .name = "double", .arity = 1, .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = twice }));
 
     const int64_t five[] = { 5 }, two_three[] = { 2, 3 };
     const struct { const char *claim; size_t n; const fn *fns[3]; const int64_t *args; size_t argc; } rows[] = {

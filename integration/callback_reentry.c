@@ -21,7 +21,7 @@ int main(void)
     /* (= (double $x) (* 2 $x)) */
     require("define double", mt_add(m, E("=", E("double", V("x")), E("*", 2, V("x")))));
     require("publish delegate", mt_def(m, (mt_op){ .name = "delegate", .arity = 1,
-                                                   .effect = MT_PURE, .fn = delegate }));
+                                                   .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = delegate }));
     check_int("C calls MeTTa from inside a call MeTTa made",
               mt_one_int(mt_eval(m, E("delegate", 21))), 42);
     require("withdraw delegate", mt_undef(m, "delegate"));

@@ -28,7 +28,7 @@ static inline void import_thread_lib(metta *m)
    (: name (-> Number result)) when the original declares it. */
 static inline void publish_unary(metta *m, const char *name, mt_fn fn, const char *result)
 {
-    require(name, mt_def(m, (mt_op){ .name = name, .arity = 1, .effect = MT_PURE, .fn = fn }));
+    require(name, mt_def(m, (mt_op){ .name = name, .arity = 1, .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = fn }));
     if (result) require("declare its type", mt_add(m, E(":", name, E("->", "Number", result))));
 }
 

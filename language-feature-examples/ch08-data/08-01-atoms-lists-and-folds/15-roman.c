@@ -59,7 +59,7 @@ int main(void)
 {
     metta *m = open_engine();
     require("import lib_roman", mt_one_truth(mt_eval(m, E("import!", "&self", E("library", "lib_roman")))));
-    require("publish mfail", mt_def(m, (mt_op){ .name = "mfail", .arity = 1, .effect = MT_PURE, .fn = mfail }));
+    require("publish mfail", mt_def(m, (mt_op){ .name = "mfail", .arity = 1, .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = mfail }));
 
     mt_atom *flat = E(1, 2, 3), *nested = E(1, E(2, 3));
     check_answers("map-flat", mt_eval(m, E("map-flat", E("+", 1), mt_keep(flat))), map_nested(flat, inc));

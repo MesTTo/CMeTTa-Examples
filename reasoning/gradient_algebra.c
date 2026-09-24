@@ -37,9 +37,9 @@ int main(void)
     metta *m = open_engine();
     static bool product = true;
     require("publish dual-add", mt_def(m, (mt_op){ .name = "dual-add", .arity = 2,
-                                                   .effect = MT_PURE, .fn = combine }));
+                                                   .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = combine }));
     require("publish dual-multiply", mt_def(m, (mt_op){ .name = "dual-multiply", .arity = 2,
-        .effect = MT_PURE, .fn = combine, .user = &product }));
+        .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = combine, .user = &product }));
     /* (algebra dual dual-add dual-multiply (Dual 0.0 0.0) (Dual 1.0 0.0) (laws) (carrier) (requires) global) */
     require("declare the algebra", mt_add(mt_catalog(m), E("algebra", "dual", "dual-add", "dual-multiply",
         E("Dual", 0.0, 0.0), E("Dual", 1.0, 0.0), E("laws"), E("carrier"), E("requires"), "global")));

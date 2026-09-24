@@ -58,7 +58,7 @@ int main(void)
                E("Error", E("/", 7, 0), "DivisionByZero"));
 
     require("publish math-string", mt_def(m, (mt_op){ .name = "math-string", .arity = 0,
-                                                    .effect = MT_PURE, .fn = math_string }));
+                                                    .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = math_string }));
     check_answers("a computed string meets sqrt-math's own guard",
                   mt_eval(m, E("sqrt-math", E("math-string"))),
                   E("Error", E("sqrt-math", T("s")), E("BadArgType", 1, "Number", "String")));

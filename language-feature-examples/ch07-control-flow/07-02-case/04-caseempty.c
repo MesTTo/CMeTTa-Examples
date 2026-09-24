@@ -16,7 +16,7 @@ static mt_status f(mt_call *call, void *user)
 int main(void)
 {
     metta *m = open_engine();
-    require("publish f", mt_def(m, (mt_op){ .name = "f", .effect = MT_PURE, .fn = f }));
+    require("publish f", mt_def(m, (mt_op){ .name = "f", .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = f }));
     require("wu", mt_lower(m, (wu), (case (empty) ((1 2) (Empty 42)))));
     require("wu2", mt_lower(m, (wu2), (case (f) ((42 ok) (Empty nok)))));
     check_answers("a key with no answers takes Empty", mt_eval(m, E("wu")), 42);

@@ -352,19 +352,19 @@ int main(void)
     require("its internal heads", mt_add(accounts, E("internal", "owned-by", "_field-owner", "_field-balance")));
     require("(: GrainAgent ...)", mt_add(agents, E(":", "GrainAgent", E("->", "SpaceType", "GrainAgent"))));
     require("its internal heads", mt_add(agents, E("internal", "owned-by", "_field-label")));
-    const struct { const char *name; size_t arity; method method; mt_effect effect; } methods[] = {
-        { "GrainAccount-balance", 1, ACCOUNT_BALANCE, MT_LOOKUP }, { "GrainAccount-balance!", 2, ACCOUNT_SET, MT_WRITES },
-        { "retire-GrainAccount", 1, ACCOUNT_RETIRE, MT_WRITES },  { "make-GrainAccount", 2, ACCOUNT_MAKE, MT_WRITES },
-        { "GrainAgent-label", 1, AGENT_LABEL, MT_LOOKUP },         { "make-GrainAgent", 1, AGENT_MAKE, MT_WRITES },
-        { "discard", 1, DISCARD, MT_WRITES },
+    const struct { const char *name; size_t arity; method method; enum mt_effect_class effect; } methods[] = {
+        { "GrainAccount-balance", 1, ACCOUNT_BALANCE, MT_EFFECT_CLASS_READ_ONLY_LOOKUP }, { "GrainAccount-balance!", 2, ACCOUNT_SET, MT_EFFECT_CLASS_WRITES_STATE },
+        { "retire-GrainAccount", 1, ACCOUNT_RETIRE, MT_EFFECT_CLASS_WRITES_STATE },  { "make-GrainAccount", 2, ACCOUNT_MAKE, MT_EFFECT_CLASS_WRITES_STATE },
+        { "GrainAgent-label", 1, AGENT_LABEL, MT_EFFECT_CLASS_READ_ONLY_LOOKUP },         { "make-GrainAgent", 1, AGENT_MAKE, MT_EFFECT_CLASS_WRITES_STATE },
+        { "discard", 1, DISCARD, MT_EFFECT_CLASS_WRITES_STATE },
     };
     for (size_t i = 0; i < sizeof methods / sizeof *methods; i++)
         require(methods[i].name, mt_def(m, (mt_op){ .name = methods[i].name, .arity = methods[i].arity, .effect = methods[i].effect,
                                                     .fn = call_method, .user = (void *)(intptr_t)methods[i].method }));
-    require("the grains' body", mt_def(m, (mt_op){ .name = "c-grain-grains", .arity = 0, .effect = MT_WRITES, .fn = grains }));
-    require("the deferring body", mt_def(m, (mt_op){ .name = "c-grain-during", .arity = 1, .effect = MT_WRITES, .fn = during }));
-    require("the inner body", mt_def(m, (mt_op){ .name = "c-grain-inner", .arity = 1, .effect = MT_WRITES, .fn = inner }));
-    require("the outer body", mt_def(m, (mt_op){ .name = "c-grain-outer", .arity = 0, .effect = MT_WRITES, .fn = outer }));
+    require("the grains' body", mt_def(m, (mt_op){ .name = "c-grain-grains", .arity = 0, .effect = MT_EFFECT_CLASS_WRITES_STATE, .fn = grains }));
+    require("the deferring body", mt_def(m, (mt_op){ .name = "c-grain-during", .arity = 1, .effect = MT_EFFECT_CLASS_WRITES_STATE, .fn = during }));
+    require("the inner body", mt_def(m, (mt_op){ .name = "c-grain-inner", .arity = 1, .effect = MT_EFFECT_CLASS_WRITES_STATE, .fn = inner }));
+    require("the outer body", mt_def(m, (mt_op){ .name = "c-grain-outer", .arity = 0, .effect = MT_EFFECT_CLASS_WRITES_STATE, .fn = outer }));
 
     check_answers("the grains, in a scope", mt_eval(m, E("scope", E("c-grain-grains"))), B(true));
 

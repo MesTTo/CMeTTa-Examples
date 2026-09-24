@@ -70,7 +70,7 @@ static mt_status own_describe_op(mt_call *call, void *user) { return call_method
 
 static void publish(metta *m, const char *name, mt_fn fn, void *user)
 {
-    require(name, mt_def(m, (mt_op){ .name = name, .arity = 1, .effect = MT_PURE, .fn = fn, .user = user }));
+    require(name, mt_def(m, (mt_op){ .name = name, .arity = 1, .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = fn, .user = user }));
 }
 
 /* A class's space, holding the rows get-type reads, and its from in &self. */

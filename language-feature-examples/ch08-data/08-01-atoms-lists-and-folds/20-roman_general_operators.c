@@ -58,7 +58,7 @@ int main(void)
     require("import lib_roman", mt_one_truth(mt_eval(m, E("import!", "&self", E("library", "lib_roman")))));
     require("(: close-enough (-> Number Number Bool))",
             mt_add(m, E(":", "close-enough", E("->", "Number", "Number", "Bool"))));
-    require("publish close-enough", mt_def(m, (mt_op){ .name = "close-enough", .arity = 2, .effect = MT_PURE,
+    require("publish close-enough", mt_def(m, (mt_op){ .name = "close-enough", .arity = 2, .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL,
                                                      .fn = close_enough }));
 
     const set left = { { 1, 5, 9 }, 3 }, right = { { 2, 100 }, 2 }, empty = { .n = 0 };

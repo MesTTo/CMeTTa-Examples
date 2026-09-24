@@ -21,7 +21,7 @@ static mt_status twice(mt_call *call, void *user)
 int main(void)
 {
     metta *m = open_engine();
-    require("publish f", mt_def(m, (mt_op){ .name = "f", .arity = 1, .effect = MT_PURE, .fn = twice }));
+    require("publish f", mt_def(m, (mt_op){ .name = "f", .arity = 1, .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = twice }));
     require("(= (g $f $x) (justdata $f $x))",
             mt_add(m, E("=", E("g", V("f"), V("x")), E("justdata", V("f"), V("x")))));
     require("(= (h $f $x) ($f $x))", mt_add(m, E("=", E("h", V("f"), V("x")), E(V("f"), V("x")))));

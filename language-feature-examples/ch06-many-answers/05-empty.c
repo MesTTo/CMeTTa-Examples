@@ -17,7 +17,7 @@ static mt_status nothing(mt_call *call, void *user)
 int main(void)
 {
     metta *m = open_engine();
-    require("publish y", mt_def(m, (mt_op){ .name = "y", .effect = MT_PURE, .fn = nothing }));
+    require("publish y", mt_def(m, (mt_op){ .name = "y", .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = nothing }));
     check_none("(y) answers nothing", mt_eval(m, E("y")));
     return done(m);
 }

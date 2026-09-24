@@ -19,7 +19,7 @@ static mt_status keep(mt_call *call, void *user)
 int main(void)
 {
     metta *m = open_engine();
-    require("publish keep", mt_def(m, (mt_op){ .name = "keep", .arity = 2, .effect = MT_PURE, .fn = keep }));
+    require("publish keep", mt_def(m, (mt_op){ .name = "keep", .arity = 2, .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = keep }));
     check_answers("(if True 42)", mt_eval(m, E("if", B(true), 42)), 42);
     check_answers("C's if answers the same", mt_eval(m, E("keep", B(true), 42)), 42);
     check_none("with the condition false, no answer", mt_eval(m, E("if", B(false), 42)));

@@ -108,9 +108,9 @@ int main(void)
     require("open &temp", c.temp != NULL);
     require("the mutex", pthread_mutex_init(&c.testmutex, NULL) == 0);
     const mt_op ops[] = {
-        { .name = "sloppyinc", .arity = 0, .effect = MT_WRITES, .fn = sloppyinc, .user = &c },
-        { .name = "mutexinc", .arity = 0, .effect = MT_WRITES, .fn = mutexinc, .user = &c },
-        { .name = "Transaction_rollback_fail_to_inc", .arity = 0, .effect = MT_WRITES, .fn = rollback_fail_to_inc, .user = &c },
+        { .name = "sloppyinc", .arity = 0, .effect = MT_EFFECT_CLASS_WRITES_STATE, .fn = sloppyinc, .user = &c },
+        { .name = "mutexinc", .arity = 0, .effect = MT_EFFECT_CLASS_WRITES_STATE, .fn = mutexinc, .user = &c },
+        { .name = "Transaction_rollback_fail_to_inc", .arity = 0, .effect = MT_EFFECT_CLASS_WRITES_STATE, .fn = rollback_fail_to_inc, .user = &c },
     };
     for (size_t i = 0; i < sizeof ops / sizeof *ops; i++) require(ops[i].name, mt_def(m, ops[i]));
 

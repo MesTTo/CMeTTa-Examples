@@ -55,10 +55,10 @@ static mt_atom *genlambda(void) { return E("|->", E(V("x")), E("g", V("x"))); }
 int main(void)
 {
     metta *m = open_engine();
-    require("publish f", mt_def(m, (mt_op){ .name = "f", .effect = MT_PURE, .fn = f }));
+    require("publish f", mt_def(m, (mt_op){ .name = "f", .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = f }));
     for (size_t i = 0; i < 2; i++)
         require("(= (g k) v)", mt_add(m, E("=", E("g", G_TABLE[i][0]), G_TABLE[i][1])));
-    require("publish P", mt_def(m, (mt_op){ .name = "P", .arity = 1, .effect = MT_PURE, .fn = below_two }));
+    require("publish P", mt_def(m, (mt_op){ .name = "P", .arity = 1, .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = below_two }));
 
     const int64_t both[] = { 1, 2 }, two[] = { 2 }, one[] = { 1 };
     const struct { const char *claim; mt_atom *generator, *check; const int64_t *values; size_t n;

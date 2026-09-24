@@ -38,7 +38,7 @@ int main(void)
     import_thread_lib(m);
     publish_unary(m, "inc", inc_op, NULL);
     publish_unary(m, "big?", big_op, NULL);
-    require("publish slow", mt_def(m, (mt_op){ .name = "slow", .arity = 1, .effect = MT_IO, .fn = slow_op }));
+    require("publish slow", mt_def(m, (mt_op){ .name = "slow", .arity = 1, .effect = MT_EFFECT_CLASS_ORACLE_IO, .fn = slow_op }));
 
     const int64_t four[] = { 1, 2, 3, 4 }, five[] = { 1, 2, 3, 4, 5 }, all_big[] = { 3, 4, 5 }, one_small[] = { 1, 4, 5 },
                   late_big[] = { 1, 2, 9 }, none_big[] = { 1, 2 };

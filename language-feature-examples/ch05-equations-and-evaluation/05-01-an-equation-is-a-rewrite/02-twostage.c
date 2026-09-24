@@ -17,7 +17,7 @@ int main(void)
 {
     metta *m = open_engine();
     require("(= (f) (g)), before g exists", mt_add(m, E("=", E("f"), E("g"))));
-    require("publish g", mt_def(m, (mt_op){ .name = "g", .arity = 0, .effect = MT_PURE, .fn = g }));
+    require("publish g", mt_def(m, (mt_op){ .name = "g", .arity = 0, .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = g }));
     require("(= (h) (g))", mt_add(m, E("=", E("h"), E("g"))));
     check_int("(f) reaches the C function", mt_one_int(mt_eval(m, E("f"))), 42);
     check_int("and so does (h)", mt_one_int(mt_eval(m, E("h"))), 42);

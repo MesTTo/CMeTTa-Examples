@@ -93,7 +93,7 @@ static mt_status own_decide_op(mt_call *call, void *user) { return call_method(c
 
 static void publish(metta *m, const char *name, mt_fn fn, const void *user)
 {
-    require(name, mt_def(m, (mt_op){ .name = name, .arity = 1, .effect = MT_LOOKUP, .fn = fn, .user = (void *)user }));
+    require(name, mt_def(m, (mt_op){ .name = name, .arity = 1, .effect = MT_EFFECT_CLASS_READ_ONLY_LOOKUP, .fn = fn, .user = (void *)user }));
 }
 
 int main(void)
@@ -107,7 +107,7 @@ int main(void)
         const agent_class *c = &agent_classes[i];
         snprintf(heads[i][0], sizeof heads[i][0], "make-%s", c->name);
         snprintf(heads[i][1], sizeof heads[i][1], "%s-decide", c->name);
-        require(heads[i][0], mt_def(m, (mt_op){ .name = heads[i][0], .arity = 1, .effect = MT_WRITES, .fn = make, .user = (void *)c }));
+        require(heads[i][0], mt_def(m, (mt_op){ .name = heads[i][0], .arity = 1, .effect = MT_EFFECT_CLASS_WRITES_STATE, .fn = make, .user = (void *)c }));
         publish(m, heads[i][1], own_decide_op, c);
         char name[40];
         snprintf(name, sizeof name, "&%s", c->name);

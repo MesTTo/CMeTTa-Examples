@@ -55,10 +55,10 @@ static mt_atom *chosen(void) { return E("if", B(true), E("let", V("f"), adding()
 int main(void)
 {
     metta *m = open_engine();
-    require("publish f", mt_def(m, (mt_op){ .name = "f", .effect = MT_PURE, .fn = f }));
+    require("publish f", mt_def(m, (mt_op){ .name = "f", .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = f }));
     for (size_t i = 0; i < 2; i++)
         require("(= (g k) v)", mt_add(m, E("=", E("g", G_TABLE[i][0]), G_TABLE[i][1])));
-    require("publish merge", mt_def(m, (mt_op){ .name = "merge", .arity = 2, .effect = MT_PURE, .fn = merge }));
+    require("publish merge", mt_def(m, (mt_op){ .name = "merge", .arity = 2, .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = merge }));
 
     const struct { const char *claim; mt_atom *aggregate, *generator; int64_t scale; } rows[] = {
         { "a named aggregator", S("merge"), E("f"), 1 },

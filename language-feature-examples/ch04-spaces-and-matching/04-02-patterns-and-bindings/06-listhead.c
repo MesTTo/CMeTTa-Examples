@@ -41,7 +41,7 @@ int main(void)
                   mt_eval(m, E("let", E("cons", V("Head"), V("Tail")), six, E(V("Head"), V("Tail")))),
                   E(1, E(2, 3, 4, 5, 6)));
 
-    require("publish len", mt_def(m, (mt_op){ .name = "len", .arity = 1, .effect = MT_PURE, .fn = len }));
+    require("publish len", mt_def(m, (mt_op){ .name = "len", .arity = 1, .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = len }));
     check_int("(len (1 2 3)) is 3", mt_one_int(mt_eval(m, E("len", E(1, 2, 3)))), 3);
     check_answers("(cons 42 ()) is (42)", mt_eval(m, E("cons", 42, mt_unit())), E(42));
     return done(m);

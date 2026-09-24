@@ -47,7 +47,7 @@ int main(void)
     require("open &snapshot", snapshot != NULL);
     require("(item alpha)", mt_add(snapshot, E("item", "alpha")));
     require("(item beta)", mt_add(snapshot, E("item", "beta")));
-    require("publish visit", mt_def(m, (mt_op){ .name = "visit", .arity = 1, .effect = MT_WRITES,
+    require("publish visit", mt_def(m, (mt_op){ .name = "visit", .arity = 1, .effect = MT_EFFECT_CLASS_WRITES_STATE,
                                                 .fn = visit, .user = snapshot }));
     check_answers("both rows are answered though each template removes the other",
                   mt_eval(m, E("match", mt_spaceref("&snapshot"), E("item", V("x")), E("visit", V("x")))),

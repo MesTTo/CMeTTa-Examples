@@ -62,9 +62,9 @@ int main(void)
     metta *m = open_engine();
     search s = { 11, 0 };
     require("publish fitness", mt_def(m, (mt_op){ .name = "fitness", .arity = 1,
-                                                  .effect = MT_PURE, .fn = score }));
+                                                  .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = score }));
     require("publish next-generation", mt_def(m, (mt_op){ .name = "next-generation", .arity = 0,
-        .effect = MT_WRITES, .fn = next_generation, .user = &s }));
+        .effect = MT_EFFECT_CLASS_WRITES_STATE, .fn = next_generation, .user = &s }));
     for (int64_t i = 0; i < POPULATION; i++)
         require("seed the population", mt_add(m, E("member", i, i)));
 

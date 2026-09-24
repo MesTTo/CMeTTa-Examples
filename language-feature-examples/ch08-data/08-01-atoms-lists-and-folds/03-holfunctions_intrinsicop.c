@@ -22,7 +22,7 @@ int main(void)
     require("(= (mymap $f ()) ())", mt_add(m, E("=", E("mymap", V("f"), mt_unit()), mt_unit())));
     require("mymap's cons case", mt_lower(m, (mymap $f (cons $x $xs)),
                                           (let $head ($f $x) (let $rest (mymap $f $xs) (cons $head $rest)))));
-    require("publish eq", mt_def(m, (mt_op){ .name = "eq", .arity = 2, .effect = MT_PURE, .fn = eq }));
+    require("publish eq", mt_def(m, (mt_op){ .name = "eq", .arity = 2, .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = eq }));
 
     mt_atom *mapped[3];
     for (size_t i = 0; i < 3; i++) mapped[i] = B(XS[i] == 1);

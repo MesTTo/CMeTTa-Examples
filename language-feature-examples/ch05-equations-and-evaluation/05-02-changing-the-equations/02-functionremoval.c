@@ -19,7 +19,7 @@ static mt_status plus_one(mt_call *call, void *user)
 int main(void)
 {
     metta *m = open_engine();
-    require("publish g", mt_def(m, (mt_op){ .name = "g", .arity = 1, .effect = MT_PURE, .fn = plus_one }));
+    require("publish g", mt_def(m, (mt_op){ .name = "g", .arity = 1, .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = plus_one }));
     mt_atom *calls = E("=", E("f", V("g")), E(V("g"), 1));      /* (= (f $g) ($g 1)) */
     mt_atom *constant = E("=", E("f", V("g")), 42);              /* (= (f $g) 42) */
     require("the calling equation", mt_add(m, mt_keep(calls)));

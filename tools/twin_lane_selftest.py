@@ -39,7 +39,8 @@ CASES = {
     check_int("(f 1)", mt_one_int(mt_eval(m, E("f", 1))), 1);""", None),
     "good-c-operation": (IDENTITY, """
     require("publish", mt_def(m, (mt_op){ .name = "f", .arity = 1,
-                                          .effect = MT_PURE, .fn = square }));
+                                          .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL,
+                                          .fn = square }));
     check_int("(f 1)", mt_one_int(mt_eval(m, E("f", 1))), 1);""", None),
     "claims-short": (REPR, """
     check_text("42", mt_show(mt_one(mt_eval(m, E("repr", 42)))), "\\"42\\"");""",
