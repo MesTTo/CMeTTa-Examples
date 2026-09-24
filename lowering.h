@@ -21,6 +21,17 @@
  *     where C's % takes the dividend's: (% -7 3) is 2 and -7 % 3 is -1
  *     [source: engine/metta/operators.pl:154, R is A mod B;
  *     commit=d4a365c16bdf1801f9839597e56ecfcc8c2b7a0c]
+ *   - C_DIV is MeTTa's / on floats, a zero divisor included, which answers
+ *     the signed infinity in both; on two integers MeTTa answers an integer
+ *     when the quotient is exact and a float when it is not, where C
+ *     truncates, so a body divides doubles [source: engine/metta/operators.pl,
+ *     '/'/3 and metta_saturating_recover/4;
+ *     commit=8d651070dedaa190e25cc388c029172a63e967be] [tested: make check;
+ *     commit=WORKTREE]
+ *   - C_MIN and C_MAX are SWI's min and max on operands that are neither NaN
+ *     nor zeros of opposite sign, where SWI answers NaN and prefers -0.0 for
+ *     min [source: swipl-devel V10.1.14 src/pl-arith.c, ar_min and ar_max]
+ *     [tested: make check; commit=WORKTREE]
  */
 #ifndef EXAMPLES_LOWERING_H
 #define EXAMPLES_LOWERING_H
@@ -38,6 +49,9 @@
 #define C_GT(a, b) ((a) > (b))
 #define M_GT(a, b) (> a b)
 #define T_GT(a, b) mt_expr(">", a, b)
+#define C_LE(a, b) ((a) <= (b))
+#define M_LE(a, b) (<= a b)
+#define T_LE(a, b) mt_expr("<=", a, b)
 
 #define C_ADD(a, b) ((a) + (b))
 #define M_ADD(a, b) (+ a b)
@@ -48,9 +62,23 @@
 #define C_MUL(a, b) ((a) * (b))
 #define M_MUL(a, b) (* a b)
 #define T_MUL(a, b) mt_expr("*", a, b)
+#define C_DIV(a, b) ((a) / (b))
+#define M_DIV(a, b) (/ a b)
+#define T_DIV(a, b) mt_expr("/", a, b)
 #define C_MOD(a, b) floor_mod(a, b)
 #define M_MOD(a, b) (% a b)
 #define T_MOD(a, b) mt_expr("%", a, b)
+
+#define C_MIN(a, b) ((a) < (b) ? (a) : (b))
+#define M_MIN(a, b) (min a b)
+#define T_MIN(a, b) mt_expr("min", a, b)
+#define C_MAX(a, b) ((a) > (b) ? (a) : (b))
+#define M_MAX(a, b) (max a b)
+#define T_MAX(a, b) mt_expr("max", a, b)
+
+#define C_AND(a, b) ((a) && (b))
+#define M_AND(a, b) (and a b)
+#define T_AND(a, b) mt_expr("and", a, b)
 
 /* On booleans, xor is inequality. */
 #define C_XOR(a, b) ((a) != (b))

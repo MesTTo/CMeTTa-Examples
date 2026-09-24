@@ -4,6 +4,14 @@
 
 ## Unreleased
 
+- Spell MeTTa's `/`, `<=`, `min`, `max` and `and` in `lowering.h`, for
+  chapter 22's PLN formulas, whose deduction and consistency conditions are
+  one body each for C and for the equations a program adds.
+  `operations/lowering.c` holds the new operators to the engine's over every
+  pair of a five-value grid, a zero divisor's signed infinity included, as it
+  holds `C_MOD` to MeTTa's `%`. `C_MIN` and `C_MAX` are SWI's `min` and `max`
+  except at NaN and at zeros of opposite sign.
+
 - Write chapter 20's thirty-eight twins in C. The translator-rule twins keep
   the engine's cost fold and orientation rule in `costs.h`, so C decides
   which way each bidirectional rule turns a call. The MeTTa-in-MeTTa twins
