@@ -4,6 +4,12 @@
 
 ## Unreleased
 
+- Record in ERRORS.md the C seat's `f76b44e`, which keeps version-control
+  metadata out of `make install`. `make check-consumers` installs the seat
+  into `build/prefix`, and the install had carried lib's `.git`, so `git
+  clean -fdx` left `build/prefix/share/metta/lib` behind as a nested
+  repository.
+
 - Build the installed consumers again. `lane.c` copied the published
   operations' names with `strdup`, which is POSIX, and `make
   check-consumers` compiles the helpers as plain C11, so both consumers

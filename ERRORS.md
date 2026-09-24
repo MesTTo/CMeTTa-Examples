@@ -37,9 +37,11 @@ they raced and stranger-c failed `cannot find -lcmetta`; `4b7a44b` resolves
 each bridge predicate once per runtime instead of interning it per call,
 which had moved c-bench's cursor-step row past its band; `9d72d61` decodes
 true and false by length and a fixed-size compare; `12432c3` re-pins the boot
-row's governed QLF inventory from 28 artifacts to 26; and `697eff4` adds
+row's governed QLF inventory from 28 artifacts to 26; `697eff4` adds
 `make runtime-halt-created-thread`, the reproduction of the host defect
-below.
+below; and `f76b44e` keeps version-control metadata out of `make install`,
+which had copied lib's `.git` into the corpus consumers' prefix, a nested
+repository `git clean -fdx` would not remove.
 
 ## Reported to the shared engine
 
