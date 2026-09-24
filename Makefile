@@ -89,7 +89,7 @@ check-consumers:
 	cmake --build build/consumer-cmake
 	env -u METTA_PATH ctest --test-dir build/consumer-cmake --output-on-failure
 
-build/%.o: %.c common.h lane.h $(CMETTA_DIR)/cmetta.h
+build/%.o: %.c common.h lane.h $(CMETTA_DIR)/cmetta.h $(CMETTA_DIR)/vocabularies.h
 	@mkdir -p $(@D)
 	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
 

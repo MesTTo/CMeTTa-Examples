@@ -20,17 +20,17 @@ Every MeTTa original the Python seat twins has a C twin at the same path or an `
 | `ch12-testing` | 4 | 4 | 4 | 0 | 0 |
 | `ch14-seeing-your-program` | 3 | 2 | 2 | 0 | 0 |
 | `ch15-writing-transactions-and-worlds` | 7 | 6 | 6 | 0 | 0 |
-| `ch16-events-and-standing-queries` | 1 | 1 | 0 | 0 | 0 |
-| `ch17-concurrency-and-the-loop` | 13 | 12 | 0 | 0 | 0 |
+| `ch16-events-and-standing-queries` | 1 | 1 | 1 | 0 | 0 |
+| `ch17-concurrency-and-the-loop` | 13 | 12 | 12 | 0 | 0 |
 | `ch18-performance` | 24 | 20 | 0 | 0 | 0 |
 | `ch19-spaces-backed-by-anything` | 10 | 10 | 0 | 0 | 0 |
 | `ch20-extending-the-engine` | 52 | 38 | 0 | 0 | 0 |
 | `ch22-a-reasoner-you-can-serve` | 33 | 27 | 0 | 0 | 0 |
-| **all** | 366 | 323 | 215 | 0 | 0 |
+| **all** | 366 | 323 | 228 | 0 | 0 |
 
 ## Residue
 
-108 originals the Python seat twins have neither a C twin nor a residue entry yet.
+95 originals the Python seat twins have neither a C twin nor a residue entry yet.
 
 
 ## The Python seat's own examples

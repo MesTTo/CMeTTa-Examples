@@ -4,6 +4,24 @@
 
 ## Unreleased
 
+- Write chapter 17's twelve twins in C and chapter 16's one. The lib_thread
+  twins share `thread_oracle.h`: inc and big? as C functions, C's own map,
+  filter, all and any as the oracle every parallel collection answers as, a
+  pool's report read into C's record of a pool, and a writer on a C pthread
+  attached to the engine, which await-atom and take-atom block for. A C
+  thread attached to the engine also raises thread-count, and cpu-count is
+  exactly `sysconf(_SC_NPROCESSORS_ONLN)`, the count SWI's flag holds.
+  prime? decides by deterministic Miller-Rabin in 128-bit arithmetic, exact
+  below 2^64, so every hyperpose branch is cheap in C. The class twins
+  write their classes the C way: a struct marshalled to its constructor
+  term, methods as C functions under the class's prefix, dispatch through a
+  C function table, prototypes as spaces C names, decorators as accessors,
+  composed comparators, a C generator and a closure. The grains twin runs
+  each scope's body as a C function the scope evaluates. Chapter 16's
+  catalog twin reads every expected word from `vocabularies.h`, the header
+  cmetta now generates from the engine's rows, and the build rebuilds a twin
+  when that header changes.
+
 - Write chapter 15's six twins in C. The mutexed counter is five pthreads,
   each attached to the engine, calling a published increment that holds a
   pthread mutex, and the failing transaction is `mt_transaction` inside a
