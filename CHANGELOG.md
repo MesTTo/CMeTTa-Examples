@@ -4,6 +4,14 @@
 
 ## Unreleased
 
+- ERRORS.md closes SWI's halt race. The host went live as
+  `swipl-patched.5` in superproject `622e425d4`, carrying
+  `swi-halt-passes-created-thread`, and cmetta's
+  `make runtime-halt-created-thread`, which died 16 runs of 20 on
+  `swipl-patched.2`, halts cleanly 20 runs of 20 on it. The report moves
+  from Open to the table of reports with its outcome, and `done()`'s
+  comment on why it flushes before closing names the race as past.
+
 - Follow the chapter 22 originals the library and example fixes of
   superprojects `7f373da2b` and `3488b9753` changed. lib_nars' and
   lib_pln's `LimitSize` now treat the empty queue as its own limit, so

@@ -56,34 +56,12 @@ went to the MeTTa checkout's owner with its reproduction.
 | A partial stored through the Python seat's provider | `((partial + (1)) 2)` where the native space answers 3 | 2026-09-24 |
 | Chapter 15's `04-admission_pools` | The MeTTa chain the example calls the builtin's executable specification reads only the first capacity row, `(accept)` where the builtin answers `(refuse (pool-at-capacity 2))` | 2026-09-24 11:39; fixed in superproject `47855fa71`, the chain walking every row. On `3f3d8107a` the chain and the builtin agree for rows `(5 2)`, `(2 5)`, `(3 2)`, `(5 3 2)`, `(5 4)` and none over three atoms, where the old chain, asked beside them, still admits at `(5 2)` and `(5 3 2)` |
 | `mt_register_prolog`'s refusals | No `prolog:error_message` for `metta_control_signal(value \| type \| interrupted, _)`, and the value refusal row carries the JSON crossing's ground and remedy | 2026-09-24 15:38 |
+| `mt_close` after a lib_thread timer or a background loader | SWI's halt passes over a thread `thread_create` has marked created and `start_thread` has not yet marked running, so the thread resolves its goal while `PL_cleanup()` frees the module tables: `make runtime-halt-created-thread` in `extensions/cmetta` died 16 runs of 20, and the corpus lost chapter 20's `13-reference_loading` to it in two of five full runs, each core showing the new thread in `start_thread`, `callProlog` and `resolveProcedure` while `PL_cleanup` freed tables | 2026-09-24 12:06; fixed in the host: `swipl-patched.5`, live since superproject `622e425d4`, carries `swi-halt-passes-created-thread`, and the reproduction halts cleanly 20 runs of 20 on it |
 | Chapter 22's derivation twins | lib_nars' and lib_pln's `LimitSize` never return at size 0 once the queue is empty: the test is false for `()`, and excluding the empty tuple's best candidate from `()` leaves `()` | 2026-09-24 18:41; upstream PeTTa 43705f5 has the same body. Guarded in lib `709ab77a7` (superproject `7f373da2b`): the empty queue is its own limit, and the derivation-control twins claim `(LimitSize () 0)` and the size-0 derivation |
 | Chapter 22's tile puzzle | The original calls `add-unique-item-or-empty`, which nothing defines, so the start board is never recorded and the claim 181441 is 9!/2 + 1 | 2026-09-24 18:41; upstream makes the same call. Fixed in superproject `3488b9753` (examples `3528c8f`), which seeds `&dup` with `add-unique-or-fail`; the twin claims 181440 |
 | Chapter 22's `04-matespace2` | `(superpose (collapse (match ...)))` walks its unevaluated argument, answering the symbol `collapse` before the match, where the Python twin's docstring describes a snapshot | 2026-09-24 18:41; the file is upstream's, so this is what it means, and the docstring is being corrected |
 
 ## Open
-
-**SWI's halt passes over a thread still being created.** `thread_create`
-marks a thread created before `pthread_create`, and `exitPrologThreads()` has
-no case for that state, so the thread starts its goal while `PL_cleanup()`
-frees the module tables its goal is looked up in. `make
-runtime-halt-created-thread` in `extensions/cmetta` reproduces it without the
-engine, and it dies 16 runs of 20 with eight threads. In the corpus it shows as
-a program whose engine created a thread just before closing, an original or a
-twin using lib_thread or a background loader, exiting -11 after every claim
-passed, and only under a parallel lane: twelve serial runs of each such
-program exited 0. The final verification's first run caught it in chapter
-20's `13-reference_loading` twin, whose `background` load policy starts a
-loader thread; the core shows that thread in `start_thread`, `callProlog`
-and `resolveProcedure` while `mt_close`'s `PL_cleanup` is in
-`unallocModule`. The fourth run, the first against the verdict rename,
-caught the same twin the same way, `PL_cleanup` in `cleanupFunctors` this
-time (core 1509400), so two of four full runs under `JOBS=4` lost it. `done()` and the originals' runner flush stdout before they
-close the engine, so a crash there still hands the lane every claim and the
-space report. It is the host's defect, and it needs nothing from this
-corpus: the fix, a `PL_THREAD_CREATED` case in `exitPrologThreads()`, is in
-the native host build `swipl-patched.5`, which becomes the live host after
-gate-perf lands. Until then the gate runs `swipl-patched.2`, which lacks
-it.
 
 **No refusal kinds in C.** cmetta reports every engine refusal as `MT_ERROR`
 with its words, remedy and ground, but does not read the engine's
