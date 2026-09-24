@@ -2,7 +2,7 @@
 
 # Example index
 
-258 C programs: 207 language twins, each at its MeTTa original's path, and 51 C embedding examples.
+260 C programs: 209 language twins, each at its MeTTa original's path, and 51 C embedding examples.
 
 ## Embedding examples
 
@@ -368,3 +368,10 @@
 | [02-he_equalreduct.c](language-feature-examples/ch12-testing/02-he_equalreduct.c) | lib_he's small helpers, each held against C: id answers its argument, =alpha is mt_alpha_eq, and if-equal picks its branch by mt_eq. |
 | [03-assertion_difference.c](language-feature-examples/ch12-testing/03-assertion_difference.c) | a failed assertion reports which answers differ. C computes each report itself, from the bags it knows the forms produce and expect: a two-sided comparison's missing and excess bags are the two directed bag_minus differences, so a repeated answer counts every time; a one-sided containment has no excess bag; assert has a verdict and no bags at all; and a permutation fails assertEqual with two empty bags, since the collapsed tuples differ while the bags agree. The call in each report is the atom C built and evaluated. The passing forms' verdicts are C's too. |
 | [04-assert_answers.c](language-feature-examples/ch12-testing/04-assert_answers.c) | the reporting doors under the assert family. assert-answers takes a verdict, the call to report and two bags, and C computes what it reports from the same bags: nothing for a true verdict, and for a false one the missing and excess bag_minus differences; assert-includes-answers reports no excess bag. A form written over the door, assert-sorted, is held against C's own sort with mt_order: sorted answers pass, and an unsorted bag fails with two empty bags, since sorting keeps the bag. |
+
+### ch14-seeing-your-program
+
+| Twin | What it proves |
+|---|---|
+| [01-time_and_pragmas.c](language-feature-examples/ch14-seeing-your-program/01-time_and_pragmas.c) | time control and interpreter pragmas. timeout, elapsed and inferences take their expression unevaluated, so C builds it as a term; a bound that is not reached changes nothing, so each answer is what C computes for the bounded expression itself: spin's done, a sum, every answer of a superpose. A pragma answers unit; a stack depth has to be a nonnegative integer, which C checks to build the error the engine answers for -1; under a depth of 20 a factorial still answers C's 120 beside the branch that ran out. Relational arithmetic runs backwards, and C solves each equation by the inverse operation, with no integer doubling to 7. |
+| [03-the_clock_and_the_command_line.c](language-feature-examples/ch14-seeing-your-program/03-the_clock_and_the_command_line.c) | the clock, its written form and the process's arguments. C reads its own clock with time(), which is past 1700000000 too, and writes each format with strftime into its own buffer, whose length is the length the engine's rendering has; a format's answer is a name, not a text. Reading an argument past the end answers nothing, and C, holding argc of at least one, knows argument 0 is there. |

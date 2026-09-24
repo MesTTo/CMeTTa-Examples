@@ -4,6 +4,16 @@
 
 ## Unreleased
 
+- Write chapter 14's two twins in C. The bounded forms take their expression
+  as a term C builds, and each answer is what C computes for the expression
+  itself; relational arithmetic is checked against C solving each equation
+  by the inverse operation, and the clock against C's own `time()` and
+  `strftime`. The pragma twin found that `mt_eval` ignored
+  `max-stack-depth`: a factorial answered 120 and then overflowed the host
+  stack where the original answers `(Error -3 StackOverflow)`. cmetta
+  34f6aa6 runs an evaluated goal in the engine's fuel scope, and the twin
+  needs that commit.
+
 - Write chapter 12's assertion twins in C: each verdict is C's own, and each
   failure report is built from the bags C knows the forms compare, the
   missing and excess bags being the two directed `bag_minus` differences,
