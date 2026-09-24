@@ -72,8 +72,6 @@ static mt_status find_divisor_op(mt_call *call, void *user)
     return mt_answer(call, N(find_divisor(mt_int(mt_arg(call, 0)), mt_int(mt_arg(call, 1)))));
 }
 
-
-static mt_atom *number(int64_t x) { return N(x); }
 static mt_atom *primality(int64_t x) { return E("prime?", x); }
 static mt_atom *verdict(int64_t x) { return B(is_prime((uint64_t)x)); }
 
@@ -96,11 +94,11 @@ int main(void)
 
     const int64_t listed[] = { 3, 1, 2 };
     const size_t listed_n = sizeof listed / sizeof *listed;
-    mt_list answers = mt_all(mt_eval(m, E("let", V("xs"), each_of(listed, listed_n, number), E("hyperpose", V("xs")))));
+    mt_list answers = mt_all(mt_eval(m, E("let", V("xs"), mt_array(listed_n, listed), E("hyperpose", V("xs")))));
     qsort(answers.items, answers.len, sizeof *answers.items, mt_order);
     mt_atom **sorted = malloc(listed_n * sizeof *sorted);
     require("room for the list", sorted != NULL);
-    for (size_t i = 0; i < listed_n; i++) sorted[i] = number(listed[i]);
+    for (size_t i = 0; i < listed_n; i++) sorted[i] = N(listed[i]);
     qsort(sorted, listed_n, sizeof *sorted, mt_order);
     check_list_("hyperpose over a list held in a variable", answers, listed_n, sorted);
     free(sorted);

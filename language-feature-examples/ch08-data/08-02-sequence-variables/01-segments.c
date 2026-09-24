@@ -30,13 +30,16 @@ int main(void)
                   run(seven, 2, mt_len(seven)));
     check_answers("the gap does not widen the head", mt_eval(m, E("match", "&self", E("Note", GAP()), "matched")), "matched");
 
-    mt_atom *row = E("a", "b", "SEP", "c", "SEP", "d"), *splits[4];
+    mt_atom *row = E("a", "b", "SEP", "c", "SEP", "d");
+    mt_atom **splits = malloc(mt_len(row) * sizeof *splits);
+    require("room for an answer per separator", splits != NULL);
     size_t n = 0;
     for (size_t i = 1; i + 1 < mt_len(row); i++)
         if (strcmp(mt_name(mt_at(row, i)), "SEP") == 0)
             splits[n++] = E(mt_keep(mt_at(row, 0)), mt_keep(mt_at(row, mt_len(row) - 1)));
     check_list_("one answer per separator",
                 mt_all(mt_eval(m, E("let", E(V("pre"), GAP(), "SEP", GAP(), V("post")), row, E(V("pre"), V("post"))))), n, splits);
+    free(splits);
 
     mt_atom *twice = E("f", "a", "b", "mid", "a", "b");
     check_answers("a repeated gap repeats its run",

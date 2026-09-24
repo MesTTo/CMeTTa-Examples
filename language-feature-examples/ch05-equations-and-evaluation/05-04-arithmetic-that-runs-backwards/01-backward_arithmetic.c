@@ -7,12 +7,14 @@
  *   25 read with mt_bound against a C table; a bound posted first is a guard
  *   term, (let True bound question); and the # family posts rather than
  *   solves, so the composed query the ordinary operators refuse answers. The
- *   # tables carry C's own operator in their last column.
+ *   # tables carry C's own operation in their last column, floored as
+ *   CLP(FD)'s div and mod are.
  * Guarantees: all twenty-five claims of the original hold [tested: make
  *   twins; commit=WORKTREE].
  */
 #define MT_SHORTHAND
 #include "common.h"
+#include "lowering.h"
 
 /* (let True cond answer): answer only where cond holds, asked in the same
    derivation, so a constraint cond posts is still in force for answer. */
@@ -23,9 +25,14 @@ static const struct { int64_t known; const char *op, *var; int64_t operand, want
     { 5, "+", "p", 2, 3 }, { 12, "*", "q", 4, 3 }, { 6, "-", "r", 4, 10 }, { 3, "/", "s", 4, 12 },
 };
 
-static const struct { const char *op; int64_t a, b, c; } ARITH[] = {
-    { "#div", 13, 4, 13 / 4 },         { "#mod", 13, 4, 13 % 4 },
-    { "#min", 3, 7, 3 < 7 ? 3 : 7 },   { "#max", 3, 7, 3 > 7 ? 3 : 7 },
+/* CLP(FD)'s div and mod floor, as Prolog's do, where C's / and % truncate. */
+static int64_t floor_div(int64_t a, int64_t b) { return (a - floor_mod(a, b)) / b; }
+static int64_t smaller(int64_t a, int64_t b) { return C_MIN(a, b); }
+static int64_t larger(int64_t a, int64_t b) { return C_MAX(a, b); }
+
+static const struct { const char *op; int64_t a, b; int64_t (*c)(int64_t, int64_t); } ARITH[] = {
+    { "#div", 13, 4, floor_div }, { "#mod", 13, 4, floor_mod },
+    { "#min", 3, 7, smaller },    { "#max", 3, 7, larger },
 };
 
 static const struct { const char *op; int64_t a, b; bool c; } COMPARE[] = {
@@ -67,7 +74,7 @@ int main(void)
     check_list("the # family solves the composed query", mt_all(mt_solve(m, N(20), composed())), 4);
 
     for (size_t i = 0; i < sizeof ARITH / sizeof *ARITH; i++)
-        check_answers(ARITH[i].op, mt_eval(m, E(ARITH[i].op, ARITH[i].a, ARITH[i].b)), ARITH[i].c);
+        check_answers(ARITH[i].op, mt_eval(m, E(ARITH[i].op, ARITH[i].a, ARITH[i].b)), ARITH[i].c(ARITH[i].a, ARITH[i].b));
     for (size_t i = 0; i < sizeof COMPARE / sizeof *COMPARE; i++)
         check_answers(COMPARE[i].op, mt_eval(m, E(COMPARE[i].op, COMPARE[i].a, COMPARE[i].b)),
                       B(COMPARE[i].c));

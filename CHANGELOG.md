@@ -4,6 +4,15 @@
 
 ## Unreleased
 
+- Fix what a C reviewer reading ten twins across the chapters found. The
+  backward-arithmetic twin computed `#div` and `#mod` with C's truncating
+  `/` and `%`, which agree with CLP(FD)'s floored ones only for positive
+  operands; its table now holds C functions that floor. The segments twin
+  collected an answer per separator into a four-slot array nothing bounded;
+  it is sized by the row now. The hyperpose twin built its list of numbers
+  through a helper that only adapted `N` to a mapping, which `mt_array`
+  replaces. The other seven read as written C.
+
 - Keep ERRORS.md true to the hand-written corpus. It opens with the C seat
   repairs this corpus needed, each with the twin or probe that showed it and
   the commit. Then come the defects reported to the shared engine with what
