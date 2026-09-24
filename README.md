@@ -33,11 +33,11 @@ what exists, and [COVERAGE.md](COVERAGE.md) lists the rest.
 | `ch15-writing-transactions-and-worlds` | 7 | 6 | 6 | 0 | 0 |
 | `ch16-events-and-standing-queries` | 1 | 1 | 1 | 0 | 0 |
 | `ch17-concurrency-and-the-loop` | 13 | 12 | 12 | 0 | 0 |
-| `ch18-performance` | 24 | 20 | 0 | 0 | 0 |
-| `ch19-spaces-backed-by-anything` | 10 | 10 | 0 | 0 | 0 |
+| `ch18-performance` | 24 | 20 | 20 | 0 | 0 |
+| `ch19-spaces-backed-by-anything` | 10 | 10 | 10 | 0 | 0 |
 | `ch20-extending-the-engine` | 52 | 38 | 0 | 0 | 0 |
 | `ch22-a-reasoner-you-can-serve` | 33 | 27 | 0 | 0 | 0 |
-| **all** | 366 | 323 | 228 | 0 | 0 |
+| **all** | 366 | 323 | 258 | 0 | 0 |
 <!-- coverage:end -->
 
 ## Running them

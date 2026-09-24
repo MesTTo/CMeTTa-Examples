@@ -4,6 +4,32 @@
 
 ## Unreleased
 
+- Write chapter 18's twenty twins and chapter 19's ten in C. The workload
+  loaders are C loops storing their atoms through one `mt_add_all` batch,
+  sharing each subterm they build, while the questions stay the originals'
+  equations, lowered from C tokens. Where the engine's own `collapse` or
+  `length` does the counting, C asks for the count rather than walking a
+  million answers across: `01-scale`'s questions cost 4.4 seconds as C
+  cursors against the engine's 0.5, and the mate-space count 1.64 trillion
+  user instructions against 1.38. Every count C expects is its own, computed
+  from the loader's definition. The gap query twin reaches the language
+  matcher through `mt_query` under `mt_limit`'s inference bound. The
+  memoisation and tabling twins hold each report to one `tabling.h` builds
+  from the counts C expects, spelled from `vocabularies.h`. `17-memo_controls`
+  asks through `mt_run_goal`, because memoize-exact's tables are private to
+  the engine that filled them and every `mt_eval` cursor is an engine of its
+  own. Chapter 19's spaces are the engine's models built as terms through
+  `spaces.h`. The parametric twin opens `(cache &primary-kb 100)` with
+  `mt_space_of`. The C space is a provider behind `mt_provider_open`: a
+  pthread-mutexed array answering each match with a snapshot, held to the
+  seam harness's report and to four attached writer threads. The builtin
+  is a function published with `mt_def`, and the native vector a C struct
+  wrapped by `mt_object`. The MORK twin builds lib_mm2's operators as terms.
+  The Redis and MORK twins run their guarded claims exactly when the
+  originals do. Twins that import libraries mirror the originals' imports,
+  since the heads rule counts what an import defines. These twins need
+  extensions/cmetta 4dacbae.
+
 - Compare a space too large to list by its equations and the hash of
   everything else. Over the lane's 50,000-atom cap, the twin lane compared
   the two `&self` spaces by one multiset hash, so a twin whose C operation
