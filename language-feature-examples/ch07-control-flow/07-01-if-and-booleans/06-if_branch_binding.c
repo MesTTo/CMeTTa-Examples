@@ -8,9 +8,11 @@
  */
 #define MT_SHORTHAND
 #include "common.h"
+#include "lowering.h"
 
-/* Comparisons as functions, so C compiles a < a as the question the
-   original asks rather than folding it as a tautology. */
+/* Comparisons as functions, passed where lowering.h's C_LT and C_GT would
+   go, so C compiles a < a as the question the original asks rather than
+   folding it as a tautology. */
 static bool less(int64_t a, int64_t b) { return a < b; }
 static bool greater(int64_t a, int64_t b) { return a > b; }
 
@@ -18,20 +20,14 @@ static bool greater(int64_t a, int64_t b) { return a > b; }
    yields the body. */
 #define C_LET(name, value, body) ((void)(value), (body))
 #define M_LET(name, value, body) (let* ((name value)) body)
-#define C_IF(c, t, e) ((c) ? (t) : (e))
-#define M_IF(c, t, e) (if c t e)
-#define C_LT(a, b) less(a, b)
-#define M_LT(a, b) (< a b)
-#define C_GT(a, b) greater(a, b)
-#define M_GT(a, b) (> a b)
 
 #define PICK_ELSE(IF, LT, GT, LET, a, b) IF(LT(a, a), LET($c, a, a), b)
 #define PICK_THEN(IF, LT, GT, LET, a, b) IF(GT(a, 0), LET($c, a, a), b)
 #define BOTH(IF, LT, GT, LET, a, b) IF(GT(a, b), LET($c, 1, a), LET($d, 1, b))
 
-static int64_t pick_else(int64_t a, int64_t b) { return PICK_ELSE(C_IF, C_LT, C_GT, C_LET, a, b); }
-static int64_t pick_then(int64_t a, int64_t b) { return PICK_THEN(C_IF, C_LT, C_GT, C_LET, a, b); }
-static int64_t both(int64_t a, int64_t b) { return BOTH(C_IF, C_LT, C_GT, C_LET, a, b); }
+static int64_t pick_else(int64_t a, int64_t b) { return PICK_ELSE(C_IF, less, greater, C_LET, a, b); }
+static int64_t pick_then(int64_t a, int64_t b) { return PICK_THEN(C_IF, less, greater, C_LET, a, b); }
+static int64_t both(int64_t a, int64_t b) { return BOTH(C_IF, less, greater, C_LET, a, b); }
 
 /* A case over a boolean with a True and a False arm is ?: as well. */
 static int64_t case_else(int64_t a, int64_t b) { return less(a, a) ? a : b; }

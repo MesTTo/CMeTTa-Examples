@@ -6,12 +6,11 @@
  */
 #define MT_SHORTHAND
 #include "common.h"
+#include "lowering.h"
 
 /* One body, two languages: MUL is C's * in one expansion and MeTTa's (* a b)
    in the other, so the definition cannot say two different things. */
 #define SQUARE(MUL, x) MUL(x, x)
-#define C_MUL(a, b) ((a) * (b))
-#define M_MUL(a, b) (* a b)
 
 static int64_t square(int64_t x) { return SQUARE(C_MUL, x); }
 

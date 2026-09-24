@@ -7,16 +7,9 @@
  */
 #define MT_SHORTHAND
 #include "common.h"
+#include "lowering.h"
 
 #define FIB(IF, LT, ADD, SUB, SELF, n) IF(LT(n, 2), n, ADD(SELF(SUB(n, 1)), SELF(SUB(n, 2))))
-#define C_IF(c, t, e) ((c) ? (t) : (e))
-#define C_LT(a, b) ((a) < (b))
-#define C_ADD(a, b) ((a) + (b))
-#define C_SUB(a, b) ((a) - (b))
-#define M_IF(c, t, e) (if c t e)
-#define M_LT(a, b) (< a b)
-#define M_ADD(a, b) (+ a b)
-#define M_SUB(a, b) (- a b)
 #define M_FIB(n) (fib n)
 
 static int64_t fib(int64_t n) { return FIB(C_IF, C_LT, C_ADD, C_SUB, fib, n); }

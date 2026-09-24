@@ -8,16 +8,9 @@
  */
 #define MT_SHORTHAND
 #include "common.h"
+#include "lowering.h"
 
 #define FAC(IF, EQ, MUL, SUB, SELF, n) IF(EQ(n, 0), 1, MUL(n, SELF(SUB(n, 1))))
-#define C_IF(c, t, e) ((c) ? (t) : (e))
-#define C_EQ(a, b) ((a) == (b))
-#define C_MUL(a, b) ((a) * (b))
-#define C_SUB(a, b) ((a) - (b))
-#define M_IF(c, t, e) (if c t e)
-#define M_EQ(a, b) (== a b)
-#define M_MUL(a, b) (* a b)
-#define M_SUB(a, b) (- a b)
 #define M_FACF(n) (facF n)
 
 static int64_t facF(int64_t n) { return FAC(C_IF, C_EQ, C_MUL, C_SUB, facF, n); }

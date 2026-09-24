@@ -6,16 +6,9 @@
  */
 #ifndef FIBSMART_H
 #define FIBSMART_H
+#include "lowering.h"
 
 #define FIB_TR(IF, EQ, ADD, SUB, SELF, n, a, b) IF(EQ(n, 0), a, SELF(SUB(n, 1), b, ADD(a, b)))
-#define C_IF(c, t, e) ((c) ? (t) : (e))
-#define C_EQ(a, b) ((a) == (b))
-#define C_ADD(a, b) ((a) + (b))
-#define C_SUB(a, b) ((a) - (b))
-#define M_IF(c, t, e) (if c t e)
-#define M_EQ(a, b) (== a b)
-#define M_ADD(a, b) (+ a b)
-#define M_SUB(a, b) (- a b)
 #define M_FIB_TR(n, a, b) (fib-tr n a b)
 
 /* int64_t holds fib(n) up to n = 92; the engine's integers are unbounded. */

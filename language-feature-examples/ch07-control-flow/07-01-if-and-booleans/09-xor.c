@@ -8,16 +8,9 @@
  */
 #define MT_SHORTHAND
 #include "common.h"
+#include "lowering.h"
 
 #define CHECK_XOR(IF, XOR, EQ, GT, s, d) IF(XOR(EQ(s, d), GT(s, d)), 42, 0)
-#define C_IF(c, t, e) ((c) ? (t) : (e))
-#define C_XOR(a, b) ((a) != (b))
-#define C_EQ(a, b) ((a) == (b))
-#define C_GT(a, b) ((a) > (b))
-#define M_IF(c, t, e) (if c t e)
-#define M_XOR(a, b) (xor a b)
-#define M_EQ(a, b) (== a b)
-#define M_GT(a, b) (> a b)
 
 static int64_t check_xor(int64_t s, int64_t d) { return CHECK_XOR(C_IF, C_XOR, C_EQ, C_GT, s, d); }
 

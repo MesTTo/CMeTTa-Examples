@@ -4,6 +4,18 @@
 
 ## Unreleased
 
+- Spell each MeTTa operator once, in `lowering.h`: `C_X` is the C
+  expression, `M_X` the MeTTa tokens `mt_lower()` stringifies, and `T_X` the
+  atom `mt_expr()` builds, for `if`, `==`, `<`, `>`, `+`, `-`, `*`, `%` and
+  `xor`. Six twins in chapters 5 and 7 each defined their own copies and now
+  include it. `C_MOD` is Prolog's floored `mod`, which MeTTa's `%` is, where
+  C's own `%` truncates: `(% -7 3)` is 2 and `-7 % 3` is -1.
+  `operations/lowering.c` now proves `C_MOD` equal to the lowered `%` for
+  every sign of dividend and divisor. The Makefile takes each program's
+  header prerequisites from the compiler (`-MMD -MP`) instead of a list kept
+  beside its rules, so a program rebuilds when a header it includes changes,
+  and a twin including no shared header no longer rebuilds when one does.
+
 - Name every published operation's effect class by cmetta's generated
   `enum mt_effect_class`, which replaced the hand-named `MT_PURE` through
   `MT_IO` and `mt_effect_str` in extensions/cmetta 3f4d713: fifty-nine twins,
