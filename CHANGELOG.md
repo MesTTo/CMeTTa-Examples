@@ -4,6 +4,17 @@
 
 ## Unreleased
 
+- Write chapter 22's logic programs in C: eight twins. The relations are C
+  tables turned into equations, and each rule is the term it is. C decides
+  every answer from its tables: the letters below d in its alphabet, the
+  members a constrained list must hold, which negations hold and which leave
+  constraints, the Scallop README's five programs and each `not-provable`
+  over nested case arms. The backward chainer's five recursive clauses are
+  one `chain_clause(n)` over one to five premises, searched over Metamath's
+  demo0 in three knowledge bases C fills. The tagged fixpoint closes the same
+  rules in C under each carrier with `semirings.h`, including the exact
+  probability over the possible worlds of the edges.
+
 - Turn C arrays into expressions with cmetta's new `mt_array`. Twelve chapter
   8 twins built a tuple from a C array of bytes, codes or integers with a
   loop of their own, most of them into a fixed-size buffer, and the database
