@@ -4,6 +4,10 @@
 
 ## Unreleased
 
+- VERIFICATION.md records the corpus verified on superproject `99bd67a73`,
+  the chapter 22 fixes' tree on `swipl-patched.5`: every step passes,
+  323/323 twins and 3891/3891 claims, with that run's receipts.
+
 - ERRORS.md closes SWI's halt race. The host went live as
   `swipl-patched.5` in superproject `622e425d4`, carrying
   `swi-halt-passes-created-thread`, and cmetta's

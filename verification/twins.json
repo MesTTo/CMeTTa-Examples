@@ -394,8 +394,8 @@
   "example": "examples/ch05-equations-and-evaluation/05-02-changing-the-equations/04-specialize.metta",
   "claims_owed": 11,
   "claims_proved": 12,
-  "example_inferences": 81670,
-  "twin_inferences": 47058,
+  "example_inferences": 81630,
+  "twin_inferences": 47018,
   "storage": "carried",
   "findings": []
  },
@@ -414,8 +414,8 @@
   "example": "examples/ch05-equations-and-evaluation/05-02-changing-the-equations/06-specializecyclic.metta",
   "claims_owed": 2,
   "claims_proved": 2,
-  "example_inferences": 21551,
-  "twin_inferences": 19560,
+  "example_inferences": 21527,
+  "twin_inferences": 19536,
   "storage": "equal",
   "findings": []
  },
@@ -1174,7 +1174,7 @@
   "example": "examples/ch08-data/08-01-atoms-lists-and-folds/15-roman.metta",
   "claims_owed": 26,
   "claims_proved": 26,
-  "example_inferences": 291145,
+  "example_inferences": 291089,
   "twin_inferences": 3431,
   "storage": "carried",
   "findings": []
@@ -1224,7 +1224,7 @@
   "example": "examples/ch08-data/08-01-atoms-lists-and-folds/20-roman_general_operators.metta",
   "claims_owed": 16,
   "claims_proved": 16,
-  "example_inferences": 139375,
+  "example_inferences": 139343,
   "twin_inferences": 2952,
   "storage": "carried",
   "findings": []
@@ -1304,7 +1304,7 @@
   "example": "examples/ch08-data/08-03-the-shipped-libraries/02-datastructures_fingertree.metta",
   "claims_owed": 15,
   "claims_proved": 15,
-  "example_inferences": 286014,
+  "example_inferences": 285926,
   "twin_inferences": 1305,
   "storage": "equal",
   "findings": []
@@ -1314,7 +1314,7 @@
   "example": "examples/ch08-data/08-03-the-shipped-libraries/03-text_lib.metta",
   "claims_owed": 37,
   "claims_proved": 38,
-  "example_inferences": 358657,
+  "example_inferences": 358631,
   "twin_inferences": 3009,
   "storage": "equal",
   "findings": []
@@ -1394,7 +1394,7 @@
   "example": "examples/ch08-data/08-03-the-shipped-libraries/11-combinatorics_lib.metta",
   "claims_owed": 63,
   "claims_proved": 63,
-  "example_inferences": 766278,
+  "example_inferences": 766246,
   "twin_inferences": 5100,
   "storage": "equal",
   "findings": []
@@ -1414,7 +1414,7 @@
   "example": "examples/ch08-data/08-03-the-shipped-libraries/13-vector_lib.metta",
   "claims_owed": 43,
   "claims_proved": 43,
-  "example_inferences": 244251,
+  "example_inferences": 244243,
   "twin_inferences": 3621,
   "storage": "equal",
   "findings": []
@@ -1424,7 +1424,7 @@
   "example": "examples/ch08-data/08-03-the-shipped-libraries/14-reflect_lib.metta",
   "claims_owed": 59,
   "claims_proved": 61,
-  "example_inferences": 1234241,
+  "example_inferences": 1234170,
   "twin_inferences": 63472,
   "storage": "equal",
   "findings": []
@@ -1434,7 +1434,7 @@
   "example": "examples/ch08-data/08-03-the-shipped-libraries/15-fingertree_internals.metta",
   "claims_owed": 28,
   "claims_proved": 28,
-  "example_inferences": 281609,
+  "example_inferences": 281521,
   "twin_inferences": 2319,
   "storage": "equal",
   "findings": []
@@ -1494,7 +1494,7 @@
   "example": "examples/ch08-data/08-03-the-shipped-libraries/21-datastructures_lib.metta",
   "claims_owed": 59,
   "claims_proved": 60,
-  "example_inferences": 2902745,
+  "example_inferences": 2902657,
   "twin_inferences": 5327,
   "storage": "equal",
   "findings": []
@@ -1504,7 +1504,7 @@
   "example": "examples/ch08-data/08-03-the-shipped-libraries/22-functional_lib.metta",
   "claims_owed": 73,
   "claims_proved": 73,
-  "example_inferences": 1117488,
+  "example_inferences": 1117440,
   "twin_inferences": 77947,
   "storage": "carried",
   "findings": []
@@ -1524,7 +1524,7 @@
   "example": "examples/ch08-data/08-03-the-shipped-libraries/24-pairs_lib.metta",
   "claims_owed": 37,
   "claims_proved": 37,
-  "example_inferences": 828065,
+  "example_inferences": 828057,
   "twin_inferences": 3042,
   "storage": "equal",
   "findings": []
@@ -1534,7 +1534,7 @@
   "example": "examples/ch08-data/08-03-the-shipped-libraries/25-graph_lib.metta",
   "claims_owed": 52,
   "claims_proved": 52,
-  "example_inferences": 7960737,
+  "example_inferences": 7960729,
   "twin_inferences": 4931,
   "storage": "equal",
   "findings": []
@@ -1544,7 +1544,7 @@
   "example": "examples/ch08-data/08-03-the-shipped-libraries/26-unicode_lib.metta",
   "claims_owed": 54,
   "claims_proved": 54,
-  "example_inferences": 220363,
+  "example_inferences": 220364,
   "twin_inferences": 4209,
   "storage": "equal",
   "findings": []
@@ -1554,7 +1554,7 @@
   "example": "examples/ch08-data/08-03-the-shipped-libraries/27-parsing_lib.metta",
   "claims_owed": 74,
   "claims_proved": 74,
-  "example_inferences": 4295721,
+  "example_inferences": 4295645,
   "twin_inferences": 104031,
   "storage": "carried",
   "findings": []
@@ -1614,7 +1614,7 @@
   "example": "examples/ch08-data/08-03-the-shipped-libraries/33-uuid_lib.metta",
   "claims_owed": 49,
   "claims_proved": 49,
-  "example_inferences": 1340107,
+  "example_inferences": 1340096,
   "twin_inferences": 4442,
   "storage": "equal",
   "findings": []
@@ -1634,7 +1634,7 @@
   "example": "examples/ch08-data/08-03-the-shipped-libraries/35-math_lib.metta",
   "claims_owed": 74,
   "claims_proved": 74,
-  "example_inferences": 370187,
+  "example_inferences": 370171,
   "twin_inferences": 5706,
   "storage": "equal",
   "findings": []
@@ -1644,7 +1644,7 @@
   "example": "examples/ch08-data/08-03-the-shipped-libraries/36-random_lib.metta",
   "claims_owed": 68,
   "claims_proved": 68,
-  "example_inferences": 1060798,
+  "example_inferences": 1060769,
   "twin_inferences": 6188,
   "storage": "equal",
   "findings": []
@@ -1654,7 +1654,7 @@
   "example": "examples/ch08-data/08-03-the-shipped-libraries/37-statistics_lib.metta",
   "claims_owed": 78,
   "claims_proved": 78,
-  "example_inferences": 2146438,
+  "example_inferences": 2146406,
   "twin_inferences": 6525,
   "storage": "equal",
   "findings": []
@@ -1664,7 +1664,7 @@
   "example": "examples/ch08-data/08-03-the-shipped-libraries/38-http_lib.metta",
   "claims_owed": 41,
   "claims_proved": 41,
-  "example_inferences": 568103,
+  "example_inferences": 568105,
   "twin_inferences": 18768,
   "storage": "equal",
   "findings": []
@@ -1934,8 +1934,8 @@
   "example": "examples/ch09-types/24-sorted_constructors.metta",
   "claims_owed": 7,
   "claims_proved": 7,
-  "example_inferences": 24212,
-  "twin_inferences": 17575,
+  "example_inferences": 24196,
+  "twin_inferences": 17559,
   "storage": "equal",
   "findings": []
  },
@@ -2074,8 +2074,8 @@
   "example": "examples/ch14-seeing-your-program/01-time_and_pragmas.metta",
   "claims_owed": 25,
   "claims_proved": 30,
-  "example_inferences": 50819,
-  "twin_inferences": 11961,
+  "example_inferences": 50803,
+  "twin_inferences": 11953,
   "storage": "equal",
   "findings": []
  },
@@ -2094,7 +2094,7 @@
   "example": "examples/ch15-writing-transactions-and-worlds/01-mutex_and_transaction.metta",
   "claims_owed": 2,
   "claims_proved": 10,
-  "example_inferences": 26454,
+  "example_inferences": 26461,
   "twin_inferences": 7355,
   "storage": "carried",
   "findings": []
@@ -2124,7 +2124,7 @@
   "example": "examples/ch15-writing-transactions-and-worlds/04-admission_pools.metta",
   "claims_owed": 9,
   "claims_proved": 19,
-  "example_inferences": 31801,
+  "example_inferences": 31793,
   "twin_inferences": 14448,
   "storage": "carried",
   "findings": []
@@ -2164,7 +2164,7 @@
   "example": "examples/ch17-concurrency-and-the-loop/01-thread_lib.metta",
   "claims_owed": 27,
   "claims_proved": 27,
-  "example_inferences": 198662,
+  "example_inferences": 198656,
   "twin_inferences": 8275,
   "storage": "carried",
   "findings": []
@@ -2174,7 +2174,7 @@
   "example": "examples/ch17-concurrency-and-the-loop/02-thread_linda.metta",
   "claims_owed": 10,
   "claims_proved": 15,
-  "example_inferences": 142771,
+  "example_inferences": 142775,
   "twin_inferences": 2915,
   "storage": "carried",
   "findings": []
@@ -2184,7 +2184,7 @@
   "example": "examples/ch17-concurrency-and-the-loop/03-hyperpose_primes.metta",
   "claims_owed": 3,
   "claims_proved": 3,
-  "example_inferences": 246158640,
+  "example_inferences": 241586350,
   "twin_inferences": 6093,
   "storage": "carried",
   "findings": []
@@ -2194,7 +2194,7 @@
   "example": "examples/ch17-concurrency-and-the-loop/04-thin_forms.metta",
   "claims_owed": 25,
   "claims_proved": 25,
-  "example_inferences": 42519,
+  "example_inferences": 43113,
   "twin_inferences": 8904,
   "storage": "carried",
   "findings": []
@@ -2214,7 +2214,7 @@
   "example": "examples/ch17-concurrency-and-the-loop/06-the_prolog_rung_under_lib_thread.metta",
   "claims_owed": 35,
   "claims_proved": 38,
-  "example_inferences": 202556,
+  "example_inferences": 202416,
   "twin_inferences": 8013,
   "storage": "carried",
   "findings": []
@@ -2224,7 +2224,7 @@
   "example": "examples/ch17-concurrency-and-the-loop/08-class_grains.metta",
   "claims_owed": 3,
   "claims_proved": 17,
-  "example_inferences": 2976327,
+  "example_inferences": 2975598,
   "twin_inferences": 26271,
   "storage": "equal",
   "findings": []
@@ -2244,8 +2244,8 @@
   "example": "examples/ch17-concurrency-and-the-loop/10-class_entities.metta",
   "claims_owed": 6,
   "claims_proved": 8,
-  "example_inferences": 88104,
-  "twin_inferences": 19827,
+  "example_inferences": 88154,
+  "twin_inferences": 19837,
   "storage": "equal",
   "findings": []
  },
@@ -2254,8 +2254,8 @@
   "example": "examples/ch17-concurrency-and-the-loop/11-class_dispatch.metta",
   "claims_owed": 6,
   "claims_proved": 6,
-  "example_inferences": 225384,
-  "twin_inferences": 38651,
+  "example_inferences": 224802,
+  "twin_inferences": 38621,
   "storage": "equal",
   "findings": []
  },
@@ -2264,8 +2264,8 @@
   "example": "examples/ch17-concurrency-and-the-loop/12-class_prototypes.metta",
   "claims_owed": 5,
   "claims_proved": 8,
-  "example_inferences": 177891,
-  "twin_inferences": 35131,
+  "example_inferences": 177780,
+  "twin_inferences": 35141,
   "storage": "equal",
   "findings": []
  },
@@ -2274,7 +2274,7 @@
   "example": "examples/ch17-concurrency-and-the-loop/13-class_decorators.metta",
   "claims_owed": 12,
   "claims_proved": 12,
-  "example_inferences": 104333,
+  "example_inferences": 104323,
   "twin_inferences": 62418,
   "storage": "equal",
   "findings": []
@@ -2294,7 +2294,7 @@
   "example": "examples/ch18-performance/18-01-larger-workloads/02-holbenchmark.metta",
   "claims_owed": 4,
   "claims_proved": 4,
-  "example_inferences": 36077716,
+  "example_inferences": 36077676,
   "twin_inferences": 3494,
   "storage": "carried",
   "findings": []
@@ -2424,7 +2424,7 @@
   "example": "examples/ch18-performance/18-02-memoisation-and-tabling/09-tabling_fib.metta",
   "claims_owed": 1,
   "claims_proved": 1,
-  "example_inferences": 66014,
+  "example_inferences": 66006,
   "twin_inferences": 774,
   "storage": "equal",
   "findings": []
@@ -2434,7 +2434,7 @@
   "example": "examples/ch18-performance/18-02-memoisation-and-tabling/10-tabling_equation_change.metta",
   "claims_owed": 4,
   "claims_proved": 4,
-  "example_inferences": 51321,
+  "example_inferences": 51293,
   "twin_inferences": 2828,
   "storage": "equal",
   "findings": []
@@ -2444,7 +2444,7 @@
   "example": "examples/ch18-performance/18-02-memoisation-and-tabling/11-tabling_space_write.metta",
   "claims_owed": 6,
   "claims_proved": 6,
-  "example_inferences": 60375,
+  "example_inferences": 60348,
   "twin_inferences": 3872,
   "storage": "equal",
   "findings": []
@@ -2515,7 +2515,7 @@
   "claims_owed": 6,
   "claims_proved": 6,
   "example_inferences": 20263,
-  "twin_inferences": 5856,
+  "twin_inferences": 5848,
   "storage": "equal",
   "findings": []
  },
@@ -2544,7 +2544,7 @@
   "example": "examples/ch19-spaces-backed-by-anything/19-02-a-space-in-c/01-c_space.metta",
   "claims_owed": 0,
   "claims_proved": 6,
-  "example_inferences": 288603,
+  "example_inferences": 288605,
   "twin_inferences": 2746,
   "storage": "equal",
   "findings": []
@@ -2554,7 +2554,7 @@
   "example": "examples/ch19-spaces-backed-by-anything/19-03-a-builtin-in-c/01-c_extension.metta",
   "claims_owed": 0,
   "claims_proved": 1,
-  "example_inferences": 249572,
+  "example_inferences": 249573,
   "twin_inferences": 1633,
   "storage": "equal",
   "findings": []
@@ -2694,7 +2694,7 @@
   "example": "examples/ch20-extending-the-engine/20-02-metta-written-in-metta/04-minimal_metta.metta",
   "claims_owed": 33,
   "claims_proved": 33,
-  "example_inferences": 184227,
+  "example_inferences": 184195,
   "twin_inferences": 7530,
   "storage": "equal",
   "findings": []
@@ -2774,7 +2774,7 @@
   "example": "examples/ch20-extending-the-engine/20-02-metta-written-in-metta/13-strategy_internals.metta",
   "claims_owed": 23,
   "claims_proved": 23,
-  "example_inferences": 408612,
+  "example_inferences": 408580,
   "twin_inferences": 55668,
   "storage": "equal",
   "findings": []
@@ -2914,8 +2914,8 @@
   "example": "examples/ch20-extending-the-engine/20-04-modules-and-the-catalog/11-reference_rows.metta",
   "claims_owed": 13,
   "claims_proved": 13,
-  "example_inferences": 127190,
-  "twin_inferences": 72874,
+  "example_inferences": 126915,
+  "twin_inferences": 72944,
   "storage": "equal",
   "findings": []
  },
@@ -2924,8 +2924,8 @@
   "example": "examples/ch20-extending-the-engine/20-04-modules-and-the-catalog/12-reference_maps.metta",
   "claims_owed": 12,
   "claims_proved": 12,
-  "example_inferences": 113707,
-  "twin_inferences": 91708,
+  "example_inferences": 113540,
+  "twin_inferences": 91600,
   "storage": "declared",
   "findings": []
  },
@@ -2934,8 +2934,8 @@
   "example": "examples/ch20-extending-the-engine/20-04-modules-and-the-catalog/13-reference_loading.metta",
   "claims_owed": 5,
   "claims_proved": 5,
-  "example_inferences": 68712,
-  "twin_inferences": 46355,
+  "example_inferences": 70454,
+  "twin_inferences": 44448,
   "storage": "declared",
   "findings": []
  },
@@ -2994,8 +2994,8 @@
   "example": "examples/ch22-a-reasoner-you-can-serve/22-01-logic-programs/04-nilbc.metta",
   "claims_owed": 9,
   "claims_proved": 9,
-  "example_inferences": 313624085,
-  "twin_inferences": 161419,
+  "example_inferences": 313624077,
+  "twin_inferences": 161403,
   "storage": "equal",
   "findings": []
  },
@@ -3004,8 +3004,8 @@
   "example": "examples/ch22-a-reasoner-you-can-serve/22-01-logic-programs/05-scallop_readme.metta",
   "claims_owed": 5,
   "claims_proved": 5,
-  "example_inferences": 68076,
-  "twin_inferences": 50126,
+  "example_inferences": 68060,
+  "twin_inferences": 50110,
   "storage": "equal",
   "findings": []
  },
@@ -3024,7 +3024,7 @@
   "example": "examples/ch22-a-reasoner-you-can-serve/22-01-logic-programs/07-tagged_fixpoint.metta",
   "claims_owed": 6,
   "claims_proved": 6,
-  "example_inferences": 34329,
+  "example_inferences": 34325,
   "twin_inferences": 931,
   "storage": "equal",
   "findings": []
@@ -3044,7 +3044,7 @@
   "example": "examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/01-measure.metta",
   "claims_owed": 19,
   "claims_proved": 19,
-  "example_inferences": 137343,
+  "example_inferences": 137285,
   "twin_inferences": 5691,
   "storage": "equal",
   "findings": []
@@ -3054,7 +3054,7 @@
   "example": "examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/02-soft.metta",
   "claims_owed": 25,
   "claims_proved": 25,
-  "example_inferences": 316415,
+  "example_inferences": 316383,
   "twin_inferences": 2295,
   "storage": "equal",
   "findings": []
@@ -3084,7 +3084,7 @@
   "example": "examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/06-pln_roman.metta",
   "claims_owed": 1,
   "claims_proved": 1,
-  "example_inferences": 1986681,
+  "example_inferences": 1991526,
   "twin_inferences": 7376,
   "storage": "equal",
   "findings": []
@@ -3094,7 +3094,7 @@
   "example": "examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/09-nars_tuffy.metta",
   "claims_owed": 1,
   "claims_proved": 1,
-  "example_inferences": 4632116,
+  "example_inferences": 4643478,
   "twin_inferences": 6568,
   "storage": "equal",
   "findings": []
@@ -3104,7 +3104,7 @@
   "example": "examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/11-weighted_subset_posterior.metta",
   "claims_owed": 11,
   "claims_proved": 11,
-  "example_inferences": 1637510,
+  "example_inferences": 1637499,
   "twin_inferences": 1343,
   "storage": "equal",
   "findings": []
@@ -3114,7 +3114,7 @@
   "example": "examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/13-the_measure_algebra_underneath.metta",
   "claims_owed": 18,
   "claims_proved": 18,
-  "example_inferences": 58239,
+  "example_inferences": 58223,
   "twin_inferences": 1662,
   "storage": "equal",
   "findings": []
@@ -3124,7 +3124,7 @@
   "example": "examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/14-soft_aggregation_underneath.metta",
   "claims_owed": 20,
   "claims_proved": 20,
-  "example_inferences": 134218,
+  "example_inferences": 134202,
   "twin_inferences": 1836,
   "storage": "equal",
   "findings": []
@@ -3152,10 +3152,10 @@
  {
   "twin": "language-feature-examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/17-nars_derivation_control.c",
   "example": "examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/17-nars_derivation_control.metta",
-  "claims_owed": 26,
-  "claims_proved": 26,
-  "example_inferences": 248891,
-  "twin_inferences": 2268,
+  "claims_owed": 28,
+  "claims_proved": 28,
+  "example_inferences": 252346,
+  "twin_inferences": 2418,
   "storage": "equal",
   "findings": []
  },
@@ -3172,10 +3172,10 @@
  {
   "twin": "language-feature-examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/19-pln_derivation_control.c",
   "example": "examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/19-pln_derivation_control.metta",
-  "claims_owed": 25,
-  "claims_proved": 25,
-  "example_inferences": 332866,
-  "twin_inferences": 2124,
+  "claims_owed": 27,
+  "claims_proved": 27,
+  "example_inferences": 336145,
+  "twin_inferences": 2274,
   "storage": "equal",
   "findings": []
  },
@@ -3194,8 +3194,8 @@
   "example": "examples/ch22-a-reasoner-you-can-serve/22-03-search/02-tilepuzzle.metta",
   "claims_owed": 1,
   "claims_proved": 1,
-  "example_inferences": 32161638,
-  "twin_inferences": 44667,
+  "example_inferences": 33673738,
+  "twin_inferences": 44860,
   "storage": "equal",
   "findings": []
  },
