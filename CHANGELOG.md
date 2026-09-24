@@ -4,6 +4,11 @@
 
 ## Unreleased
 
+- Write chapter 10's error twins in C, where an error is a value as a C
+  result is: C computes each sum and division it can and an error for the
+  rest, and models if-error, return-on-error and throw, which wraps a reason
+  unless it is an error already, over the atoms it builds.
+
 - Write chapter 9's type twins in C. Declarations come from C tables and
   each claim that is a lookup is derived from them: a symbol's types, an
   arrow's result where the arguments fit, and subtyping's widening run as

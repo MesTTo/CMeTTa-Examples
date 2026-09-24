@@ -2,7 +2,7 @@
 
 # Example index
 
-245 C programs: 194 language twins, each at its MeTTa original's path, and 51 C embedding examples.
+247 C programs: 196 language twins, each at its MeTTa original's path, and 51 C embedding examples.
 
 ## Embedding examples
 
@@ -340,3 +340,10 @@
 | [22-variadic_arrow_signature.c](language-feature-examples/ch09-types/22-variadic_arrow_signature.c) | an arrow whose last parameter is a segment accepts every arity. do2's (-> (:seg Bool) (->)) evaluates each argument, printing as it goes, and answers unit whatever the count; undeclared-do binds its whole run too, which C builds as the list of the arguments it passed. |
 | [23-variadic_arrow_faces.c](language-feature-examples/ch09-types/23-variadic_arrow_faces.c) | a segment parameter is checked element by element. vsum's (:seg Number) admits any count of numbers, whose sum C takes itself, and refuses a Bool at whichever position it stands, the position C finds by scanning the arguments. An (:seg Atom) run is held as written, and a fixed prefix before it is evaluated. A fixed arrow still refuses an extra argument, and C builds that error from fixed2's own arrow: its parameter count and the count the call supplied. |
 | [24-sorted_constructors.c](language-feature-examples/ch09-types/24-sorted_constructors.c) | a declared constructor is sorted data. SortedPoint's arrow has no equation, so an application is a point whose type is the arrow's last type, and methods destructure it. C takes the same fields: x is the first, the norm is its own sqrt, and a String where a Number is declared is refused at the position C finds. The three loops add a field twenty times whichever way it is reached, sixty by C's multiplication. |
+
+### ch10-errors-and-refusals
+
+| Twin | What it proves |
+|---|---|
+| [01-he_error.c](language-feature-examples/ch10-errors-and-refusals/01-he_error.c) | an error is a value, which is how C reports one too: a result is a value or an (Error ...) the caller inspects. C computes each sum it can and makes an error of the rest the way the engine does: an operand that is no number, whether declared a String or never declared, and two unbound operands, which catch turns into an error, and an integer division by zero. if-error asks whether a value is an error, and return-on-error answers an error itself and anything else's next form. |
+| [02-throwing_and_tracing.c](language-feature-examples/ch10-errors-and-refusals/02-throwing_and_tracing.c) | throw makes an error value and trace! prints without changing a value. C's throw answers (Error (throw reason) reason), or the reason itself when it is an error already, so rethrowing keeps the cause; the error travels as any answer does, through if-error and return-on-error and out of half, whose guard C runs as its own function. trace! answers its second argument, which C computes, while the engine prints the first. |
