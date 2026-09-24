@@ -4,6 +4,20 @@
 
 ## Unreleased
 
+- Write chapter 15's six twins in C. The mutexed counter is five pthreads,
+  each attached to the engine, calling a published increment that holds a
+  pthread mutex, and the failing transaction is `mt_transaction` inside a
+  published operation whose body answers `MT_FAIL`. The hook judges are C
+  rule tables published as functions and claimed through the engine's own
+  `declare-pre-add!` and `declare-post-add!`; `judges.h` keeps a model of
+  what the claimed space should hold, derived from the verdicts, and builds
+  each refusal's Error from C data. The admission judge is C, one function
+  per head of the original's chain, with loops where the chain recurses. It
+  reads every capacity row as the builtin does, and a two-row differential
+  shows the builtin agreeing with it where the original's chain reads only
+  the first row. Owned records are written through `mt_transaction`, and a
+  refused commit is the door's `MT_ERROR`.
+
 - Write chapter 14's two twins in C. The bounded forms take their expression
   as a term C builds, and each answer is what C computes for the expression
   itself; relational arithmetic is checked against C solving each equation
