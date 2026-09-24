@@ -4,6 +4,17 @@
 
 ## Unreleased
 
+- Write chapter 8's CLI twin in C: an option parser written from lib_cli's
+  own grammar, since getopt_long clusters `-vn` and reads `-vtrue` as five
+  flags where the library refuses one and attaches the other. Declarations
+  are read and refused as the library refuses them, tokens are scanned in
+  its order, every value is converted before a repeat policy selects, and
+  defaults precede supplied occurrences; tokens are counted bytes, so an
+  argument holding NUL stays whole. Each held converter has a C counterpart,
+  and `cli-plus` is one C operation the engine and C's parser both call.
+  Help is laid out in optparse's columns, padded by characters, and the
+  engine's help text equals C's.
+
 - Write chapter 8's testing twin in C: range is a half-open interval
   counted in GMP, so a bound past int64 walks the same loop;
   cartesian-power is an odometer whose last place turns fastest; forall is an
