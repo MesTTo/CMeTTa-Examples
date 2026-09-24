@@ -4,6 +4,19 @@
 
 ## Unreleased
 
+- Write chapter 22's search twins in C. The tile puzzle's twenty-four move
+  equations are one geometry C writes. Its breadth-first search is C's over
+  the same geometry, and it dequeues the start twice, because
+  `add-unique-item-or-empty` is defined nowhere and so never records it.
+  `matespace.h` models the matespace programs' space and the order the
+  engine evaluates them in, measured against the engine round by round. In
+  the second program, `(superpose (collapse (match ...)))` is not a
+  snapshot: superpose walks its unevaluated argument, answering the symbol
+  `collapse` before it reaches the match. The model reproduces that at every
+  round count tried and gives the originals' 1,063,919 and 1,297,533. The
+  energy function is one body for C and its equation, and the added
+  Fibonacci is `fib.h`'s. These twins need extensions/cmetta cf925da.
+
 - Write chapter 22's weighted answers in C: fourteen twins held to C's
   models of the reasoning libraries. `nars_truth.h` is lib_nars's truth
   functions in the library's own operation order, so every truth a rule must

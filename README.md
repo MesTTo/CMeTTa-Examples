@@ -36,8 +36,8 @@ what exists, and [COVERAGE.md](COVERAGE.md) lists the rest.
 | `ch18-performance` | 24 | 20 | 20 | 0 | 0 |
 | `ch19-spaces-backed-by-anything` | 10 | 10 | 10 | 0 | 0 |
 | `ch20-extending-the-engine` | 52 | 38 | 38 | 0 | 0 |
-| `ch22-a-reasoner-you-can-serve` | 33 | 27 | 22 | 0 | 0 |
-| **all** | 366 | 323 | 318 | 0 | 0 |
+| `ch22-a-reasoner-you-can-serve` | 33 | 27 | 27 | 0 | 0 |
+| **all** | 366 | 323 | 323 | 0 | 0 |
 <!-- coverage:end -->
 
 ## Running them
