@@ -39,16 +39,9 @@ static bool bytes_of(const mt_atom *list, bytes *out)
     return true;
 }
 
-static mt_atom *list_of(const unsigned char *at, size_t n)
-{
-    mt_atom *kids[4 * MOST];
-    for (size_t i = 0; i < n; i++) kids[i] = mt_num(at[i]);
-    return mt_exprv(n, kids);
-}
-
 /* UTF-8: a text is its bytes; bytes are text only when every sequence
    decodes. NULL when they do not, or are no bytes. */
-static mt_atom *utf8_bytes(const char *text) { return list_of((const unsigned char *)text, strlen(text)); }
+static mt_atom *utf8_bytes(const char *text) { return mt_array(strlen(text), (const unsigned char *)text); }
 
 static mt_atom *utf8_text(const mt_atom *list)
 {
@@ -95,7 +88,7 @@ static mt_atom *unhex(const char *text)
         char pair[3] = { text[i], text[i + 1], '\0' };
         out[i / 2] = (unsigned char)strtol(pair, NULL, 16);
     }
-    return list_of(out, len / 2);
+    return mt_array(len / 2, out);
 }
 
 /* The alphabets by name; -1 for a name the library does not know. */
@@ -113,7 +106,7 @@ static mt_atom *unbase64_of(const char *name, const char *text)
     unsigned char out[MOST];
     int url = alphabet(name);
     long n = url >= 0 ? unbase64(text, strlen(text), url, out) : -1;
-    return n >= 0 ? list_of(out, (size_t)n) : NULL;
+    return n >= 0 ? mt_array((size_t)n, out) : NULL;
 }
 
 static mt_atom *verdict(bool holds) { return S(holds ? "fine" : "refused"); }

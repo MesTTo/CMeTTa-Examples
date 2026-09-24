@@ -143,14 +143,6 @@ static mt_atom *ready_handles(mt_atom *const *handles, const int *fds, size_t n,
     return mt_exprv(found, kids);
 }
 
-static mt_atom *bytes_of(const unsigned char *bytes, size_t n)
-{
-    mt_atom *kids[MESSAGE];
-    require("a message of this program", n <= MESSAGE);
-    for (size_t i = 0; i < n; i++) kids[i] = mt_num(bytes[i]);
-    return mt_exprv(n, kids);
-}
-
 /* Up to `most` bytes, or through EOF for 0. */
 static mt_atom *read_from(int fd, size_t most)
 {
@@ -161,7 +153,7 @@ static mt_atom *read_from(int fd, size_t most)
         r = read(fd, buffer + got, (most ? most : sizeof buffer) - got);
         if (r > 0) got += (size_t)r;
     } while (r > 0 && (most ? got < most : got < sizeof buffer));
-    return bytes_of(buffer, got);
+    return mt_array(got, buffer);
 }
 
 static bool wrote(int fd, const unsigned char *bytes, size_t n) { return write(fd, bytes, n) == (ssize_t)n; }
@@ -191,7 +183,7 @@ static mt_atom *received(int fd, const endpoint *from, bool *from_there)
     ssize_t got = recvfrom(fd, bytes, sizeof bytes, 0, (struct sockaddr *)&a, &n);
     require("a datagram", got >= 0 && endpoint_of(&a, &sender));
     *from_there = same(&sender, from);
-    return bytes_of(bytes, (size_t)got);
+    return mt_array((size_t)got, bytes);
 }
 
 /* Closing releases the descriptor once, however often it is asked. */

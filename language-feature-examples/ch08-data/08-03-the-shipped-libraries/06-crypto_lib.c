@@ -27,14 +27,6 @@ static mt_atom *hmac(const char *algorithm, const void *key, size_t key_n, const
     return hex(md, length);
 }
 
-/* Bytes as the expression of their octets, lib_crypto's byte door. */
-static mt_atom *octets(const unsigned char *bytes, size_t n)
-{
-    mt_atom *kids[MOST];
-    for (size_t i = 0; i < n; i++) kids[i] = mt_num(bytes[i]);
-    return mt_exprv(n, kids);
-}
-
 /* Whether password matches a $pbkdf2-sha512$t=<iterations>$<salt>$<digest>
    record [source: lib/lib_crypto/lib_crypto.pl, 'crypto-password-hash';
    commit=33c2d50c84b24c1a2c906225600e2a4ffdb662f1]. */
@@ -87,21 +79,21 @@ int main(void)
     /* Text is UTF-8; the byte door keeps every octet. */
     check_answers("the native spelling", mt_eval(m, E("crypto_hash", "sha256", T(hello))), digest("SHA256", hello, 5));
     const unsigned char hello_bytes[] = { 'h', 'e', 'l', 'l', 'o' }, key[] = { 0xc3, 0xa9 }, data[] = { 0x00, 0xff };
-    check_answers("the octets of hello", mt_eval(m, E("crypto-hash-bytes", "sha256", octets(hello_bytes, 5))),
+    check_answers("the octets of hello", mt_eval(m, E("crypto-hash-bytes", "sha256", mt_array(5, hello_bytes))),
                   digest("SHA256", hello_bytes, 5));
     check_answers("no octets at all", mt_eval(m, E("crypto-hash-bytes", "sha256", mt_unit())), digest("SHA256", "", 0));
     const char *jefe = "Jefe", *nothing = "what do ya want for nothing?";
     check_answers("an HMAC", mt_eval(m, E("crypto-hmac", "sha256", T(jefe), T(nothing))),
                   hmac("SHA256", jefe, strlen(jefe), nothing, strlen(nothing)));
     check_answers("an HMAC over bytes, zero among them",
-                  mt_eval(m, E("crypto-hmac-bytes", "sha256", octets(key, 2), octets(data, 2))),
+                  mt_eval(m, E("crypto-hmac-bytes", "sha256", mt_array(2, key), mt_array(2, data))),
                   hmac("SHA256", key, 2, data, 2));
 
     /* Random draws: C knows each answer's size or bound, not its value. */
     require("import lib_string", mt_one_truth(mt_eval(m, E("import!", "&self", E("library", "lib_string")))));
     check_answers("zero bytes are no hex", mt_eval(m, E("crypto_random_hex", 0)), hex(NULL, 0));
     check_answers("two hex digits a byte", mt_eval(m, E("string-length", E("crypto-random-hex", 4))), (int64_t)(2 * 4));
-    check_answers("zero bytes", mt_eval(m, E("crypto-random-bytes", 0)), octets(NULL, 0));
+    check_answers("zero bytes", mt_eval(m, E("crypto-random-bytes", 0)), mt_unit());
     check_answers("eight bytes", mt_eval(m, E("size-atom", E("crypto-random-bytes", 8))), (int64_t)8);
     check_answers("a half-open range of one value", mt_eval(m, E("crypto-random-integer", -9, -8)), (int64_t)-9);
     int64_t low = -20, high = 7, drawn = mt_one_int(mt_eval(m, E("crypto-random-integer", low, high)));

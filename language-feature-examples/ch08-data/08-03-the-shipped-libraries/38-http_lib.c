@@ -51,16 +51,6 @@ typedef struct request {
     size_t n_options;
 } request;
 
-static mt_atom *byte_list(const int *bytes, size_t n)
-{
-    mt_atom **kids = malloc((n + 1) * sizeof *kids);
-    require("room for the bytes", kids != NULL);
-    for (size_t i = 0; i < n; i++) kids[i] = mt_num(bytes[i]);
-    mt_atom *out = mt_exprv(n, kids);
-    free(kids);
-    return out;
-}
-
 /* The engine's spelling of the same options. */
 static mt_atom *options_atom(const request *r)
 {
@@ -69,7 +59,7 @@ static mt_atom *options_atom(const request *r)
     for (size_t i = 0; i < r->n_options; i++) {
         const option *o = &r->options[i];
         kids[i] = o->kind == HEADER    ? E("header", T(o->name), T(o->value))
-                  : o->kind == BODY    ? E("body", T(o->media), byte_list(o->bytes, o->n_bytes))
+                  : o->kind == BODY    ? E("body", T(o->media), mt_array(o->n_bytes, o->bytes))
                   : o->kind == TIMEOUT ? E("timeout", o->seconds)
                                        : E("redirect", B(o->follow));
     }
@@ -328,16 +318,6 @@ static void check_field(metta *m, const char *claim, const mt_atom *fields, cons
     free(values);
 }
 
-static mt_atom *bytes_of(const unsigned char *bytes, size_t n)
-{
-    mt_atom **kids = malloc((n + 1) * sizeof *kids);
-    require("room for the bytes", kids != NULL);
-    for (size_t i = 0; i < n; i++) kids[i] = mt_num(bytes[i]);
-    mt_atom *out = mt_exprv(n, kids);
-    free(kids);
-    return out;
-}
-
 /* Bytes the engine answered, as the C text they spell. */
 static char *text_of(const mt_atom *bytes)
 {
@@ -359,7 +339,7 @@ typedef struct reader {
 static mt_atom *read_part(reader *r, size_t most)
 {
     size_t take = r->n - r->at < most ? r->n - r->at : most;
-    mt_atom *out = bytes_of(r->bytes + r->at, take);
+    mt_atom *out = mt_array(take, r->bytes + r->at);
     r->at += take;
     return out;
 }
@@ -462,7 +442,7 @@ int main(void)
     mt_atom *response = value_of(m, engine_request("http-request!", &get));
     const mt_atom *fields = mt_at(response, 2);
     check_atom("the status", mt_keep(mt_at(response, 1)), mt_num(x.status));
-    check_atom("the bytes", mt_keep(mt_at(response, 3)), bytes_of(x.bytes, x.n));
+    check_atom("the bytes", mt_keep(mt_at(response, 3)), mt_array(x.n, x.bytes));
     check_atom("the media type", value_of(m, E("http-header", mt_keep(fields), T("Content-Type"))), field_value(&x, "content-type"));
     check_atom("a count, whatever the case", value_of(m, E("http-header", mt_keep(fields), T("CONTENT-LENGTH"))), field_value(&x, "content-length"));
     check_field(m, "a repeated field, in order", fields, "x-reply", &x);
@@ -474,7 +454,7 @@ int main(void)
     x = fetched(&head);
     mt_atom *headed = value_of(m, engine_request("http-request!", &head));
     check_atom("HEAD's status", mt_keep(mt_at(headed, 1)), mt_num(x.status));
-    check_atom("no bytes", mt_keep(mt_at(headed, 3)), bytes_of(x.bytes, x.n));
+    check_atom("no bytes", mt_keep(mt_at(headed, 3)), mt_array(x.n, x.bytes));
     check_atom("but the count", value_of(m, E("http-header", mt_keep(mt_at(headed, 2)), T("content-length"))), field_value(&x, "content-length"));
     release(&x);
 
@@ -523,7 +503,7 @@ int main(void)
     request followed = { "get", redirect, following, 1 };
     x = fetched(&followed);
     mt_atom *arrived = value_of(m, engine_request("http-request!", &followed));
-    check_atom("unless asked", mt_keep(mt_at(arrived, 3)), bytes_of(x.bytes, x.n));
+    check_atom("unless asked", mt_keep(mt_at(arrived, 3)), mt_array(x.n, x.bytes));
     release(&x);
 
     /* The streaming door, held against the same bytes read in parts. */
@@ -536,7 +516,7 @@ int main(void)
     check_atom("the rest", value_of(m, E("file-read-bytes!", mt_keep(handle))), read_part(&r, r.n));
     check_answers("closed", mt_eval(m, E("file-close!", mt_keep(handle))), B(close_reader(&r)));
     check_answers("closed again", mt_eval(m, E("file-close!", mt_keep(handle))), B(close_reader(&r)));
-    check_answers("a scoped response", mt_eval(m, E("with-http", "get", T(url), mt_unit(), "read-http")), bytes_of(x.bytes, x.n));
+    check_answers("a scoped response", mt_eval(m, E("with-http", "get", T(url), mt_unit(), "read-http")), mt_array(x.n, x.bytes));
     mt_atom *pinged = value_of(m, E("with-http-server", T("127.0.0.1"), 0, "library-http", E(E("workers", 1)), "ping-http"));
     check_atom("a scoped server", mt_keep(mt_at(pinged, 1)), mt_num(x.status));
     release(&x);

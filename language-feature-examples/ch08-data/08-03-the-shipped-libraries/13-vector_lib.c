@@ -171,13 +171,6 @@ static mt_atom *reals(size_t n, const double *xs)
     return mt_exprv(n, kids);
 }
 
-static mt_atom *ints(size_t n, const int64_t *xs)
-{
-    mt_atom *kids[MOST];
-    for (size_t i = 0; i < n; i++) kids[i] = mt_num(xs[i]);
-    return mt_exprv(n, kids);
-}
-
 /* What if-error answers: refused when C's precondition fails. A count is an
    integer at least zero; a component, or a value to fill with, a number. */
 static mt_atom *verdict(bool holds) { return mt_sym(holds ? "accepted" : "refused"); }
@@ -236,14 +229,14 @@ int main(void)
 
     /* Exact componentwise arithmetic. */
     const int64_t i12[] = { 1, 2 }, i34[] = { 3, 4 }, i68[] = { 6, 8 }, i24[] = { 2, 4 }, three[] = { 3, 3 }, i46[] = { 4, 6 };
-    check_answers("add", mt_eval(m, E("vector-add", ints(2, i12), ints(2, i34))), componentwise(i12, i34, 2, plus));
-    check_answers("subtract", mt_eval(m, E("vector-subtract", ints(2, i34), ints(2, i12))), componentwise(i34, i12, 2, minus));
-    check_answers("multiply", mt_eval(m, E("vector-multiply", ints(2, i12), ints(2, i34))), componentwise(i12, i34, 2, times));
-    check_answers("divide, exactly", mt_eval(m, E("vector-divide", ints(2, i68), ints(2, i24))), componentwise(i68, i24, 2, over));
-    check_answers("scale", mt_eval(m, E("vector-scale", ints(2, i12), 3)), componentwise(i12, three, 2, times));
-    mt_atom *exact34 = HOLD(ints(2, i34));
+    check_answers("add", mt_eval(m, E("vector-add", mt_array(2, i12), mt_array(2, i34))), componentwise(i12, i34, 2, plus));
+    check_answers("subtract", mt_eval(m, E("vector-subtract", mt_array(2, i34), mt_array(2, i12))), componentwise(i34, i12, 2, minus));
+    check_answers("multiply", mt_eval(m, E("vector-multiply", mt_array(2, i12), mt_array(2, i34))), componentwise(i12, i34, 2, times));
+    check_answers("divide, exactly", mt_eval(m, E("vector-divide", mt_array(2, i68), mt_array(2, i24))), componentwise(i68, i24, 2, over));
+    check_answers("scale", mt_eval(m, E("vector-scale", mt_array(2, i12), 3)), componentwise(i12, three, 2, times));
+    mt_atom *exact34 = HOLD(mt_array(2, i34));
     check_answers("normalize", mt_eval(m, E("vector-normalize", mt_keep(exact34))), normalized(exact34));
-    mt_atom *from = HOLD(ints(2, i12)), *to = HOLD(ints(2, i46));
+    mt_atom *from = HOLD(mt_array(2, i12)), *to = HOLD(mt_array(2, i46));
     check_answers("distance", mt_eval(m, E("vector-distance", mt_keep(from), mt_keep(to))), distance(from, to));
     check_answers("fill", mt_eval(m, E("vector-fill", 3, 7)), filled(3, mt_num(7)));
     check_answers("fill none", mt_eval(m, E("vector-fill", 0, 7)), filled(0, mt_num(7)));
@@ -251,13 +244,13 @@ int main(void)
 
     /* Exactness where floats would lose it. */
     mt_atom *cancel = HOLD(reals(3, (const double[]){ 18014398509481984.0, 1.0, -18014398509481984.0 }));
-    mt_atom *ones = HOLD(ints(3, (const int64_t[]){ 1, 1, 1 }));
+    mt_atom *ones = HOLD(E(1, 1, 1));
     check_answers("2^54 + 1 - 2^54 keeps its 1", mt_eval(m, E("dot", mt_keep(cancel), mt_keep(ones))), dot(cancel, ones));
     mt_atom *tiny = HOLD(reals(1, (const double[]){ 1e-300 }));
     check_answers("a length whose square underflows", mt_eval(m, E("norm", mt_keep(tiny))), norm(tiny));
     mt_atom *huge = HOLD(V2(1e308, 1e308));
     check_answers("a cosine whose norms overflow", mt_eval(m, E("cosine", mt_keep(huge), mt_keep(huge))), cosine(huge, huge));
-    mt_atom *zero = HOLD(ints(2, (const int64_t[]){ 0, 0 }));
+    mt_atom *zero = HOLD(E(0, 0));
     check_answers("a zero direction has no cosine",
                   mt_eval(m, E("isnan-math", E("cosine", mt_keep(zero), mt_keep(from)))), B(isnan(cosine(zero, from))));
     /* 1e400 overflows a double, so the original's component is infinity. */

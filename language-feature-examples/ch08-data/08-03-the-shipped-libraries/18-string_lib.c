@@ -58,13 +58,6 @@ static void push(codes *out, const int32_t *at, size_t n)
     out->n += n;
 }
 
-static mt_atom *numbers(const int32_t *at, size_t n)
-{
-    mt_atom *kids[MOST];
-    for (size_t i = 0; i < n; i++) kids[i] = mt_num(at[i]);
-    return mt_exprv(n, kids);
-}
-
 /* A value as the library reads it as text: a String or a Symbol its name, an
    integer its decimal digits [source: lib/lib_string/lib.metta, "Text accepts
    Strings, Symbols and Numbers"; commit=33c2d50c84b24c1a2c906225600e2a4ffdb662f1].
@@ -557,13 +550,13 @@ int main(void)
     check_answers("chars from texts, symbols and numbers", mt_eval(m, E("string-from-chars", mt_keep(items))), joined("", items, ""));
     mt_drop(items);
     codes a_fox = of("a🦊");
-    check_answers("codes", mt_eval(m, E("string-codes", T("a🦊"))), numbers(a_fox.at, a_fox.n));
-    check_answers("from codes", mt_eval(m, E("string-from-codes", numbers(a_fox.at, a_fox.n))), from_codes(a_fox.at, a_fox.n));
+    check_answers("codes", mt_eval(m, E("string-codes", T("a🦊"))), mt_array(a_fox.n, a_fox.at));
+    check_answers("from codes", mt_eval(m, E("string-from-codes", mt_array(a_fox.n, a_fox.at))), from_codes(a_fox.at, a_fox.n));
     static const int32_t with_nul[] = { 97, 0, 129418 };
     mt_atom *nul = from_codes(with_nul, 3);
     codes back = decoded(mt_name(nul), mt_name_len(nul));
-    check_answers("a NUL survives the round trip", mt_eval(m, E("string-codes", E("string-from-codes", numbers(with_nul, 3)))),
-                  numbers(back.at, back.n));
+    check_answers("a NUL survives the round trip", mt_eval(m, E("string-codes", E("string-from-codes", mt_array(3, with_nul)))),
+                  mt_array(back.n, back.at));
     mt_drop(nul);
     check_answers("repeat", mt_eval(m, E("string-repeat", T("ab"), 3)), repeated("ab", mt_num(3)));
     check_answers("pad left", mt_eval(m, E("string-pad-left", T("x"), 4, T("ab"))), padded("x", mt_num(4), "ab", all));

@@ -442,18 +442,10 @@ static mt_atom *text_read(FILE *f, size_t most)
     return mt_textn(buf, n);
 }
 
-static mt_atom *octets(const unsigned char *at, size_t n)
-{
-    mt_atom *kids[MOST];
-    require("room for the octets", n <= MOST);
-    for (size_t i = 0; i < n; i++) kids[i] = mt_num(at[i]);
-    return mt_exprv(n, kids);
-}
-
 static mt_atom *octets_read(FILE *f, size_t most)
 {
     unsigned char buf[MOST];
-    return octets(buf, fread(buf, 1, most < sizeof buf ? most : sizeof buf, f));
+    return mt_array(fread(buf, 1, most < sizeof buf ? most : sizeof buf, f), buf);
 }
 
 /* A text model's LF-separated lines, one terminal empty line dropped. */
@@ -544,9 +536,9 @@ int main(void)
     char blob[PATH_MAX];
     snprintf(blob, sizeof blob, "%s", under(dir, "blob.bin"));
     static const unsigned char four[] = { 0, 1, 255, 10 }, five[] = { 0, 1, 255, 10, 7 }, seven[] = { 7 };
-    check_answers("write-bytes!", mt_eval(m, E("write-bytes!", T(blob), octets(four, 4))), B(true));
-    check_answers("append-bytes!", mt_eval(m, E("append-bytes!", T(blob), octets(seven, 1))), B(true));
-    check_answers("read-bytes!", mt_eval(m, E("read-bytes!", T(blob))), octets(five, 5));
+    check_answers("write-bytes!", mt_eval(m, E("write-bytes!", T(blob), mt_array(4, four))), B(true));
+    check_answers("append-bytes!", mt_eval(m, E("append-bytes!", T(blob), mt_array(1, seven))), B(true));
+    check_answers("read-bytes!", mt_eval(m, E("read-bytes!", T(blob))), mt_array(5, five));
     mt_atom *h = value_of(m, E("file-open!", T(blob), T("rb")));
     FILE *f = fopen(blob, "rb");
     require("C opens the same file", f != NULL);
@@ -556,7 +548,7 @@ int main(void)
     require("file-close!", mt_one_truth(mt_eval(m, E("file-close!", h))));
     static const unsigned char ab[] = { 65, 66 };
     h = value_of(m, E("file-open!", T(blob), T("wb")));
-    require("file-write-bytes!", mt_one_truth(mt_eval(m, E("file-write-bytes!", mt_keep(h), octets(ab, 2)))));
+    require("file-write-bytes!", mt_one_truth(mt_eval(m, E("file-write-bytes!", mt_keep(h), mt_array(2, ab)))));
     require("file-close!", mt_one_truth(mt_eval(m, E("file-close!", h))));
     check_answers("a wb handle leaves what it wrote", mt_eval(m, E("read-file!", T(blob))), mt_textn((const char *)ab, 2));
     const char *text_mode = "r";
@@ -600,16 +592,16 @@ int main(void)
     require("file-close!", mt_one_truth(mt_eval(m, E("file-close!", h))));
     check_answers("the path names the new one", mt_eval(m, E("read-file!", T(notes))), T(model));
     static const unsigned char hi[] = { 104, 105 };
-    check_answers("replacing with octets", mt_eval(m, E("replace-file!", T(blob), octets(hi, 2))), B(true));
+    check_answers("replacing with octets", mt_eval(m, E("replace-file!", T(blob), mt_array(2, hi))), B(true));
     check_answers("which read as text", mt_eval(m, E("read-file!", T(blob))), mt_textn((const char *)hi, 2));
     char copied[PATH_MAX], absent[PATH_MAX];
     snprintf(copied, sizeof copied, "%s", under(dir, "blob-copy.bin"));
     snprintf(absent, sizeof absent, "%s", under(dir, "absent.bin"));
     check_answers("copy-file!", mt_eval(m, E("copy-file!", T(blob), T(copied))), B(true));
-    check_answers("a copy has the same octets", mt_eval(m, E("read-bytes!", T(copied))), octets(hi, 2));
+    check_answers("a copy has the same octets", mt_eval(m, E("read-bytes!", T(copied))), mt_array(2, hi));
     check_answers("a copy needs a source", mt_eval(m, guarded(E("copy-file!", T(absent), T(copied)))),
                   verdict(access(absent, F_OK) == 0));
-    check_answers("and a failed copy replaces nothing", mt_eval(m, E("read-bytes!", T(copied))), octets(hi, 2));
+    check_answers("and a failed copy replaces nothing", mt_eval(m, E("read-bytes!", T(copied))), mt_array(2, hi));
 
     /* Directories, trees and links. */
     char tree[PATH_MAX];

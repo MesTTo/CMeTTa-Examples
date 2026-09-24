@@ -68,13 +68,6 @@ static mt_atom *named(int version, const mt_atom *ns, const mt_atom *name)
     return text_of(out);
 }
 
-static mt_atom *bytes_of(const uuid_t u)
-{
-    mt_atom *kids[16];
-    for (size_t i = 0; i < 16; i++) kids[i] = mt_num(u[i]);
-    return mt_exprv(16, kids);
-}
-
 /* Sixteen numbers from 0 to 255 as a UUID; false for anything else. */
 static bool from_bytes(const mt_atom *list, uuid_t out)
 {
@@ -200,7 +193,7 @@ int main(void)
     check_answers("upper case reads", mt_eval(m, E("uuid-is", mt_keep(upper))), B(parsed(upper, scratch)));
     check_answers("the bytes, in hex", mt_eval(m, E("hex-encode", E("uuid-bytes", mt_keep(lower)))), hex(u, 16));
     check_answers("and back to lower case", mt_eval(m, E("uuid-of-bytes", E("uuid-bytes", mt_keep(upper)))), text_of(u));
-    check_answers("nil's bytes", mt_eval(m, E("uuid-bytes", E("uuid-nil"))), bytes_of(nil));
+    check_answers("nil's bytes", mt_eval(m, E("uuid-bytes", E("uuid-nil"))), mt_array(sizeof(uuid_t), nil));
     memset(all_ones, 0xff, sizeof all_ones);
     check_answers("every bit set", mt_eval(m, E("uuid-of-bytes", E("hex-decode", T("ffffffffffffffffffffffffffffffff")))), text_of(all_ones));
 

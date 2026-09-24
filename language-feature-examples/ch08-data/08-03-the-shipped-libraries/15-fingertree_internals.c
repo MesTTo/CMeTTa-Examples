@@ -158,13 +158,6 @@ static mt_atom *nodes(const int64_t *xs, size_t n)
     return mt_exprv(k, out);
 }
 
-static mt_atom *ints(const int64_t *xs, size_t n)
-{
-    mt_atom *kids[MOST];
-    for (size_t i = 0; i < n; i++) kids[i] = mt_num(xs[i]);
-    return mt_exprv(n, kids);
-}
-
 /* Lists joined, what every push, append and concatenation flattens to. */
 static mt_atom *joined(const int64_t *a, size_t n, const int64_t *b, size_t m, const int64_t *c, size_t k)
 {
@@ -172,10 +165,10 @@ static mt_atom *joined(const int64_t *a, size_t n, const int64_t *b, size_t m, c
     memcpy(all, a, n * sizeof *a);
     memcpy(all + n, b, m * sizeof *b);
     memcpy(all + n + m, c, k * sizeof *c);
-    return ints(all, n + m + k);
+    return mt_array(n + m + k, all);
 }
 
-static mt_atom *from_list(const int64_t *xs, size_t n) { return E("ft-from-list", ints(xs, n)); }
+static mt_atom *from_list(const int64_t *xs, size_t n) { return E("ft-from-list", mt_array(n, xs)); }
 
 int main(void)
 {
@@ -225,23 +218,23 @@ int main(void)
 
     static const int64_t six[] = { 1, 2, 3, 4, 5, 6 };
     for (size_t n = 2; n <= 6; n++)
-        check_answers("nodes regroups loose elements", mt_eval(m, E("ft-nodes", ints(six, n))), nodes(six, n));
+        check_answers("nodes regroups loose elements", mt_eval(m, E("ft-nodes", mt_array(n, six))), nodes(six, n));
 
     static const int64_t one_two[] = { 1, 2 }, three_four[] = { 3, 4 }, seven_eight[] = { 7, 8 };
     check_answers("pushing a list on the front keeps its order",
-                  mt_eval(m, E("ft-to-list", E("ft-push-list-front", ints(one_two, 2), from_list(three_four, 2)))),
+                  mt_eval(m, E("ft-to-list", E("ft-push-list-front", mt_array(2, one_two), from_list(three_four, 2)))),
                   joined(one_two, 2, three_four, 2, NULL, 0));
     check_answers("pushing it on the back puts it after",
-                  mt_eval(m, E("ft-to-list", E("ft-push-list-back", ints(one_two, 2), from_list(three_four, 2)))),
+                  mt_eval(m, E("ft-to-list", E("ft-push-list-back", mt_array(2, one_two), from_list(three_four, 2)))),
                   joined(three_four, 2, one_two, 2, NULL, 0));
     check_answers("pushing nothing on the front", mt_eval(m, E("ft-to-list", E("ft-push-list-front", mt_unit(), from_list(three_four, 2)))),
                   joined(three_four, 2, NULL, 0, NULL, 0));
     check_answers("or the back", mt_eval(m, E("ft-to-list", E("ft-push-list-back", mt_unit(), from_list(three_four, 2)))),
                   joined(three_four, 2, NULL, 0, NULL, 0));
     check_answers("app3 joins two trees around loose elements",
-                  mt_eval(m, E("ft-to-list", E("ft-app3", from_list(one_two, 2), ints(seven_eight, 2), from_list(three_four, 2)))),
+                  mt_eval(m, E("ft-to-list", E("ft-app3", from_list(one_two, 2), mt_array(2, seven_eight), from_list(three_four, 2)))),
                   joined(one_two, 2, seven_eight, 2, three_four, 2));
-    check_answers("an empty left tree", mt_eval(m, E("ft-to-list", E("ft-app3", "FTEmpty", ints(seven_eight, 2), from_list(three_four, 2)))),
+    check_answers("an empty left tree", mt_eval(m, E("ft-to-list", E("ft-app3", "FTEmpty", mt_array(2, seven_eight), from_list(three_four, 2)))),
                   joined(NULL, 0, seven_eight, 2, three_four, 2));
     check_answers("an empty right tree", mt_eval(m, E("ft-to-list", E("ft-app3", from_list(one_two, 2), mt_unit(), "FTEmpty"))),
                   joined(one_two, 2, NULL, 0, NULL, 0));

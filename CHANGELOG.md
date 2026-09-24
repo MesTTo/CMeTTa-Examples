@@ -4,6 +4,15 @@
 
 ## Unreleased
 
+- Turn C arrays into expressions with cmetta's new `mt_array`. Twelve chapter
+  8 twins built a tuple from a C array of bytes, codes or integers with a
+  loop of their own, most of them into a fixed-size buffer, and the database
+  twin wrote the loop inline. Each is now one `mt_array` call. The crypto
+  twin's zero-length case is `mt_unit()`, since `mt_array` reads the element
+  type from the array. The vector twin's two literal rows are `E(1, 1, 1)`
+  and `E(0, 0)`, which count themselves. These twins need extensions/cmetta
+  cf925da.
+
 - Spell MeTTa's `/`, `<=`, `min`, `max` and `and` in `lowering.h`, for
   chapter 22's PLN formulas, whose deduction and consistency conditions are
   one body each for C and for the equations a program adds.

@@ -220,13 +220,6 @@ static mt_atom *fifo_atom(const fifo *q)
     return E("queue", top_first(q->back, q->nback), top_first(q->front, q->nfront), (int64_t)(q->nback + q->nfront));
 }
 
-static mt_atom *numbers(const int64_t *at, size_t n)
-{
-    mt_atom *kids[MOST];
-    for (size_t i = 0; i < n; i++) kids[i] = mt_num(at[i]);
-    return mt_exprv(n, kids);
-}
-
 static mt_atom *value_of(metta *m, mt_atom *goal)
 {
     mt_atom *v = mt_one(mt_eval(m, goal));
@@ -347,12 +340,12 @@ int main(void)
 
     /* The finger tree holds a sequence: C's is an array. */
     static const int64_t three[] = { 1, 2, 3 }, left[] = { 1, 2 }, right[] = { 3, 4 }, all[] = { 1, 2, 3, 4 };
-    check_answers("ft-to-list inverts ft-from-list", mt_eval(m, E("ft-to-list", E("ft-from-list", numbers(three, 3)))), numbers(three, 3));
-    check_answers("ft-front", mt_eval(m, E("ft-front", E("ft-from-list", numbers(three, 3)))), three[0]);
-    check_answers("ft-back", mt_eval(m, E("ft-back", E("ft-from-list", numbers(three, 3)))), three[2]);
+    check_answers("ft-to-list inverts ft-from-list", mt_eval(m, E("ft-to-list", E("ft-from-list", mt_array(3, three)))), mt_array(3, three));
+    check_answers("ft-front", mt_eval(m, E("ft-front", E("ft-from-list", mt_array(3, three)))), three[0]);
+    check_answers("ft-back", mt_eval(m, E("ft-back", E("ft-from-list", mt_array(3, three)))), three[2]);
     check_answers("ft-concat",
-                  mt_eval(m, E("ft-to-list", E("ft-concat", E("ft-from-list", numbers(left, 2)), E("ft-from-list", numbers(right, 2))))),
-                  numbers(all, 4));
+                  mt_eval(m, E("ft-to-list", E("ft-concat", E("ft-from-list", mt_array(2, left)), E("ft-from-list", mt_array(2, right))))),
+                  mt_array(4, all));
     check_answers("ft-is-empty", mt_eval(m, E("ft-is-empty", E("ft-empty"))), B(none.n == 0));
 
     /* A map is its relation, which C reads apart with mt_at. */

@@ -633,11 +633,9 @@ int main(void)
     all = snapshot(c_first);
     check_answers("so 1.0 stays", mt_eval(m, projection(number_value, atoms_of(first), value)), projected(all, number_value, value));
     mt_drop(all);
-    static const char nul_bytes[] = { 'a', '\0', 'b' };
-    mt_atom *nul = mt_textn(nul_bytes, 3);
-    mt_atom *codes[3];
-    for (size_t i = 0; i < 3; i++) codes[i] = mt_num((unsigned char)nul_bytes[i]);
-    check_answers("a NUL in a text", mt_eval(m, E("string-codes", mt_keep(nul))), mt_exprv(3, codes));
+    static const unsigned char nul_bytes[] = { 'a', '\0', 'b' };
+    mt_atom *nul = mt_textn((const char *)nul_bytes, sizeof nul_bytes);
+    check_answers("a NUL in a text", mt_eval(m, E("string-codes", mt_keep(nul))), mt_array(sizeof nul_bytes, nul_bytes));
     mt_atom *texts = E("text", T("café"), mt_keep(nul), mt_unit()), *texts_pattern = E("text", V("left"), V("right"), mt_unit()),
             *left_right = E(V("left"), V("right"));
     check_answers("texts held", mt_eval(m, E("database-add!", mt_keep(first), mt_keep(texts))), B(added(c_first, texts)));

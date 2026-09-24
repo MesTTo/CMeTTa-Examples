@@ -49,19 +49,9 @@ static void put(bytes *b, const void *data, size_t n)
     b->n += n;
 }
 
-static mt_atom *list_of(const unsigned char *data, size_t n)
-{
-    mt_atom **kids = malloc((n + 1) * sizeof *kids);
-    require("room for the list", kids != NULL);
-    for (size_t i = 0; i < n; i++) kids[i] = mt_num(data[i]);
-    mt_atom *out = mt_exprv(n, kids);
-    free(kids);
-    return out;
-}
-
 static mt_atom *taken(bytes *b)
 {
-    mt_atom *out = list_of(b->at, b->n);
+    mt_atom *out = mt_array(b->n, b->at);
     free(b->at);
     *b = (bytes){ 0 };
     return out;
@@ -526,7 +516,7 @@ int main(void)
 
     /* Bytes, compressed by the engine and inflated by C, and the reverse. */
     static const unsigned char data[] = { 0, 128, 255, 10 };
-    mt_atom *data_list = list_of(data, 4);
+    mt_atom *data_list = mt_array(4, data);
     mt_atom *gzipped = value_of(m, E("compress-bytes", "gzip", 6, mt_keep(data_list)));
     mt_atom *zlibbed = value_of(m, E("compress-bytes", "zlib", 6, mt_keep(data_list)));
     bytes own;
@@ -543,7 +533,7 @@ int main(void)
         size_t n;
     } rounds[] = { { "gzip", 0, { 0 }, 0 }, { "zlib", 9, { 0 }, 0 }, { "gzip", 9, { 1, 1, 1, 1, 1 }, 5 }, { "zlib", 0, { 1, 2, 3 }, 3 } };
     for (size_t i = 0; i < 4; i++) {
-        mt_atom *packed = value_of(m, E("compress-bytes", S(rounds[i].format), rounds[i].level, list_of(rounds[i].data, rounds[i].n)));
+        mt_atom *packed = value_of(m, E("compress-bytes", S(rounds[i].format), rounds[i].level, mt_array(rounds[i].n, rounds[i].data)));
         check_answers(rounds[i].format, mt_eval(m, E("decompress-bytes", S(rounds[i].format), mt_keep(packed))), inflated(rounds[i].format, packed));
         mt_drop(packed);
     }
