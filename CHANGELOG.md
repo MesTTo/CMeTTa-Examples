@@ -4,6 +4,24 @@
 
 ## Unreleased
 
+- Write chapter 22's weighted answers in C: fourteen twins held to C's
+  models of the reasoning libraries. `nars_truth.h` is lib_nars's truth
+  functions in the library's own operation order, so every truth a rule must
+  answer matches C's in the last bit. `pln.h` is lib_pln's formulas. The
+  deduction and consistency conditions 03 and 04 define are one body each,
+  for C and for their equations, and lib_pln's `/safe` divisions are C
+  functions that answer whether they have a value. `derive.h` is the loop
+  NARS and PLN share: sentences, stamps, the bounded priority queue and the
+  step budget, run in C over C's rules and held to the engine's queues.
+  `measure.h` and `soft.h` model lib_measure's weighted superpositions and
+  lib_soft's weak unification. The query twins hold each answer to the proof
+  its stamp names: 06's is the revision of two PLN deductions, and 09's is
+  an abduction, a deduction, a revision and a deduction through the smoking
+  rule. The posterior twin is the exhaustive definition lib_statistics'
+  tests compare against, in exact ratios. The independence twin is
+  lib_pln2's walk over the support groups. Both libraries' `LimitSize` never
+  returns at size zero once the queue is empty; C's model stops there.
+
 - Write chapter 22's logic programs in C: eight twins. The relations are C
   tables turned into equations, and each rule is the term it is. C decides
   every answer from its tables: the letters below d in its alphabet, the
