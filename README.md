@@ -307,7 +307,10 @@ proves the lane refuses a twin that drifts.
 `common.h` holds the checks every program states its claims through:
 `check`, `check_int`, `check_text`, `check_atom` and `check_answers` are
 claims, and `require` is a status the program needs before it can go on.
-A false claim exits nonzero whatever `NDEBUG` says.
+A false claim exits nonzero whatever `NDEBUG` says. `open_engine()` gives
+cmetta a counting allocator, and `done()` refuses a program that leaves any
+atom it made unreleased once the engine has closed, so ownership as
+`cmetta.h` prescribes it is checked, not assumed.
 
 ## Reading order
 

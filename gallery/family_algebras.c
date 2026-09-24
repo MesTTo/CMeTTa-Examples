@@ -38,7 +38,7 @@ int main(void)
             for (size_t i = 0; i < rows.len; i++)
                 check("each answer is True with the carrier's identity",
                       mt_len(rows.items[i]) == 2 &&
-                      mt_alpha_eq(mt_at(rows.items[i], 0), B(true)) &&
+                      alpha_equal(mt_at(rows.items[i], 0), B(true)) &&
                       mt_alpha_eq(mt_at(rows.items[i], 1), algebras[a].identity));
             mt_list_free(rows);
         }

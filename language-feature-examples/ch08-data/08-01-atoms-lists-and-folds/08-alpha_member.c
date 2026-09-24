@@ -65,8 +65,9 @@ int main(void)
 
     mt_atom *pattern = E("hi", "name", "boss"), *fresh = V("new");
     printf("pattern:- %s\n", mt_show(pattern));
-    printf("is member:- %s in pattern:- %s\n",
-           mt_show(mt_one(mt_eval(m, E("is-alpha-member", mt_keep(fresh), mt_keep(pattern))))), mt_show(pattern));
+    mt_atom *verdict = mt_one(mt_eval(m, E("is-alpha-member", mt_keep(fresh), mt_keep(pattern))));
+    printf("is member:- %s in pattern:- %s\n", mt_show(verdict), mt_show(pattern));
+    mt_drop(verdict);
     mt_drop(fresh);
     mt_drop(pattern);
     return done(m);

@@ -3,8 +3,11 @@
  *   it made visible, and the atoms its &self holds.
  * Owns resources: done() closes the runtime; every check that takes an atom or
  *   a cursor releases it on every path. A failed claim ends the process.
- * Guarded by: the claim counter is atomic, because worker threads prove
- *   claims too; everything else runs on the thread that calls done().
+ *   open_engine() gives cmetta a counting allocator on its thread, so done()
+ *   can see what the program made and never released.
+ * Guarded by: the claim counter and the held-block counts are atomic,
+ *   because worker threads prove claims and release atoms too; everything
+ *   else runs on the thread that calls done().
  * Guarantees: the space report is the same function for a twin and for the
  *   original's runner, tools/original.c, so the two sides of the lane cannot
  *   canonicalise atoms two ways [tested: make twins; commit=WORKTREE].
@@ -17,6 +20,30 @@
 
 static atomic_size_t claims;
 static uint64_t inferences_at_open;
+
+/* The blocks cmetta allocated on the thread that opened the engine and has
+   not yet released. A block goes back through the allocator that made it,
+   on whatever thread releases it, so the count is exact whoever drops an
+   atom last. */
+static atomic_size_t held_blocks, held_bytes;
+
+static void *counted_resize(void *user, void *pointer, size_t old_size, size_t new_size)
+{
+    (void)user;
+    if (new_size == 0) {
+        atomic_fetch_sub(&held_blocks, 1);
+        atomic_fetch_sub(&held_bytes, old_size);
+        free(pointer);
+        return NULL;
+    }
+    void *block = realloc(pointer, new_size);
+    if (block) {
+        if (old_size == 0) atomic_fetch_add(&held_blocks, 1);
+        atomic_fetch_add(&held_bytes, new_size);
+        atomic_fetch_sub(&held_bytes, old_size);
+    }
+    return block;
+}
 
 static void fail(const char *claim, const char *detail, ...)
 {
@@ -67,6 +94,7 @@ const char *metatype(const mt_atom *atom)
 metta *open_engine(void)
 {
     mt_clear();
+    (void)mt_allocator_set((mt_allocator){ counted_resize, NULL });
     metta *runtime = mt_open(NULL);
     if (!runtime) fail("open the engine", NULL);
     inferences_at_open = mt_stats_now(runtime).inferences;
@@ -102,6 +130,13 @@ void check_text(const char *claim, const char *got, const char *want)
     if (!got || strcmp(got, want) != 0)
         fail(claim, "got \"%s\", want \"%s\"", got ? got : "(null)", want);
     proved();
+}
+
+bool alpha_equal(const mt_atom *got, mt_atom *want)
+{
+    bool equal = got && want && mt_alpha_eq(got, want);
+    mt_drop(want);
+    return equal;
 }
 
 void check_atom(const char *claim, mt_atom *got, mt_atom *want)
@@ -182,6 +217,8 @@ int done_(metta *runtime, const char *file)
         mt_close(runtime);
         if (!mt_ok()) fail("close the engine", NULL);
     }
+    size_t blocks = atomic_load(&held_blocks);
+    if (blocks) fail("release every atom", "%zu blocks (%zu bytes) outlived the engine", blocks, atomic_load(&held_bytes));
     printf("OK %s (%zu claims)\n", file, count);
     return EXIT_SUCCESS;
 }

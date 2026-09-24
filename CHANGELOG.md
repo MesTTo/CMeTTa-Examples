@@ -4,6 +4,21 @@
 
 ## Unreleased
 
+- Refuse a program that leaves an atom unreleased. `open_engine()` gives
+  cmetta a counting allocator on its thread, and `done()` fails a program
+  if any block cmetta allocated for it outlives `mt_close`. A program that
+  releases everything leaves zero, so a leak is counted, never guessed.
+  Twelve of the 374 programs leaked. The four twins: the alpha-member twin
+  printed an owned answer it never dropped; the class twin handed a fresh
+  space reference to a helper that only borrows; the tabling twin kept a
+  child of a report it never dropped; and the soft twin's `SCORE` macro
+  named each atom twice, building it again inside `mt_keep`. The eight
+  embedding examples compared with `mt_alpha_eq` against an expectation
+  built in place, which it borrows, so `common.h` gains `alpha_equal`,
+  which borrows the atom a program holds and takes the expectation. The
+  lane's self-test plants a twin that keeps an atom and is refused, and its
+  own short-claims twin no longer leaks.
+
 - Fix what a C reviewer reading ten twins across the chapters found. The
   backward-arithmetic twin computed `#div` and `#mod` with C's truncating
   `/` and `%`, which agree with CLP(FD)'s floored ones only for positive

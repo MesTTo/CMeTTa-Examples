@@ -10,6 +10,11 @@
  *   - done() refuses a program that checked nothing, left an error unhandled
  *     or could not close the engine [tested: make check-helpers;
  *     commit=WORKTREE]
+ *   - done() refuses a program that leaves any block cmetta allocated for it
+ *     on the thread that opened the engine unreleased once the engine has
+ *     closed, which is every atom it made and did not drop; the count is
+ *     zero for a program that releases everything [tested: make check,
+ *     twin_lane_selftest.py's leak case; commit=WORKTREE]
  *   - require() is a status the program needs in order to go on and never
  *     counts as a claim, so the lane's claim count is the comparisons a
  *     program made on values it computed [tested: make twins;
@@ -36,6 +41,11 @@ void check_text(const char *claim, const char *got, const char *want);
 /* Equal up to a consistent renaming of variables, MeTTa's =alpha. TAKES both
    atoms, the way every door taking a fresh term does. */
 void check_atom(const char *claim, mt_atom *got, mt_atom *want);
+
+/* The same question as a truth value, for a condition with more in it:
+   BORROWS the atom the program holds and TAKES the expectation built to ask
+   about it, so alpha_equal(row, E("item", 1)) leaves nothing behind. */
+bool alpha_equal(const mt_atom *got, mt_atom *want);
 
 /* Exactly these answers, in this order, each alpha-equal to its expectation.
    CONSUMES the cursor and TAKES every expectation; the expectations coerce

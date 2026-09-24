@@ -30,7 +30,11 @@ static void scores(metta *m, const soft *s, const char *claim, aggregation agg, 
         check_none(claim, mt_eval(m, call));
     soft_bindings_free(&bound), mt_drop(p), mt_drop(a);
 }
-#define SCORE(m, s, claim, p, a) scores((m), (s), (claim), (s)->declared, E("soft-score", mt_keep(p), mt_keep(a)), (p), (a))
+/* The same for soft-score under the space's own aggregation. TAKES both. */
+static void score(metta *m, const soft *s, const char *claim, mt_atom *p, mt_atom *a)
+{
+    scores(m, s, claim, s->declared, E("soft-score", mt_keep(p), mt_keep(a)), p, a);
+}
 
 /* |x - target| < 1e-9 for C's score of P against A under AGG. TAKES both. */
 static bool near(const soft *s, aggregation agg, mt_atom *p, mt_atom *a, double target)
@@ -57,27 +61,27 @@ int main(void)
         mt_drop(a), mt_drop(b);
     }
 
-    SCORE(m, &model, "identical", E("likes", "cat", "fish"), E("likes", "cat", "fish"));
-    SCORE(m, &model, "one close symbol", E("likes", "feline", "fish"), E("likes", "cat", "fish"));
-    SCORE(m, &model, "the worst position", E("likes", "feline", "wolf"), E("likes", "cat", "dog"));
-    SCORE(m, &model, "lengths differ", E("likes", "cat"), E("likes", "cat", "fish"));
-    SCORE(m, &model, "heads differ", E("likes", "cat", "fish"), E("hates", "cat", "fish"));
-    SCORE(m, &model, "equal numbers", N(3), N(3));
-    SCORE(m, &model, "unequal numbers", N(3), N(4));
-    SCORE(m, &model, "an equation compared as written", E("=", E("likes", "cat", V("f")), V("body")),
+    score(m, &model, "identical", E("likes", "cat", "fish"), E("likes", "cat", "fish"));
+    score(m, &model, "one close symbol", E("likes", "feline", "fish"), E("likes", "cat", "fish"));
+    score(m, &model, "the worst position", E("likes", "feline", "wolf"), E("likes", "cat", "dog"));
+    score(m, &model, "lengths differ", E("likes", "cat"), E("likes", "cat", "fish"));
+    score(m, &model, "heads differ", E("likes", "cat", "fish"), E("hates", "cat", "fish"));
+    score(m, &model, "equal numbers", N(3), N(3));
+    score(m, &model, "unequal numbers", N(3), N(4));
+    score(m, &model, "an equation compared as written", E("=", E("likes", "cat", V("f")), V("body")),
           E("=", E("likes", "feline", "fish"), "tasty"));
-    SCORE(m, &model, "a runnable argument not run", E("likes", "cat", E("+", 1, 2)), E("likes", "feline", E("+", 1, 2)));
-    SCORE(m, &model, "a variable matches anything", V("x"), S("anything"));
+    score(m, &model, "a runnable argument not run", E("likes", "cat", E("+", 1, 2)), E("likes", "feline", E("+", 1, 2)));
+    score(m, &model, "a variable matches anything", V("x"), S("anything"));
 
     /* The binding is real: the walk binds $who, and the answer carries it. */
     mt_atom *pattern = E("likes", V("who"), "fish"), *candidate = E("likes", "cat", "fish");
     soft_bindings bound = { NULL, 0 };
-    double score = 0;
-    require("C's walk scores it", soft_score(&model, pattern, candidate, &bound, &score));
+    double degree = 0;
+    require("C's walk scores it", soft_score(&model, pattern, candidate, &bound, &degree));
     mt_atom *who = V("who");
     check_answers("the score and the binding",
                   mt_eval(m, E("let", V("probe"), E("soft-score", mt_keep(pattern), mt_keep(candidate)), E(V("probe"), V("who")))),
-                  E(score, mt_keep(soft_bound(&bound, who))));
+                  E(degree, mt_keep(soft_bound(&bound, who))));
     soft_bindings_free(&bound), mt_drop(who), mt_drop(pattern), mt_drop(candidate);
 
     /* Soft matching over a space C fills, feeding the measure algebra. */
@@ -113,7 +117,7 @@ int main(void)
     mt_space_close(zoo_space);
 
     /* min is the worst position; mean keeps the two that agree. */
-    SCORE(m, &model, "under min one stranger is zero", E("likes", "cat", "fish"), E("likes", "dog", "fish"));
+    score(m, &model, "under min one stranger is zero", E("likes", "cat", "fish"), E("likes", "dog", "fish"));
     check_answers("under mean it is two thirds",
                   mt_eval(m, E("<", E("abs-math", E("-", E("soft-score-by", "mean", E("likes", "cat", "fish"), E("likes", "dog", "fish")), 0.6666666666666666)), 1.0e-9)),
                   B(near(&model, SOFT_MEAN, E("likes", "cat", "fish"), E("likes", "dog", "fish"), 0.6666666666666666)));

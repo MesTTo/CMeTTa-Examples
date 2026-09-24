@@ -14,7 +14,7 @@ int main(void)
     require("store (item 2)", mt_add(m, E("item", 2)));
 
     check_int("the snapshot still holds one row", (int64_t)snapshot.len, 1);
-    check("and it is (item 1)", snapshot.len == 1 && mt_alpha_eq(snapshot.items[0], E("item", 1)));
+    check("and it is (item 1)", snapshot.len == 1 && alpha_equal(snapshot.items[0], E("item", 1)));
     check_int("while the space holds two", (int64_t)mt_count(m), 2);
     mt_list_free(snapshot);
     return done(m);

@@ -226,7 +226,9 @@ static mt_status grains(mt_call *call, void *user)
     for (size_t i = 0; i < sizeof class_names / sizeof *class_names; i++)
         require("home reads the class", mt_add(home, E("from", mt_spaceref(class_names[i]))));
 
-    mt_space *points = space_of(mt_spaceref("&GrainPoint"));
+    mt_atom *point_class = mt_spaceref("&GrainPoint");
+    mt_space *points = space_of(point_class);
+    mt_drop(point_class);
     check("the accessor is a row the class space holds", holds(points, accessor_row(0)));
     mt_space_close(points);
     const int64_t point[POINT_FIELDS] = { 3, 4 };

@@ -55,8 +55,9 @@ int main(void)
     truly("declaring again", E("tabled", reach()));
     truly("is idempotent", E("tabled", reach()));
     stats.declared = true;
-    check_answers("the policy is back", mt_eval(m, E("index-atom", E("table-stats", reach()), 5)),
-                  mt_keep(mt_at(table_stats_atom(stats), 5)));
+    mt_atom *report = table_stats_atom(stats);
+    check_answers("the policy is back", mt_eval(m, E("index-atom", E("table-stats", reach()), 5)), mt_keep(mt_at(report, 5)));
+    mt_drop(report);
 
     answers_b("the table answers again");
     truly("table-clear-all abolishes every table", E("table-clear-all"));

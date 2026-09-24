@@ -13,9 +13,9 @@ int main(void)
     metta *m = open_engine();
     mt_list forms = mt_forms("(fact 7) !(+ 20 22)");
     check_int("the reader answers two forms", (int64_t)forms.len, 2);
-    check("the first is the fact", forms.len == 2 && mt_alpha_eq(forms.items[0], E("fact", 7)));
+    check("the first is the fact", forms.len == 2 && alpha_equal(forms.items[0], E("fact", 7)));
     check("the directive's body is data, not 42",
-          forms.len == 2 && mt_alpha_eq(forms.items[1], E("+", 20, 22)));
+          forms.len == 2 && alpha_equal(forms.items[1], E("+", 20, 22)));
     mt_list_free(forms);
     check_int("reading wrote nothing", (int64_t)mt_count(m), 0);
 

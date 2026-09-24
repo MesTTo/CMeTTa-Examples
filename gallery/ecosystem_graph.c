@@ -86,7 +86,7 @@ int main(void)
                                                         .effect = MT_EFFECT_CLASS_READ_ONLY_LOOKUP, .fn = shortest }));
 
     mt_atom *path = mt_one(mt_eval(m, E("shortest-path", 0, 3)));
-    check("the unique shortest path is 0 1 2 3", mt_alpha_eq(path, E("Path", 0, 1, 2, 3)));
+    check("the unique shortest path is 0 1 2 3", alpha_equal(path, E("Path", 0, 1, 2, 3)));
     require("store the path as knowledge", mt_add(m, path));
     check_answers("the computed path is now a fact",
                   mt_match(m, E("Path", V("a"), V("b"), V("c"), V("d"))), E("Path", 0, 1, 2, 3));

@@ -9,7 +9,7 @@
 
 static mt_status published(void *user, bool added, const mt_atom *job)
 {
-    if (added && mt_alpha_eq(job, E("Job", 7))) ++*(unsigned *)user;
+    if (added && alpha_equal(job, E("Job", 7))) ++*(unsigned *)user;
     return MT_OK;
 }
 

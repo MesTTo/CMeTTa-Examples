@@ -62,11 +62,11 @@ int main(void)
         E("unify", mt_keep(fish_oil), V("s"), E("Evidence", V("claim"), V("proof")), "Empty"))));
     require("one hypothesis", hypothesis != NULL);
     check("similarity bridges the vocabulary",
-          mt_alpha_eq(mt_at(hypothesis, 1), E("suggests", "omega-3", "raynaud")));
+          alpha_equal(mt_at(hypothesis, 1), E("suggests", "omega-3", "raynaud")));
     const mt_atom *proof = mt_at(hypothesis, 2);
     mt_atom *first = E("times", E("times", "abc", "p1"), "p2");
     mt_atom *second = E("times", E("times", "abc", "p4"), "p5");
-    check("the proof is a sum of two", mt_len(proof) == 3 && mt_alpha_eq(mt_at(proof, 0), S("plus")));
+    check("the proof is a sum of two", mt_len(proof) == 3 && alpha_equal(mt_at(proof, 0), S("plus")));
     check("of both independent citation paths",
           (mt_alpha_eq(mt_at(proof, 1), first) && mt_alpha_eq(mt_at(proof, 2), second)) ||
           (mt_alpha_eq(mt_at(proof, 2), first) && mt_alpha_eq(mt_at(proof, 1), second)));

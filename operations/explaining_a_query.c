@@ -32,7 +32,7 @@ int main(void)
         const mt_atom *item = mt_at(plan, i);
         const char *head = mt_name(mt_at(item, 0));
         if (head && strcmp(head, "plan") == 0)
-            generic_join = mt_alpha_eq(mt_at(item, 1), S("generic-join"));
+            generic_join = alpha_equal(mt_at(item, 1), S("generic-join"));
     }
     check("the plan is a generic trie join", generic_join);
     mt_drop(plan);

@@ -13,7 +13,7 @@ typedef struct seen { unsigned adds, removes; bool other; } seen;
 static mt_status changed(void *user, bool added, const mt_atom *item)
 {
     seen *s = user;
-    if (!mt_alpha_eq(item, E("item", 7))) s->other = true;
+    if (!alpha_equal(item, E("item", 7))) s->other = true;
     if (added) s->adds++;
     else s->removes++;
     return MT_OK;

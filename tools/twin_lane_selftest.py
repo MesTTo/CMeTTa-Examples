@@ -49,7 +49,9 @@ CASES = {
                                           .fn = square }));
     check_int("(f 1)", mt_one_int(mt_eval(m, E("f", 1))), 1);""", None),
     "claims-short": (REPR, """
-    check_text("42", mt_show(mt_one(mt_eval(m, E("repr", 42)))), "\\"42\\"");""",
+    mt_atom *printed = mt_one(mt_eval(m, E("repr", 42)));
+    check_text("42", mt_show(printed), "\\"42\\"");
+    mt_drop(printed);""",
                      "claims and the twin proved"),
     "content-drift": (IDENTITY, """
     require("define", mt_add(m, E("=", E("f", V("x")), E("*", V("x"), 1))));
@@ -71,6 +73,12 @@ CASES = {
     require("define", mt_do(m, "(= (f $x) (* $x $x))"));
     check_int("(f 1)", mt_one_int(mt_eval(m, E("f", 1))), 1);""",
                              "runs MeTTa source through mt_do"),
+    # An atom made and never dropped outlives the engine, and done() says so.
+    "leak": (IDENTITY, """
+    require("lower", mt_lower(m, (f $x), (* $x $x)));
+    mt_atom *kept = E("f", 1);
+    check_int("(f 1)", mt_one_int(mt_eval(m, mt_keep(kept))), 1);""",
+             "release every atom"),
     "false-claim": (IDENTITY, """
     require("lower", mt_lower(m, (f $x), (* $x $x)));
     check_int("(f 1)", mt_one_int(mt_eval(m, E("f", 1))), 2);""",
