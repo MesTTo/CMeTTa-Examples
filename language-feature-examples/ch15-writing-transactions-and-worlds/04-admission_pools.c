@@ -13,8 +13,8 @@
  *   from its own verdict, and the builtin answers C's verdict for every atom
  *   asked, a pool with two capacity rows included, where the original's
  *   chain reads only the first row [measured 2026-09-24: the chain's
- *   definitions over rows 5 and 2 and three held atoms answer (accept), the
- *   builtin (refuse (pool-at-capacity 2))].
+ *   definitions over rows 5 and 2 and three held atoms answer (Accept), the
+ *   builtin (Refuse (pool-at-capacity 2))].
  * Guarantees: all seven claims of the original hold, with its six
  *   unasserted forms checked as well [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */

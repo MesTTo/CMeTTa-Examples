@@ -4,12 +4,12 @@
  *   per head of the offered (head x), each rule one of the four verdicts of
  *   verdicts.h. An atom no rule covers gets no answer, which the engine
  *   reports as a stuck hook. What lands follows from the verdicts alone: the
- *   offered atom on accept, its transform on a transforming accept, nothing
+ *   offered atom on (Accept), its transform on (Accept <atom>), nothing
  *   otherwise, and with both slots claimed the post judge sees only an atom
  *   the pre judge let in as offered [source: engine/metta/space_hooks.pl,
  *   metta_space_hooked_add/4, metta_hook_post_phase/2 and
- *   metta_hook_invalid_verdict/5;
- *   commit=11bb3d9780d9714f2284eaae7d218b12476122ae].
+ *   metta_hook_invalid_verdict/5, whose arity refusal a judge published at
+ *   one arity never meets; commit=5bae989dfe8735448d575856e72f735bb2043e24].
  * Assumes: one runtime, opened by open_engine(); a judge outlives the runtime
  *   that publishes it.
  */
@@ -26,7 +26,7 @@ typedef enum { ACCEPT, TRANSFORM, REFUSE, DROP } verdict;
 
 /* One equation of a judge, (= (judge (head $x)) <verdict>), or with no head
    (= (judge $x) <verdict>), which covers every atom. A transform answers
-   (accept (into $x)) and a refusal (refuse words). */
+   (Accept (into $x)) and a refusal (Refuse words). */
 typedef struct rule {
     const char *head;
     verdict verdict;

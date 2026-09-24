@@ -4,6 +4,17 @@
 
 ## Unreleased
 
+- Answer the judges' verdicts as the engine's capitalized constructors,
+  `(Accept)`, `(Accept <atom>)`, `(Refuse <words>)` and `(Drop)`, which the
+  engine reads since superproject `5bae989df`: a lowercase `(drop)` is a
+  call wherever a library defines `drop`, as lib_functional does.
+  `verdicts.h`'s three builders are the one place the corpus spells a
+  verdict, so the five twins that answer one, chapter 9's typing rules,
+  chapter 15's pre-add, admission and post-add hooks and chapter 20's
+  translator refusal, follow it with no edit of their own; the comments
+  that spelled the lowercase heads in `judges.h` and the admission twin
+  follow too, and both headers cite the engine at `5bae989df`.
+
 - VERIFICATION.md records the hand-written corpus's verification from a
   clean copy of `4fe7740`: the C seat's seven gate lanes, `make surface`,
   `all`, `check` and `check-consumers`, the lane's source rule over every
