@@ -4,6 +4,18 @@
 
 ## Unreleased
 
+- Write README.md in the Python seat's shape. Six real pairs, shortest twin
+  first, each MeTTa original above its C twin: a collapse, fib under a
+  budget, a parametric type, an equation as one body, a C builtin in place
+  of the Python seat's notation section, and a pattern read by a C function.
+  Then running them, the reading order, what each chapter teaches and where
+  a twin cannot follow. `tools/index.py` copies every pair from the files
+  between its markers, the original without its comments and the twin
+  without its obligation header, and refuses pairs out of shortest-first
+  order. It derives the where-a-twin-cannot-follow list from `residue.json`
+  and every twin's lane notes, read by the lane's own parser, so none of it
+  is kept by hand.
+
 - Read a twin's lane notes as comment fields. The lane took `text:`
   anywhere in a comment as a note, so prose such as "reads it as text: a
   String" exempted six twins from the source rule, and each reason ran on
