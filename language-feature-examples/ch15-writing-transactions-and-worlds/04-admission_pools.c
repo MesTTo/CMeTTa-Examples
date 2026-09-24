@@ -20,6 +20,7 @@
  */
 #define MT_SHORTHAND
 #include "common.h"
+#include "verdicts.h"
 
 typedef struct judge {
     metta *m;
@@ -39,8 +40,6 @@ static mt_atom *contract(const judge *j, const char *head, const mt_atom *pool)
     return out;
 }
 
-static mt_atom *refuse(mt_atom *reason) { return E("refuse", reason); }
-
 /* metta-admission-within: refuse at the first limit the pool's count has
    reached, or accept. */
 static mt_atom *within(const judge *j, const mt_atom *pool, const mt_atom *limits)
@@ -50,8 +49,8 @@ static mt_atom *within(const judge *j, const mt_atom *pool, const mt_atom *limit
     int64_t count = (int64_t)mt_count(space);
     mt_space_close(space);
     for (size_t i = 0; i < mt_len(limits); i++)
-        if (count >= mt_int(mt_at(limits, i))) return refuse(E("pool-at-capacity", mt_keep(mt_at(limits, i))));
-    return E("accept");
+        if (count >= mt_int(mt_at(limits, i))) return refusing(E("pool-at-capacity", mt_keep(mt_at(limits, i))));
+    return accepting(NULL);
 }
 
 /* metta-admission-bounded: the pool's capacity rows decide. */
@@ -72,7 +71,7 @@ static mt_atom *typed(const judge *j, const mt_atom *pool, const mt_atom *atom, 
         mt_clear();
         bool carried = mt_one_truth(mt_eval(j->m, E("has-declared-type", mt_keep(atom), mt_keep(type))));
         if (!carried && !mt_ok()) return NULL;
-        if (!carried) return refuse(E("does-not-carry", mt_keep(type)));
+        if (!carried) return refusing(E("does-not-carry", mt_keep(type)));
     }
     return bounded(j, pool);
 }
@@ -162,7 +161,7 @@ int main(void)
     check("the capacity row goes", mt_del(j.catalog, E("capacity", mt_keep(ref), capacity)));
     check_agrees(&j, ref, mt_keep(first));
     check_answers("and with no bound the builtin admits a Ticket", mt_eval(m, E("space-admission-verdict", mt_keep(ref), mt_keep(first))),
-                  E("accept"));
+                  accepting(NULL));
 
     /* Every capacity row binds, not only the first. */
     const int64_t limits[] = { capacity + 1, capacity };

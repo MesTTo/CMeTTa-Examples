@@ -1,9 +1,8 @@
 /* Purpose: the hook judges chapter 15's two hook twins publish, the model a
  *   claimed space is held against, and the checks both make of a claimed
  *   write door. A judge is C data, a name and one rule
- *   per head of the offered (head x), each rule one of the four verdicts the
- *   engine's hook protocol reads: (accept), (accept <atom>), (refuse <words>)
- *   and (drop). An atom no rule covers gets no answer, which the engine
+ *   per head of the offered (head x), each rule one of the four verdicts of
+ *   verdicts.h. An atom no rule covers gets no answer, which the engine
  *   reports as a stuck hook. What lands follows from the verdicts alone: the
  *   offered atom on accept, its transform on a transforming accept, nothing
  *   otherwise, and with both slots claimed the post judge sees only an atom
@@ -17,6 +16,7 @@
 #ifndef CH15_JUDGES_H
 #define CH15_JUDGES_H
 #include "common.h"
+#include "verdicts.h"
 
 /* The two write hooks a space has, named as the engine names them. */
 typedef enum { PRE_ADD, POST_ADD } slot;
@@ -56,12 +56,12 @@ static inline mt_atom *transformed(const rule *r, const mt_atom *offered) { retu
 static inline mt_atom *verdict_atom(const rule *r, const mt_atom *offered)
 {
     switch (r->verdict) {
-    case ACCEPT: return E("accept");
-    case TRANSFORM: return E("accept", transformed(r, offered));
-    case REFUSE: return E("refuse", T(r->words));
+    case ACCEPT: return accepting(NULL);
+    case TRANSFORM: return accepting(transformed(r, offered));
+    case REFUSE: return refusing(T(r->words));
     case DROP: break;
     }
-    return E("drop");
+    return dropping();
 }
 
 /* The judge as the function of one atom the engine calls. */
