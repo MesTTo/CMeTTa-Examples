@@ -4,6 +4,20 @@
 
 ## Unreleased
 
+- Compare a space too large to list by its equations and the hash of
+  everything else. Over the lane's 50,000-atom cap, the twin lane compared
+  the two `&self` spaces by one multiset hash, so a twin whose C operation
+  carries an equation the original stores could pass only through a
+  Divergence pin naming two hashes. `lane.c` now also prints each equation,
+  `(= head body)`, as a `LANE-EQUATION` line, their count, and
+  `LANE-DATA-HASH` over the atoms that are not equations. When the data
+  hashes agree, the lane compares the equations under the same carried and
+  derived exceptions it applies below the cap; a pin is needed only when the
+  data differs. The content rule is now `twin_lane.content()`, which the
+  self-test calls directly with over-cap reports, since no small original is
+  over the cap. The self-test now judges 20 cases, up from 14. The new ones
+  check a real report against the atoms it lists, and five over-cap reports.
+
 - Spell each MeTTa operator once, in `lowering.h`: `C_X` is the C
   expression, `M_X` the MeTTa tokens `mt_lower()` stringifies, and `T_X` the
   atom `mt_expr()` builds, for `if`, `==`, `<`, `>`, `+`, `-`, `*`, `%` and

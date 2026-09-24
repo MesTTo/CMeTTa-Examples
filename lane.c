@@ -10,8 +10,14 @@
  *     hash, so enumeration order cannot move it and a duplicate atom does
  *     [source: Bellare and Micciancio, "A New Paradigm for Collision-free
  *     Hashing: Incrementality at Reduced Cost", EUROCRYPT 1997, AdHash]
+ *   - LANE-DATA-HASH is the same sum over the atoms that are not equations,
+ *     and each equation, (= head body), also prints as a LANE-EQUATION line,
+ *     with LANE-EQUATIONS counting them, so a space too large to list still
+ *     shows the definitions a twin's C functions carry one by one
+ *     [tested: make twins; commit=WORKTREE]
  * Decides: LANE-ATOM lines stop at 50,000 atoms, the cap the Python lane uses
- *   for the same diagnostic; LANE-HASH still covers every atom
+ *   for the same diagnostic, and LANE-EQUATION lines at 50,000 equations;
+ *   the hashes and counts still cover every atom
  *   [source: extensions/python/tools/twin_coverage.py, CONTENT_CAP;
  *   commit=7d995f762ba535440834d6edd071679f672fdca9].
  * Fails when: an atom holds a live C object or a native handle; those print
@@ -178,6 +184,13 @@ static char *head_key(const mt_atom *head)
     return t.data;
 }
 
+/* An equation, (= head body): what a twin may carry in a C function instead. */
+static bool equation(const mt_atom *a)
+{
+    return mt_kind_of(a) == MT_EXPR && mt_len(a) == 3 && mt_kind_of(mt_at(a, 0)) == MT_SYMBOL &&
+           strcmp(mt_name(mt_at(a, 0)), "=") == 0;
+}
+
 static void print_sorted_unique(const char *marker, char **items, size_t n)
 {
     qsort(items, n, sizeof *items, by_text);
@@ -217,16 +230,23 @@ void lane_report(metta *runtime)
     }
     print_sorted_unique("LANE-OPS", keys, n);
 
-    size_t held = mt_count(runtime);
-    uint64_t hash = 0;
+    size_t held = mt_count(runtime), equations = 0;
+    uint64_t hash = 0, data = 0;
     text line = {0};
     printf("LANE-HELD %zu\n", held);
     mt_each (atom, mt_atoms(runtime)) {
         canonical(&line, atom);
-        hash += fnv1a(line.data, line.len);
+        uint64_t h = fnv1a(line.data, line.len);
+        hash += h;
+        if (!equation(atom))
+            data += h;
+        else if (++equations <= ATOM_CAP)
+            printf("LANE-EQUATION %s\n", line.data);
         if (held <= ATOM_CAP) printf("LANE-ATOM %s\n", line.data);
     }
     free(line.data);
     printf("LANE-HASH %016" PRIx64 "\n", hash);
+    printf("LANE-EQUATIONS %zu\n", equations);
+    printf("LANE-DATA-HASH %016" PRIx64 "\n", data);
     mt_clear();
 }

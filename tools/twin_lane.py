@@ -14,7 +14,10 @@ what the two answer:
   content  the atoms the two &self spaces hold are one multiset, up to
            variable renaming, except where the twin's C operation carries the
            original's equations for that head, a clause is one the specializer
-           derived, or the twin declares the exact difference as a Divergence
+           derived, or the twin declares the exact difference as a Divergence;
+           over the enumeration cap the atoms that are not equations compare
+           by their multiset hash and the equations one by one, under the same
+           exceptions
   engine   a twin reaches the engine (20 inferences or more) unless it says
            why not with an `engine-free:` note
   source   no program runs MeTTa source text: no mt_run, mt_do, mt_load,
@@ -176,12 +179,16 @@ class Run:
     held: int | None = None
     atoms: list[str] | None = None
     hash: str | None = None
+    equations: list[str] | None = None
+    data_hash: str | None = None
     ok: bool = False
 
 
 def read(returncode: int, output: str) -> Run:
     run = Run(returncode, output)
     atoms: list[str] = []
+    equations: list[str] = []
+    counted = None
     for line in output.splitlines():
         marker, _, rest = line.partition(" ")
         if marker == "LANE-CLAIMS":
@@ -198,10 +205,18 @@ def read(returncode: int, output: str) -> Run:
             atoms.append(rest)
         elif marker == "LANE-HASH":
             run.hash = rest.strip()
+        elif marker == "LANE-EQUATION":
+            equations.append(rest)
+        elif marker == "LANE-EQUATIONS":
+            counted = int(rest)
+        elif marker == "LANE-DATA-HASH":
+            run.data_hash = rest.strip()
         elif marker == "OK":
             run.ok = True
     if run.held is not None and run.held == len(atoms):
         run.atoms = atoms
+    if counted is not None and counted == len(equations):
+        run.equations = equations
     return run
 
 
@@ -330,6 +345,49 @@ def carried_by_op(atom: str, ops: set[str]) -> bool:
     return bool(hit and hit.group(1) in ops)
 
 
+def comparable(left: Run, right: Run) -> tuple[list[str], list[str]] | None:
+    """The atom lists the content rule compares: every atom when both sides
+    listed theirs, else the equations alone, which stand for the whole space
+    only when the atoms that are not equations hash alike, else None."""
+    if left.atoms is not None and right.atoms is not None:
+        return left.atoms, right.atoms
+    if (left.equations is not None and right.equations is not None
+            and left.data_hash is not None and left.data_hash == right.data_hash):
+        return left.equations, right.equations
+    return None
+
+
+def content(left: Run, right: Run, ops: set[str],
+            told: dict[str, str]) -> tuple[str, list[str]]:
+    """The content rule over what two runs store: the storage verdict and the
+    findings it raises. An atom only the original holds is excused when the
+    twin's C operation carries it or the specializer derived it."""
+    if left.hash == right.hash:
+        return "equal", (["declares a Divergence while the two spaces hold the same atoms"]
+                         if "divergence" in told else [])
+    lists = comparable(left, right)
+    if lists is None:
+        pinned = divergence_digest([left.hash or ""], [right.hash or ""])
+        if told.get("divergence") == pinned:
+            return "pinned", []
+        why = (f"the atoms that are not equations differ (data hash {left.data_hash} "
+               f"against {right.data_hash})" if left.data_hash != right.data_hash
+               else "the equations are too many to list")
+        return "different", [f"{why}, over the enumeration cap; pin it with "
+                             f"`Divergence {pinned}:`"]
+    example_only = [a for a in surplus(*lists) if not carried_by_op(a, ops) and not derived(a)]
+    twin_only = [a for a in surplus(lists[1], lists[0]) if not derived(a)]
+    if not example_only and not twin_only:
+        return "carried", (["declares a Divergence while the only difference is the "
+                            "definitions its C operations carry"] if "divergence" in told else [])
+    digest = divergence_digest(example_only, twin_only)
+    if told.get("divergence") == digest:
+        return "declared", []
+    return "different", [f"stored content differs: original-only={json.dumps(example_only)} "
+                         f"twin-only={json.dumps(twin_only)}; if the difference is meant, "
+                         f"declare `Divergence {digest}:` with its reason"]
+
+
 def divergence_digest(example_only: list[str], twin_only: list[str]) -> str:
     text = json.dumps([example_only, twin_only], separators=(",", ":"))
     return hashlib.sha256(text.encode()).hexdigest()[:16]
@@ -412,35 +470,8 @@ def check_one(twin: Path, engine: Path, entries: list[dict]) -> Verdict:
              f"{ENGINE_FLOOR}; a twin that never reaches the engine only agrees "
              "with its original, so say why with an `engine-free:` note")
 
-    if left.hash == right.hash:
-        verdict.storage = "equal"
-        if "divergence" in told:
-            find("declares a Divergence while the two spaces hold the same atoms")
-        return verdict
-    if left.atoms is None or right.atoms is None:
-        pinned = divergence_digest([left.hash or ""], [right.hash or ""])
-        verdict.storage = "pinned" if told.get("divergence") == pinned else "different"
-        if verdict.storage != "pinned":
-            find(f"stored content differs (hash {left.hash} against {right.hash}, "
-                 f"over the enumeration cap); pin it with `Divergence {pinned}:`")
-        return verdict
-    example_only = [a for a in surplus(left.atoms, right.atoms)
-                    if not carried_by_op(a, ops) and not derived(a)]
-    twin_only = [a for a in surplus(right.atoms, left.atoms) if not derived(a)]
-    if not example_only and not twin_only:
-        verdict.storage = "carried"
-        if "divergence" in told:
-            find("declares a Divergence while the only difference is the "
-                 "definitions its C operations carry")
-        return verdict
-    digest = divergence_digest(example_only, twin_only)
-    if told.get("divergence") == digest:
-        verdict.storage = "declared"
-        return verdict
-    verdict.storage = "different"
-    find(f"stored content differs: original-only={json.dumps(example_only)} "
-         f"twin-only={json.dumps(twin_only)}; if the difference is meant, "
-         f"declare `Divergence {digest}:` with its reason")
+    verdict.storage, found = content(left, right, ops, told)
+    verdict.findings.extend(found)
     return verdict
 
 

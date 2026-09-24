@@ -6,7 +6,8 @@
 #define EXAMPLES_LANE_H
 #include <cmetta.h>
 
-/* Print LANE-HEADS, LANE-OPS, LANE-HELD, LANE-HASH and, up to a cap,
-   LANE-ATOM lines describing &self. Leaves the error state clear. */
+/* Print LANE-HEADS, LANE-OPS, LANE-HELD, LANE-HASH, LANE-EQUATIONS,
+   LANE-DATA-HASH and, up to a cap, LANE-ATOM and LANE-EQUATION lines
+   describing &self. Leaves the error state clear. */
 void lane_report(metta *runtime);
 #endif
