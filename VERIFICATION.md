@@ -4,16 +4,18 @@ Open Obligations: the open issues in ERRORS.md. -->
 
 # Verification
 
-The corpus at `d4affe3` was verified from a clean copy: a worktree of this
+The corpus at `f8d79ba` was verified from a clean copy: a worktree of this
 repository checked out at that commit with every untracked and ignored file
 removed, so every program was built from nothing. Later commits change no
-program: they touch ERRORS.md, CHANGELOG.md and this record with its receipts.
-It ran against the MeTTa checkout's committed tree, superproject `f9c56dbba`,
-which carries the verdict rename of `5bae989df` and the renamed originals at
-examples `84aab62`, and pins `extensions/cmetta` at `8211c57`, in a battery of
-that checkout carrying no uncommitted edit. The host was the patched
-SWI-Prolog 10.1.14 at `/home/user/Dev/swipl-patched`, compiled Sep 24 2026 at
-09:57:51, with GCC 15.2.0, CMake 4.2.3 and Python 3.14.4.
+program: `818dc34` pins the admission twin's evidence tag to this commit, and
+the rest touch ERRORS.md, CHANGELOG.md and this record with its receipts. It
+ran against the MeTTa checkout's committed tree, superproject `3f3d8107a`,
+which carries the verdict rename of `5bae989df` and the admission fix of
+`47855fa71` in its originals at examples `3372c22`, and pins
+`extensions/cmetta` at `8211c57`, in a battery of that checkout carrying no
+uncommitted edit. The host was the patched SWI-Prolog 10.1.14 at
+`/home/user/Dev/swipl-patched`, compiled Sep 24 2026 at 09:57:51, with GCC
+15.2.0, CMake 4.2.3 and Python 3.14.4.
 
 ## Commands
 
@@ -45,7 +47,7 @@ through `tools/run.py`, then the twin lane, the lane's self-test and
 | `make surface` | the C seat's library built from the engine checkout |
 | `make all` | 379 compile and link commands under `-std=c11 -Wall -Wextra -Wpedantic -Werror`, every one of the 374 programs among them |
 | embedding programs | 51/51 passed |
-| twin lane | 323/323 twins agree with their originals; 3885/3885 claims proved; stored content carried 50, declared 2, equal 271 |
+| twin lane | 323/323 twins agree with their originals; 3887/3887 claims proved; stored content carried 50, declared 2, equal 271 |
 | lane self-test | 22/22 planted cases judged as expected |
 | index | INDEX.md, COVERAGE.md and README.md agree with the files |
 | `make check-consumers` | both Make consumers print `OK` (2 claims each), the archive links no `libcmetta.so`, CTest passes 1/1 with `METTA_PATH` unset, and the installed prefix holds no `.git*` entry |
@@ -75,7 +77,7 @@ C seat gate's whole output.
 
 ## Limits of the result
 
-Five runs led here. The first, at `f7fad19`, failed two steps: `make
+Six runs led here. The first, at `f7fad19`, failed two steps: `make
 check-consumers`, because `lane.c` called POSIX `strdup` where the consumers
 compile plain C11, fixed in `2c09a57`; and chapter 20's `13-reference_loading`
 twin, which died with SIGSEGV while closing its engine when SWI's halt raced
@@ -96,9 +98,12 @@ chapter 20's `07-translatorrule_refusal`, to their renamed originals through
 `verdicts.h`'s capitalized constructors, and lost `13-reference_loading` to
 the same race as the first run, after the twin had printed its space report
 (core 1509400, `PL_cleanup` in `cleanupFunctors` this time); that twin's lane
-then agreed ten times of ten run alone on the same engine, 5/5 claims each. So
-two of five full runs under `JOBS=4` have lost that twin. This fifth, on the
-tree the superproject pins, passed every step.
+then agreed ten times of ten run alone on the same engine, 5/5 claims each.
+The fifth, on superproject `f9c56dbba` as pinned, passed every step. This
+sixth, on `3f3d8107a`, where `47855fa71` made the admission original's MeTTa
+chain walk every capacity row and gave it a two-row section, which chapter
+15's `04-admission_pools` twin follows since `f8d79ba`, passed every step,
+323/323 twins with 3887/3887 claims, the original's two new claims among them.
 
 `c-bench` declined its three boot comparisons in this configuration, since
 the battery's checkout path is longer than the canonical shape its baseline

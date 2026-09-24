@@ -4,6 +4,14 @@
 
 ## Unreleased
 
+- VERIFICATION.md records the corpus at `f8d79ba` verified on superproject
+  `3f3d8107a`, whose admission fix gave chapter 15's original a two-row
+  section: every step passes, 323/323 twins and 3887/3887 claims, with
+  that run's receipts. ERRORS.md closes the admission report: the fixed
+  chain and `space-admission-verdict` agree across six capacity-row
+  orderings, where the old chain asked beside them still admits at rows
+  `(5 2)` and `(5 3 2)`.
+
 - Hold chapter 15's admission twin to its original's two-row section, which
   superproject `47855fa71` added when it made the original's MeTTa chain
   walk every capacity row as `space-admission-verdict` does. The twin's own

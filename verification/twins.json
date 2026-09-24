@@ -1314,7 +1314,7 @@
   "example": "examples/ch08-data/08-03-the-shipped-libraries/03-text_lib.metta",
   "claims_owed": 37,
   "claims_proved": 38,
-  "example_inferences": 358631,
+  "example_inferences": 358657,
   "twin_inferences": 3009,
   "storage": "equal",
   "findings": []
@@ -1554,7 +1554,7 @@
   "example": "examples/ch08-data/08-03-the-shipped-libraries/27-parsing_lib.metta",
   "claims_owed": 74,
   "claims_proved": 74,
-  "example_inferences": 4295725,
+  "example_inferences": 4295721,
   "twin_inferences": 104031,
   "storage": "carried",
   "findings": []
@@ -2094,7 +2094,7 @@
   "example": "examples/ch15-writing-transactions-and-worlds/01-mutex_and_transaction.metta",
   "claims_owed": 2,
   "claims_proved": 10,
-  "example_inferences": 26459,
+  "example_inferences": 26454,
   "twin_inferences": 7355,
   "storage": "carried",
   "findings": []
@@ -2122,10 +2122,10 @@
  {
   "twin": "language-feature-examples/ch15-writing-transactions-and-worlds/04-admission_pools.c",
   "example": "examples/ch15-writing-transactions-and-worlds/04-admission_pools.metta",
-  "claims_owed": 7,
-  "claims_proved": 14,
-  "example_inferences": 27291,
-  "twin_inferences": 14367,
+  "claims_owed": 9,
+  "claims_proved": 19,
+  "example_inferences": 31801,
+  "twin_inferences": 14448,
   "storage": "carried",
   "findings": []
  },
@@ -2164,7 +2164,7 @@
   "example": "examples/ch17-concurrency-and-the-loop/01-thread_lib.metta",
   "claims_owed": 27,
   "claims_proved": 27,
-  "example_inferences": 198463,
+  "example_inferences": 198662,
   "twin_inferences": 8275,
   "storage": "carried",
   "findings": []
@@ -2184,7 +2184,7 @@
   "example": "examples/ch17-concurrency-and-the-loop/03-hyperpose_primes.metta",
   "claims_owed": 3,
   "claims_proved": 3,
-  "example_inferences": 235334298,
+  "example_inferences": 246158640,
   "twin_inferences": 6093,
   "storage": "carried",
   "findings": []
@@ -2194,7 +2194,7 @@
   "example": "examples/ch17-concurrency-and-the-loop/04-thin_forms.metta",
   "claims_owed": 25,
   "claims_proved": 25,
-  "example_inferences": 42902,
+  "example_inferences": 42519,
   "twin_inferences": 8904,
   "storage": "carried",
   "findings": []
@@ -2214,7 +2214,7 @@
   "example": "examples/ch17-concurrency-and-the-loop/06-the_prolog_rung_under_lib_thread.metta",
   "claims_owed": 35,
   "claims_proved": 38,
-  "example_inferences": 202740,
+  "example_inferences": 202556,
   "twin_inferences": 8013,
   "storage": "carried",
   "findings": []
@@ -2434,7 +2434,7 @@
   "example": "examples/ch18-performance/18-02-memoisation-and-tabling/10-tabling_equation_change.metta",
   "claims_owed": 4,
   "claims_proved": 4,
-  "example_inferences": 51293,
+  "example_inferences": 51321,
   "twin_inferences": 2828,
   "storage": "equal",
   "findings": []
@@ -2444,7 +2444,7 @@
   "example": "examples/ch18-performance/18-02-memoisation-and-tabling/11-tabling_space_write.metta",
   "claims_owed": 6,
   "claims_proved": 6,
-  "example_inferences": 60347,
+  "example_inferences": 60375,
   "twin_inferences": 3872,
   "storage": "equal",
   "findings": []
@@ -2544,7 +2544,7 @@
   "example": "examples/ch19-spaces-backed-by-anything/19-02-a-space-in-c/01-c_space.metta",
   "claims_owed": 0,
   "claims_proved": 6,
-  "example_inferences": 288611,
+  "example_inferences": 288603,
   "twin_inferences": 2746,
   "storage": "equal",
   "findings": []
@@ -2934,8 +2934,8 @@
   "example": "examples/ch20-extending-the-engine/20-04-modules-and-the-catalog/13-reference_loading.metta",
   "claims_owed": 5,
   "claims_proved": 5,
-  "example_inferences": 71660,
-  "twin_inferences": 48954,
+  "example_inferences": 68712,
+  "twin_inferences": 46355,
   "storage": "declared",
   "findings": []
  },
@@ -3104,7 +3104,7 @@
   "example": "examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/11-weighted_subset_posterior.metta",
   "claims_owed": 11,
   "claims_proved": 11,
-  "example_inferences": 1637512,
+  "example_inferences": 1637510,
   "twin_inferences": 1343,
   "storage": "equal",
   "findings": []
