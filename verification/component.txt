@@ -1,5 +1,8 @@
-surface: 156 declarations, all defined
-docs: every mt_ name in README.md and llms.txt is in the header
+--> c-binding [GATE]
+
+=== c-binding [GATE] ===
+surface: 166 declarations, all defined
+docs: every mt_ name in README.md and llms.txt is in a header
 version: 1.0.0, and mt_version() agrees
 hardening: GNU_RELRO and BIND_NOW on both shared libraries
 ERROR: [Thread main] MeTTa assertion failed: (assertEqual 1 2)
@@ -8,23 +11,24 @@ ERROR: [Thread main]   excess: (1)
 ERROR: [Thread main] MeTTa assertion failed: (assertEqual 1 2)
 ERROR: [Thread main]   missing: (2)
 ERROR: [Thread main]   excess: (1)
-543 checks, 0 failures
+1243 checks, 0 failures
 bad boot exception barrier ok
 apostrophe boot path ok
-qlf boot: 7695 predicates, identical from source and from .qlf
+qlf boot: 7781 predicates, identical from source and from .qlf
 qlf boot regimes ok
 transactional eager growth ok
-% [1/4] cmetta_cursor_lif..stroys_after_unlock ...... passed (0.002 sec)
+% [1/4] cmetta_cursor_lif..stroys_after_unlock ...... passed (0.006 sec)
 % [2/4] cmetta_cursor_lif..stroys_after_unlock ...... passed (0.000 sec)
 % [3/4] cmetta_cursor_lif..stroys_after_unlock ...... passed (0.000 sec)
 % [4/4] cmetta_cursor_lif.._ownership_transfer ...... passed (0.000 sec)
-closed cursors 2000: registry bytes 0, records 0, atoms 14762 (initial 0/0/14762)
-closed cursors 10000: registry bytes 0, records 0, atoms 14762 (initial 0/0/14762)
-closed cursors 20000: registry bytes 0, records 0, atoms 14762 (initial 0/0/14762)
+closed cursors 2000: registry bytes 0, records 0, atoms 15010 (initial 0/0/15010)
+closed cursors 10000: registry bytes 0, records 0, atoms 15010 (initial 0/0/15010)
+closed cursors 20000: registry bytes 0, records 0, atoms 15010 (initial 0/0/15010)
 cursor ids 32008 then 32009; 43205 concurrent vs 66005 sequential open inferences
 cursor restart ids 34410 then 1 remain generation-safe
 runtime predicate restart ok
 internal range, list, stats and limit contracts ok
+stack ceiling ok: 8 boots
 batch add 2000 atoms: 62035 sequential vs 24054 batch inferences
 unification and substitution contracts ok
 seam: points, rows, ownership, a C provider, a rendering and the loader
@@ -44,9 +48,16 @@ CASE transactions and speculation restore engine state and registrations
 CASE every scope enclosing C registry mutation must retain its own rollback owner
 transactions: isolated source, commit, rollback, nesting, speculation, cursor ownership and registry restoration passed
 CASE foreign spaces preserve typed rows and captured transaction ownership
+CASE a compound stored through a provider comes back as the term it was
+CASE a provider that promises rules holds a program, and one that does not refuses it
 providers: typed objects, candidate unification, multiplicity, late errors, capability refusal, transactions and retained replacement passed
+providers: a stored compound applies, shares, removes by value and stays apart from its spelling
+providers: a rules provider holds a program the engine compiles, and a data provider refuses one
 CASE UTF-8 terms and names preserve their bytes and reject malformed input
 CASE native atoms preserve identity through the engine
+CASE mt_bigrational reduces a ratio of any width as the engine's rdiv does
+CASE every other spelling is refused as a misuse
+CASE a BigRational reads as its canonical text and nothing narrower
 native parity: UTF-8, 64 unification pairs, canonical integers, borrowed transport, unevaluated forms and occurrence removal passed
 CASE standing queries observe committed changes and retain callback ownership
 subscriptions: matching, both edges, commit buffering, rollback, failure and reentrant cancellation passed
@@ -54,10 +65,119 @@ CASE extension initialization publishes atomically or rolls back
 extensions: separate shared objects, initialization rollback and live calls passed
 matchers: refusal, bindings, streams, errors and ownership passed
 structural hash contracts ok
-thread attach, isolated errors, mt_of and detach ok
+thread attach, isolated errors, mt_of, detach and handle drops during close ok
 kit long-string and bounded-escape contracts ok
 examples/hello ok
 examples/ops ok
 examples/stream ok
 examples/lower ok
 examples/language ok
+--> stranger-c [GATE]
+--> c-sanitize [GATE]
+
+=== stranger-c [GATE] ===
+before        : the seat holds no provider, no repr and no library
+extension     : mt_extension(m, solars.so) loaded it and it registered
+provider      : &stars opens, point 'provider'
+provider      : an add reaches the solars store
+provider      : and a second
+provider      : a match walks the store the engine never held
+repr          : a solars object goes into a space
+repr          : and prints as (star -1.5), point 'repr'
+op            : (solar-double 21) is 42, point 'op'
+library       : (library solars solars.metta) answers 42, point 'library'
+orbit         : a point solars declared, and the seat dispatches it
+orbit         : a subject its row declines answers nothing
+seam          : one row per door, readable back as data
+solars extended the C seat through 5 doors with no edit to PeTTa
+a stranger extends the C seat: passed
+
+=== c-sanitize [GATE] ===
+UndefinedBehaviorSanitizer
+ERROR: [Thread main] MeTTa assertion failed: (assertEqual 1 2)
+ERROR: [Thread main]   missing: (2)
+ERROR: [Thread main]   excess: (1)
+ERROR: [Thread main] MeTTa assertion failed: (assertEqual 1 2)
+ERROR: [Thread main]   missing: (2)
+ERROR: [Thread main]   excess: (1)
+1243 checks, 0 failures
+bad boot exception barrier ok
+apostrophe boot path ok
+transactional eager growth ok
+% [1/4] cmetta_cursor_lif..stroys_after_unlock ...... passed (0.007 sec)
+% [2/4] cmetta_cursor_lif..stroys_after_unlock ...... passed (0.000 sec)
+% [3/4] cmetta_cursor_lif..stroys_after_unlock ...... passed (0.000 sec)
+% [4/4] cmetta_cursor_lif.._ownership_transfer ...... passed (0.000 sec)
+closed cursors 2000: registry bytes 0, records 0, atoms 15010 (initial 0/0/15010)
+closed cursors 10000: registry bytes 0, records 0, atoms 15010 (initial 0/0/15010)
+closed cursors 20000: registry bytes 0, records 0, atoms 15010 (initial 0/0/15010)
+cursor ids 32008 then 32009; 43205 concurrent vs 66005 sequential open inferences
+cursor restart ids 34410 then 1 remain generation-safe
+runtime predicate restart ok
+internal range, list, stats and limit contracts ok
+batch add 2000 atoms: 62035 sequential vs 24054 batch inferences
+unification and substitution contracts ok
+structural hash contracts ok
+thread attach, isolated errors, mt_of, detach and handle drops during close ok
+kit long-string and bounded-escape contracts ok
+hello ok
+ops ok
+lower ok
+stream ok
+UBSan diagnostics: none
+LeakSanitizer (standalone, LSAN_OPTIONS=exitcode=0)
+SUMMARY: LeakSanitizer: 66018 byte(s) leaked in 142 allocation(s).
+1243 checks, 0 failures
+C-seat allocation origins: none
+--> c-bench [GATE]
+
+=== c-bench [GATE] ===
+NOT MEASURED IN THIS CONFIGURATION boot: inferences not compared; checkout length 65, depth 9; canonical length 29, depth 5; Non-monotonic atom/predicate inventory sensitivity; no fixed inference slope per component. At length29 and depths2,3,4,5,6,7, engine boot reads 296185,296185,296185,296185,296185,296185 and C boot reads 456391,456394,456395,456391,456397,456396, three identical processes per point. Instrumented engine boots make88 absolute_file_name/3 calls at every measured depth; calls times a constant do not explain the C series. At the canonical shape, interning0,1,2,3,5,8,16 fresh atoms before engine boot reads 296185,296185,296185,296158,296185,296185,296185. Instruction counts also depend on path length as recorded by the earlier controls. See the 2026-09-09 boot location section of docs/journal/2026-09-09-runtime-units-compile-beside-their-source.md.
+NOT MEASURED IN THIS CONFIGURATION boot: instructions not compared; checkout length 65, depth 9; canonical length 29, depth 5; Non-monotonic atom/predicate inventory sensitivity; no fixed inference slope per component. At length29 and depths2,3,4,5,6,7, engine boot reads 296185,296185,296185,296185,296185,296185 and C boot reads 456391,456394,456395,456391,456397,456396, three identical processes per point. Instrumented engine boots make88 absolute_file_name/3 calls at every measured depth; calls times a constant do not explain the C series. At the canonical shape, interning0,1,2,3,5,8,16 fresh atoms before engine boot reads 296185,296185,296185,296158,296185,296185,296185. Instruction counts also depend on path length as recorded by the earlier controls. See the 2026-09-09 boot location section of docs/journal/2026-09-09-runtime-units-compile-beside-their-source.md.
+NOT MEASURED IN THIS CONFIGURATION boot: estimated cycles not compared; checkout length 65, depth 9; canonical length 29, depth 5; Non-monotonic atom/predicate inventory sensitivity; no fixed inference slope per component. At length29 and depths2,3,4,5,6,7, engine boot reads 296185,296185,296185,296185,296185,296185 and C boot reads 456391,456394,456395,456391,456397,456396, three identical processes per point. Instrumented engine boots make88 absolute_file_name/3 calls at every measured depth; calls times a constant do not explain the C series. At the canonical shape, interning0,1,2,3,5,8,16 fresh atoms before engine boot reads 296185,296185,296185,296158,296185,296185,296185. Instruction counts also depend on path length as recorded by the earlier controls. See the 2026-09-09 boot location section of docs/journal/2026-09-09-runtime-units-compile-beside-their-source.md.
+3 comparison(s) declined for the reasons above; every runtime row's comparisons ran
+boot fixture: 26 governed QLF artifacts after the boot's purge and ordinary warmup
+boot: instructions=[1613402572, 1613403198, 1613419594] estimated_cycles=[2440166508, 2440277887, 2440252427] cpu=[0.12526, 0.13082, 0.13464] inferences=[593018, 593018, 593018] NOT MEASURED IN THIS CONFIGURATION
+cursor-step: instructions=[325676893, 325681940, 325677016] estimated_cycles=[558702903, 558884144, 561993220] cpu=[0.02279, 0.02282, 0.0233] inferences=[240006, 240006, 240006]
+term-in: instructions=[434098633, 433963978, 434134544] estimated_cycles=[668340384, 668349362, 668348998] cpu=[0.0217, 0.02176, 0.02328] inferences=[522009, 522009, 522009]
+term-out: instructions=[324227972, 324304124, 324244189] estimated_cycles=[1076245210, 1077042876, 1076984054] cpu=[0.01928, 0.01692, 0.01649] inferences=[156005, 156005, 156005]
+space-pair: instructions=[321949517, 322456191, 322011697] estimated_cycles=[541447564, 540926469, 541134796] cpu=[0.03551, 0.0343, 0.03832] inferences=[200041, 200041, 200041]
+error-ball: instructions=[168483470, 168506210, 168469233] estimated_cycles=[268435766, 268283068, 268394794] cpu=[0.01708, 0.01659, 0.01689] inferences=[67813, 67813, 67813]
+6 case(s) sampled; 3 comparison(s) declined
+--> c-install [GATE]
+
+=== c-install [GATE] ===
+version: 1.0.0, and mt_version() agrees
+installed cmetta 1.0.0 under /home/user/Dev/PyPeTTa1/PeTTa/ai-tmp/wt-merge/ai-tmp/wt-battery-1/extensions/cmetta/build/install-check
+install-check: the install carries no version-control metadata
+ 0x0000000000000001 (NEEDED)             Shared library: [libcmetta.so.1]
+install-check: a consumer outside this checkout booted the installed engine
+install-check: archive consumer booted the installed engine
+--> llms [GATE]
+--> evidence [GATE]
+
+=== llms [GATE] ===
+llms: 5 cheat sheet(s) read against 325 live engine names; 229 of 257 callable names are corpus-used and 229 are covered, 0 finding(s)
+
+=== evidence [GATE] ===
+0 unbacked evidence tag(s) in 9674 claims, against 17979 known test names in 1463 files a runner executes; 342 commit=WORKTREE placeholder(s) awaiting a provenance pin; door contracts read through doorgen
+
+================ summary ================
+GATE   c-binding    ok           36s
+GATE   stranger-c   ok            1s
+GATE   c-sanitize   ok           36s
+GATE   c-bench      ok           12s
+GATE   c-install    ok            5s
+GATE   llms         ok            6s
+GATE   evidence     ok           11s
+
+ran for 118s; the lanes that cost it:
+     36s  c-binding
+     36s  c-sanitize
+     12s  c-bench
+     11s  evidence
+      6s  llms
+      5s  c-install
+      1s  stranger-c
+
+all gate checks passed

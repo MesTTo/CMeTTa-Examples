@@ -1,87 +1,102 @@
-<!-- Purpose: record commands, fixed snapshots and observable verification results.
-Open Obligations: SWI shutdown and source-writer limits in ERRORS.md. -->
+<!-- Purpose: how the corpus was last verified: the trees it ran against, the
+commands, what each reported, and what the result does not cover.
+Open Obligations: the open issues in ERRORS.md. -->
 
 # Verification
 
-All 362 C programs were compiled with C11, `-Wall -Wextra -Wpedantic -Werror`
-and executed in an isolated Git worktree. The final receipt is
-[verification/results.json](verification/results.json): every discovered program
-has exit status zero and an `OK` assertion report. No executable was skipped.
-The two deliberate assertion-helper failures were also checked under `NDEBUG`.
+The corpus at `4fe7740` was verified from a clean copy: a worktree of this
+repository checked out at that commit with every untracked and ignored file
+removed, so every program was built from nothing. Later commits change only
+ERRORS.md, CHANGELOG.md, this record and its receipts. It ran against the
+MeTTa checkout's committed tree, superproject `8bda9d552`, in a battery of
+that checkout carrying no other uncommitted edit, with `extensions/cmetta` at
+`e73dfea`, the seat's install fix, which the superproject pins in place of
+`cf925da` once gate-perf has landed. The host was the patched SWI-Prolog
+10.1.14 at `/home/user/Dev/swipl-patched`, compiled Sep 24 2026 at 09:57:51,
+with GCC 15.2.0, CMake 4.2.3 and Python 3.14.4.
 
-The environment used GCC 15.2.0, SWI-Prolog 10.1.14, OpenBLAS 0.3.32,
-CMake 4.2.3 and Python 3.11.15 for the runner. Python 3.13 was used only to
-read the Python source roster, which includes PEP 695 syntax.
+## Commands
 
-## Corpus and consumers
-
-The verification tree lives at `ai-battery-1/`. Its C dependency was also built
-in an isolated component worktree. With `surface` set to the repaired component
-and `engine` to its containing MeTTa checkout, the executed build was:
-
-```sh
-make -C ai-battery-1 -j8 check check-consumers \
-  CMETTA_DIR="$surface/ai-battery-1" \
-  CMETTA_ENGINE="$engine" \
-  SQLITE_CFLAGS="-I$PWD/ai-tmp/deps/sqlite/usr/include" \
-  SQLITE_LIBS=-l:libsqlite3.so.0 JOBS=4
-```
-
-The SQLite overrides pair the installed runtime with the header from Ubuntu's
-`libsqlite3-dev_3.46.1-9ubuntu0.3_amd64.deb`, downloaded and extracted under
-`ai-tmp/deps/`. They avoid modifying the system. With SQLite development files
-installed normally, the Makefile obtains both flags through pkg-config.
-
-Results:
-
-- All example binaries compiled and ran, including the 1,572,862-answer stream.
-- Source/fixture regeneration and the index/coverage drift checks passed.
-- Shared Make consumer: `OK installed_consumer (4 checks)`.
-- Archive Make consumer: `OK installed_consumer (4 checks)`; `readelf` confirmed
-  no `libcmetta.so` dependency.
-- CMake consumer: `1/1` CTest passed with `METTA_PATH` unset.
-- The loaded extension was compiled as a shared object and invoked by the
-  `shared_extension` example. SQLite and BLAS support paths ran in their examples.
-
-The `Makefile` enumerates C files in the eight corpus directories. Support C
-files and the assertion-helper executable are built and exercised by those
-targets; installed linking variants reuse the same asserted consumer source.
-
-## Component regression checks
-
-Component functional evidence is pinned to
-`91eef0753a3d55913cee42a2d385bbbf008f0be5`; the following comment-only commit
-`4d479e762fdc38ec5dc2ed0dc6bff59c115f9f28` records that evidence in headers.
-The actual `extensions/cmetta/check.sh` file was sourced through a local harness
-that selected its `c-binding` registration and invoked its `test.sh` directly.
-`ENGINE_PATH` pointed at the permitted shared engine checkout, and temporary
-files remained inside this repository. The enclosing superproject gate was
-not run because it also owns unrelated components and writes outside this scope.
-
-Each C repair passed that binding lane. The final component snapshot also ran:
+In the MeTTa checkout, the C seat's own gate lanes:
 
 ```sh
-ENGINE_PATH="$engine" sh "$surface/ai-battery-1/build.sh"
-make -C "$surface/ai-battery-1" install-check ENGINE_PATH="$engine"
+sh tools/check.sh c-binding stranger-c c-sanitize c-bench c-install llms evidence
 ```
 
-The binding lane reported 156 public declarations, all defined; 543 core checks,
-zero failures; passing ownership, native parity, matcher, provider, transaction,
-subscription, thread, iterator, hash, extension and cursor suites; and successful
-`hello`, `ops`, `stream`, `lower` and `language` examples. Its deliberate
-`assertEqual 1 2` diagnostics test the exception barrier and are expected.
-Installed shared and archive consumers both booted the installed engine.
-The full component output is in [verification/component.txt](verification/component.txt).
+Then in the clean copy, with `CMETTA_DIR` and `CMETTA_ENGINE` naming that
+checkout's C seat and engine:
+
+```sh
+make surface
+make -j8 all
+make check JOBS=4
+make check-consumers
+```
+
+`make check` builds and runs `check-helpers`, runs the 51 embedding programs
+through `tools/run.py`, then the twin lane, the lane's self-test and
+`tools/index.py --check`.
+
+## Results
+
+| Step | Result |
+| --- | --- |
+| C seat gate | seven lanes ok: `c-binding` (166 public declarations, all defined; 1243 checks, 0 failures), `stranger-c`, `c-sanitize`, `c-bench`, `c-install`, `llms`, and `evidence` (0 unbacked evidence tags in 9674 claims) |
+| `make surface` | the C seat's library built from the engine checkout |
+| `make all` | 379 compile and link commands under `-std=c11 -Wall -Wextra -Wpedantic -Werror`, every one of the 374 programs among them |
+| embedding programs | 51/51 passed |
+| twin lane | 323/323 twins agree with their originals; 3885/3885 claims proved; stored content carried 50, declared 2, equal 271 |
+| lane self-test | 22/22 planted cases judged as expected |
+| index | INDEX.md, COVERAGE.md and README.md agree with the files |
+| `make check-consumers` | both Make consumers print `OK` (2 claims each), the archive links no `libcmetta.so`, CTest passes 1/1 with `METTA_PATH` unset, and the installed prefix holds no `.git*` entry |
+
+Every program ran under `done()`'s ownership check, so none left a block
+cmetta allocated for it once its engine had closed.
+
+Beside the gate, three checks over the repository at that commit:
+
+- The lane's source rule, `scan()` in `tools/twin_lane.py`, over all
+  409 tracked C files: 39 findings. Each is in a file whose
+  `text:` note says why it handles MeTTa text, except `tools/original.c`,
+  which loads each original and so reads text by definition, and
+  `common.c`'s `"(null)"`, printf's spelling of a null string.
+- `git grep` for `check_program` and for `const char *const program[]`
+  finds nothing. The two `program[]` arrays in chapter 22's matespace twins
+  hold atoms built with `E`, not text.
+- `git grep -i` for `generate.py`, `corpus.json` and `auto-generated` finds
+  only history: one line of CHANGELOG.md and four of ERRORS.md.
+
+The receipts are [verification/results.json](verification/results.json),
+each embedding program's exit and log;
+[verification/twins.json](verification/twins.json), the lane's verdict on
+each twin; and [verification/component.txt](verification/component.txt), the
+C seat gate's whole output.
 
 ## Limits of the result
 
-The independent SWI-only Linda probe aborted once in thirty full-cleanup runs;
-its error and attribution boundary are in [ERRORS.md](ERRORS.md). Successful
-corpus runs establish that every program was executed successfully, not that
-this external intermittent failure has been repaired.
+This is the third run of the verification. The first, at `f7fad19`, failed two
+steps. `make check-consumers` failed because `lane.c` called POSIX `strdup`
+where the consumers compile plain C11, fixed in `2c09a57`. And one twin,
+chapter 20's `13-reference_loading`, died with SIGSEGV while closing its
+engine: SWI's halt raced the loader thread its `background` policy had
+started, the host defect ERRORS.md keeps open. Any program whose engine
+creates a thread just before it closes can fail that way under the parallel
+lane until the live host carries the fix, which is in the native build
+`swipl-patched.5`, due after gate-perf lands. The second run, at `2c09a57`,
+passed every step, and then `git clean -fdx` could not empty its build
+directory: cmetta's `make install` had copied the lib submodule's `.git` into
+the consumers' prefix, making it a nested repository. The seat's `f76b44e`
+keeps version-control metadata out of the install, and this run is against it,
+`extensions/cmetta` at its provenance pin `e73dfea` ahead of the
+superproject's pin.
 
-The correspondence inventory is explicit about missing host services and
-package-specific behavior. No claim of Python package/API identity is made.
-The duplicate-code audit reported one six-line callback fragment, 0.2% of
-handwritten code at the first audit, 0.1% after the final additions; the reason
-for retaining it is in the error ledger.
+The shared MeTTa checkout has an uncommitted rename of the judges' verdicts
+to `(Accept)`, `(Refuse W)`, `(Drop)` and `Defer`. Against that live tree
+five twins fail: chapter 9's `16-typing_rules`, chapter 15's
+`03-pre_add_hooks`, `04-admission_pools` and `05-post_add_hooks`, and
+chapter 20's `07-translatorrule_refusal`. They spell every verdict through
+`verdicts.h` and move with it when the rename lands.
+
+`c-bench` declined its three boot comparisons in this configuration, since
+the battery's checkout path is longer than the canonical shape its baseline
+was measured at; every runtime row was compared.

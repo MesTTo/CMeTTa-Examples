@@ -1,0 +1,3232 @@
+[
+ {
+  "twin": "language-feature-examples/ch03-atoms-and-expressions/01-comments.c",
+  "example": "examples/ch03-atoms-and-expressions/01-comments.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 5335,
+  "twin_inferences": 3817,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch03-atoms-and-expressions/02-string.c",
+  "example": "examples/ch03-atoms-and-expressions/02-string.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 4222,
+  "twin_inferences": 84,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch03-atoms-and-expressions/03-string_comments.c",
+  "example": "examples/ch03-atoms-and-expressions/03-string_comments.metta",
+  "claims_owed": 11,
+  "claims_proved": 22,
+  "example_inferences": 7193,
+  "twin_inferences": 5089,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch03-atoms-and-expressions/04-repr.c",
+  "example": "examples/ch03-atoms-and-expressions/04-repr.metta",
+  "claims_owed": 6,
+  "claims_proved": 12,
+  "example_inferences": 6703,
+  "twin_inferences": 680,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch03-atoms-and-expressions/05-parse.c",
+  "example": "examples/ch03-atoms-and-expressions/05-parse.metta",
+  "claims_owed": 8,
+  "claims_proved": 16,
+  "example_inferences": 7983,
+  "twin_inferences": 832,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch03-atoms-and-expressions/06-reading_forms.c",
+  "example": "examples/ch03-atoms-and-expressions/06-reading_forms.metta",
+  "claims_owed": 19,
+  "claims_proved": 24,
+  "example_inferences": 45114,
+  "twin_inferences": 2498,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch04-spaces-and-matching/04-01-a-space-is-where-a-program-lives/01-spaces.c",
+  "example": "examples/ch04-spaces-and-matching/04-01-a-space-is-where-a-program-lives/01-spaces.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 6487,
+  "twin_inferences": 4704,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch04-spaces-and-matching/04-01-a-space-is-where-a-program-lives/02-spaces2.c",
+  "example": "examples/ch04-spaces-and-matching/04-01-a-space-is-where-a-program-lives/02-spaces2.metta",
+  "claims_owed": 1,
+  "claims_proved": 4,
+  "example_inferences": 6847,
+  "twin_inferences": 5153,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch04-spaces-and-matching/04-01-a-space-is-where-a-program-lives/03-spaces3.c",
+  "example": "examples/ch04-spaces-and-matching/04-01-a-space-is-where-a-program-lives/03-spaces3.metta",
+  "claims_owed": 5,
+  "claims_proved": 5,
+  "example_inferences": 7339,
+  "twin_inferences": 439,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch04-spaces-and-matching/04-01-a-space-is-where-a-program-lives/04-spaces_find.c",
+  "example": "examples/ch04-spaces-and-matching/04-01-a-space-is-where-a-program-lives/04-spaces_find.metta",
+  "claims_owed": 1,
+  "claims_proved": 2,
+  "example_inferences": 18310,
+  "twin_inferences": 497,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch04-spaces-and-matching/04-01-a-space-is-where-a-program-lives/05-spaces_succeedspredicate.c",
+  "example": "examples/ch04-spaces-and-matching/04-01-a-space-is-where-a-program-lives/05-spaces_succeedspredicate.metta",
+  "claims_owed": 2,
+  "claims_proved": 2,
+  "example_inferences": 17911,
+  "twin_inferences": 273,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch04-spaces-and-matching/04-01-a-space-is-where-a-program-lives/06-spaces_removeallatoms.c",
+  "example": "examples/ch04-spaces-and-matching/04-01-a-space-is-where-a-program-lives/06-spaces_removeallatoms.metta",
+  "claims_owed": 3,
+  "claims_proved": 3,
+  "example_inferences": 26809,
+  "twin_inferences": 1167,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch04-spaces-and-matching/04-01-a-space-is-where-a-program-lives/07-add_atom_fun_space.c",
+  "example": "examples/ch04-spaces-and-matching/04-01-a-space-is-where-a-program-lives/07-add_atom_fun_space.metta",
+  "claims_owed": 3,
+  "claims_proved": 3,
+  "example_inferences": 6676,
+  "twin_inferences": 4913,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch04-spaces-and-matching/04-01-a-space-is-where-a-program-lives/08-spacefunction.c",
+  "example": "examples/ch04-spaces-and-matching/04-01-a-space-is-where-a-program-lives/08-spacefunction.metta",
+  "claims_owed": 3,
+  "claims_proved": 3,
+  "example_inferences": 8558,
+  "twin_inferences": 6005,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch04-spaces-and-matching/04-01-a-space-is-where-a-program-lives/09-selfprog.c",
+  "example": "examples/ch04-spaces-and-matching/04-01-a-space-is-where-a-program-lives/09-selfprog.metta",
+  "claims_owed": 2,
+  "claims_proved": 4,
+  "example_inferences": 6839,
+  "twin_inferences": 5963,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch04-spaces-and-matching/04-01-a-space-is-where-a-program-lives/12-add_reducts_and_containment.c",
+  "example": "examples/ch04-spaces-and-matching/04-01-a-space-is-where-a-program-lives/12-add_reducts_and_containment.metta",
+  "claims_owed": 15,
+  "claims_proved": 15,
+  "example_inferences": 10331,
+  "twin_inferences": 1415,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch04-spaces-and-matching/04-01-a-space-is-where-a-program-lives/13-migrating_and_counting.c",
+  "example": "examples/ch04-spaces-and-matching/04-01-a-space-is-where-a-program-lives/13-migrating_and_counting.metta",
+  "claims_owed": 10,
+  "claims_proved": 10,
+  "example_inferences": 26978,
+  "twin_inferences": 1144,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch04-spaces-and-matching/04-02-patterns-and-bindings/01-matchsingle.c",
+  "example": "examples/ch04-spaces-and-matching/04-02-patterns-and-bindings/01-matchsingle.metta",
+  "claims_owed": 2,
+  "claims_proved": 3,
+  "example_inferences": 8546,
+  "twin_inferences": 5773,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch04-spaces-and-matching/04-02-patterns-and-bindings/02-matchnested.c",
+  "example": "examples/ch04-spaces-and-matching/04-02-patterns-and-bindings/02-matchnested.metta",
+  "claims_owed": 1,
+  "claims_proved": 2,
+  "example_inferences": 7726,
+  "twin_inferences": 5073,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch04-spaces-and-matching/04-02-patterns-and-bindings/03-matchnested2.c",
+  "example": "examples/ch04-spaces-and-matching/04-02-patterns-and-bindings/03-matchnested2.metta",
+  "claims_owed": 1,
+  "claims_proved": 2,
+  "example_inferences": 7791,
+  "twin_inferences": 4770,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch04-spaces-and-matching/04-02-patterns-and-bindings/04-match_snapshot.c",
+  "example": "examples/ch04-spaces-and-matching/04-02-patterns-and-bindings/04-match_snapshot.metta",
+  "claims_owed": 4,
+  "claims_proved": 4,
+  "example_inferences": 10955,
+  "twin_inferences": 5774,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch04-spaces-and-matching/04-02-patterns-and-bindings/05-constanthead.c",
+  "example": "examples/ch04-spaces-and-matching/04-02-patterns-and-bindings/05-constanthead.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 6103,
+  "twin_inferences": 4681,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch04-spaces-and-matching/04-02-patterns-and-bindings/06-listhead.c",
+  "example": "examples/ch04-spaces-and-matching/04-02-patterns-and-bindings/06-listhead.metta",
+  "claims_owed": 3,
+  "claims_proved": 5,
+  "example_inferences": 8470,
+  "twin_inferences": 4834,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch04-spaces-and-matching/04-02-patterns-and-bindings/07-unify.c",
+  "example": "examples/ch04-spaces-and-matching/04-02-patterns-and-bindings/07-unify.metta",
+  "claims_owed": 15,
+  "claims_proved": 17,
+  "example_inferences": 11392,
+  "twin_inferences": 7077,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch04-spaces-and-matching/04-02-patterns-and-bindings/08-unify_eval_branches.c",
+  "example": "examples/ch04-spaces-and-matching/04-02-patterns-and-bindings/08-unify_eval_branches.metta",
+  "claims_owed": 5,
+  "claims_proved": 5,
+  "example_inferences": 37984,
+  "twin_inferences": 541,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch05-equations-and-evaluation/05-01-an-equation-is-a-rewrite/01-identity.c",
+  "example": "examples/ch05-equations-and-evaluation/05-01-an-equation-is-a-rewrite/01-identity.metta",
+  "claims_owed": 1,
+  "claims_proved": 2,
+  "example_inferences": 5659,
+  "twin_inferences": 15594,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch05-equations-and-evaluation/05-01-an-equation-is-a-rewrite/02-twostage.c",
+  "example": "examples/ch05-equations-and-evaluation/05-01-an-equation-is-a-rewrite/02-twostage.metta",
+  "claims_owed": 2,
+  "claims_proved": 2,
+  "example_inferences": 8130,
+  "twin_inferences": 9602,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch05-equations-and-evaluation/05-01-an-equation-is-a-rewrite/03-program_order.c",
+  "example": "examples/ch05-equations-and-evaluation/05-01-an-equation-is-a-rewrite/03-program_order.metta",
+  "claims_owed": 1,
+  "claims_proved": 2,
+  "example_inferences": 5658,
+  "twin_inferences": 3982,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch05-equations-and-evaluation/05-01-an-equation-is-a-rewrite/04-partialdef.c",
+  "example": "examples/ch05-equations-and-evaluation/05-01-an-equation-is-a-rewrite/04-partialdef.metta",
+  "claims_owed": 2,
+  "claims_proved": 3,
+  "example_inferences": 8829,
+  "twin_inferences": 6499,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch05-equations-and-evaluation/05-01-an-equation-is-a-rewrite/05-smartdispatch.c",
+  "example": "examples/ch05-equations-and-evaluation/05-01-an-equation-is-a-rewrite/05-smartdispatch.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 12403,
+  "twin_inferences": 7993,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch05-equations-and-evaluation/05-01-an-equation-is-a-rewrite/06-functionhead.c",
+  "example": "examples/ch05-equations-and-evaluation/05-01-an-equation-is-a-rewrite/06-functionhead.metta",
+  "claims_owed": 2,
+  "claims_proved": 2,
+  "example_inferences": 10754,
+  "twin_inferences": 8047,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch05-equations-and-evaluation/05-01-an-equation-is-a-rewrite/07-functionhead2.c",
+  "example": "examples/ch05-equations-and-evaluation/05-01-an-equation-is-a-rewrite/07-functionhead2.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 16503,
+  "twin_inferences": 13521,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch05-equations-and-evaluation/05-01-an-equation-is-a-rewrite/08-functionhead3.c",
+  "example": "examples/ch05-equations-and-evaluation/05-01-an-equation-is-a-rewrite/08-functionhead3.metta",
+  "claims_owed": 6,
+  "claims_proved": 6,
+  "example_inferences": 11412,
+  "twin_inferences": 7264,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch05-equations-and-evaluation/05-01-an-equation-is-a-rewrite/09-multicall.c",
+  "example": "examples/ch05-equations-and-evaluation/05-01-an-equation-is-a-rewrite/09-multicall.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 6701,
+  "twin_inferences": 4694,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch05-equations-and-evaluation/05-01-an-equation-is-a-rewrite/10-unwind_cleanup.c",
+  "example": "examples/ch05-equations-and-evaluation/05-01-an-equation-is-a-rewrite/10-unwind_cleanup.metta",
+  "claims_owed": 6,
+  "claims_proved": 6,
+  "example_inferences": 9118,
+  "twin_inferences": 4746,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch05-equations-and-evaluation/05-01-an-equation-is-a-rewrite/11-single_answer.c",
+  "example": "examples/ch05-equations-and-evaluation/05-01-an-equation-is-a-rewrite/11-single_answer.metta",
+  "claims_owed": 5,
+  "claims_proved": 5,
+  "example_inferences": 10593,
+  "twin_inferences": 5909,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch05-equations-and-evaluation/05-02-changing-the-equations/01-dispatch_policies.c",
+  "example": "examples/ch05-equations-and-evaluation/05-02-changing-the-equations/01-dispatch_policies.metta",
+  "claims_owed": 3,
+  "claims_proved": 3,
+  "example_inferences": 7564,
+  "twin_inferences": 4629,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch05-equations-and-evaluation/05-02-changing-the-equations/02-functionremoval.c",
+  "example": "examples/ch05-equations-and-evaluation/05-02-changing-the-equations/02-functionremoval.metta",
+  "claims_owed": 4,
+  "claims_proved": 4,
+  "example_inferences": 15367,
+  "twin_inferences": 9952,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch05-equations-and-evaluation/05-02-changing-the-equations/03-functionremovalspec.c",
+  "example": "examples/ch05-equations-and-evaluation/05-02-changing-the-equations/03-functionremovalspec.metta",
+  "claims_owed": 3,
+  "claims_proved": 3,
+  "example_inferences": 15129,
+  "twin_inferences": 8143,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch05-equations-and-evaluation/05-02-changing-the-equations/04-specialize.c",
+  "example": "examples/ch05-equations-and-evaluation/05-02-changing-the-equations/04-specialize.metta",
+  "claims_owed": 11,
+  "claims_proved": 12,
+  "example_inferences": 81670,
+  "twin_inferences": 47058,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch05-equations-and-evaluation/05-02-changing-the-equations/05-specialize_recursive_wrap.c",
+  "example": "examples/ch05-equations-and-evaluation/05-02-changing-the-equations/05-specialize_recursive_wrap.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 11521,
+  "twin_inferences": 6963,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch05-equations-and-evaluation/05-02-changing-the-equations/06-specializecyclic.c",
+  "example": "examples/ch05-equations-and-evaluation/05-02-changing-the-equations/06-specializecyclic.metta",
+  "claims_owed": 2,
+  "claims_proved": 2,
+  "example_inferences": 21551,
+  "twin_inferences": 19560,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch05-equations-and-evaluation/05-02-changing-the-equations/07-specializefunctiontypes.c",
+  "example": "examples/ch05-equations-and-evaluation/05-02-changing-the-equations/07-specializefunctiontypes.metta",
+  "claims_owed": 2,
+  "claims_proved": 3,
+  "example_inferences": 8863,
+  "twin_inferences": 5531,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch05-equations-and-evaluation/05-03-the-number-library/01-math.c",
+  "example": "examples/ch05-equations-and-evaluation/05-03-the-number-library/01-math.metta",
+  "claims_owed": 34,
+  "claims_proved": 34,
+  "example_inferences": 21059,
+  "twin_inferences": 7065,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch05-equations-and-evaluation/05-03-the-number-library/02-math_exp_random.c",
+  "example": "examples/ch05-equations-and-evaluation/05-03-the-number-library/02-math_exp_random.metta",
+  "claims_owed": 7,
+  "claims_proved": 7,
+  "example_inferences": 12812,
+  "twin_inferences": 5136,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch05-equations-and-evaluation/05-03-the-number-library/03-exp_and_seeded_randomness.c",
+  "example": "examples/ch05-equations-and-evaluation/05-03-the-number-library/03-exp_and_seeded_randomness.metta",
+  "claims_owed": 7,
+  "claims_proved": 7,
+  "example_inferences": 10404,
+  "twin_inferences": 909,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch05-equations-and-evaluation/05-03-the-number-library/04-bit_operations.c",
+  "example": "examples/ch05-equations-and-evaluation/05-03-the-number-library/04-bit_operations.metta",
+  "claims_owed": 15,
+  "claims_proved": 15,
+  "example_inferences": 10907,
+  "twin_inferences": 1146,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch05-equations-and-evaluation/05-04-arithmetic-that-runs-backwards/01-backward_arithmetic.c",
+  "example": "examples/ch05-equations-and-evaluation/05-04-arithmetic-that-runs-backwards/01-backward_arithmetic.metta",
+  "claims_owed": 25,
+  "claims_proved": 25,
+  "example_inferences": 40152,
+  "twin_inferences": 6808,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch05-equations-and-evaluation/05-04-arithmetic-that-runs-backwards/02-relational_arithmetic.c",
+  "example": "examples/ch05-equations-and-evaluation/05-04-arithmetic-that-runs-backwards/02-relational_arithmetic.metta",
+  "claims_owed": 20,
+  "claims_proved": 20,
+  "example_inferences": 14343,
+  "twin_inferences": 1509,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch05-equations-and-evaluation/05-04-arithmetic-that-runs-backwards/03-constraint_domains.c",
+  "example": "examples/ch05-equations-and-evaluation/05-04-arithmetic-that-runs-backwards/03-constraint_domains.metta",
+  "claims_owed": 11,
+  "claims_proved": 11,
+  "example_inferences": 78766,
+  "twin_inferences": 1069,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch05-equations-and-evaluation/05-04-arithmetic-that-runs-backwards/04-relational_integer_division.c",
+  "example": "examples/ch05-equations-and-evaluation/05-04-arithmetic-that-runs-backwards/04-relational_integer_division.metta",
+  "claims_owed": 11,
+  "claims_proved": 11,
+  "example_inferences": 12789,
+  "twin_inferences": 909,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch06-many-answers/01-superpose_nested.c",
+  "example": "examples/ch06-many-answers/01-superpose_nested.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 7296,
+  "twin_inferences": 5219,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch06-many-answers/02-casenew.c",
+  "example": "examples/ch06-many-answers/02-casenew.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 8134,
+  "twin_inferences": 7279,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch06-many-answers/03-collapse.c",
+  "example": "examples/ch06-many-answers/03-collapse.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 4331,
+  "twin_inferences": 84,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch06-many-answers/04-supercollapse.c",
+  "example": "examples/ch06-many-answers/04-supercollapse.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 9527,
+  "twin_inferences": 908,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch06-many-answers/05-empty.c",
+  "example": "examples/ch06-many-answers/05-empty.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 5596,
+  "twin_inferences": 4667,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch06-many-answers/06-once.c",
+  "example": "examples/ch06-many-answers/06-once.metta",
+  "claims_owed": 1,
+  "claims_proved": 2,
+  "example_inferences": 6588,
+  "twin_inferences": 763,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch06-many-answers/07-tests.c",
+  "example": "examples/ch06-many-answers/07-tests.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 11892,
+  "twin_inferences": 1680,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch06-many-answers/08-permutations.c",
+  "example": "examples/ch06-many-answers/08-permutations.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 24250419,
+  "twin_inferences": 6533994,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch06-many-answers/09-streamops.c",
+  "example": "examples/ch06-many-answers/09-streamops.metta",
+  "claims_owed": 4,
+  "claims_proved": 4,
+  "example_inferences": 8478,
+  "twin_inferences": 516,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch06-many-answers/10-mettaset.c",
+  "example": "examples/ch06-many-answers/10-mettaset.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 6200,
+  "twin_inferences": 339,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch07-control-flow/07-01-if-and-booleans/01-ifsimple.c",
+  "example": "examples/ch07-control-flow/07-01-if-and-booleans/01-ifsimple.metta",
+  "claims_owed": 1,
+  "claims_proved": 4,
+  "example_inferences": 4236,
+  "twin_inferences": 4843,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch07-control-flow/07-01-if-and-booleans/02-if.c",
+  "example": "examples/ch07-control-flow/07-01-if-and-booleans/02-if.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 4614,
+  "twin_inferences": 84,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch07-control-flow/07-01-if-and-booleans/03-if2.c",
+  "example": "examples/ch07-control-flow/07-01-if-and-booleans/03-if2.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 5011,
+  "twin_inferences": 84,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch07-control-flow/07-01-if-and-booleans/04-if3.c",
+  "example": "examples/ch07-control-flow/07-01-if-and-booleans/04-if3.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 4754,
+  "twin_inferences": 84,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch07-control-flow/07-01-if-and-booleans/05-if4.c",
+  "example": "examples/ch07-control-flow/07-01-if-and-booleans/05-if4.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 4806,
+  "twin_inferences": 84,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch07-control-flow/07-01-if-and-booleans/06-if_branch_binding.c",
+  "example": "examples/ch07-control-flow/07-01-if-and-booleans/06-if_branch_binding.metta",
+  "claims_owed": 5,
+  "claims_proved": 5,
+  "example_inferences": 12970,
+  "twin_inferences": 1984,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch07-control-flow/07-01-if-and-booleans/07-and_or.c",
+  "example": "examples/ch07-control-flow/07-01-if-and-booleans/07-and_or.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 5108,
+  "twin_inferences": 84,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch07-control-flow/07-01-if-and-booleans/08-booleansolver.c",
+  "example": "examples/ch07-control-flow/07-01-if-and-booleans/08-booleansolver.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 5339,
+  "twin_inferences": 96,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch07-control-flow/07-01-if-and-booleans/09-xor.c",
+  "example": "examples/ch07-control-flow/07-01-if-and-booleans/09-xor.metta",
+  "claims_owed": 2,
+  "claims_proved": 2,
+  "example_inferences": 7346,
+  "twin_inferences": 595,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch07-control-flow/07-01-if-and-booleans/10-and_then_or_else.c",
+  "example": "examples/ch07-control-flow/07-01-if-and-booleans/10-and_then_or_else.metta",
+  "claims_owed": 9,
+  "claims_proved": 15,
+  "example_inferences": 15756,
+  "twin_inferences": 6814,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch07-control-flow/07-01-if-and-booleans/12-implication_and_unifiability.c",
+  "example": "examples/ch07-control-flow/07-01-if-and-booleans/12-implication_and_unifiability.metta",
+  "claims_owed": 17,
+  "claims_proved": 17,
+  "example_inferences": 20361,
+  "twin_inferences": 7650,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch07-control-flow/07-02-case/01-case.c",
+  "example": "examples/ch07-control-flow/07-02-case/01-case.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 5896,
+  "twin_inferences": 519,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch07-control-flow/07-02-case/02-case2.c",
+  "example": "examples/ch07-control-flow/07-02-case/02-case2.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 6035,
+  "twin_inferences": 537,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch07-control-flow/07-02-case/03-caseconstrain.c",
+  "example": "examples/ch07-control-flow/07-02-case/03-caseconstrain.metta",
+  "claims_owed": 1,
+  "claims_proved": 3,
+  "example_inferences": 4320,
+  "twin_inferences": 84,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch07-control-flow/07-02-case/04-caseempty.c",
+  "example": "examples/ch07-control-flow/07-02-case/04-caseempty.metta",
+  "claims_owed": 2,
+  "claims_proved": 2,
+  "example_inferences": 8548,
+  "twin_inferences": 5573,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch07-control-flow/07-02-case/05-casecomputed.c",
+  "example": "examples/ch07-control-flow/07-02-case/05-casecomputed.metta",
+  "claims_owed": 11,
+  "claims_proved": 11,
+  "example_inferences": 14165,
+  "twin_inferences": 2633,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch07-control-flow/07-02-case/06-ifcasenondet.c",
+  "example": "examples/ch07-control-flow/07-02-case/06-ifcasenondet.metta",
+  "claims_owed": 2,
+  "claims_proved": 2,
+  "example_inferences": 8675,
+  "twin_inferences": 1047,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch07-control-flow/07-02-case/07-let_superpose_if_case.c",
+  "example": "examples/ch07-control-flow/07-02-case/07-let_superpose_if_case.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 7912,
+  "twin_inferences": 5148,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch07-control-flow/07-03-let-and-sequencing/01-letstar.c",
+  "example": "examples/ch07-control-flow/07-03-let-and-sequencing/01-letstar.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 4521,
+  "twin_inferences": 84,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch07-control-flow/07-03-let-and-sequencing/02-letlet.c",
+  "example": "examples/ch07-control-flow/07-03-let-and-sequencing/02-letlet.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 5678,
+  "twin_inferences": 519,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch07-control-flow/07-03-let-and-sequencing/03-letext.c",
+  "example": "examples/ch07-control-flow/07-03-let-and-sequencing/03-letext.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 4897,
+  "twin_inferences": 159,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch07-control-flow/07-03-let-and-sequencing/04-letstarcomputed.c",
+  "example": "examples/ch07-control-flow/07-03-let-and-sequencing/04-letstarcomputed.metta",
+  "claims_owed": 8,
+  "claims_proved": 8,
+  "example_inferences": 12093,
+  "twin_inferences": 5230,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch07-control-flow/07-03-let-and-sequencing/05-metta4_prog.c",
+  "example": "examples/ch07-control-flow/07-03-let-and-sequencing/05-metta4_prog.metta",
+  "claims_owed": 3,
+  "claims_proved": 3,
+  "example_inferences": 4900,
+  "twin_inferences": 373,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch07-control-flow/07-03-let-and-sequencing/06-chain.c",
+  "example": "examples/ch07-control-flow/07-03-let-and-sequencing/06-chain.metta",
+  "claims_owed": 2,
+  "claims_proved": 2,
+  "example_inferences": 5754,
+  "twin_inferences": 159,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch07-control-flow/07-03-let-and-sequencing/07-eval.c",
+  "example": "examples/ch07-control-flow/07-03-let-and-sequencing/07-eval.metta",
+  "claims_owed": 2,
+  "claims_proved": 3,
+  "example_inferences": 12991,
+  "twin_inferences": 8427,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch07-control-flow/07-03-let-and-sequencing/08-sealed.c",
+  "example": "examples/ch07-control-flow/07-03-let-and-sequencing/08-sealed.metta",
+  "claims_owed": 10,
+  "claims_proved": 10,
+  "example_inferences": 11641,
+  "twin_inferences": 6193,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch07-control-flow/07-03-let-and-sequencing/09-walrus.c",
+  "example": "examples/ch07-control-flow/07-03-let-and-sequencing/09-walrus.metta",
+  "claims_owed": 3,
+  "claims_proved": 3,
+  "example_inferences": 8718,
+  "twin_inferences": 1059,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch07-control-flow/07-03-let-and-sequencing/11-nop.c",
+  "example": "examples/ch07-control-flow/07-03-let-and-sequencing/11-nop.metta",
+  "claims_owed": 11,
+  "claims_proved": 11,
+  "example_inferences": 7537,
+  "twin_inferences": 1295,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch07-control-flow/07-04-bounded-and-committed-searches/01-forall.c",
+  "example": "examples/ch07-control-flow/07-04-bounded-and-committed-searches/01-forall.metta",
+  "claims_owed": 12,
+  "claims_proved": 12,
+  "example_inferences": 26596,
+  "twin_inferences": 7918,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch07-control-flow/07-04-bounded-and-committed-searches/02-metta4_streams.c",
+  "example": "examples/ch07-control-flow/07-04-bounded-and-committed-searches/02-metta4_streams.metta",
+  "claims_owed": 3,
+  "claims_proved": 3,
+  "example_inferences": 12969,
+  "twin_inferences": 6612,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch07-control-flow/07-04-bounded-and-committed-searches/03-take.c",
+  "example": "examples/ch07-control-flow/07-04-bounded-and-committed-searches/03-take.metta",
+  "claims_owed": 7,
+  "claims_proved": 7,
+  "example_inferences": 9529,
+  "twin_inferences": 1455,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch07-control-flow/07-04-bounded-and-committed-searches/04-cut.c",
+  "example": "examples/ch07-control-flow/07-04-bounded-and-committed-searches/04-cut.metta",
+  "claims_owed": 1,
+  "claims_proved": 2,
+  "example_inferences": 6757,
+  "twin_inferences": 763,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch07-control-flow/07-04-bounded-and-committed-searches/05-foldall.c",
+  "example": "examples/ch07-control-flow/07-04-bounded-and-committed-searches/05-foldall.metta",
+  "claims_owed": 10,
+  "claims_proved": 10,
+  "example_inferences": 23946,
+  "twin_inferences": 7769,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch07-control-flow/07-04-bounded-and-committed-searches/06-foldallmatch.c",
+  "example": "examples/ch07-control-flow/07-04-bounded-and-committed-searches/06-foldallmatch.metta",
+  "claims_owed": 2,
+  "claims_proved": 2,
+  "example_inferences": 8361,
+  "twin_inferences": 4818,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch07-control-flow/07-04-bounded-and-committed-searches/07-foldallspacecount.c",
+  "example": "examples/ch07-control-flow/07-04-bounded-and-committed-searches/07-foldallspacecount.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 7626,
+  "twin_inferences": 5698,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch07-control-flow/07-05-recursion/01-factorial.c",
+  "example": "examples/ch07-control-flow/07-05-recursion/01-factorial.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 7305,
+  "twin_inferences": 519,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch07-control-flow/07-05-recursion/02-fib.c",
+  "example": "examples/ch07-control-flow/07-05-recursion/02-fib.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 33554,
+  "twin_inferences": 519,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch07-control-flow/07-05-recursion/03-fibsmart.c",
+  "example": "examples/ch07-control-flow/07-05-recursion/03-fibsmart.metta",
+  "claims_owed": 1,
+  "claims_proved": 2,
+  "example_inferences": 9091,
+  "twin_inferences": 983,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch07-control-flow/07-05-recursion/04-fibsmartimport.c",
+  "example": "examples/ch07-control-flow/07-05-recursion/04-fibsmartimport.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 11473,
+  "twin_inferences": 908,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch07-control-flow/07-05-recursion/05-iter.c",
+  "example": "examples/ch07-control-flow/07-05-recursion/05-iter.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 7509,
+  "twin_inferences": 5917,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch07-control-flow/07-05-recursion/06-peano.c",
+  "example": "examples/ch07-control-flow/07-05-recursion/06-peano.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 1512628,
+  "twin_inferences": 141634,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch07-control-flow/07-05-recursion/07-invertpeanoplus.c",
+  "example": "examples/ch07-control-flow/07-05-recursion/07-invertpeanoplus.metta",
+  "claims_owed": 5,
+  "claims_proved": 5,
+  "example_inferences": 12909,
+  "twin_inferences": 6098,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-01-atoms-lists-and-folds/01-nestedcons.c",
+  "example": "examples/ch08-data/08-01-atoms-lists-and-folds/01-nestedcons.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 5731,
+  "twin_inferences": 3913,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-01-atoms-lists-and-folds/02-holfunctions.c",
+  "example": "examples/ch08-data/08-01-atoms-lists-and-folds/02-holfunctions.metta",
+  "claims_owed": 6,
+  "claims_proved": 7,
+  "example_inferences": 21324,
+  "twin_inferences": 10358,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-01-atoms-lists-and-folds/03-holfunctions_intrinsicop.c",
+  "example": "examples/ch08-data/08-01-atoms-lists-and-folds/03-holfunctions_intrinsicop.metta",
+  "claims_owed": 1,
+  "claims_proved": 2,
+  "example_inferences": 14910,
+  "twin_inferences": 7781,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-01-atoms-lists-and-folds/04-curry.c",
+  "example": "examples/ch08-data/08-01-atoms-lists-and-folds/04-curry.metta",
+  "claims_owed": 11,
+  "claims_proved": 11,
+  "example_inferences": 17018,
+  "twin_inferences": 4027,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-01-atoms-lists-and-folds/05-lambda.c",
+  "example": "examples/ch08-data/08-01-atoms-lists-and-folds/05-lambda.metta",
+  "claims_owed": 7,
+  "claims_proved": 7,
+  "example_inferences": 19821,
+  "twin_inferences": 6173,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-01-atoms-lists-and-folds/06-invertfunction.c",
+  "example": "examples/ch08-data/08-01-atoms-lists-and-folds/06-invertfunction.metta",
+  "claims_owed": 3,
+  "claims_proved": 3,
+  "example_inferences": 9025,
+  "twin_inferences": 1059,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-01-atoms-lists-and-folds/07-atomops.c",
+  "example": "examples/ch08-data/08-01-atoms-lists-and-folds/07-atomops.metta",
+  "claims_owed": 26,
+  "claims_proved": 26,
+  "example_inferences": 17185,
+  "twin_inferences": 2016,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-01-atoms-lists-and-folds/08-alpha_member.c",
+  "example": "examples/ch08-data/08-01-atoms-lists-and-folds/08-alpha_member.metta",
+  "claims_owed": 22,
+  "claims_proved": 22,
+  "example_inferences": 21443,
+  "twin_inferences": 1849,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-01-atoms-lists-and-folds/09-alpha_unique_atom.c",
+  "example": "examples/ch08-data/08-01-atoms-lists-and-folds/09-alpha_unique_atom.metta",
+  "claims_owed": 13,
+  "claims_proved": 13,
+  "example_inferences": 17540,
+  "twin_inferences": 1095,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-01-atoms-lists-and-folds/10-multiset_operations.c",
+  "example": "examples/ch08-data/08-01-atoms-lists-and-folds/10-multiset_operations.metta",
+  "claims_owed": 8,
+  "claims_proved": 8,
+  "example_inferences": 9673,
+  "twin_inferences": 675,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-01-atoms-lists-and-folds/11-patrick.c",
+  "example": "examples/ch08-data/08-01-atoms-lists-and-folds/11-patrick.metta",
+  "claims_owed": 3,
+  "claims_proved": 3,
+  "example_inferences": 24454,
+  "twin_inferences": 3178,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-01-atoms-lists-and-folds/12-patrick_iterate_fib.c",
+  "example": "examples/ch08-data/08-01-atoms-lists-and-folds/12-patrick_iterate_fib.metta",
+  "claims_owed": 1,
+  "claims_proved": 2,
+  "example_inferences": 22303,
+  "twin_inferences": 1580,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-01-atoms-lists-and-folds/13-patrick_iterate_quad.c",
+  "example": "examples/ch08-data/08-01-atoms-lists-and-folds/13-patrick_iterate_quad.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 11034469,
+  "twin_inferences": 1018,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-01-atoms-lists-and-folds/14-lib_roman_pair_helpers.c",
+  "example": "examples/ch08-data/08-01-atoms-lists-and-folds/14-lib_roman_pair_helpers.metta",
+  "claims_owed": 3,
+  "claims_proved": 3,
+  "example_inferences": 35574,
+  "twin_inferences": 1712,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-01-atoms-lists-and-folds/15-roman.c",
+  "example": "examples/ch08-data/08-01-atoms-lists-and-folds/15-roman.metta",
+  "claims_owed": 26,
+  "claims_proved": 26,
+  "example_inferences": 291073,
+  "twin_inferences": 3431,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-01-atoms-lists-and-folds/16-if_decons_expr.c",
+  "example": "examples/ch08-data/08-01-atoms-lists-and-folds/16-if_decons_expr.metta",
+  "claims_owed": 10,
+  "claims_proved": 10,
+  "example_inferences": 10248,
+  "twin_inferences": 813,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-01-atoms-lists-and-folds/17-swi_term_doors.c",
+  "example": "examples/ch08-data/08-01-atoms-lists-and-folds/17-swi_term_doors.metta",
+  "claims_owed": 21,
+  "claims_proved": 21,
+  "example_inferences": 18389,
+  "twin_inferences": 1614,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-01-atoms-lists-and-folds/18-sorting_and_deduplication.c",
+  "example": "examples/ch08-data/08-01-atoms-lists-and-folds/18-sorting_and_deduplication.metta",
+  "claims_owed": 16,
+  "claims_proved": 16,
+  "example_inferences": 15293,
+  "twin_inferences": 1245,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-01-atoms-lists-and-folds/19-decons_and_substitution.c",
+  "example": "examples/ch08-data/08-01-atoms-lists-and-folds/19-decons_and_substitution.metta",
+  "claims_owed": 12,
+  "claims_proved": 12,
+  "example_inferences": 12189,
+  "twin_inferences": 984,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-01-atoms-lists-and-folds/20-roman_general_operators.c",
+  "example": "examples/ch08-data/08-01-atoms-lists-and-folds/20-roman_general_operators.metta",
+  "claims_owed": 16,
+  "claims_proved": 16,
+  "example_inferences": 139303,
+  "twin_inferences": 2952,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-01-atoms-lists-and-folds/21-compose.c",
+  "example": "examples/ch08-data/08-01-atoms-lists-and-folds/21-compose.metta",
+  "claims_owed": 9,
+  "claims_proved": 9,
+  "example_inferences": 39667,
+  "twin_inferences": 3879,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-02-sequence-variables/01-segments.c",
+  "example": "examples/ch08-data/08-02-sequence-variables/01-segments.metta",
+  "claims_owed": 11,
+  "claims_proved": 11,
+  "example_inferences": 10392,
+  "twin_inferences": 1074,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-02-sequence-variables/02-in-an-equation-head.c",
+  "example": "examples/ch08-data/08-02-sequence-variables/02-in-an-equation-head.metta",
+  "claims_owed": 13,
+  "claims_proved": 13,
+  "example_inferences": 25472,
+  "twin_inferences": 11671,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-02-sequence-variables/03-the-one-sided-fragment.c",
+  "example": "examples/ch08-data/08-02-sequence-variables/03-the-one-sided-fragment.metta",
+  "claims_owed": 14,
+  "claims_proved": 14,
+  "example_inferences": 12067,
+  "twin_inferences": 1148,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-02-sequence-variables/04-the-two-sided-fragments.c",
+  "example": "examples/ch08-data/08-02-sequence-variables/04-the-two-sided-fragments.metta",
+  "claims_owed": 14,
+  "claims_proved": 14,
+  "example_inferences": 11248,
+  "twin_inferences": 1221,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-02-sequence-variables/05-the-fence.c",
+  "example": "examples/ch08-data/08-02-sequence-variables/05-the-fence.metta",
+  "claims_owed": 13,
+  "claims_proved": 14,
+  "example_inferences": 15150,
+  "twin_inferences": 5187,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-03-the-shipped-libraries/01-library.c",
+  "example": "examples/ch08-data/08-03-the-shipped-libraries/01-library.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 34233,
+  "twin_inferences": 159,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-03-the-shipped-libraries/02-datastructures_fingertree.c",
+  "example": "examples/ch08-data/08-03-the-shipped-libraries/02-datastructures_fingertree.metta",
+  "claims_owed": 15,
+  "claims_proved": 15,
+  "example_inferences": 285793,
+  "twin_inferences": 1305,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-03-the-shipped-libraries/03-text_lib.c",
+  "example": "examples/ch08-data/08-03-the-shipped-libraries/03-text_lib.metta",
+  "claims_owed": 37,
+  "claims_proved": 38,
+  "example_inferences": 358297,
+  "twin_inferences": 3009,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-03-the-shipped-libraries/04-regex_lib.c",
+  "example": "examples/ch08-data/08-03-the-shipped-libraries/04-regex_lib.metta",
+  "claims_owed": 26,
+  "claims_proved": 28,
+  "example_inferences": 130557,
+  "twin_inferences": 2400,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-03-the-shipped-libraries/05-json_lib.c",
+  "example": "examples/ch08-data/08-03-the-shipped-libraries/05-json_lib.metta",
+  "claims_owed": 28,
+  "claims_proved": 36,
+  "example_inferences": 317244,
+  "twin_inferences": 3063,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-03-the-shipped-libraries/06-crypto_lib.c",
+  "example": "examples/ch08-data/08-03-the-shipped-libraries/06-crypto_lib.metta",
+  "claims_owed": 18,
+  "claims_proved": 19,
+  "example_inferences": 302246,
+  "twin_inferences": 2444,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-03-the-shipped-libraries/07-datetime.c",
+  "example": "examples/ch08-data/08-03-the-shipped-libraries/07-datetime.metta",
+  "claims_owed": 25,
+  "claims_proved": 26,
+  "example_inferences": 66758,
+  "twin_inferences": 2079,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-03-the-shipped-libraries/08-doc_lib.c",
+  "example": "examples/ch08-data/08-03-the-shipped-libraries/08-doc_lib.metta",
+  "claims_owed": 5,
+  "claims_proved": 5,
+  "example_inferences": 13807,
+  "twin_inferences": 1317,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-03-the-shipped-libraries/09-conformance.c",
+  "example": "examples/ch08-data/08-03-the-shipped-libraries/09-conformance.metta",
+  "claims_owed": 2,
+  "claims_proved": 2,
+  "example_inferences": 36006,
+  "twin_inferences": 415,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-03-the-shipped-libraries/10-documentation_as_data.c",
+  "example": "examples/ch08-data/08-03-the-shipped-libraries/10-documentation_as_data.metta",
+  "claims_owed": 15,
+  "claims_proved": 15,
+  "example_inferences": 34248,
+  "twin_inferences": 6639,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-03-the-shipped-libraries/11-combinatorics_lib.c",
+  "example": "examples/ch08-data/08-03-the-shipped-libraries/11-combinatorics_lib.metta",
+  "claims_owed": 63,
+  "claims_proved": 63,
+  "example_inferences": 766201,
+  "twin_inferences": 5100,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-03-the-shipped-libraries/12-dict_lib.c",
+  "example": "examples/ch08-data/08-03-the-shipped-libraries/12-dict_lib.metta",
+  "claims_owed": 25,
+  "claims_proved": 25,
+  "example_inferences": 256870,
+  "twin_inferences": 2241,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-03-the-shipped-libraries/13-vector_lib.c",
+  "example": "examples/ch08-data/08-03-the-shipped-libraries/13-vector_lib.metta",
+  "claims_owed": 43,
+  "claims_proved": 43,
+  "example_inferences": 244144,
+  "twin_inferences": 3621,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-03-the-shipped-libraries/14-reflect_lib.c",
+  "example": "examples/ch08-data/08-03-the-shipped-libraries/14-reflect_lib.metta",
+  "claims_owed": 59,
+  "claims_proved": 61,
+  "example_inferences": 1233864,
+  "twin_inferences": 63472,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-03-the-shipped-libraries/15-fingertree_internals.c",
+  "example": "examples/ch08-data/08-03-the-shipped-libraries/15-fingertree_internals.metta",
+  "claims_owed": 28,
+  "claims_proved": 28,
+  "example_inferences": 281388,
+  "twin_inferences": 2319,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-03-the-shipped-libraries/16-the_prolog_rung.c",
+  "example": "examples/ch08-data/08-03-the-shipped-libraries/16-the_prolog_rung.metta",
+  "claims_owed": 19,
+  "claims_proved": 19,
+  "example_inferences": 339189,
+  "twin_inferences": 2782,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-03-the-shipped-libraries/17-csv_lib.c",
+  "example": "examples/ch08-data/08-03-the-shipped-libraries/17-csv_lib.metta",
+  "claims_owed": 22,
+  "claims_proved": 22,
+  "example_inferences": 338298,
+  "twin_inferences": 2500,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-03-the-shipped-libraries/18-string_lib.c",
+  "example": "examples/ch08-data/08-03-the-shipped-libraries/18-string_lib.metta",
+  "claims_owed": 50,
+  "claims_proved": 50,
+  "example_inferences": 361861,
+  "twin_inferences": 4071,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-03-the-shipped-libraries/19-file_lib.c",
+  "example": "examples/ch08-data/08-03-the-shipped-libraries/19-file_lib.metta",
+  "claims_owed": 90,
+  "claims_proved": 95,
+  "example_inferences": 361549,
+  "twin_inferences": 15691,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-03-the-shipped-libraries/20-spaces_lib.c",
+  "example": "examples/ch08-data/08-03-the-shipped-libraries/20-spaces_lib.metta",
+  "claims_owed": 27,
+  "claims_proved": 27,
+  "example_inferences": 49711,
+  "twin_inferences": 2366,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-03-the-shipped-libraries/21-datastructures_lib.c",
+  "example": "examples/ch08-data/08-03-the-shipped-libraries/21-datastructures_lib.metta",
+  "claims_owed": 59,
+  "claims_proved": 60,
+  "example_inferences": 2902524,
+  "twin_inferences": 5327,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-03-the-shipped-libraries/22-functional_lib.c",
+  "example": "examples/ch08-data/08-03-the-shipped-libraries/22-functional_lib.metta",
+  "claims_owed": 73,
+  "claims_proved": 73,
+  "example_inferences": 1117315,
+  "twin_inferences": 77947,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-03-the-shipped-libraries/23-sets_lib.c",
+  "example": "examples/ch08-data/08-03-the-shipped-libraries/23-sets_lib.metta",
+  "claims_owed": 54,
+  "claims_proved": 54,
+  "example_inferences": 345760,
+  "twin_inferences": 4263,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-03-the-shipped-libraries/24-pairs_lib.c",
+  "example": "examples/ch08-data/08-03-the-shipped-libraries/24-pairs_lib.metta",
+  "claims_owed": 37,
+  "claims_proved": 37,
+  "example_inferences": 827916,
+  "twin_inferences": 3042,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-03-the-shipped-libraries/25-graph_lib.c",
+  "example": "examples/ch08-data/08-03-the-shipped-libraries/25-graph_lib.metta",
+  "claims_owed": 52,
+  "claims_proved": 52,
+  "example_inferences": 7960516,
+  "twin_inferences": 4931,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-03-the-shipped-libraries/26-unicode_lib.c",
+  "example": "examples/ch08-data/08-03-the-shipped-libraries/26-unicode_lib.metta",
+  "claims_owed": 54,
+  "claims_proved": 54,
+  "example_inferences": 220178,
+  "twin_inferences": 4209,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-03-the-shipped-libraries/27-parsing_lib.c",
+  "example": "examples/ch08-data/08-03-the-shipped-libraries/27-parsing_lib.metta",
+  "claims_owed": 74,
+  "claims_proved": 74,
+  "example_inferences": 4295396,
+  "twin_inferences": 104031,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-03-the-shipped-libraries/28-yaml_lib.c",
+  "example": "examples/ch08-data/08-03-the-shipped-libraries/28-yaml_lib.metta",
+  "claims_owed": 32,
+  "claims_proved": 32,
+  "example_inferences": 349956,
+  "twin_inferences": 11230,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-03-the-shipped-libraries/29-markup_lib.c",
+  "example": "examples/ch08-data/08-03-the-shipped-libraries/29-markup_lib.metta",
+  "claims_owed": 30,
+  "claims_proved": 30,
+  "example_inferences": 136165,
+  "twin_inferences": 2613,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-03-the-shipped-libraries/30-encoding_lib.c",
+  "example": "examples/ch08-data/08-03-the-shipped-libraries/30-encoding_lib.metta",
+  "claims_owed": 43,
+  "claims_proved": 43,
+  "example_inferences": 323996,
+  "twin_inferences": 3583,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-03-the-shipped-libraries/31-system_lib.c",
+  "example": "examples/ch08-data/08-03-the-shipped-libraries/31-system_lib.metta",
+  "claims_owed": 29,
+  "claims_proved": 29,
+  "example_inferences": 648734,
+  "twin_inferences": 2580,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-03-the-shipped-libraries/32-process_lib.c",
+  "example": "examples/ch08-data/08-03-the-shipped-libraries/32-process_lib.metta",
+  "claims_owed": 24,
+  "claims_proved": 24,
+  "example_inferences": 71616,
+  "twin_inferences": 2100,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-03-the-shipped-libraries/33-uuid_lib.c",
+  "example": "examples/ch08-data/08-03-the-shipped-libraries/33-uuid_lib.metta",
+  "claims_owed": 49,
+  "claims_proved": 49,
+  "example_inferences": 1339802,
+  "twin_inferences": 4442,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-03-the-shipped-libraries/34-logging_lib.c",
+  "example": "examples/ch08-data/08-03-the-shipped-libraries/34-logging_lib.metta",
+  "claims_owed": 28,
+  "claims_proved": 28,
+  "example_inferences": 64196,
+  "twin_inferences": 3798,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-03-the-shipped-libraries/35-math_lib.c",
+  "example": "examples/ch08-data/08-03-the-shipped-libraries/35-math_lib.metta",
+  "claims_owed": 74,
+  "claims_proved": 74,
+  "example_inferences": 370053,
+  "twin_inferences": 5706,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-03-the-shipped-libraries/36-random_lib.c",
+  "example": "examples/ch08-data/08-03-the-shipped-libraries/36-random_lib.metta",
+  "claims_owed": 68,
+  "claims_proved": 68,
+  "example_inferences": 1060520,
+  "twin_inferences": 6188,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-03-the-shipped-libraries/37-statistics_lib.c",
+  "example": "examples/ch08-data/08-03-the-shipped-libraries/37-statistics_lib.metta",
+  "claims_owed": 78,
+  "claims_proved": 78,
+  "example_inferences": 2146014,
+  "twin_inferences": 6525,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-03-the-shipped-libraries/38-http_lib.c",
+  "example": "examples/ch08-data/08-03-the-shipped-libraries/38-http_lib.metta",
+  "claims_owed": 41,
+  "claims_proved": 41,
+  "example_inferences": 567651,
+  "twin_inferences": 18768,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-03-the-shipped-libraries/39-uri_lib.c",
+  "example": "examples/ch08-data/08-03-the-shipped-libraries/39-uri_lib.metta",
+  "claims_owed": 55,
+  "claims_proved": 55,
+  "example_inferences": 361583,
+  "twin_inferences": 4647,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-03-the-shipped-libraries/40-socket_lib.c",
+  "example": "examples/ch08-data/08-03-the-shipped-libraries/40-socket_lib.metta",
+  "claims_owed": 53,
+  "claims_proved": 53,
+  "example_inferences": 332341,
+  "twin_inferences": 6173,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-03-the-shipped-libraries/41-compression_lib.c",
+  "example": "examples/ch08-data/08-03-the-shipped-libraries/41-compression_lib.metta",
+  "claims_owed": 54,
+  "claims_proved": 54,
+  "example_inferences": 374998,
+  "twin_inferences": 5013,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-03-the-shipped-libraries/42-database_lib.c",
+  "example": "examples/ch08-data/08-03-the-shipped-libraries/42-database_lib.metta",
+  "claims_owed": 71,
+  "claims_proved": 71,
+  "example_inferences": 379527,
+  "twin_inferences": 8638,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-03-the-shipped-libraries/43-testing_lib.c",
+  "example": "examples/ch08-data/08-03-the-shipped-libraries/43-testing_lib.metta",
+  "claims_owed": 37,
+  "claims_proved": 69,
+  "example_inferences": 373085,
+  "twin_inferences": 6511,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch08-data/08-03-the-shipped-libraries/44-cli_lib.c",
+  "example": "examples/ch08-data/08-03-the-shipped-libraries/44-cli_lib.metta",
+  "claims_owed": 64,
+  "claims_proved": 69,
+  "example_inferences": 428164,
+  "twin_inferences": 10675,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch09-types/01-types.c",
+  "example": "examples/ch09-types/01-types.metta",
+  "claims_owed": 13,
+  "claims_proved": 13,
+  "example_inferences": 16977,
+  "twin_inferences": 8683,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch09-types/02-builin_types.c",
+  "example": "examples/ch09-types/02-builin_types.metta",
+  "claims_owed": 36,
+  "claims_proved": 36,
+  "example_inferences": 83256,
+  "twin_inferences": 3144,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch09-types/03-functiontypes.c",
+  "example": "examples/ch09-types/03-functiontypes.metta",
+  "claims_owed": 5,
+  "claims_proved": 5,
+  "example_inferences": 15596,
+  "twin_inferences": 9402,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch09-types/04-outputtype.c",
+  "example": "examples/ch09-types/04-outputtype.metta",
+  "claims_owed": 3,
+  "claims_proved": 3,
+  "example_inferences": 10382,
+  "twin_inferences": 6595,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch09-types/05-meta_types.c",
+  "example": "examples/ch09-types/05-meta_types.metta",
+  "claims_owed": 6,
+  "claims_proved": 7,
+  "example_inferences": 5249,
+  "twin_inferences": 654,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch09-types/06-dont_eval_type.c",
+  "example": "examples/ch09-types/06-dont_eval_type.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 6343,
+  "twin_inferences": 4490,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch09-types/08-parametric_types.c",
+  "example": "examples/ch09-types/08-parametric_types.metta",
+  "claims_owed": 1,
+  "claims_proved": 3,
+  "example_inferences": 9227,
+  "twin_inferences": 4552,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch09-types/09-recursive_types.c",
+  "example": "examples/ch09-types/09-recursive_types.metta",
+  "claims_owed": 4,
+  "claims_proved": 4,
+  "example_inferences": 8322,
+  "twin_inferences": 4559,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch09-types/10-recursive_types2.c",
+  "example": "examples/ch09-types/10-recursive_types2.metta",
+  "claims_owed": 2,
+  "claims_proved": 2,
+  "example_inferences": 12445,
+  "twin_inferences": 7802,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch09-types/11-subtyping.c",
+  "example": "examples/ch09-types/11-subtyping.metta",
+  "claims_owed": 8,
+  "claims_proved": 8,
+  "example_inferences": 14344,
+  "twin_inferences": 7321,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch09-types/12-types_dependent.c",
+  "example": "examples/ch09-types/12-types_dependent.metta",
+  "claims_owed": 2,
+  "claims_proved": 2,
+  "example_inferences": 17682,
+  "twin_inferences": 10752,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch09-types/13-types_nondet.c",
+  "example": "examples/ch09-types/13-types_nondet.metta",
+  "claims_owed": 4,
+  "claims_proved": 4,
+  "example_inferences": 12603,
+  "twin_inferences": 16642,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch09-types/14-matchtypes.c",
+  "example": "examples/ch09-types/14-matchtypes.metta",
+  "claims_owed": 4,
+  "claims_proved": 6,
+  "example_inferences": 9874,
+  "twin_inferences": 6586,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch09-types/15-engine_surface.c",
+  "example": "examples/ch09-types/15-engine_surface.metta",
+  "claims_owed": 25,
+  "claims_proved": 25,
+  "example_inferences": 21307,
+  "twin_inferences": 5858,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch09-types/16-typing_rules.c",
+  "example": "examples/ch09-types/16-typing_rules.metta",
+  "claims_owed": 3,
+  "claims_proved": 5,
+  "example_inferences": 11060,
+  "twin_inferences": 4944,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch09-types/18-compiled_overloads.c",
+  "example": "examples/ch09-types/18-compiled_overloads.metta",
+  "claims_owed": 3,
+  "claims_proved": 3,
+  "example_inferences": 8403,
+  "twin_inferences": 4789,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch09-types/20-type_casts_that_hold.c",
+  "example": "examples/ch09-types/20-type_casts_that_hold.metta",
+  "claims_owed": 17,
+  "claims_proved": 18,
+  "example_inferences": 16091,
+  "twin_inferences": 6647,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch09-types/21-a_librarys_declared_types.c",
+  "example": "examples/ch09-types/21-a_librarys_declared_types.metta",
+  "claims_owed": 10,
+  "claims_proved": 10,
+  "example_inferences": 132999,
+  "twin_inferences": 1560,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch09-types/22-variadic_arrow_signature.c",
+  "example": "examples/ch09-types/22-variadic_arrow_signature.metta",
+  "claims_owed": 4,
+  "claims_proved": 4,
+  "example_inferences": 18208,
+  "twin_inferences": 5701,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch09-types/23-variadic_arrow_faces.c",
+  "example": "examples/ch09-types/23-variadic_arrow_faces.metta",
+  "claims_owed": 9,
+  "claims_proved": 9,
+  "example_inferences": 32845,
+  "twin_inferences": 9882,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch09-types/24-sorted_constructors.c",
+  "example": "examples/ch09-types/24-sorted_constructors.metta",
+  "claims_owed": 7,
+  "claims_proved": 7,
+  "example_inferences": 24212,
+  "twin_inferences": 17575,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch10-errors-and-refusals/01-he_error.c",
+  "example": "examples/ch10-errors-and-refusals/01-he_error.metta",
+  "claims_owed": 8,
+  "claims_proved": 8,
+  "example_inferences": 41672,
+  "twin_inferences": 953,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch10-errors-and-refusals/02-throwing_and_tracing.c",
+  "example": "examples/ch10-errors-and-refusals/02-throwing_and_tracing.metta",
+  "claims_owed": 15,
+  "claims_proved": 15,
+  "example_inferences": 16771,
+  "twin_inferences": 6760,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch11-python-as-a-notation/01-python.c",
+  "example": "examples/ch11-python-as-a-notation/01-python.metta",
+  "claims_owed": 6,
+  "claims_proved": 6,
+  "example_inferences": 20068,
+  "twin_inferences": 11161,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch11-python-as-a-notation/02-python_booleans.c",
+  "example": "examples/ch11-python-as-a-notation/02-python_booleans.metta",
+  "claims_owed": 9,
+  "claims_proved": 9,
+  "example_inferences": 12780,
+  "twin_inferences": 684,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch11-python-as-a-notation/03-python_import.c",
+  "example": "examples/ch11-python-as-a-notation/03-python_import.metta",
+  "claims_owed": 2,
+  "claims_proved": 2,
+  "example_inferences": 8181,
+  "twin_inferences": 234,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch11-python-as-a-notation/05-py_numpy.c",
+  "example": "examples/ch11-python-as-a-notation/05-py_numpy.metta",
+  "claims_owed": 9,
+  "claims_proved": 9,
+  "example_inferences": 18533,
+  "twin_inferences": 1300,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch11-python-as-a-notation/06-door_combinations.c",
+  "example": "examples/ch11-python-as-a-notation/06-door_combinations.metta",
+  "claims_owed": 4,
+  "claims_proved": 5,
+  "example_inferences": 15364,
+  "twin_inferences": 8045,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch11-python-as-a-notation/09-compiled_structural_vocabulary.c",
+  "example": "examples/ch11-python-as-a-notation/09-compiled_structural_vocabulary.metta",
+  "claims_owed": 6,
+  "claims_proved": 6,
+  "example_inferences": 16697,
+  "twin_inferences": 11992,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch11-python-as-a-notation/10-torch-library-surface.c",
+  "example": "examples/ch11-python-as-a-notation/10-torch-library-surface.metta",
+  "claims_owed": 0,
+  "claims_proved": 15,
+  "example_inferences": 188355,
+  "twin_inferences": 1440,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch12-testing/01-he_assert.c",
+  "example": "examples/ch12-testing/01-he_assert.metta",
+  "claims_owed": 12,
+  "claims_proved": 12,
+  "example_inferences": 45224,
+  "twin_inferences": 1546,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch12-testing/02-he_equalreduct.c",
+  "example": "examples/ch12-testing/02-he_equalreduct.metta",
+  "claims_owed": 4,
+  "claims_proved": 4,
+  "example_inferences": 37544,
+  "twin_inferences": 965,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch12-testing/03-assertion_difference.c",
+  "example": "examples/ch12-testing/03-assertion_difference.metta",
+  "claims_owed": 10,
+  "claims_proved": 10,
+  "example_inferences": 17615,
+  "twin_inferences": 2083,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch12-testing/04-assert_answers.c",
+  "example": "examples/ch12-testing/04-assert_answers.metta",
+  "claims_owed": 10,
+  "claims_proved": 10,
+  "example_inferences": 18008,
+  "twin_inferences": 7694,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch14-seeing-your-program/01-time_and_pragmas.c",
+  "example": "examples/ch14-seeing-your-program/01-time_and_pragmas.metta",
+  "claims_owed": 25,
+  "claims_proved": 30,
+  "example_inferences": 50819,
+  "twin_inferences": 11961,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch14-seeing-your-program/03-the_clock_and_the_command_line.c",
+  "example": "examples/ch14-seeing-your-program/03-the_clock_and_the_command_line.metta",
+  "claims_owed": 15,
+  "claims_proved": 15,
+  "example_inferences": 161620,
+  "twin_inferences": 3183,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch15-writing-transactions-and-worlds/01-mutex_and_transaction.c",
+  "example": "examples/ch15-writing-transactions-and-worlds/01-mutex_and_transaction.metta",
+  "claims_owed": 2,
+  "claims_proved": 10,
+  "example_inferences": 26461,
+  "twin_inferences": 7355,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch15-writing-transactions-and-worlds/02-state.c",
+  "example": "examples/ch15-writing-transactions-and-worlds/02-state.metta",
+  "claims_owed": 6,
+  "claims_proved": 6,
+  "example_inferences": 8773,
+  "twin_inferences": 702,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch15-writing-transactions-and-worlds/03-pre_add_hooks.c",
+  "example": "examples/ch15-writing-transactions-and-worlds/03-pre_add_hooks.metta",
+  "claims_owed": 7,
+  "claims_proved": 17,
+  "example_inferences": 13467,
+  "twin_inferences": 7692,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch15-writing-transactions-and-worlds/04-admission_pools.c",
+  "example": "examples/ch15-writing-transactions-and-worlds/04-admission_pools.metta",
+  "claims_owed": 7,
+  "claims_proved": 14,
+  "example_inferences": 27291,
+  "twin_inferences": 14367,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch15-writing-transactions-and-worlds/05-post_add_hooks.c",
+  "example": "examples/ch15-writing-transactions-and-worlds/05-post_add_hooks.metta",
+  "claims_owed": 12,
+  "claims_proved": 24,
+  "example_inferences": 20397,
+  "twin_inferences": 9829,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch15-writing-transactions-and-worlds/07-owned_records.c",
+  "example": "examples/ch15-writing-transactions-and-worlds/07-owned_records.metta",
+  "claims_owed": 5,
+  "claims_proved": 9,
+  "example_inferences": 12514,
+  "twin_inferences": 3147,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch16-events-and-standing-queries/01-event_catalog.c",
+  "example": "examples/ch16-events-and-standing-queries/01-event_catalog.metta",
+  "claims_owed": 9,
+  "claims_proved": 11,
+  "example_inferences": 7883,
+  "twin_inferences": 1105,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch17-concurrency-and-the-loop/01-thread_lib.c",
+  "example": "examples/ch17-concurrency-and-the-loop/01-thread_lib.metta",
+  "claims_owed": 27,
+  "claims_proved": 27,
+  "example_inferences": 198369,
+  "twin_inferences": 8275,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch17-concurrency-and-the-loop/02-thread_linda.c",
+  "example": "examples/ch17-concurrency-and-the-loop/02-thread_linda.metta",
+  "claims_owed": 10,
+  "claims_proved": 15,
+  "example_inferences": 142584,
+  "twin_inferences": 2915,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch17-concurrency-and-the-loop/03-hyperpose_primes.c",
+  "example": "examples/ch17-concurrency-and-the-loop/03-hyperpose_primes.metta",
+  "claims_owed": 3,
+  "claims_proved": 3,
+  "example_inferences": 239507201,
+  "twin_inferences": 6093,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch17-concurrency-and-the-loop/04-thin_forms.c",
+  "example": "examples/ch17-concurrency-and-the-loop/04-thin_forms.metta",
+  "claims_owed": 25,
+  "claims_proved": 25,
+  "example_inferences": 43026,
+  "twin_inferences": 8904,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch17-concurrency-and-the-loop/05-channels_pools_and_the_machine.c",
+  "example": "examples/ch17-concurrency-and-the-loop/05-channels_pools_and_the_machine.metta",
+  "claims_owed": 18,
+  "claims_proved": 18,
+  "example_inferences": 196260,
+  "twin_inferences": 4792,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch17-concurrency-and-the-loop/06-the_prolog_rung_under_lib_thread.c",
+  "example": "examples/ch17-concurrency-and-the-loop/06-the_prolog_rung_under_lib_thread.metta",
+  "claims_owed": 35,
+  "claims_proved": 38,
+  "example_inferences": 202065,
+  "twin_inferences": 8013,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch17-concurrency-and-the-loop/08-class_grains.c",
+  "example": "examples/ch17-concurrency-and-the-loop/08-class_grains.metta",
+  "claims_owed": 3,
+  "claims_proved": 17,
+  "example_inferences": 2977082,
+  "twin_inferences": 26002,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch17-concurrency-and-the-loop/09-class_values.c",
+  "example": "examples/ch17-concurrency-and-the-loop/09-class_values.metta",
+  "claims_owed": 6,
+  "claims_proved": 6,
+  "example_inferences": 37627,
+  "twin_inferences": 16679,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch17-concurrency-and-the-loop/10-class_entities.c",
+  "example": "examples/ch17-concurrency-and-the-loop/10-class_entities.metta",
+  "claims_owed": 6,
+  "claims_proved": 8,
+  "example_inferences": 87101,
+  "twin_inferences": 19429,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch17-concurrency-and-the-loop/11-class_dispatch.c",
+  "example": "examples/ch17-concurrency-and-the-loop/11-class_dispatch.metta",
+  "claims_owed": 6,
+  "claims_proved": 6,
+  "example_inferences": 231516,
+  "twin_inferences": 42770,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch17-concurrency-and-the-loop/12-class_prototypes.c",
+  "example": "examples/ch17-concurrency-and-the-loop/12-class_prototypes.metta",
+  "claims_owed": 5,
+  "claims_proved": 8,
+  "example_inferences": 178364,
+  "twin_inferences": 36166,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch17-concurrency-and-the-loop/13-class_decorators.c",
+  "example": "examples/ch17-concurrency-and-the-loop/13-class_decorators.metta",
+  "claims_owed": 12,
+  "claims_proved": 12,
+  "example_inferences": 159880,
+  "twin_inferences": 90958,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch18-performance/18-01-larger-workloads/01-scale.c",
+  "example": "examples/ch18-performance/18-01-larger-workloads/01-scale.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 27217681,
+  "twin_inferences": 7913,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch18-performance/18-01-larger-workloads/02-holbenchmark.c",
+  "example": "examples/ch18-performance/18-01-larger-workloads/02-holbenchmark.metta",
+  "claims_owed": 4,
+  "claims_proved": 4,
+  "example_inferences": 36077716,
+  "twin_inferences": 3494,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch18-performance/18-01-larger-workloads/03-superpose_primes.c",
+  "example": "examples/ch18-performance/18-01-larger-workloads/03-superpose_primes.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 546981,
+  "twin_inferences": 907,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch18-performance/18-01-larger-workloads/04-peanofast.c",
+  "example": "examples/ch18-performance/18-01-larger-workloads/04-peanofast.metta",
+  "claims_owed": 1,
+  "claims_proved": 2,
+  "example_inferences": 71492,
+  "twin_inferences": 9421425,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch18-performance/18-01-larger-workloads/05-matespacefast.c",
+  "example": "examples/ch18-performance/18-01-larger-workloads/05-matespacefast.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 63712825,
+  "twin_inferences": 5111,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch18-performance/18-01-larger-workloads/06-a-gap-query-and-its-index.c",
+  "example": "examples/ch18-performance/18-01-larger-workloads/06-a-gap-query-and-its-index.metta",
+  "claims_owed": 9,
+  "claims_proved": 9,
+  "example_inferences": 109229,
+  "twin_inferences": 51838,
+  "storage": "carried",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch18-performance/18-02-memoisation-and-tabling/01-memo_multi_answer.c",
+  "example": "examples/ch18-performance/18-02-memoisation-and-tabling/01-memo_multi_answer.metta",
+  "claims_owed": 2,
+  "claims_proved": 3,
+  "example_inferences": 30684,
+  "twin_inferences": 1179,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch18-performance/18-02-memoisation-and-tabling/02-memo_aggregate.c",
+  "example": "examples/ch18-performance/18-02-memoisation-and-tabling/02-memo_aggregate.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 31858,
+  "twin_inferences": 1492,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch18-performance/18-02-memoisation-and-tabling/03-memo_per_arity.c",
+  "example": "examples/ch18-performance/18-02-memoisation-and-tabling/03-memo_per_arity.metta",
+  "claims_owed": 5,
+  "claims_proved": 6,
+  "example_inferences": 32810,
+  "twin_inferences": 1387,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch18-performance/18-02-memoisation-and-tabling/04-memo_same_name_multi_arity.c",
+  "example": "examples/ch18-performance/18-02-memoisation-and-tabling/04-memo_same_name_multi_arity.metta",
+  "claims_owed": 9,
+  "claims_proved": 9,
+  "example_inferences": 37776,
+  "twin_inferences": 1679,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch18-performance/18-02-memoisation-and-tabling/05-memo_variant_nonground.c",
+  "example": "examples/ch18-performance/18-02-memoisation-and-tabling/05-memo_variant_nonground.metta",
+  "claims_owed": 2,
+  "claims_proved": 3,
+  "example_inferences": 29954,
+  "twin_inferences": 869,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch18-performance/18-02-memoisation-and-tabling/06-memo_dependency_invalidation.c",
+  "example": "examples/ch18-performance/18-02-memoisation-and-tabling/06-memo_dependency_invalidation.metta",
+  "claims_owed": 2,
+  "claims_proved": 3,
+  "example_inferences": 29607,
+  "twin_inferences": 800,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch18-performance/18-02-memoisation-and-tabling/07-memo_spaces.c",
+  "example": "examples/ch18-performance/18-02-memoisation-and-tabling/07-memo_spaces.metta",
+  "claims_owed": 16,
+  "claims_proved": 16,
+  "example_inferences": 44309,
+  "twin_inferences": 4210,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch18-performance/18-02-memoisation-and-tabling/08-memo_stats.c",
+  "example": "examples/ch18-performance/18-02-memoisation-and-tabling/08-memo_stats.metta",
+  "claims_owed": 3,
+  "claims_proved": 5,
+  "example_inferences": 30125,
+  "twin_inferences": 956,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch18-performance/18-02-memoisation-and-tabling/09-tabling_fib.c",
+  "example": "examples/ch18-performance/18-02-memoisation-and-tabling/09-tabling_fib.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 65997,
+  "twin_inferences": 774,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch18-performance/18-02-memoisation-and-tabling/10-tabling_equation_change.c",
+  "example": "examples/ch18-performance/18-02-memoisation-and-tabling/10-tabling_equation_change.metta",
+  "claims_owed": 4,
+  "claims_proved": 4,
+  "example_inferences": 51304,
+  "twin_inferences": 2828,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch18-performance/18-02-memoisation-and-tabling/11-tabling_space_write.c",
+  "example": "examples/ch18-performance/18-02-memoisation-and-tabling/11-tabling_space_write.metta",
+  "claims_owed": 6,
+  "claims_proved": 6,
+  "example_inferences": 60330,
+  "twin_inferences": 3872,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch18-performance/18-02-memoisation-and-tabling/12-tabling_statistics.c",
+  "example": "examples/ch18-performance/18-02-memoisation-and-tabling/12-tabling_statistics.metta",
+  "claims_owed": 6,
+  "claims_proved": 7,
+  "example_inferences": 59681,
+  "twin_inferences": 1529,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch18-performance/18-02-memoisation-and-tabling/17-memo_controls.c",
+  "example": "examples/ch18-performance/18-02-memoisation-and-tabling/17-memo_controls.metta",
+  "claims_owed": 21,
+  "claims_proved": 21,
+  "example_inferences": 46327,
+  "twin_inferences": 14630,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch18-performance/18-02-memoisation-and-tabling/18-tabling_doors.c",
+  "example": "examples/ch18-performance/18-02-memoisation-and-tabling/18-tabling_doors.metta",
+  "claims_owed": 23,
+  "claims_proved": 23,
+  "example_inferences": 92089,
+  "twin_inferences": 2597,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch19-spaces-backed-by-anything/19-01-spaces-of-your-own/01-inherited_spaces.c",
+  "example": "examples/ch19-spaces-backed-by-anything/19-01-spaces-of-your-own/01-inherited_spaces.metta",
+  "claims_owed": 6,
+  "claims_proved": 6,
+  "example_inferences": 8822,
+  "twin_inferences": 985,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch19-spaces-backed-by-anything/19-01-spaces-of-your-own/02-restricted_spaces.c",
+  "example": "examples/ch19-spaces-backed-by-anything/19-01-spaces-of-your-own/02-restricted_spaces.metta",
+  "claims_owed": 3,
+  "claims_proved": 3,
+  "example_inferences": 69478,
+  "twin_inferences": 1108,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch19-spaces-backed-by-anything/19-01-spaces-of-your-own/03-parametric_spaces.c",
+  "example": "examples/ch19-spaces-backed-by-anything/19-01-spaces-of-your-own/03-parametric_spaces.metta",
+  "claims_owed": 5,
+  "claims_proved": 5,
+  "example_inferences": 11522,
+  "twin_inferences": 1545,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch19-spaces-backed-by-anything/19-01-spaces-of-your-own/04-super.c",
+  "example": "examples/ch19-spaces-backed-by-anything/19-01-spaces-of-your-own/04-super.metta",
+  "claims_owed": 6,
+  "claims_proved": 6,
+  "example_inferences": 20263,
+  "twin_inferences": 5856,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch19-spaces-backed-by-anything/19-01-spaces-of-your-own/05-evalc.c",
+  "example": "examples/ch19-spaces-backed-by-anything/19-01-spaces-of-your-own/05-evalc.metta",
+  "claims_owed": 10,
+  "claims_proved": 11,
+  "example_inferences": 15102,
+  "twin_inferences": 3188,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch19-spaces-backed-by-anything/19-01-spaces-of-your-own/06-a-shared-space-on-redis.c",
+  "example": "examples/ch19-spaces-backed-by-anything/19-01-spaces-of-your-own/06-a-shared-space-on-redis.metta",
+  "claims_owed": 0,
+  "claims_proved": 1,
+  "example_inferences": 96615,
+  "twin_inferences": 228,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch19-spaces-backed-by-anything/19-02-a-space-in-c/01-c_space.c",
+  "example": "examples/ch19-spaces-backed-by-anything/19-02-a-space-in-c/01-c_space.metta",
+  "claims_owed": 0,
+  "claims_proved": 6,
+  "example_inferences": 288271,
+  "twin_inferences": 2746,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch19-spaces-backed-by-anything/19-03-a-builtin-in-c/01-c_extension.c",
+  "example": "examples/ch19-spaces-backed-by-anything/19-03-a-builtin-in-c/01-c_extension.metta",
+  "claims_owed": 0,
+  "claims_proved": 1,
+  "example_inferences": 249237,
+  "twin_inferences": 1633,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch19-spaces-backed-by-anything/19-03-a-builtin-in-c/02-handle.c",
+  "example": "examples/ch19-spaces-backed-by-anything/19-03-a-builtin-in-c/02-handle.metta",
+  "claims_owed": 0,
+  "claims_proved": 5,
+  "example_inferences": 255497,
+  "twin_inferences": 6196,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch19-spaces-backed-by-anything/19-04-a-space-on-mork/01-mm2-operators.c",
+  "example": "examples/ch19-spaces-backed-by-anything/19-04-a-space-on-mork/01-mm2-operators.metta",
+  "claims_owed": 2,
+  "claims_proved": 9,
+  "example_inferences": 278821,
+  "twin_inferences": 1860,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch20-extending-the-engine/20-01-translator-rules/01-translatorrule.c",
+  "example": "examples/ch20-extending-the-engine/20-01-translator-rules/01-translatorrule.metta",
+  "claims_owed": 3,
+  "claims_proved": 3,
+  "example_inferences": 9734,
+  "twin_inferences": 5864,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch20-extending-the-engine/20-01-translator-rules/02-translatorrule_direction.c",
+  "example": "examples/ch20-extending-the-engine/20-01-translator-rules/02-translatorrule_direction.metta",
+  "claims_owed": 8,
+  "claims_proved": 8,
+  "example_inferences": 15486,
+  "twin_inferences": 6062,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch20-extending-the-engine/20-01-translator-rules/03-translatorrule_guard.c",
+  "example": "examples/ch20-extending-the-engine/20-01-translator-rules/03-translatorrule_guard.metta",
+  "claims_owed": 11,
+  "claims_proved": 11,
+  "example_inferences": 23547,
+  "twin_inferences": 12816,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch20-extending-the-engine/20-01-translator-rules/04-translatorrule_cost.c",
+  "example": "examples/ch20-extending-the-engine/20-01-translator-rules/04-translatorrule_cost.metta",
+  "claims_owed": 6,
+  "claims_proved": 7,
+  "example_inferences": 12840,
+  "twin_inferences": 5130,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch20-extending-the-engine/20-01-translator-rules/05-translatorrule_for.c",
+  "example": "examples/ch20-extending-the-engine/20-01-translator-rules/05-translatorrule_for.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 9237,
+  "twin_inferences": 5009,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch20-extending-the-engine/20-01-translator-rules/06-translatorrule_fib.c",
+  "example": "examples/ch20-extending-the-engine/20-01-translator-rules/06-translatorrule_fib.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 11484,
+  "twin_inferences": 9974,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch20-extending-the-engine/20-01-translator-rules/07-translatorrule_refusal.c",
+  "example": "examples/ch20-extending-the-engine/20-01-translator-rules/07-translatorrule_refusal.metta",
+  "claims_owed": 3,
+  "claims_proved": 3,
+  "example_inferences": 9397,
+  "twin_inferences": 6310,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch20-extending-the-engine/20-01-translator-rules/08-derived_forms.c",
+  "example": "examples/ch20-extending-the-engine/20-01-translator-rules/08-derived_forms.metta",
+  "claims_owed": 7,
+  "claims_proved": 7,
+  "example_inferences": 16818,
+  "twin_inferences": 1763,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch20-extending-the-engine/20-02-metta-written-in-metta/01-callquoteevalreduce.c",
+  "example": "examples/ch20-extending-the-engine/20-02-metta-written-in-metta/01-callquoteevalreduce.metta",
+  "claims_owed": 4,
+  "claims_proved": 4,
+  "example_inferences": 72526,
+  "twin_inferences": 29103,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch20-extending-the-engine/20-02-metta-written-in-metta/02-callquoteevalreduce2.c",
+  "example": "examples/ch20-extending-the-engine/20-02-metta-written-in-metta/02-callquoteevalreduce2.metta",
+  "claims_owed": 4,
+  "claims_proved": 4,
+  "example_inferences": 36049,
+  "twin_inferences": 8161,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch20-extending-the-engine/20-02-metta-written-in-metta/03-myinterpreter.c",
+  "example": "examples/ch20-extending-the-engine/20-02-metta-written-in-metta/03-myinterpreter.metta",
+  "claims_owed": 2,
+  "claims_proved": 2,
+  "example_inferences": 9599,
+  "twin_inferences": 5746,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch20-extending-the-engine/20-02-metta-written-in-metta/04-minimal_metta.c",
+  "example": "examples/ch20-extending-the-engine/20-02-metta-written-in-metta/04-minimal_metta.metta",
+  "claims_owed": 33,
+  "claims_proved": 33,
+  "example_inferences": 184222,
+  "twin_inferences": 7530,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch20-extending-the-engine/20-02-metta-written-in-metta/05-he_minimalmetta.c",
+  "example": "examples/ch20-extending-the-engine/20-02-metta-written-in-metta/05-he_minimalmetta.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 28320843,
+  "twin_inferences": 3353,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch20-extending-the-engine/20-02-metta-written-in-metta/06-he_evaluation.c",
+  "example": "examples/ch20-extending-the-engine/20-02-metta-written-in-metta/06-he_evaluation.metta",
+  "claims_owed": 4,
+  "claims_proved": 4,
+  "example_inferences": 40867,
+  "twin_inferences": 792,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch20-extending-the-engine/20-02-metta-written-in-metta/07-he_quoting.c",
+  "example": "examples/ch20-extending-the-engine/20-02-metta-written-in-metta/07-he_quoting.metta",
+  "claims_owed": 6,
+  "claims_proved": 6,
+  "example_inferences": 38956,
+  "twin_inferences": 537,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch20-extending-the-engine/20-02-metta-written-in-metta/08-he_atomspace.c",
+  "example": "examples/ch20-extending-the-engine/20-02-metta-written-in-metta/08-he_atomspace.metta",
+  "claims_owed": 5,
+  "claims_proved": 6,
+  "example_inferences": 40432,
+  "twin_inferences": 1793,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch20-extending-the-engine/20-02-metta-written-in-metta/09-he_types.c",
+  "example": "examples/ch20-extending-the-engine/20-02-metta-written-in-metta/09-he_types.metta",
+  "claims_owed": 14,
+  "claims_proved": 14,
+  "example_inferences": 43210,
+  "twin_inferences": 1658,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch20-extending-the-engine/20-02-metta-written-in-metta/10-he_math.c",
+  "example": "examples/ch20-extending-the-engine/20-02-metta-written-in-metta/10-he_math.metta",
+  "claims_owed": 24,
+  "claims_proved": 24,
+  "example_inferences": 14843,
+  "twin_inferences": 1809,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch20-extending-the-engine/20-02-metta-written-in-metta/12-interpret_and_metta_thread.c",
+  "example": "examples/ch20-extending-the-engine/20-02-metta-written-in-metta/12-interpret_and_metta_thread.metta",
+  "claims_owed": 19,
+  "claims_proved": 19,
+  "example_inferences": 28574,
+  "twin_inferences": 9373,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch20-extending-the-engine/20-02-metta-written-in-metta/13-strategy_internals.c",
+  "example": "examples/ch20-extending-the-engine/20-02-metta-written-in-metta/13-strategy_internals.metta",
+  "claims_owed": 23,
+  "claims_proved": 23,
+  "example_inferences": 408535,
+  "twin_inferences": 55668,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch20-extending-the-engine/20-03-prolog-underneath/01-translatepredicate.c",
+  "example": "examples/ch20-extending-the-engine/20-03-prolog-underneath/01-translatepredicate.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 4314,
+  "twin_inferences": 84,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch20-extending-the-engine/20-03-prolog-underneath/03-foreign_rules.c",
+  "example": "examples/ch20-extending-the-engine/20-03-prolog-underneath/03-foreign_rules.metta",
+  "claims_owed": 6,
+  "claims_proved": 6,
+  "example_inferences": 33702,
+  "twin_inferences": 5702,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch20-extending-the-engine/20-03-prolog-underneath/04-registering_prolog_predicates.c",
+  "example": "examples/ch20-extending-the-engine/20-03-prolog-underneath/04-registering_prolog_predicates.metta",
+  "claims_owed": 19,
+  "claims_proved": 19,
+  "example_inferences": 36359,
+  "twin_inferences": 3922,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch20-extending-the-engine/20-03-prolog-underneath/05-the-module-doors.c",
+  "example": "examples/ch20-extending-the-engine/20-03-prolog-underneath/05-the-module-doors.metta",
+  "claims_owed": 21,
+  "claims_proved": 21,
+  "example_inferences": 312034,
+  "twin_inferences": 1974,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch20-extending-the-engine/20-04-modules-and-the-catalog/01-import_order_independence.c",
+  "example": "examples/ch20-extending-the-engine/20-04-modules-and-the-catalog/01-import_order_independence.metta",
+  "claims_owed": 0,
+  "claims_proved": 1,
+  "example_inferences": 10806,
+  "twin_inferences": 162,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch20-extending-the-engine/20-04-modules-and-the-catalog/02-import_relative_nested.c",
+  "example": "examples/ch20-extending-the-engine/20-04-modules-and-the-catalog/02-import_relative_nested.metta",
+  "claims_owed": 2,
+  "claims_proved": 2,
+  "example_inferences": 14956,
+  "twin_inferences": 234,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch20-extending-the-engine/20-04-modules-and-the-catalog/03-import_duplicate_cycle.c",
+  "example": "examples/ch20-extending-the-engine/20-04-modules-and-the-catalog/03-import_duplicate_cycle.metta",
+  "claims_owed": 3,
+  "claims_proved": 3,
+  "example_inferences": 13728,
+  "twin_inferences": 468,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch20-extending-the-engine/20-04-modules-and-the-catalog/04-import_error_surface.c",
+  "example": "examples/ch20-extending-the-engine/20-04-modules-and-the-catalog/04-import_error_surface.metta",
+  "claims_owed": 2,
+  "claims_proved": 2,
+  "example_inferences": 38576,
+  "twin_inferences": 645,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch20-extending-the-engine/20-04-modules-and-the-catalog/05-import_space_identity.c",
+  "example": "examples/ch20-extending-the-engine/20-04-modules-and-the-catalog/05-import_space_identity.metta",
+  "claims_owed": 11,
+  "claims_proved": 11,
+  "example_inferences": 37298,
+  "twin_inferences": 1352,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch20-extending-the-engine/20-04-modules-and-the-catalog/06-git_import.c",
+  "example": "examples/ch20-extending-the-engine/20-04-modules-and-the-catalog/06-git_import.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 37253,
+  "twin_inferences": 7399,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch20-extending-the-engine/20-04-modules-and-the-catalog/08-catalog.c",
+  "example": "examples/ch20-extending-the-engine/20-04-modules-and-the-catalog/08-catalog.metta",
+  "claims_owed": 6,
+  "claims_proved": 6,
+  "example_inferences": 9804,
+  "twin_inferences": 3604,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch20-extending-the-engine/20-04-modules-and-the-catalog/09-carrier_vocabulary.c",
+  "example": "examples/ch20-extending-the-engine/20-04-modules-and-the-catalog/09-carrier_vocabulary.metta",
+  "claims_owed": 5,
+  "claims_proved": 5,
+  "example_inferences": 7181,
+  "twin_inferences": 681,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch20-extending-the-engine/20-04-modules-and-the-catalog/10-include.c",
+  "example": "examples/ch20-extending-the-engine/20-04-modules-and-the-catalog/10-include.metta",
+  "claims_owed": 9,
+  "claims_proved": 9,
+  "example_inferences": 13661,
+  "twin_inferences": 707,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch20-extending-the-engine/20-04-modules-and-the-catalog/11-reference_rows.c",
+  "example": "examples/ch20-extending-the-engine/20-04-modules-and-the-catalog/11-reference_rows.metta",
+  "claims_owed": 13,
+  "claims_proved": 13,
+  "example_inferences": 125629,
+  "twin_inferences": 70940,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch20-extending-the-engine/20-04-modules-and-the-catalog/12-reference_maps.c",
+  "example": "examples/ch20-extending-the-engine/20-04-modules-and-the-catalog/12-reference_maps.metta",
+  "claims_owed": 12,
+  "claims_proved": 12,
+  "example_inferences": 166576,
+  "twin_inferences": 144320,
+  "storage": "declared",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch20-extending-the-engine/20-04-modules-and-the-catalog/13-reference_loading.c",
+  "example": "examples/ch20-extending-the-engine/20-04-modules-and-the-catalog/13-reference_loading.metta",
+  "claims_owed": 5,
+  "claims_proved": 5,
+  "example_inferences": 73554,
+  "twin_inferences": 50811,
+  "storage": "declared",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch20-extending-the-engine/20-06-files-and-processes/05-seeking-and-sizing.c",
+  "example": "examples/ch20-extending-the-engine/20-06-files-and-processes/05-seeking-and-sizing.metta",
+  "claims_owed": 5,
+  "claims_proved": 11,
+  "example_inferences": 262318,
+  "twin_inferences": 3004,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch20-extending-the-engine/20-07-tokens-and-the-reader/01-reader-tokens.c",
+  "example": "examples/ch20-extending-the-engine/20-07-tokens-and-the-reader/01-reader-tokens.metta",
+  "claims_owed": 19,
+  "claims_proved": 19,
+  "example_inferences": 15861,
+  "twin_inferences": 1806,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch22-a-reasoner-you-can-serve/22-01-logic-programs/01-logicprog.c",
+  "example": "examples/ch22-a-reasoner-you-can-serve/22-01-logic-programs/01-logicprog.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 13149,
+  "twin_inferences": 10822,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch22-a-reasoner-you-can-serve/22-01-logic-programs/02-logicprogset.c",
+  "example": "examples/ch22-a-reasoner-you-can-serve/22-01-logic-programs/02-logicprogset.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 8427,
+  "twin_inferences": 6762,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch22-a-reasoner-you-can-serve/22-01-logic-programs/03-constructive_negation.c",
+  "example": "examples/ch22-a-reasoner-you-can-serve/22-01-logic-programs/03-constructive_negation.metta",
+  "claims_owed": 50,
+  "claims_proved": 50,
+  "example_inferences": 108484,
+  "twin_inferences": 42898,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch22-a-reasoner-you-can-serve/22-01-logic-programs/04-nilbc.c",
+  "example": "examples/ch22-a-reasoner-you-can-serve/22-01-logic-programs/04-nilbc.metta",
+  "claims_owed": 9,
+  "claims_proved": 9,
+  "example_inferences": 313624085,
+  "twin_inferences": 161419,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch22-a-reasoner-you-can-serve/22-01-logic-programs/05-scallop_readme.c",
+  "example": "examples/ch22-a-reasoner-you-can-serve/22-01-logic-programs/05-scallop_readme.metta",
+  "claims_owed": 5,
+  "claims_proved": 5,
+  "example_inferences": 68004,
+  "twin_inferences": 50126,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch22-a-reasoner-you-can-serve/22-01-logic-programs/06-case-duals.c",
+  "example": "examples/ch22-a-reasoner-you-can-serve/22-01-logic-programs/06-case-duals.metta",
+  "claims_owed": 7,
+  "claims_proved": 7,
+  "example_inferences": 15164,
+  "twin_inferences": 6047,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch22-a-reasoner-you-can-serve/22-01-logic-programs/07-tagged_fixpoint.c",
+  "example": "examples/ch22-a-reasoner-you-can-serve/22-01-logic-programs/07-tagged_fixpoint.metta",
+  "claims_owed": 6,
+  "claims_proved": 6,
+  "example_inferences": 34329,
+  "twin_inferences": 931,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch22-a-reasoner-you-can-serve/22-01-logic-programs/08-guarded_rules.c",
+  "example": "examples/ch22-a-reasoner-you-can-serve/22-01-logic-programs/08-guarded_rules.metta",
+  "claims_owed": 4,
+  "claims_proved": 4,
+  "example_inferences": 21432,
+  "twin_inferences": 898,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/01-measure.c",
+  "example": "examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/01-measure.metta",
+  "claims_owed": 19,
+  "claims_proved": 19,
+  "example_inferences": 137237,
+  "twin_inferences": 5691,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/02-soft.c",
+  "example": "examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/02-soft.metta",
+  "claims_owed": 25,
+  "claims_proved": 25,
+  "example_inferences": 316338,
+  "twin_inferences": 2295,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/03-plntest.c",
+  "example": "examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/03-plntest.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 32155,
+  "twin_inferences": 31303,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/04-plntestdirect.c",
+  "example": "examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/04-plntestdirect.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 35099,
+  "twin_inferences": 36078,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/06-pln_roman.c",
+  "example": "examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/06-pln_roman.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 1986609,
+  "twin_inferences": 7376,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/09-nars_tuffy.c",
+  "example": "examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/09-nars_tuffy.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 4632044,
+  "twin_inferences": 6568,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/11-weighted_subset_posterior.c",
+  "example": "examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/11-weighted_subset_posterior.metta",
+  "claims_owed": 11,
+  "claims_proved": 11,
+  "example_inferences": 1637091,
+  "twin_inferences": 1343,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/13-the_measure_algebra_underneath.c",
+  "example": "examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/13-the_measure_algebra_underneath.metta",
+  "claims_owed": 18,
+  "claims_proved": 18,
+  "example_inferences": 58167,
+  "twin_inferences": 1662,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/14-soft_aggregation_underneath.c",
+  "example": "examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/14-soft_aggregation_underneath.metta",
+  "claims_owed": 20,
+  "claims_proved": 20,
+  "example_inferences": 134213,
+  "twin_inferences": 1836,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/15-independent_supports.c",
+  "example": "examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/15-independent_supports.metta",
+  "claims_owed": 8,
+  "claims_proved": 8,
+  "example_inferences": 38356,
+  "twin_inferences": 1788,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/16-nars_truth_functions.c",
+  "example": "examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/16-nars_truth_functions.metta",
+  "claims_owed": 42,
+  "claims_proved": 42,
+  "example_inferences": 133878,
+  "twin_inferences": 3549,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/17-nars_derivation_control.c",
+  "example": "examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/17-nars_derivation_control.metta",
+  "claims_owed": 26,
+  "claims_proved": 26,
+  "example_inferences": 248819,
+  "twin_inferences": 2268,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/18-pln_formulas.c",
+  "example": "examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/18-pln_formulas.metta",
+  "claims_owed": 42,
+  "claims_proved": 42,
+  "example_inferences": 172806,
+  "twin_inferences": 3219,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/19-pln_derivation_control.c",
+  "example": "examples/ch22-a-reasoner-you-can-serve/22-02-weighted-answers/19-pln_derivation_control.metta",
+  "claims_owed": 25,
+  "claims_proved": 25,
+  "example_inferences": 332794,
+  "twin_inferences": 2124,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch22-a-reasoner-you-can-serve/22-03-search/01-newtons_method.c",
+  "example": "examples/ch22-a-reasoner-you-can-serve/22-03-search/01-newtons_method.metta",
+  "claims_owed": 2,
+  "claims_proved": 2,
+  "example_inferences": 46480,
+  "twin_inferences": 16824,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch22-a-reasoner-you-can-serve/22-03-search/02-tilepuzzle.c",
+  "example": "examples/ch22-a-reasoner-you-can-serve/22-03-search/02-tilepuzzle.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 32161417,
+  "twin_inferences": 44667,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch22-a-reasoner-you-can-serve/22-03-search/03-matespace.c",
+  "example": "examples/ch22-a-reasoner-you-can-serve/22-03-search/03-matespace.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 19538715,
+  "twin_inferences": 14751,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch22-a-reasoner-you-can-serve/22-03-search/04-matespace2.c",
+  "example": "examples/ch22-a-reasoner-you-can-serve/22-03-search/04-matespace2.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 29085610,
+  "twin_inferences": 14984,
+  "storage": "equal",
+  "findings": []
+ },
+ {
+  "twin": "language-feature-examples/ch22-a-reasoner-you-can-serve/22-03-search/05-fibadd.c",
+  "example": "examples/ch22-a-reasoner-you-can-serve/22-03-search/05-fibadd.metta",
+  "claims_owed": 1,
+  "claims_proved": 1,
+  "example_inferences": 35696,
+  "twin_inferences": 14389,
+  "storage": "equal",
+  "findings": []
+ }
+]

@@ -4,6 +4,15 @@
 
 ## Unreleased
 
+- VERIFICATION.md records the hand-written corpus's verification from a
+  clean copy of `4fe7740`: the C seat's seven gate lanes, `make surface`,
+  `all`, `check` and `check-consumers`, the lane's source rule over every
+  tracked C file and the greps for generated twins, with the three runs it
+  took and what the result does not cover. Its receipts are replaced by that
+  run's: `verification/results.json` for the embedding programs,
+  `verification/twins.json`, new, for the lane's verdict on each twin, and
+  `verification/component.txt` for the seat's gate output.
+
 - ERRORS.md's open entry for SWI's halt race now names where the fix is:
   a `PL_THREAD_CREATED` case in `exitPrologThreads()`, in the native host
   build `swipl-patched.5`, which becomes the live host after gate-perf
