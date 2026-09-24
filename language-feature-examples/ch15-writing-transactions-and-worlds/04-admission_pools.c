@@ -11,12 +11,12 @@
  *   so the pool judges the offered atom as itself. metta-pool-guard is the
  *   judge closed over &metta-pool. A refused write raises the Error C builds
  *   from its own verdict, and the builtin answers C's verdict for every atom
- *   asked, a pool with two capacity rows included, where the original's
- *   chain reads only the first row [measured 2026-09-24: the chain's
- *   definitions over rows 5 and 2 and three held atoms answer (Accept), the
- *   builtin (Refuse (pool-at-capacity 2))].
- * Guarantees: all seven claims of the original hold, with its six
- *   unasserted forms checked as well [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
+ *   asked. With two capacity rows the first the count reaches decides,
+ *   which C's within() walks every row for and the original's chain does
+ *   since superproject 47855fa71 [source: examples 3372c22,
+ *   metta-admission-within].
+ * Guarantees: all nine claims of the original hold, with its ten
+ *   unasserted forms checked as well [tested: make twins; commit=WORKTREE].
  */
 #define MT_SHORTHAND
 #include "common.h"
@@ -163,13 +163,16 @@ int main(void)
     check_answers("and with no bound the builtin admits a Ticket", mt_eval(m, E("space-admission-verdict", mt_keep(ref), mt_keep(first))),
                   accepting(NULL));
 
-    /* Every capacity row binds, not only the first. */
-    const int64_t limits[] = { capacity + 1, capacity };
+    /* Every capacity row binds, not only the first: the rows 5 then 2 the
+       original adds, over the two tickets held, so the second decides. */
+    const int64_t limits[] = { 5, capacity };
     for (size_t i = 0; i < sizeof limits / sizeof *limits; i++)
-        require("a capacity row", mt_add(j.catalog, E("capacity", mt_keep(ref), limits[i])));
+        check("a capacity row", mt_add(j.catalog, E("capacity", mt_keep(ref), limits[i])));
     check_agrees(&j, ref, mt_keep(first));
+    check_answers("the chain refuses at the row the count reaches", mt_eval(m, E("metta-admission-verdict", mt_keep(ref), mt_keep(first))),
+                  refusing(E("pool-at-capacity", capacity)));
     for (size_t i = 0; i < sizeof limits / sizeof *limits; i++)
-        require("remove it", mt_del(j.catalog, E("capacity", mt_keep(ref), limits[i])));
+        check("and it goes", mt_del(j.catalog, E("capacity", mt_keep(ref), limits[i])));
 
     mt_drop(first), mt_drop(stowaway), mt_drop(ref);
     mt_space_close(pool);

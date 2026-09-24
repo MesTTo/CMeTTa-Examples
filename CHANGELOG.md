@@ -4,6 +4,15 @@
 
 ## Unreleased
 
+- Hold chapter 15's admission twin to its original's two-row section, which
+  superproject `47855fa71` added when it made the original's MeTTa chain
+  walk every capacity row as `space-admission-verdict` does. The twin's own
+  two-row check used rows 3 and 2; it now uses the original's 5 and 2 over
+  the two tickets held, proves both new claims, that the builtin answers
+  C's verdict and that the chain refuses at `(pool-at-capacity 2)`, and
+  checks the four row writes as it checks the original's others. Its header
+  no longer says the original's chain reads only the first row.
+
 - VERIFICATION.md records the corpus verified against the verdict rename:
   `d4affe3` from a clean copy on superproject `f9c56dbba` as pinned, the
   C seat at `8211c57`, where every step passes, 323/323 twins and 3885/3885
