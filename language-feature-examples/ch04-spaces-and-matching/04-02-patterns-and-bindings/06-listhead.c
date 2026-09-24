@@ -4,7 +4,7 @@
  *   counting children, and the engine's own let over (cons $Head $Tail) and
  *   cons agree with the C view.
  * Guarantees: (1 2 3 4 5 6) splits as 1 and (2 3 4 5 6) both ways, (len (1 2
- *   3)) is 3, and (cons 42 ()) is (42) [tested: make twins; commit=WORKTREE].
+ *   3)) is 3, and (cons 42 ()) is (42) [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

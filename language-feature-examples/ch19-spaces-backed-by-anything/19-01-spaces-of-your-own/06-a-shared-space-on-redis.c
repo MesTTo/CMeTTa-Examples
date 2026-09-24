@@ -11,7 +11,7 @@
  *   the original does, and proves the refusal it skipped on.
  * Guarantees: the original states no claim outside its guards; the twin runs
  *   the guarded ones exactly when the original does, and otherwise proves
- *   why it skipped [tested: make twins; commit=WORKTREE].
+ *   why it skipped [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

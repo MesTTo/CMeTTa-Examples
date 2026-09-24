@@ -7,7 +7,7 @@
  *   sentence out of the source and the first from there to the target in
  *   the table's order, and computes its truth with pln.h's deduction.
  * Guarantees: the original's claim holds [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

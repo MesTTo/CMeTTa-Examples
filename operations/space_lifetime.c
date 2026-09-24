@@ -2,7 +2,7 @@
  *   space and its facts where they were; mt_space_drop() ends the engine
  *   space itself, so the name opens fresh and empty afterwards.
  * Guarantees: facts survive a closed handle and not a drop [tested: make
- *   check; commit=WORKTREE].
+ *   check; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

@@ -6,7 +6,7 @@
  *   extra argument, and C builds that error from fixed2's own arrow: its
  *   parameter count and the count the call supplied.
  * Guarantees: all nine claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

@@ -2,7 +2,7 @@
  *   nothing to reduce it and answers itself; asked after, it answers what
  *   the equation says. The two asks are two C statements around one mt_add.
  * Guarantees: the call answers itself, then hello [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

@@ -10,7 +10,7 @@
  *   is one body over lowering.h's operators in &self and another in
  *   &elsewhere, and a door evaluates against the space it is handed.
  * Guarantees: all nineteen claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

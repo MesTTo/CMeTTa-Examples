@@ -3,7 +3,7 @@
  *   the same two-valued space with two loops, True before False as the
  *   engine tries them, and keeps the pairs its own && and || accept.
  * Guarantees: the original's claim holds [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

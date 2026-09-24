@@ -7,7 +7,7 @@
  *   computes, one more than its argument; a head no map admitted answers
  *   itself. A row with no map takes the space's default, set by pragma.
  * Guarantees: all twelve claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

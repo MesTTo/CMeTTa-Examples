@@ -6,7 +6,7 @@
  *   the argument's and the rule's refusal, spelled by verdicts.h as every
  *   judge's is. Removing the rule restores the admission.
  * Guarantees: all three claims of the original hold, with its two
- *   unasserted forms checked as well [tested: make twins; commit=WORKTREE].
+ *   unasserted forms checked as well [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

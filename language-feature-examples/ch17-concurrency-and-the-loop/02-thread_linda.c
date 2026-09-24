@@ -6,7 +6,7 @@
  *   starts before the message exists while a C pthread, attached to the
  *   engine, writes it. inc, which the original defines, is a C function.
  * Guarantees: all ten claims of the original hold, with its three
- *   unasserted writes checked as well [tested: make twins; commit=WORKTREE].
+ *   unasserted writes checked as well [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  * Owns resources: one pthread, attached for its one write and joined.
  */
 #define MT_SHORTHAND

@@ -6,7 +6,7 @@
  *   lowering.h's operators, lowered around that call and compiled in C
  *   around C's own fib(10), and the engine must answer what C computes.
  * Guarantees: the original's claim holds [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

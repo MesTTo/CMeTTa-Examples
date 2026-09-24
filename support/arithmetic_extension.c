@@ -3,7 +3,7 @@
  * Owns resources: the runtime keeps this shared object loaded while its
  *   registered function can be called.
  * Guarantees: integration/shared_extension.c calls what it publishes
- *   [tested: make check; commit=WORKTREE].
+ *   [tested: make check; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #include <cmetta.h>
 

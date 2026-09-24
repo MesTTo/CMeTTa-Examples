@@ -3,7 +3,7 @@
  *   of children, so its head is mt_at(e, 0) and the rest a view over the
  *   same children, which mt_expr_ref builds without copying them.
  * Guarantees: the original's claim holds, and C's destructuring agrees
- *   [tested: make twins; commit=WORKTREE].
+ *   [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

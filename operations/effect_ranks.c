@@ -4,7 +4,7 @@
  *   engine's effect plan, read without running anything, reports each class
  *   as declared.
  * Guarantees: every class survives registration into the plan [tested: make
- *   check; commit=WORKTREE].
+ *   check; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

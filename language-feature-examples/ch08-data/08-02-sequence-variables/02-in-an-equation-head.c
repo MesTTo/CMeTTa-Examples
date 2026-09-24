@@ -5,7 +5,7 @@
  *   while a written (:seg $xs) splices it; one name may be both a gap and a
  *   term here; and a gap head is additive with an ordinary one.
  * Guarantees: all thirteen claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

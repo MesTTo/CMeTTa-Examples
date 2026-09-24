@@ -2,7 +2,7 @@
  *   parentheses included, and evaluating the text atom answers the same text:
  *   nothing inside it is read as a form.
  * Guarantees: the text evaluates to itself, byte for byte
- *   [tested: make twins; commit=WORKTREE].
+ *   [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

@@ -2,7 +2,7 @@
  *   budget, which a cursor reports as MT_LIMIT rather than as exhaustion or a
  *   fault, and two samples of the engine's counters price a finite question.
  * Guarantees: the bound stops the stream with MT_LIMIT, and a measured
- *   evaluation spends inferences [tested: make check; commit=WORKTREE].
+ *   evaluation spends inferences [tested: make check; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

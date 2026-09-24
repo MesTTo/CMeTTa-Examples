@@ -5,7 +5,7 @@
  *   exactly when X has no True answer, so a False answer and no answer at
  *   all both make it hold.
  * Guarantees: all seven claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

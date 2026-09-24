@@ -5,7 +5,7 @@
  *   over as data, and compiled with C's operators it is the choice C makes
  *   between w's and v's constants, which the interpreter must answer.
  * Guarantees: both claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

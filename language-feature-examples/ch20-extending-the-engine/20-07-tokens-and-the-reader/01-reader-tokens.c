@@ -11,7 +11,7 @@
  * text: the original is about what the reader builds from text, so C reads
  *   the text it builds through mt_parse, the engine's own reader.
  * Guarantees: all nineteen claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

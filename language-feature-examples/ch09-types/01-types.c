@@ -7,7 +7,7 @@
  *   $a to its first argument's type. mid's let unifies (a b) with its
  *   argument, and testf's one equation rewrites at to t.
  * Guarantees: all thirteen claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

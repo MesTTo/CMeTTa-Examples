@@ -3,7 +3,7 @@
  *   answers, and logged composes middleware around it; the table of routes
  *   is a C array turned into equations.
  * Guarantees: a known route, a missing one and the logged composition answer
- *   as a router should [tested: make check; commit=WORKTREE].
+ *   as a router should [tested: make check; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

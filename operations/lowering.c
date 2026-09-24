@@ -11,7 +11,7 @@
  *   an atom a match can find, C_MOD is MeTTa's % over -7..7 by -3, -2, 2 and
  *   3, and C_DIV, C_MIN, C_MAX, C_LE and C_AND are MeTTa's over every pair
  *   of -2.5, -1.0, 0.0, 0.5 and 3.0 but zero over zero [tested: make check;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

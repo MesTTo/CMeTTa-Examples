@@ -9,7 +9,7 @@
  *   depth and holds the proof it built to the one C builds, the medium level
  *   by membership among every proof found.
  * Guarantees: all nine claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

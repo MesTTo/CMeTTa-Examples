@@ -6,7 +6,7 @@
  *   the original's branch budget, a pragma scoped to that one evaluation, and
  *   must answer what C computed for each candidate.
  * Guarantees: the original's claim holds [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

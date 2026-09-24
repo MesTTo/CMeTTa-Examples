@@ -14,7 +14,7 @@
  *   wrong arity and a result libm gives only as a NaN.
  * Assumes: GMP, found through pkg-config.
  * Guarantees: all seventy-four claims of the original hold [tested: make
- *   twins; commit=WORKTREE].
+ *   twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define _XOPEN_SOURCE 700 /* M_E and M_PI are XSI's */
 #define MT_SHORTHAND

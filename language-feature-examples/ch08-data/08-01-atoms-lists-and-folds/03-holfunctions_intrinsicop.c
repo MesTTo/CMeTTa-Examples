@@ -3,7 +3,7 @@
  *   being a C function; C maps its own comparison over the same array for
  *   the list both must answer.
  * Guarantees: the original's claim holds, and both agree with C's map
- *   [tested: make twins; commit=WORKTREE].
+ *   [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

@@ -5,7 +5,7 @@
  *   engine compares, so 1 and 1.0 agree; anonymous gaps are distinct; a
  *   nested gap matches inside a child; and a gap pattern joins a space.
  * Guarantees: all fifteen claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

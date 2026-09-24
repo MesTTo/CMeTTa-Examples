@@ -3,7 +3,7 @@
  *   question answers False when nothing holds, and a question with
  *   variables binds them when something does.
  * Guarantees: (friend tim tom) is False, and after (friend a b) is stored
- *   the binding question answers (a b) [tested: make twins; commit=WORKTREE].
+ *   the binding question answers (a b) [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

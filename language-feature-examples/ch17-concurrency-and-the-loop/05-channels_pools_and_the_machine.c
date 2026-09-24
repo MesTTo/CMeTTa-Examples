@@ -14,7 +14,7 @@
  *   CpuCount(); tag V10.1.14], and a C pthread attached to the engine raises
  *   thread-count while it stays attached, as a spawned thread does.
  * Guarantees: all eighteen claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  * Owns resources: one pthread, attached until main releases it, then joined.
  * Guarded by: the attachment's mutex, over the state the two threads hand
  *   each other.

@@ -5,7 +5,7 @@
  *   whether it is nonzero, true's bit length is one's, and only the Boolean
  *   atoms convert, so abc is upper-cased as text.
  * Guarantees: all nine claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

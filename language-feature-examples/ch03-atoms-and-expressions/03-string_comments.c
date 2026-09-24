@@ -7,7 +7,7 @@
  *   which is source text by definition.
  * Guarantees: all nine strings read and evaluate to themselves, (quote ";")
  *   is ";", a trailing comment is stripped from (= (test-func) result), and
- *   (test-func) is result [tested: make twins; commit=WORKTREE].
+ *   (test-func) is result [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

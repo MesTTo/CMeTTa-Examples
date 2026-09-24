@@ -6,7 +6,7 @@
  *   expression belongs is refused, while a bound one is answered, and
  *   index-atom still enumerates over an unbound index.
  * Guarantees: all thirty claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

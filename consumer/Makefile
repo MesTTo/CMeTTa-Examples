@@ -1,6 +1,6 @@
 # Purpose: build shared and archive consumers using installed pkg-config metadata.
 # Assumes: PKG_CONFIG_PATH locates cmetta.pc; the archive keeps SWI dynamically linked.
-# Guarantees: check runs both programs [tested: make check-consumers; commit=WORKTREE].
+# Guarantees: check runs both programs [tested: make check-consumers; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
 ROOT := $(abspath ..)
 OUT ?= $(ROOT)/build/consumer-make
 CMETTA_LIBDIR := $(shell pkg-config --variable=libdir cmetta)

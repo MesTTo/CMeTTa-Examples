@@ -6,7 +6,7 @@
  *   lands on March 3. The clock itself is checked against C's time(), read
  *   either side of the engine's.
  * Guarantees: all twenty-five claims of the original hold [tested: make
- *   twins; commit=WORKTREE].
+ *   twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 /* timegm is glibc's default set and strptime X/Open's, at the X/Open level
    that matches the POSIX 2008 the Makefile asks for. */

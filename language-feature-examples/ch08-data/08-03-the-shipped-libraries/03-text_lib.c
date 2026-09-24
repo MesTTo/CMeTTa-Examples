@@ -5,7 +5,7 @@
  *   the files C reads what the library wrote with fopen, so every read the
  *   library answers is checked against the bytes on disk.
  * Guarantees: all thirty-seven claims of the original hold [tested: make
- *   twins; commit=WORKTREE].
+ *   twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

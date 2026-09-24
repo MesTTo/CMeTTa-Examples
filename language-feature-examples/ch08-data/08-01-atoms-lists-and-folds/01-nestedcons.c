@@ -2,7 +2,7 @@
  *   argument twice and answers the second element; C holds the same list as
  *   an array of children, where the second element is mt_at(list, 1).
  * Guarantees: the original's claim holds [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

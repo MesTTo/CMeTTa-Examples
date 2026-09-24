@@ -16,7 +16,7 @@
  *   [source: lib/lib_regex/vendor/VENDOR.md;
  *   commit=33c2d50c84b24c1a2c906225600e2a4ffdb662f1].
  * Guarantees: all twenty-six claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

@@ -4,7 +4,7 @@
  *   out bound. h_old spells the same constraint with = inside an if. Both
  *   are equations C builds as terms; no C function can run backwards.
  * Guarantees: both answer ((40) 42000) for (42 10 40) [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

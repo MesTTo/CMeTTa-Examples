@@ -4,7 +4,7 @@
  * text: the original's subject is the text each atom prints as, so the
  *   expected outputs are written as text.
  * Guarantees: each atom prints as the original says, through both doors
- *   [tested: make twins; commit=WORKTREE].
+ *   [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

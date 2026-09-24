@@ -10,7 +10,7 @@
  *   original's concurrent writers are four pthreads, each attached to the
  *   engine, and the mutex keeps every row whole.
  * Guarantees: all six guarded claims of the original hold [tested: make
- *   twins; commit=WORKTREE].
+ *   twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

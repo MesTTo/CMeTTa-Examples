@@ -10,9 +10,9 @@ Assumes: --engine names the engine tree whose examples/ are the originals and
 whose extensions/python/examples/ are the Python seat's examples.
 Guarantees:
   - --check exits nonzero naming the first document that differs from what
-    this derives [tested: make check; commit=WORKTREE]
+    this derives [tested: make check; commit=4fe77404069bc1a630ecc9e7860856a1117a200c]
   - README.md's pairs run shortest twin first, or this exits naming the pair
-    out of order [tested: make check; commit=WORKTREE]
+    out of order [tested: make check; commit=4fe77404069bc1a630ecc9e7860856a1117a200c]
 """
 
 from __future__ import annotations

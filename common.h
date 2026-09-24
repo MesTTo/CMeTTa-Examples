@@ -6,19 +6,19 @@
  * Guarantees:
  *   - a claim that does not hold ends the process with a nonzero status, the
  *     claim's words and both sides of the comparison, whatever NDEBUG says
- *     [tested: make check-helpers; commit=WORKTREE]
+ *     [tested: make check-helpers; commit=4fe77404069bc1a630ecc9e7860856a1117a200c]
  *   - done() refuses a program that checked nothing, left an error unhandled
  *     or could not close the engine [tested: make check-helpers;
- *     commit=WORKTREE]
+ *     commit=4fe77404069bc1a630ecc9e7860856a1117a200c]
  *   - done() refuses a program that leaves any block cmetta allocated for it
  *     on the thread that opened the engine unreleased once the engine has
  *     closed, which is every atom it made and did not drop; the count is
  *     zero for a program that releases everything [tested: make check,
- *     twin_lane_selftest.py's leak case; commit=WORKTREE]
+ *     twin_lane_selftest.py's leak case; commit=4fe77404069bc1a630ecc9e7860856a1117a200c]
  *   - require() is a status the program needs in order to go on and never
  *     counts as a claim, so the lane's claim count is the comparisons a
  *     program made on values it computed [tested: make twins;
- *     commit=WORKTREE]
+ *     commit=4fe77404069bc1a630ecc9e7860856a1117a200c]
  */
 #ifndef EXAMPLES_COMMON_H
 #define EXAMPLES_COMMON_H

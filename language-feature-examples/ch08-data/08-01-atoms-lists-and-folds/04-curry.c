@@ -6,7 +6,7 @@
  *   naming the arities the function has and the count it was given; a head
  *   that names nothing stays as written.
  * Guarantees: all twelve claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

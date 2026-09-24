@@ -25,7 +25,7 @@
  *   are identical where the library's let unifies them.
  * Guarantees: each function answers what lib_soft answers for the same
  *   operands in a space holding the same facts, bindings included [tested:
- *   make twins; commit=WORKTREE].
+ *   make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #ifndef CH22_SOFT_H
 #define CH22_SOFT_H

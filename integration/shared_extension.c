@@ -4,7 +4,7 @@
  *   refused by name.
  * Owns resources: the runtime keeps the plugin loaded until exit.
  * Guarantees: (plugin-triple 14) is 42, and a missing path is named in the
- *   refusal [tested: make check; commit=WORKTREE].
+ *   refusal [tested: make check; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

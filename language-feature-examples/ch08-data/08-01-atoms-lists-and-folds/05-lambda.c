@@ -5,7 +5,7 @@
  *   which takes a closure built at the call site, applies one through a
  *   lambda, and the closure over k is a C function whose context holds k.
  * Guarantees: all seven claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

@@ -3,7 +3,7 @@
  *   goes, and answers unit whatever the count; undeclared-do binds its whole
  *   run too, which C builds as the list of the arguments it passed.
  * Guarantees: all four claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

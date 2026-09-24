@@ -9,7 +9,7 @@
  *   generator; and bytes that are not sixteen numbers from 0 to 255.
  * Assumes: libuuid and libcrypto (for the shared hex), through pkg-config.
  * Guarantees: all forty-nine claims of the original hold [tested: make
- *   twins; commit=WORKTREE].
+ *   twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

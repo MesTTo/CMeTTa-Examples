@@ -3,7 +3,7 @@
  *   under two different names; the two calls are variants of each other, so
  *   the second is the first's key, and both answer pair.
  * Guarantees: both claims of the original hold, the second ask being a hit
- *   [tested: make twins; commit=WORKTREE].
+ *   [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

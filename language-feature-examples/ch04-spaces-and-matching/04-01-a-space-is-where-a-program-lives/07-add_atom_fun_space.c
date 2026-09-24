@@ -4,7 +4,7 @@
  *   symbol is a space name the moment it is written to. is-space asks the
  *   narrower question and wants the & prefix.
  * Guarantees: the atom lands in my_space_name, is-space says False for the
- *   bare name and True for &self [tested: make twins; commit=WORKTREE].
+ *   bare name and True for &self [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

@@ -1,7 +1,7 @@
 /* Purpose: lib_he's small helpers, each held against C: id answers its
  *   argument, =alpha is mt_alpha_eq, and if-equal picks its branch by mt_eq.
  * Guarantees: all four claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

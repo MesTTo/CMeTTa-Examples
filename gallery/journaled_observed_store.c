@@ -5,7 +5,7 @@
  * Owns resources: both providers are closed and the database file removed.
  * Decides: SQLite owns journal recovery; the subscription sees only commits.
  * Guarantees: two committed orders raise two events and survive reopening
- *   [tested: make check; commit=WORKTREE].
+ *   [tested: make check; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "support/sqlite_store.h"

@@ -8,7 +8,7 @@
  *   failing: a zero stride, a negative or fractional count, a set that is not
  *   a list, a float range that stops moving.
  * Guarantees: all sixty-three claims of the original hold [tested: make
- *   twins; commit=WORKTREE].
+ *   twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

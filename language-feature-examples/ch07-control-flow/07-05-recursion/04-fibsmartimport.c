@@ -2,7 +2,7 @@
  *   03-fibsmart.metta; C's import is an #include, so this twin includes the
  *   header 03-fibsmart.c is built on and installs the same equations.
  * Guarantees: the original's claim holds [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

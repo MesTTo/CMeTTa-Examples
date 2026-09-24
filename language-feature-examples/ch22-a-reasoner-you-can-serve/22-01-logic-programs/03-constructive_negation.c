@@ -12,7 +12,7 @@
  *   superpose and the comparisons negate by what each answers, the latter by
  *   C's own comparison. An Atom-typed argument stays written on both sides.
  * Guarantees: all fifty claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

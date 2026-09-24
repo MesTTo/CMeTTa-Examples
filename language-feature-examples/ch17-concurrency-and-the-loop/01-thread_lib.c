@@ -13,7 +13,7 @@
  *   pthread attached to the engine. with-lock and timeout keep every answer,
  *   where with_mutex answers the first.
  * Guarantees: all twenty-seven claims of the original hold [tested: make
- *   twins; commit=WORKTREE].
+ *   twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  * Owns resources: one pthread, attached for its one write and joined.
  */
 #define MT_SHORTHAND

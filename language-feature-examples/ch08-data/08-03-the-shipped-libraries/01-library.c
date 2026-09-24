@@ -1,7 +1,7 @@
 /* Purpose: a shipped library, imported. lib_roman's map-flat maps (+ 1)
  *   over a list, which C does over the same array with its own function.
  * Guarantees: the original's claim holds [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

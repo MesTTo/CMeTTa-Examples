@@ -15,7 +15,7 @@
  *   it, "(1+2)" among them, are arithmetic text, never MeTTa forms.
  * Assumes: libutf8proc, for splitting text into codepoints and for letter?.
  * Guarantees: all seventy-four claims of the original hold [tested: make
- *   twins; commit=WORKTREE].
+ *   twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

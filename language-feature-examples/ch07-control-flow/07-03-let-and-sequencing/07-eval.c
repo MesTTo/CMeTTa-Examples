@@ -4,7 +4,7 @@
  *   storing the body as myfunc, reducing it and taking it back out, and C's
  *   own statements do the same three steps.
  * Guarantees: both claims of the original hold, and the C emulation agrees
- *   [tested: make twins; commit=WORKTREE].
+ *   [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

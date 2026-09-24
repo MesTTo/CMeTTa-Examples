@@ -10,7 +10,7 @@
  *   else runs on the thread that calls done().
  * Guarantees: the space report is the same function for a twin and for the
  *   original's runner, tools/original.c, so the two sides of the lane cannot
- *   canonicalise atoms two ways [tested: make twins; commit=WORKTREE].
+ *   canonicalise atoms two ways [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #include "common.h"
 #include "lane.h"

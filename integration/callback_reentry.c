@@ -2,7 +2,7 @@
  *   MeTTa for (double x) while MeTTa is inside delegate, and hands the nested
  *   answer back as its own.
  * Guarantees: (delegate 21) is 42 through C to MeTTa to C to MeTTa
- *   [tested: make check; commit=WORKTREE].
+ *   [tested: make check; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

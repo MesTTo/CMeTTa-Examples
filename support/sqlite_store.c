@@ -9,7 +9,7 @@
  *   mt_write_dup() and read back by mt_parse(), which is what a text column
  *   holding atoms is.
  * Guarantees: rollback and retained-cursor cleanup are checked by
- *   integration/sqlite_space.c [tested: make check; commit=WORKTREE].
+ *   integration/sqlite_space.c [tested: make check; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #include "sqlite_store.h"
 typedef struct sql_cursor { sql_store *store; sqlite3_stmt *statement; } sql_cursor;

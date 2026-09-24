@@ -1,7 +1,7 @@
 /* Purpose: collapse is mt_all. A term nothing reduces answers itself, once,
  *   so collecting its answers into a C list gives a list of one.
  * Guarantees: the original's claim holds [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

@@ -9,7 +9,7 @@
  *   mt_transaction and then fails, as the original's branch ends in (empty),
  *   so the engine rolls both writes back and the call answers nothing.
  * Guarantees: both claims of the original hold, with its three unasserted
- *   forms checked as well [tested: make twins; commit=WORKTREE].
+ *   forms checked as well [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  * Owns resources: five threads, each attached to the engine for its one call
  *   and joined before the claims.
  * Guarded by: testmutex, around every read-modify-write mutexinc makes.

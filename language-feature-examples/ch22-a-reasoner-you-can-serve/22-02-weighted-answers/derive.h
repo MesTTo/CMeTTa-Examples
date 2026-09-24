@@ -21,7 +21,7 @@
  * Assumes: the includer includes common.h and nars_truth.h first.
  * Guarantees: derive() leaves the queues the library's loop answers for the
  *   same queues, rules and budgets, and query() the answer the library's
- *   query picks from them [tested: make twins; commit=WORKTREE].
+ *   query picks from them [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  * Owns resources: every mt_list here owns its atoms and its array, which
  *   mt_list_free() releases.
  */

@@ -3,7 +3,7 @@
  *   takes f's out of &self and (f 3 4) is left with nothing to reduce it,
  *   while (g 3 4) still computes. A plain fact comes and goes the same way.
  * Guarantees: (f 3 4) answers itself, (g 3 4) is 7, and (my test) is gone
- *   [tested: make twins; commit=WORKTREE].
+ *   [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

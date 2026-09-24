@@ -6,7 +6,7 @@
  *   except call, which raises.
  * Assumes: the includer includes common.h first.
  * Guarantees: what the engine answers for each form, in every twin that
- *   includes this [tested: make twins; commit=WORKTREE].
+ *   includes this [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #ifndef CH20_CONTROL_FORMS_H
 #define CH20_CONTROL_FORMS_H

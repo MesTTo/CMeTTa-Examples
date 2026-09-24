@@ -2,7 +2,7 @@
  *   directly, through pkg-config and through CMake.
  * Owns resources: the runtime, closed after the answer is checked.
  * Guarantees: an installed library boots its installed engine and answers
- *   [tested: make check-consumers; commit=WORKTREE].
+ *   [tested: make check-consumers; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

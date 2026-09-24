@@ -4,7 +4,7 @@
  *   arrays with the same functions through function pointers, and each
  *   engine answer must be C's.
  * Guarantees: all six claims of the original hold, and the closing fold of
- *   pairs by append is checked too [tested: make twins; commit=WORKTREE].
+ *   pairs by append is checked too [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

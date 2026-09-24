@@ -14,7 +14,7 @@
  *   note on rounding holds here too.
  * Guarantees: each function answers the value the engine answers for the
  *   same operands, and answers none exactly where the engine answers none
- *   [tested: make twins; commit=WORKTREE].
+ *   [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #ifndef CH22_PLN_H
 #define CH22_PLN_H

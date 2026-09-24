@@ -15,7 +15,7 @@
  *   has none, a numeric repeat answers its term that many times.
  * Assumes: libcjson, found through pkg-config.
  * Guarantees: all fifty-nine claims of the original hold [tested: make
- *   twins; commit=WORKTREE].
+ *   twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

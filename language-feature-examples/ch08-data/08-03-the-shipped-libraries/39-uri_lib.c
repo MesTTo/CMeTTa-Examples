@@ -12,7 +12,7 @@
  *   context, decoding checks every escape and every UTF-8 sequence strictly
  *   through utf8proc, and query pairs split and join as the library says.
  * Guarantees: all fifty-five claims of the original hold [tested: make
- *   twins; commit=WORKTREE].
+ *   twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

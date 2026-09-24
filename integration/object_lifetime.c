@@ -4,7 +4,7 @@
  *   payload once, deterministically, without waiting for blob collection.
  * Owns resources: the payload, released by its callback.
  * Guarantees: identity survives a round trip, its type is Counter, and the
- *   payload is released exactly once [tested: make check; commit=WORKTREE].
+ *   payload is released exactly once [tested: make check; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

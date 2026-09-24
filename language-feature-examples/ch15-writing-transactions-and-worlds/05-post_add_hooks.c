@@ -9,7 +9,7 @@
  *   what gate let in as offered, and releasing both claims, the second
  *   release of the post slot included, leaves a direct write.
  * Guarantees: all twelve claims of the original hold, with its eleven
- *   unasserted forms checked as well [tested: make twins; commit=WORKTREE].
+ *   unasserted forms checked as well [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

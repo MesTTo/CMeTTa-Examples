@@ -3,7 +3,7 @@
  *   algebra dual names them in the catalog, and match-under carries a value
  *   and its derivative through two tagged rules without the rules knowing.
  * Guarantees: d(3x)/dx at x = 2 comes out as (Dual 6.0 3.0) [tested: make
- *   check; commit=WORKTREE].
+ *   check; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

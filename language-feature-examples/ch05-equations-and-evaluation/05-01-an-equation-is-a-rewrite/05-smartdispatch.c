@@ -4,7 +4,7 @@
  *   applies; and a data expression with a call inside it has the call
  *   reduced. f is reached by name from every one of them.
  * Guarantees: the five answers of the original, evaluated in one tuple
- *   [tested: make twins; commit=WORKTREE].
+ *   [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

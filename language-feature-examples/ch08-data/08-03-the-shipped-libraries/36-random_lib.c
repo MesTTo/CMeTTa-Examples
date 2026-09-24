@@ -14,7 +14,7 @@
  * Assumes: GMP, found through pkg-config; exact_oracle.h rounds exact
  *   values once.
  * Guarantees: all sixty-eight claims of the original hold [tested: make
- *   twins; commit=WORKTREE].
+ *   twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define _XOPEN_SOURCE 700 /* M_PI and M_E are XSI's */
 #define MT_SHORTHAND

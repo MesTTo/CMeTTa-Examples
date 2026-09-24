@@ -2,7 +2,7 @@
  *   compile to the C function doubled() and lower to the equation, and both
  *   asks, the miss and the hit, answer what C computes.
  * Guarantees: both claims of the original hold, the second ask being a hit
- *   [tested: make twins; commit=WORKTREE].
+ *   [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

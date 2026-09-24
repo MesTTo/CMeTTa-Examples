@@ -7,7 +7,7 @@
  *   characters from it. Every answer the handle gives is held to the
  *   model's.
  * Guarantees: all five claims of the original hold, each tuple checked part
- *   by part [tested: make twins; commit=WORKTREE].
+ *   by part [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

@@ -4,7 +4,7 @@
  *   with mt_bound() and built into new terms in C, and what the space holds
  *   is sorted with qsort in the engine's order.
  * Guarantees: all five claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

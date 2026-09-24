@@ -2,7 +2,7 @@
  *   one if and takes an arm with another; C nests ?: the same way over the
  *   same comparison, and both land on 42.
  * Guarantees: the original's claim holds [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

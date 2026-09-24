@@ -16,7 +16,7 @@
  *   definitions over rows 5 and 2 and three held atoms answer (accept), the
  *   builtin (refuse (pool-at-capacity 2))].
  * Guarantees: all seven claims of the original hold, with its six
- *   unasserted forms checked as well [tested: make twins; commit=WORKTREE].
+ *   unasserted forms checked as well [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

@@ -11,7 +11,7 @@
  *   call answers itself unreduced. Scout's space references Scout's class,
  *   whose :< edge makes it an Agent.
  * Guarantees: all five claims of the original hold, with its three
- *   constructions checked as well [tested: make twins; commit=WORKTREE].
+ *   constructions checked as well [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

@@ -2,7 +2,7 @@
  *   condition decides both: C builds only the arm it chooses as the
  *   expectation, and the engine gets the whole term.
  * Guarantees: the original's claim holds [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

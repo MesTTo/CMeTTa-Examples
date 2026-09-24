@@ -3,7 +3,7 @@
  *   the missing branch, and the engine's two-argument if agrees with it on
  *   both conditions.
  * Guarantees: the original's claim holds, with the false condition beside it
- *   [tested: make twins; commit=WORKTREE].
+ *   [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

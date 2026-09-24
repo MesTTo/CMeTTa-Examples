@@ -4,7 +4,7 @@
  *   adding the new, and read back by a match like any other fact.
  * Decides: this small host reserves a 256 MiB SWI stack.
  * Guarantees: the configured engine answers, the budget reads back, and the
- *   catalog setting moves from 7 to 3 [tested: make check; commit=WORKTREE].
+ *   catalog setting moves from 7 to 3 [tested: make check; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

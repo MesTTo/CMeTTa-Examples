@@ -3,7 +3,7 @@
  *   does: an expression of three children whose first two are the symbols
  *   justdata and haha. Any other shape is no match, and h answers nothing.
  * Guarantees: (h (justdata haha 30) 40) is 70 [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

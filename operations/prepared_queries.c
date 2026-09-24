@@ -3,7 +3,7 @@
  *   call opens a fresh engine query, so a fact added between two calls is
  *   seen by the second.
  * Guarantees: the same pattern finds Ada, then Bob after Bob is added
- *   [tested: make check; commit=WORKTREE].
+ *   [tested: make check; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

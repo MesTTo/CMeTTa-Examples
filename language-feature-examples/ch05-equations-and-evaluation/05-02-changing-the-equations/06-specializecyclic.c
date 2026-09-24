@@ -3,7 +3,7 @@
  *   cycle without looping; the branch that would call the function never
  *   runs.
  * Guarantees: (f1 + 2) and (f3 + 1) both answer finish [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

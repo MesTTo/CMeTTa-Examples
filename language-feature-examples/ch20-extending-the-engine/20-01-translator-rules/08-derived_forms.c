@@ -7,7 +7,7 @@
  *   &seen holds exactly the first one's record, so the rest of the generator
  *   never ran.
  * Guarantees: all seven claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

@@ -2,7 +2,7 @@
  *   visible to the ones after it; summed() is that block, and the engine's
  *   let* over the same values must answer what it returns.
  * Guarantees: the original's claim holds [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

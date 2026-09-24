@@ -12,7 +12,7 @@
  *   premises and holds the engine's beliefs to hold the sentence C's loop
  *   derives about a --> c.
  * Guarantees: all twenty-six claims of the original hold [tested: make
- *   twins; commit=WORKTREE].
+ *   twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

@@ -5,7 +5,7 @@
  *   is matched by query, a variable operand binds it whole, and C's own
  *   mt_unify() agrees with the engine on the two-sided binding.
  * Guarantees: every claim of the original holds, and exactly one probe runs
- *   per query [tested: make twins; commit=WORKTREE].
+ *   per query [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

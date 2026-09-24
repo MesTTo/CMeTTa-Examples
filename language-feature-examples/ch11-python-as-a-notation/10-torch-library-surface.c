@@ -8,7 +8,7 @@
  *   original's tolerance. Where torch is absent the twin says so and checks
  *   only that the recorded status is the probe's verdict.
  * Guarantees: the original's claims hold where torch is importable
- *   [tested: make twins; commit=WORKTREE].
+ *   [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

@@ -3,7 +3,7 @@
  *   handler is an equation that records the outcome as a fact, and C reads
  *   the facts to see which exits ran it.
  * Guarantees: success leaves no note, failure notes (fail), and a caller's
- *   once notes (!) [tested: make twins; commit=WORKTREE].
+ *   once notes (!) [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

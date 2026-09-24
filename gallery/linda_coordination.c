@@ -2,7 +2,7 @@
  *   published, peek-atom reads it without taking it and take-atom consumes
  *   it once, the three tuple-space operations lib_thread provides.
  * Guarantees: the watch sees the one commit, peek leaves the tuple, take
- *   removes it [tested: make check; commit=WORKTREE].
+ *   removes it [tested: make check; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

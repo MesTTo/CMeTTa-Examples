@@ -3,7 +3,7 @@
  *   substitution rebuilds the instance, and equal atoms hash alike. No engine
  *   is needed for any of it.
  * Guarantees: all 289 pairs satisfy the three properties [tested: make
- *   check; commit=WORKTREE].
+ *   check; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

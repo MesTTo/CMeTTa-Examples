@@ -6,7 +6,7 @@
  *   held against C's own sort with mt_order: sorted answers pass, and an
  *   unsorted bag fails with two empty bags, since sorting keeps the bag.
  * Guarantees: all ten claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

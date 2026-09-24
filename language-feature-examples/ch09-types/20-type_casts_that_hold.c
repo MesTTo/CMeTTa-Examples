@@ -5,7 +5,7 @@
  *   when the type asked is identical to one of them. type-cast answers the
  *   atom where the cast holds and (Error atom BadType) where it does not.
  * Guarantees: all seventeen claims of the original hold, with its one
- *   unasserted form checked as well [tested: make twins; commit=WORKTREE].
+ *   unasserted form checked as well [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

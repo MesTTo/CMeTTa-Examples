@@ -2,7 +2,7 @@
  *   is a BigInt with every digit, a ratio is stored in lowest terms with the
  *   sign on the numerator, and the engine's arithmetic on ratios is exact.
  * Guarantees: 2^64-1 keeps its digits, 6/-8 is -3/4, and -3/4 + 1/4 is -1/2
- *   [tested: make check; commit=WORKTREE].
+ *   [tested: make check; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

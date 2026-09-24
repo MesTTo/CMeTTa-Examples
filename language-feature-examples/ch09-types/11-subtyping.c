@@ -9,7 +9,7 @@
  *   operation's result; a constructor's, an arrow with no equation, is. An
  *   argument is admitted when the parameter's type is in its widened list.
  * Guarantees: all eight claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

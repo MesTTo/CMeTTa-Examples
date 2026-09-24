@@ -9,7 +9,7 @@
  *   commit=214188f1d5b5018a0061ea1bc72b104e69137b8f].
  * Assumes: the includer includes common.h first.
  * Guarantees: the cost and the orientation the engine computes for the same
- *   form and the same declarations [tested: make twins; commit=WORKTREE].
+ *   form and the same declarations [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #ifndef CH20_COSTS_H
 #define CH20_COSTS_H

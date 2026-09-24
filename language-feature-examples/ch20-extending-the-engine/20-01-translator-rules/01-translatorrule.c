@@ -7,7 +7,7 @@
  *   and registers a rule for the rows that ask for one, and every call must
  *   answer what C's own cons builds, the head before the list's items.
  * Guarantees: all three claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

@@ -3,7 +3,7 @@
  *   triangle, and the same query measured by the engine's counters answers
  *   the triangle's three rotations.
  * Guarantees: the plan names generic-join and the query answers three rows
- *   [tested: make check; commit=WORKTREE].
+ *   [tested: make check; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

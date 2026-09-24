@@ -2,7 +2,7 @@
  *   truth value with its premise's, and the answer's (stv strength
  *   confidence) is read back as two C doubles.
  * Guarantees: strength follows the premise and confidence stays strictly
- *   between 0 and 1 [tested: make check; commit=WORKTREE].
+ *   between 0 and 1 [tested: make check; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

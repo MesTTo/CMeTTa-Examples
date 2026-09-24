@@ -2,7 +2,7 @@
  *   its own, so they sit where the original puts its MeTTa ones, inside the
  *   constructor call that builds (= (f) 42), and the engine sees the same
  *   equation the original's commented source reads to.
- * Guarantees: (f) is 42 [tested: make twins; commit=WORKTREE].
+ * Guarantees: (f) is 42 [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

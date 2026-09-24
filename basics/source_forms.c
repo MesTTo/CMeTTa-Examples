@@ -3,7 +3,7 @@
  *   nothing; mt_parse() refuses text that is not a whole form.
  * text: the program's subject is MeTTa source text as a reader receives it.
  * Guarantees: two forms read, nothing is stored, a broken form is refused
- *   with a status [tested: make check; commit=WORKTREE].
+ *   with a status [tested: make check; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

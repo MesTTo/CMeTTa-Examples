@@ -13,7 +13,7 @@
  *   mapping atom that is no pair.
  * Assumes: libyaml, found through pkg-config as yaml-0.1.
  * Guarantees: all thirty-two claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

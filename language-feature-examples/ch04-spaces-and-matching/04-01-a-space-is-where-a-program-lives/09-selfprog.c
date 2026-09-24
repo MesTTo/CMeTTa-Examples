@@ -2,7 +2,7 @@
  *   builds, removes and replaces, and each call answers from whatever
  *   equation the space holds at that moment.
  * Guarantees: with no equation (function1) answers itself, and after the new
- *   one it answers (OK) [tested: make twins; commit=WORKTREE].
+ *   one it answers (OK) [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

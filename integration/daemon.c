@@ -5,7 +5,7 @@
  * Owns resources: the socket pair, the worker thread (joined), and both
  *   stdio streams (closed).
  * Guarantees: three requests, one refused, are answered in order by one
- *   engine [tested: make check; commit=WORKTREE].
+ *   engine [tested: make check; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

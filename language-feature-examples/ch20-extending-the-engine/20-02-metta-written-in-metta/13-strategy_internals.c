@@ -12,7 +12,7 @@
  *   answering the sort asked, and a strategy then applies only to a term
  *   whose declared type is that sort.
  * Guarantees: all twenty-three claims of the original hold [tested: make
- *   twins; commit=WORKTREE].
+ *   twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

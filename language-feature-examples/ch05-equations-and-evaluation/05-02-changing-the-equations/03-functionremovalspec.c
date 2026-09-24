@@ -3,7 +3,7 @@
  *   still leaves the specialized call answering from the one that remains,
  *   and putting it back adds its answer after the other's.
  * Guarantees: (f g) answers 2 and 3, then 3, then 3 and 2 [tested: make
- *   twins; commit=WORKTREE].
+ *   twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

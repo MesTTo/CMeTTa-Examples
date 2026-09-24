@@ -3,7 +3,7 @@
 # Assumes: CMETTA_DIR holds a built CMeTTa surface and its header, and
 #   CMETTA_ENGINE the engine tree whose examples/ are the originals.
 # Guarantees: check stops on a failed program, a failed claim, or a twin that
-#   disagrees with its original [tested: make check; commit=WORKTREE].
+#   disagrees with its original [tested: make check; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
 CMETTA_DIR ?= $(abspath ../MeTTa/extensions/cmetta)
 CMETTA_ENGINE ?= $(abspath $(CMETTA_DIR)/../..)
 .DEFAULT_GOAL := all

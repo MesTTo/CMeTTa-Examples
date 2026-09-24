@@ -3,7 +3,7 @@
  *   in two variables. Where int64_t holds the answer the engine must agree
  *   with C; fib 100 does not fit, and arrives as a BIGINT.
  * Guarantees: the original's claim holds, and C agrees at 90 [tested: make
- *   twins; commit=WORKTREE].
+ *   twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

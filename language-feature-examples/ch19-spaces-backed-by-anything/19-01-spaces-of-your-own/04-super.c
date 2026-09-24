@@ -8,7 +8,7 @@
  *   and every other space keeps the definition it had. evalc is mt_eval with
  *   the space's handle as its target, and &self's handle is the runtime's.
  * Guarantees: all six claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

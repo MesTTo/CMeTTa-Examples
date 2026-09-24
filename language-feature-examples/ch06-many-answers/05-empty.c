@@ -2,7 +2,7 @@
  *   returning MT_FAIL: no answer for these arguments, which the engine reads
  *   as (empty), so the call's answer list is empty.
  * Guarantees: the original's claim holds [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

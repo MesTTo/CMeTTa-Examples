@@ -5,7 +5,7 @@
  *   either sensor said alone.
  * Decides: the scores are fixed, so the posterior is reproducible.
  * Guarantees: two hypotheses survive with mass 0.505, and the right one
- *   carries over 90% of it [tested: make check; commit=WORKTREE].
+ *   carries over 90% of it [tested: make check; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

@@ -25,7 +25,7 @@
  *   double and would answer 2.0 for an integer 2.
  * Guarantees: each function answers what lib_measure answers for the same
  *   pairs, and refuses exactly where it answers an Error [tested: make
- *   twins; commit=WORKTREE].
+ *   twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  * Owns resources: a superposition owns its values and its array, which
  *   ws_free() releases.
  */

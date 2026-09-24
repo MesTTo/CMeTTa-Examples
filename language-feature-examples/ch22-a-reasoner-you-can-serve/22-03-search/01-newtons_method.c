@@ -4,7 +4,7 @@
  *   builders it is the equation the program adds after memoizing the name,
  *   so each value the engine answers is the one the same body computes in C.
  * Guarantees: both claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

@@ -12,7 +12,7 @@
  *   any call, the precondition it states. The transaction refusal runs
  *   inside mt_transaction.
  * Guarantees: all fifty-three claims of the original hold [tested: make
- *   twins; commit=WORKTREE].
+ *   twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

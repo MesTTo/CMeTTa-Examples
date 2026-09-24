@@ -4,7 +4,7 @@
  *   the array of names; for keeps the elements past 3, a C filter loop; and
  *   iterate folds 0..9 into 1, a C accumulation.
  * Guarantees: all three claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

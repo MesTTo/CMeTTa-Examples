@@ -4,7 +4,7 @@
  *   C splits the same list itself, the head mt_at(list, 0) and the tail a
  *   view over the rest.
  * Guarantees: all three claims of the original hold, and C's split agrees
- *   [tested: make twins; commit=WORKTREE].
+ *   [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

@@ -4,7 +4,7 @@
  *   a body can write an equation, which C builds as the atom the body adds,
  *   so the new name answers that atom's body and a match finds it.
  * Guarantees: all four claims of the original hold, with its one unasserted
- *   form checked as well [tested: make twins; commit=WORKTREE].
+ *   form checked as well [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

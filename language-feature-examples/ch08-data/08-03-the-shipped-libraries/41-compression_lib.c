@@ -12,7 +12,7 @@
  *   checks that CRC after converting and drops a valid field. Extraction
  *   refuses the names the library refuses before anything is published.
  * Guarantees: all fifty-four claims of the original hold [tested: make
- *   twins; commit=WORKTREE].
+ *   twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define _XOPEN_SOURCE 700
 #define MT_SHORTHAND

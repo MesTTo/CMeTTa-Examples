@@ -1,7 +1,7 @@
 /* Purpose: mt_all() is a snapshot. The collected list is the program's own,
  *   so a write after collecting changes the space and not the list.
  * Guarantees: the snapshot keeps one row while the space grows to two
- *   [tested: make check; commit=WORKTREE].
+ *   [tested: make check; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

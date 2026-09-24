@@ -2,7 +2,7 @@
  *   distinct kinds, children are borrowed from their parent, and a child kept
  *   with mt_keep() outlives the parent it came from.
  * Guarantees: each kind and payload reads back as built [tested: make check;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

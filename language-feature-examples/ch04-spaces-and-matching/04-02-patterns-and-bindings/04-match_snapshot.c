@@ -6,7 +6,7 @@
  *   of &snapshot each time, and both rows are still answered.
  * Guarantees: three reversals, the four links the original prints, visit
  *   answers alpha and beta, and &snapshot ends empty [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

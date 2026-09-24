@@ -3,7 +3,7 @@
  *   and the application's type is not's own result, Bool. Unifying apply's
  *   type with (-> (-> Bool Bool) Bool $result) binds $result to Bool too.
  * Guarantees: the original's claim holds, with its two unasserted forms
- *   checked as well [tested: make twins; commit=WORKTREE].
+ *   checked as well [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

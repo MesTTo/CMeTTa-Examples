@@ -11,7 +11,7 @@
  *   the sequence it holds, which in C is an array. Where the library
  *   refuses, a precondition C states refuses the same input.
  * Guarantees: all fifty-nine claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

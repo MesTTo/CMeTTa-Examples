@@ -2,7 +2,7 @@
  *   and summed name each intermediate value once, and the engine's chains
  *   over the same arithmetic must answer what they return.
  * Guarantees: both claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

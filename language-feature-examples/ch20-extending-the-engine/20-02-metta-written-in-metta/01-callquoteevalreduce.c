@@ -11,7 +11,7 @@
  *   compiled before fib existed and stays a call. Afterwards the wrappers
  *   written before fib answer as the ones written after it.
  * Guarantees: all four claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

@@ -11,7 +11,7 @@
  *   catalog holds no events row for one. The reaction order's default is the
  *   declaration member, and a reaction's priority is an optional integer.
  * Guarantees: all nine claims of the original hold, with its one unasserted
- *   write checked as well [tested: make twins; commit=WORKTREE].
+ *   write checked as well [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

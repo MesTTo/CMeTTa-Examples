@@ -5,7 +5,7 @@
  *   argument even after a False, and-then does not; and and-then, unlike
  *   and, cannot be solved backwards.
  * Guarantees: all nine claims of the original hold, with the six runs'
- *   answers checked as well [tested: make twins; commit=WORKTREE].
+ *   answers checked as well [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

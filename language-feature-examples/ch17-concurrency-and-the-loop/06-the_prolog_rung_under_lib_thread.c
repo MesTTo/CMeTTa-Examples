@@ -9,7 +9,7 @@
  *   where-guard is held against C's own model of the jobs it wrote: the first
  *   job the guard's threshold admits, and the jobs a take leaves behind.
  * Guarantees: all thirty-five claims of the original hold, with its three
- *   unasserted writes checked as well [tested: make twins; commit=WORKTREE].
+ *   unasserted writes checked as well [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

@@ -4,7 +4,7 @@
  *   to spaces C opens by name and reads back itself, mt_count being
  *   space-atom-count.
  * Guarantees: all eleven claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

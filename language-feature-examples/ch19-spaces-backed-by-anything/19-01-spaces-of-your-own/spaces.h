@@ -3,7 +3,7 @@
  *   space it made, and a handle opened on it.
  * Assumes: the includer defines MT_SHORTHAND and includes common.h first.
  * Guarantees: the handle names the space the engine made, or the program
- *   ends saying the engine refused it [tested: make twins; commit=WORKTREE].
+ *   ends saying the engine refused it [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #ifndef CH19_SPACES_H
 #define CH19_SPACES_H

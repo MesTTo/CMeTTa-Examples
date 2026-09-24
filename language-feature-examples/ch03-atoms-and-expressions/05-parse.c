@@ -6,7 +6,7 @@
  * text: the original is about parse, whose input is MeTTa source.
  * Guarantees: every reading of the original holds through mt_parse and
  *   through (parse ...), and writing then reading returns each awkward string
- *   [tested: make twins; commit=WORKTREE].
+ *   [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

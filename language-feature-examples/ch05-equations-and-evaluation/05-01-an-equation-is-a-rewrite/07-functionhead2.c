@@ -4,7 +4,7 @@
  *   small answers nothing, not a residual call, where it has no equation.
  *   The answers are sorted with qsort in the engine's order.
  * Guarantees: (cat $X) finds cat42 and garfield [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

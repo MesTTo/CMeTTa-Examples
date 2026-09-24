@@ -3,7 +3,7 @@
  *   objects print readably, and withdrawing it leaves the objects alive.
  * Owns resources: the object owns its string; the representation borrows it.
  * Guarantees: the repr point exists, the registration prints the value, and
- *   withdrawal is exact and final [tested: make check; commit=WORKTREE].
+ *   withdrawal is exact and final [tested: make check; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

@@ -5,7 +5,7 @@
  *   The three equations are built as terms because the compiler is what is
  *   under test.
  * Guarantees: (evolve derive 2 stmt) terminates and answers stmt [tested:
- *   make twins; commit=WORKTREE].
+ *   make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

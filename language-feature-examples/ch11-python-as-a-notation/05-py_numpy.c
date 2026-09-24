@@ -6,7 +6,7 @@
  *   a C loop from start toward stop by step. The two class names C has no
  *   type for, numpy's ndarray and Python's int, are the ones numpy answers.
  * Guarantees: all nine claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

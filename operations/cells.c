@@ -2,7 +2,7 @@
  *   and the same atom, kept with mt_keep(), is passed to get-state and
  *   change-state! for every read and write.
  * Guarantees: the cell reads 0, takes 7 with True, and reads 7 [tested: make check;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

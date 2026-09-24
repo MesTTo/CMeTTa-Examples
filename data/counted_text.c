@@ -3,7 +3,7 @@
  *   mt_parsen() round-trip all of it through the engine's writer and reader.
  * text: the program's subject is the source spelling of a text atom.
  * Guarantees: all three bytes survive the round trip [tested: make check;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

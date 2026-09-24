@@ -8,7 +8,7 @@
  *   original counts it, and C's model in matespace.h computes it with that
  *   reading, the symbol collapse leading each round.
  * Guarantees: the original's claim holds [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

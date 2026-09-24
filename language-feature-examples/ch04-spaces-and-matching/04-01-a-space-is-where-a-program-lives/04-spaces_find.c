@@ -3,7 +3,7 @@
  *   matches, so a chain of friendships is a nested condition. The facts are
  *   a C table, and the same chains walked in C from mt_match() agree.
  * Guarantees: the chain answers (FoundChain a b c) then (MissedSecondPiece)
- *   [tested: make twins; commit=WORKTREE].
+ *   [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

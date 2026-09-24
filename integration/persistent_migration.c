@@ -3,7 +3,7 @@
  *   the database reopened as &new holds only the new spelling.
  * Owns resources: both providers are closed and the database removed.
  * Guarantees: (old value) becomes (new value) with no alias left behind
- *   [tested: make check; commit=WORKTREE].
+ *   [tested: make check; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "support/sqlite_store.h"

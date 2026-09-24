@@ -4,7 +4,7 @@
  *   loop over a from 0 to 4 gives the pairs it expects; mt_first keeps the
  *   first pair, as once does.
  * Guarantees: all five claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

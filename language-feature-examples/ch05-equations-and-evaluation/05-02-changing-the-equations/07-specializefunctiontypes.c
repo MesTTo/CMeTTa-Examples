@@ -2,7 +2,7 @@
  *   (f g 42) specializes it into f_Spec_[g], and both arrows are declared
  *   for the copy, which a match on the space finds.
  * Guarantees: (f g 42) answers (repra (g 42)) and both declarations of the
- *   specialized copy are in the space [tested: make twins; commit=WORKTREE].
+ *   specialized copy are in the space [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

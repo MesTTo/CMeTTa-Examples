@@ -3,7 +3,7 @@
  *   itself, taking the one answer and storing (bar answer). From C the same
  *   commitment is mt_first, which keeps the first answer of a lazy cursor.
  * Guarantees: the original's claim holds, and mt_first commits as cut does
- *   [tested: make twins; commit=WORKTREE].
+ *   [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

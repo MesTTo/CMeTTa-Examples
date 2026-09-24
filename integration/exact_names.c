@@ -1,7 +1,7 @@
 /* Purpose: a published name is exactly the name written. word_count and
  *   word-count are two C functions, and neither is spelled into the other.
  * Guarantees: each name answers its own function [tested: make check;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

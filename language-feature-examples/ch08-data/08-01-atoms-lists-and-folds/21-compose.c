@@ -5,7 +5,7 @@
  *   innermost of any arity. Composing a longer list is composing the
  *   shorter ones.
  * Guarantees: all nine claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

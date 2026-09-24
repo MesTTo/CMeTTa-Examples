@@ -10,7 +10,7 @@
  *   and the eval and reduce doors alike. Withdrawing the rule withdraws the
  *   inverse, so the large twin form is left as written.
  * Guarantees: all eight claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

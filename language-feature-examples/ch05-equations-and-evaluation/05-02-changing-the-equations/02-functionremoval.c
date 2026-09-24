@@ -2,7 +2,7 @@
  *   its argument and one answering 42; each is an atom C removes and puts
  *   back, and the answers follow. g, the function f is handed, is C.
  * Guarantees: (f g) answers 2 and 42, then 2, then 42, then itself [tested:
- *   make twins; commit=WORKTREE].
+ *   make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

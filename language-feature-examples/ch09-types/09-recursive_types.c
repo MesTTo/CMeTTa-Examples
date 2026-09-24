@@ -5,7 +5,7 @@
  *   Sword and a Paperclip; and an expression whose head is no function
  *   answers the expression of its parts' types, one per combination.
  * Guarantees: all four claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

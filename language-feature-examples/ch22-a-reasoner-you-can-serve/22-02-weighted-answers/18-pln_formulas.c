@@ -8,7 +8,7 @@
  *   and a sort. Test2's report is built from C's own comparison, and which
  *   link types the symmetric rule's guard admits is pln.h's table.
  * Guarantees: all forty-two claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

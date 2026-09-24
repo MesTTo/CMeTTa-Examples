@@ -3,7 +3,7 @@
  *   from the space fills a struct again; the name is borrowed from the atom,
  *   so it is copied before the atom is dropped.
  * Guarantees: every field of every row round-trips [tested: make check;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

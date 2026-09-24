@@ -2,7 +2,7 @@
  *   body over its operator, so it compiles to a C function and lowers to the
  *   equation (= (f $x) (* $x $x)) the engine reduces, and the two agree.
  * Guarantees: (f 1) is 1, and the lowered equation computes what the C
- *   function computes over -100..100 [tested: make twins; commit=WORKTREE].
+ *   function computes over -100..100 [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

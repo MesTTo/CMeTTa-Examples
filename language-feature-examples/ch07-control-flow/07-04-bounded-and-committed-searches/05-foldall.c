@@ -5,7 +5,7 @@
  *   a table row whose expected answer is C's fold of the values it
  *   generates, doubled where the generator doubles.
  * Guarantees: all ten claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

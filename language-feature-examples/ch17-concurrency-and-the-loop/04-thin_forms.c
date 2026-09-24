@@ -14,7 +14,7 @@
  *   translatePredicate sort, C sorts with qsort, and a hyperpose's answers,
  *   which arrive in completion order, are sorted by C too.
  * Guarantees: all twenty-five claims of the original hold [tested: make
- *   twins; commit=WORKTREE].
+ *   twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

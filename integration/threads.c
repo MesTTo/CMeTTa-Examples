@@ -3,7 +3,7 @@
  *   records is invisible to the others and to the main thread.
  * Owns resources: four joined threads.
  * Guarantees: every worker's answer is right and no error crosses threads
- *   [tested: make check; commit=WORKTREE].
+ *   [tested: make check; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

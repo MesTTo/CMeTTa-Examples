@@ -10,7 +10,7 @@
  *   type error. Removing &metric's equation, named as an atom through
  *   lowering.h's atom spellings, leaves &self's to answer there.
  * Guarantees: all ten claims of the original hold, and the handle door's
- *   own refusal [tested: make twins; commit=WORKTREE].
+ *   own refusal [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

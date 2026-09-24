@@ -2,7 +2,7 @@
  *   are C memory: one is built before the engine opens, an answer is kept
  *   after it closes, and both stay readable.
  * Guarantees: a pre-boot atom takes part in an evaluation and the answer
- *   outlives mt_close() [tested: make check; commit=WORKTREE].
+ *   outlives mt_close() [tested: make check; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

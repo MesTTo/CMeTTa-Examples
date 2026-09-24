@@ -16,7 +16,7 @@
  *   which a scope calls however its callback ends, and its struct, freed by
  *   whoever opened it; the C work directory, removed by nftw at the end.
  * Guarantees: all seventy-one claims of the original hold [tested: make
- *   twins; commit=WORKTREE].
+ *   twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define _XOPEN_SOURCE 700
 #define MT_SHORTHAND

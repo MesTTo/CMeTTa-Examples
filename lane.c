@@ -5,7 +5,7 @@
  *   - a canonical line renumbers variables by first occurrence, so atoms equal
  *     up to renaming print alike in every process, and an anonymous `_` is a
  *     new variable at each occurrence, as the engine reads one
- *     [tested: make twins; commit=WORKTREE]
+ *     [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c]
  *   - LANE-HASH is the wrapping sum of each line's FNV-1a 64 hash, a multiset
  *     hash, so enumeration order cannot move it and a duplicate atom does
  *     [source: Bellare and Micciancio, "A New Paradigm for Collision-free
@@ -14,7 +14,7 @@
  *     and each equation, (= head body), also prints as a LANE-EQUATION line,
  *     with LANE-EQUATIONS counting them, so a space too large to list still
  *     shows the definitions a twin's C functions carry one by one
- *     [tested: make twins; commit=WORKTREE]
+ *     [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c]
  * Decides: LANE-ATOM lines stop at 50,000 atoms, the cap the Python lane uses
  *   for the same diagnostic, and LANE-EQUATION lines at 50,000 equations;
  *   the hashes and counts still cover every atom

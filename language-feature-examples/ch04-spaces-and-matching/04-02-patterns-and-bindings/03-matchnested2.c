@@ -3,7 +3,7 @@
  *   mt_query(); the rows are read by name with mt_bound() into a C array of
  *   structs before any of them is rewritten.
  * Guarantees: the two chains become (transitive sim som sam) and
- *   (transitive tim tom tam) [tested: make twins; commit=WORKTREE].
+ *   (transitive tim tom tam) [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

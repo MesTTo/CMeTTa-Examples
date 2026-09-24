@@ -5,7 +5,7 @@
  *   declaration carries, spelled from vocabularies.h's cache-policy words.
  * Assumes: the includer defines MT_SHORTHAND and includes common.h first.
  * Guarantees: each builder answers the atom the engine answers for the same
- *   numbers [tested: make twins; commit=WORKTREE].
+ *   numbers [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #ifndef CH18_TABLING_H
 #define CH18_TABLING_H

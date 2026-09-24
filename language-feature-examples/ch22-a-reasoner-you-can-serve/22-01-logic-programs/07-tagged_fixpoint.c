@@ -8,7 +8,7 @@
  *   on an acyclic copy. The exact probability, which the formula carrier
  *   reads back under prob, is C's sum over the possible worlds of the edges.
  * Guarantees: all six claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

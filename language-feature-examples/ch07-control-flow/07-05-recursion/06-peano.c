@@ -3,7 +3,7 @@
  *   C then measures each answered numeral's depth by walking its S layers
  *   with mt_at and checks the depths are exactly 0 to 300, each once.
  * Guarantees: the original's claim holds, as a count and as the set of
- *   depths [tested: make twins; commit=WORKTREE].
+ *   depths [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

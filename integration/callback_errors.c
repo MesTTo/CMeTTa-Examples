@@ -2,7 +2,7 @@
  *   into an engine error whose message reaches the caller as a status, and
  *   the next request after a refusal is served normally.
  * Guarantees: the refusal's reason crosses back, and the function still
- *   answers afterwards [tested: make check; commit=WORKTREE].
+ *   answers afterwards [tested: make check; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

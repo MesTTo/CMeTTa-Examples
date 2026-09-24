@@ -14,7 +14,7 @@ planted good twins are not, derived() reads a clause as the specializer's
 exactly when its own head carries the mark, a real report's equations and
 hashes agree with the atoms it lists, and over the enumeration cap the content
 rule excuses the equations a C operation carries and nothing else
-[tested: make check; commit=WORKTREE].
+[tested: make check; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
 Owns resources: a scratch tree under ai-tmp/, removed on success and kept on
 failure for inspection.
 """

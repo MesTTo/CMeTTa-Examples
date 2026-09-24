@@ -7,7 +7,7 @@
  *   for. bind! names a value for the reader, and C, building terms, holds
  *   the value in a variable instead.
  * Guarantees: all six claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define _XOPEN_SOURCE 700
 #define MT_SHORTHAND

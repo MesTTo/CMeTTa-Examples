@@ -3,7 +3,7 @@
  *   in, then streams (bar x) for every (foo x) that space now holds, reading
  *   its own writes through a cursor it hands back as an mt_iterator.
  * Guarantees: (matchtrickery) answers (bar a) then (bar b) [tested: make
- *   twins; commit=WORKTREE].
+ *   twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

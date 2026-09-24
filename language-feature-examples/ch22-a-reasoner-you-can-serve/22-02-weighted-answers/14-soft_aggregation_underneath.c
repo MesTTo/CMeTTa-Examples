@@ -6,7 +6,7 @@
  *   the count, or the declared score with the mean fold, C compares the
  *   engine's two answers.
  * Guarantees: all twenty claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

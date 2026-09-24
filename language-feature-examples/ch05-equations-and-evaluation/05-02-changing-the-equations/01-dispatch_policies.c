@@ -4,7 +4,7 @@
  *   row C adds to &metta makes the call answer itself, and removing the row
  *   restores the default.
  * Guarantees: nothing, then the call itself, then nothing again [tested:
- *   make twins; commit=WORKTREE].
+ *   make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

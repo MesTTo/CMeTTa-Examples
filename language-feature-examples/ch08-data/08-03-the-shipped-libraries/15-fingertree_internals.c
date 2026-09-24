@@ -11,7 +11,7 @@
  *   lists concatenated [source: Hinze and Paterson, "Finger trees: a simple
  *   general-purpose data structure", JFP 16(2), 2006, sections 3 and 4].
  * Guarantees: all twenty-eight claims of the original hold [tested: make
- *   twins; commit=WORKTREE].
+ *   twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

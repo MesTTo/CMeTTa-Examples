@@ -4,7 +4,7 @@
  *   the engine's own take refuses a count that is not a number, which C
  *   sees as MT_ERROR on the cursor.
  * Guarantees: all seven claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

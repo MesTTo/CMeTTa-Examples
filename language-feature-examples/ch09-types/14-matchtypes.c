@@ -2,7 +2,7 @@
  *   when two types are identical, which C decides with mt_eq, and
  *   match-type-or answers True for equal types and its value otherwise.
  * Guarantees: all four claims of the original hold, with its two unasserted
- *   forms checked as well [tested: make twins; commit=WORKTREE].
+ *   forms checked as well [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

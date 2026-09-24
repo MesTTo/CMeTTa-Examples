@@ -4,7 +4,7 @@
  *   steps, and C steps the same protocol in a loop for the values it
  *   expects.
  * Guarantees: the original's claim holds [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

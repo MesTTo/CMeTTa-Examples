@@ -5,7 +5,7 @@
  *   fact is assigned and withdrawn between solves, and a grounding that fails
  *   rolls back whole.
  * Guarantees: d is first reached at horizon 3, and the failed grounding
- *   leaves nothing behind [tested: make check; commit=WORKTREE].
+ *   leaves nothing behind [tested: make check; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

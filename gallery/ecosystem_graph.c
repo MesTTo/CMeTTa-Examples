@@ -7,7 +7,7 @@
  *   array, freed on every path.
  * Guarantees: the unique shortest path 0-1-2-3 is found and queryable, and a
  *   route against the edges' direction answers nothing [tested: make check;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

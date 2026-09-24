@@ -6,7 +6,7 @@
  *   MeTTa, and over C's operators it is the loop body of the C for loop that
  *   says what the engine must answer, (odd 3) then (even 4).
  * Guarantees: the original's claim holds [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

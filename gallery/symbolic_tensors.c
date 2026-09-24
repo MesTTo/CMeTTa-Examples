@@ -7,7 +7,7 @@
  * Owns resources: the callback frees its three arrays before answering.
  * Guarantees: (MM (T (T A)) B) is A*B = ((11.0)), one GEMM call, and a shape
  *   mismatch is refused before BLAS sees it [tested: make check;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

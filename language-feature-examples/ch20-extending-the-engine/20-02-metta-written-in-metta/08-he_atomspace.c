@@ -7,7 +7,7 @@
  *   answers it; unify against &self answers Yes exactly for the facts C
  *   added.
  * Guarantees: all five claims of the original hold, and its unasserted
- *   (get-type 1) as well [tested: make twins; commit=WORKTREE].
+ *   (get-type 1) as well [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

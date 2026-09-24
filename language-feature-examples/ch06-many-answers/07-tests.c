@@ -4,7 +4,7 @@
  *   program4 gathers the three calls: the three fan-outs of program2 each
  *   carry the other two answers. C builds the expected rows in a loop.
  * Guarantees: the original's claim holds [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

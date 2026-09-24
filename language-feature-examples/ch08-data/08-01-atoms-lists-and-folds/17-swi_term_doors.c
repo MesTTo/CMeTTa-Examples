@@ -5,7 +5,7 @@
  *   copy_term renames, term_hash is defined for ground terms only, and
  *   pretty-atom is the writer, all checked as the original checks them.
  * Guarantees: all twenty-one claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

@@ -3,7 +3,7 @@
  *   its argument as written, and the other (-> Number Number), so the engine
  *   reduces the argument first. The declarations are atoms like any other.
  * Guarantees: (written-term (+ 20 22)) is (+ 20 22) and
- *   (reduced-value (+ 20 22)) is 42 [tested: make check; commit=WORKTREE].
+ *   (reduced-value (+ 20 22)) is 42 [tested: make check; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

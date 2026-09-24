@@ -3,7 +3,7 @@
  *   rolls back when it answers MT_FAIL, and under mt_speculate() it always
  *   rolls back.
  * Guarantees: rollback and speculation leave nothing, commit publishes both
- *   edges [tested: make check; commit=WORKTREE].
+ *   edges [tested: make check; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

@@ -12,7 +12,7 @@
  *   path exists, which counts a shared edge once.
  * Assumes: the includer includes common.h first.
  * Guarantees: each value the engine's fixpoint answers for the same program
- *   under the same carrier [tested: make twins; commit=WORKTREE].
+ *   under the same carrier [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #ifndef CH22_SEMIRINGS_H
 #define CH22_SEMIRINGS_H

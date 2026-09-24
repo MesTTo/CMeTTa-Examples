@@ -11,7 +11,7 @@
  *   in GCC, so each operation rounds once, as SWI-Prolog's float arithmetic
  *   does.
  * Guarantees: each function answers the double the engine answers for the
- *   same operands [tested: make twins; commit=WORKTREE].
+ *   same operands [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #ifndef CH22_NARS_TRUTH_H
 #define CH22_NARS_TRUTH_H

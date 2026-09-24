@@ -2,7 +2,7 @@
  *   means nothing, and it is only a term until something reduces it; g then
  *   arrives as a C function, and both f and h, which call it, answer what C
  *   answers.
- * Guarantees: (f) and (h) are 42 [tested: make twins; commit=WORKTREE].
+ * Guarantees: (f) and (h) are 42 [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

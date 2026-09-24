@@ -3,7 +3,7 @@
  *   is and added through the space's own door, and its value at 30 is fib.h's
  *   C function, the same body run by C.
  * Guarantees: the original's claim holds [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

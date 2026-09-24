@@ -13,7 +13,7 @@
  *   aliased file's function answers as C's model of it, and a directory that
  *   is not there is refused naming it.
  * Guarantees: all nineteen claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

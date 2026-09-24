@@ -2,7 +2,7 @@
  *   on either side, mt_substitute() applies the bindings to a template, and a
  *   repeated variable demands equal fields.
  * Guarantees: the template instantiates, and (pair $x $x) refuses (pair 1 2)
- *   [tested: make check; commit=WORKTREE].
+ *   [tested: make check; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

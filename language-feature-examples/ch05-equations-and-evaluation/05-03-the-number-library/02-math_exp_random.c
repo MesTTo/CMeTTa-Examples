@@ -3,7 +3,7 @@
  *   inside their bounds, which in-range, a C function comparing with
  *   mt_compare, checks inside the engine on every draw.
  * Guarantees: all seven claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

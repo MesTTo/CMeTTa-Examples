@@ -2,7 +2,7 @@
  *   and a pong with the next ping by adding to the space it watches, so the
  *   exchange runs through reentrant notifications until ping 3 ends it.
  * Guarantees: the transcript is ping1 pong1 ping2 pong2 ping3 [tested: make
- *   check; commit=WORKTREE].
+ *   check; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

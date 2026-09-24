@@ -9,7 +9,7 @@
  *   it, and the engine's facts answer the model: each balance read, and the
  *   population, one query over the class space, sorted with qsort.
  * Guarantees: all six claims of the original hold, with its two unasserted
- *   constructions checked as well [tested: make twins; commit=WORKTREE].
+ *   constructions checked as well [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

@@ -5,7 +5,7 @@
  *   subject takes the Empty branch, not the first pattern; and metatype()
  *   names a symbol as get-metatype does.
  * Guarantees: all six claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

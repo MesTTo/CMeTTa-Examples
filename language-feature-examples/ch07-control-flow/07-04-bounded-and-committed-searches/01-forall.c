@@ -6,7 +6,7 @@
  *   variables, lambdas written in place or wrapped in an if, is a table row
  *   whose expected answer C computes with its own loop over the same values.
  * Guarantees: all twelve claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

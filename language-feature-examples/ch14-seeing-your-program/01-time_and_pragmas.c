@@ -10,7 +10,7 @@
  *   doubling to 7.
  * Guarantees: all twenty-five claims of the original hold, with its five
  *   unasserted forms checked as well [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

@@ -7,7 +7,7 @@
  *   declaration C added, since the surface is facts and not atoms; and a
  *   program's own declaration of car-atom is answered ahead of the table's.
  * Guarantees: all twenty-five claims of the original hold [tested: make
- *   twins; commit=WORKTREE].
+ *   twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

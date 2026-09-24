@@ -2,7 +2,7 @@
  *   is (empty), so it takes Empty; wu2's key is (f), a C function answering
  *   42, so it takes the 42 branch instead.
  * Guarantees: both claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

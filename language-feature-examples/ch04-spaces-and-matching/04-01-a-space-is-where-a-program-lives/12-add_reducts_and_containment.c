@@ -3,7 +3,7 @@
  *   &reduced holds answers; and space-contains asks one unification question
  *   of a space without opening a query, holding its atom argument unevaluated.
  * Guarantees: every claim of the original holds [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

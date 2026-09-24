@@ -16,7 +16,7 @@
  *   - each C_X computes what its M_X computes, over the operands the C types
  *     can hold: C's integers are int64_t where the engine's are unbounded, so
  *     C_ADD, C_SUB and C_MUL agree only while the result fits
- *     [tested: make twins; commit=WORKTREE]
+ *     [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c]
  *   - C_MOD is MeTTa's %, which is Prolog's mod and takes the divisor's sign,
  *     where C's % takes the dividend's: (% -7 3) is 2 and -7 % 3 is -1
  *     [source: engine/metta/operators.pl:154, R is A mod B;
@@ -27,11 +27,11 @@
  *     truncates, so a body divides doubles [source: engine/metta/operators.pl,
  *     '/'/3 and metta_saturating_recover/4;
  *     commit=8d651070dedaa190e25cc388c029172a63e967be] [tested: make check;
- *     commit=WORKTREE]
+ *     commit=4fe77404069bc1a630ecc9e7860856a1117a200c]
  *   - C_MIN and C_MAX are SWI's min and max on operands that are neither NaN
  *     nor zeros of opposite sign, where SWI answers NaN and prefers -0.0 for
  *     min [source: swipl-devel V10.1.14 src/pl-arith.c, ar_min and ar_max]
- *     [tested: make check; commit=WORKTREE]
+ *     [tested: make check; commit=4fe77404069bc1a630ecc9e7860856a1117a200c]
  */
 #ifndef EXAMPLES_LOWERING_H
 #define EXAMPLES_LOWERING_H

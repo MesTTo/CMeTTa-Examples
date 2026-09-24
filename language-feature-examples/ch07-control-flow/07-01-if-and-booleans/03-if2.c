@@ -2,7 +2,7 @@
  *   mt_kind_of asks in C, and the arm C picks from its own answer is the
  *   engine's answer.
  * Guarantees: the original's claim holds [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

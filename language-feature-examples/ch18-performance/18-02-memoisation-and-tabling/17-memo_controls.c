@@ -13,7 +13,7 @@
  *   library reports them, and a strategy that is one of the engine's
  *   MemoStrategy words.
  * Guarantees: all twenty-one claims of the original hold, with each report
- *   compared whole [tested: make twins; commit=WORKTREE].
+ *   compared whole [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

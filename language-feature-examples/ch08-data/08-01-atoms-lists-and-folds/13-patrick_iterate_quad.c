@@ -2,7 +2,7 @@
  *   the lower triangle of 1000 rows, adding t*i at each cell; C walks the
  *   same triangle with two nested loops, and the engine's sum must be C's.
  * Guarantees: the original's claim holds [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

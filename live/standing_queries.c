@@ -3,7 +3,7 @@
  *   inside mt_transaction() commits and delivers one, a removal delivers one,
  *   and after unsubscribing nothing is delivered.
  * Guarantees: one add and one remove are seen, in that order [tested: make
- *   check; commit=WORKTREE].
+ *   check; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

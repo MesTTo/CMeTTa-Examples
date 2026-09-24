@@ -8,7 +8,7 @@
  *   answers the read, and C decides the answer by asking the file system
  *   itself.
  * Guarantees: all three claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

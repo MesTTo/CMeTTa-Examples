@@ -39,7 +39,7 @@ Assumes: `make all` has built every twin and build/tools/original; the engine
 tree holds examples/ and, for the scope rule, extensions/python/examples.
 Guarantees: exits nonzero on any finding and prints each with its twin's path;
 writes build/twins.json with every verdict [tested: make check;
-commit=WORKTREE].
+commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
 Fails when: an original's answers depend on wall-clock order across threads;
 its space digest then differs run to run and the twin must declare it.
 """

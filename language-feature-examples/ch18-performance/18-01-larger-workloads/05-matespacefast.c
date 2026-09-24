@@ -12,9 +12,9 @@
  *   instructions against 1.38 trillion counting in the engine, where the
  *   original runs 1.19 trillion [measured 2026-09-24: perf stat -e
  *   instructions:u, one run of each, the lane report included, the walk
- *   being mt_each over mt_eval of the demo; commit=WORKTREE].
+ *   being mt_each over mt_eval of the demo; commit=c2f866159d87e0a713120e3515454f6e44ce2ded].
  * Guarantees: the original's claim holds [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

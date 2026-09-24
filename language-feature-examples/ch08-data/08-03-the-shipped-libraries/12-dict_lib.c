@@ -6,7 +6,7 @@
  *   answer must be what the C map says: a size, a membership, a value or the
  *   default, a pattern query's keys, the pairs sorted with mt_order.
  * Guarantees: all twenty-five claims of the original hold [tested: make
- *   twins; commit=WORKTREE].
+ *   twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

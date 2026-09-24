@@ -5,7 +5,7 @@
  *   silence a `!` form, is an equation whose body answers nothing.
  * Guarantees: the two chains become (transitive sim som sam) and
  *   (transitive tim tom tam), sorted in the engine's order [tested: make
- *   twins; commit=WORKTREE].
+ *   twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

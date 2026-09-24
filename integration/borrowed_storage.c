@@ -3,7 +3,7 @@
  *   runs exactly once, when the last reference to the atom goes.
  * Owns resources: the storage block, released by its callback.
  * Guarantees: the storage outlives every reference and is released once
- *   [tested: make check; commit=WORKTREE].
+ *   [tested: make check; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

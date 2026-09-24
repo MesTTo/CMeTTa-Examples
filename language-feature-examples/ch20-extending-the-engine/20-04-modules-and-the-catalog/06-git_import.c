@@ -5,7 +5,7 @@
  *   an ordinary library from then on, and its function answers what C's
  *   model of the fixture's one equation computes, three times its argument.
  * Guarantees: the original's claim holds [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

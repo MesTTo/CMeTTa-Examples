@@ -4,7 +4,7 @@
  *   under three patterns, sorted with qsort in the engine's own order, gives
  *   back exactly the four facts. answer is a C constant.
  * Guarantees: the three matches hold the four facts and nothing else, and
- *   (answer) is 42 [tested: make twins; commit=WORKTREE].
+ *   (answer) is 42 [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

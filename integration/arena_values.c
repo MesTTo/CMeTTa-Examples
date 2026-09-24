@@ -6,7 +6,7 @@
  * Owns resources: the arena's blocks, freed together at the end.
  * Guarantees: an arena-built atom crosses the engine, a kept reference holds
  *   it, and dropping the last reference releases every block [tested: make
- *   check; commit=WORKTREE].
+ *   check; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

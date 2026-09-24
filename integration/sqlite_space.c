@@ -6,7 +6,7 @@
  *   the provider is withdrawn.
  * Owns resources: the provider owns the SQLite connection.
  * Guarantees: each of those behaviours is checked against the SQL state
- *   [tested: make check; commit=WORKTREE].
+ *   [tested: make check; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "support/sqlite_store.h"

@@ -8,7 +8,7 @@
  *   each lazy match walking the atoms present when it was called and each
  *   answer running the rest of the program before the next.
  * Guarantees: the original's claim holds [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

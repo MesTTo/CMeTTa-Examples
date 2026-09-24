@@ -6,7 +6,7 @@
  *   with its own arithmetic, keeps each held one as the term it built, and
  *   runs wu2's and wu3's bodies as C functions.
  * Guarantees: all five claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

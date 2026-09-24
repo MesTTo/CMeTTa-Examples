@@ -4,7 +4,7 @@
  *   takes C function values made with mt_function(): C functions are atoms
  *   the equation applies like any other.
  * Guarantees: (mp 1 1) is 2, (plus1times2 1) is 4, and composing the C
- *   values times2 and add1 gives 4 too [tested: make twins; commit=WORKTREE].
+ *   values times2 and add1 gives 4 too [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

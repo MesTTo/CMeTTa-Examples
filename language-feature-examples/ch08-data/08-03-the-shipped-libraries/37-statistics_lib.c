@@ -10,7 +10,7 @@
  *   degrees of freedom, and the like. The two recipe claims read the
  *   variance's equation back out of the space with mt_match and apply it.
  * Guarantees: all seventy-eight claims of the original hold [tested: make
- *   twins; commit=WORKTREE].
+ *   twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define _XOPEN_SOURCE 700
 #define MT_SHORTHAND

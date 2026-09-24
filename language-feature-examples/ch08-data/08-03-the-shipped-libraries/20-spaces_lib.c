@@ -9,7 +9,7 @@
  *   answering once per atom it touched, and C compares the engine's collapsed
  *   answers with the model's.
  * Guarantees: all twenty-seven claims of the original hold [tested: make
- *   twins; commit=WORKTREE].
+ *   twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

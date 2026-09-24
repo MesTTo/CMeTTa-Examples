@@ -6,7 +6,7 @@
  *   A published function answers at once, so there is no runnable to wait
  *   for as the original's import has.
  * Guarantees: the original's guarded claim holds [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

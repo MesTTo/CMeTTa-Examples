@@ -7,7 +7,7 @@
  *   provider and its report live in conformance_report.h, which
  *   16-the_prolog_rung shares.
  * Guarantees: both claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

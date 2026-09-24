@@ -24,7 +24,7 @@
  * Assumes: the includer includes common.h first.
  * Guarantees: the count each driver leaves is the number of answers the
  *   original's final match gives over every branch [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  * Owns resources: a term_space owns its strings, its array and its index;
  *   term_space_free() releases them.
  */

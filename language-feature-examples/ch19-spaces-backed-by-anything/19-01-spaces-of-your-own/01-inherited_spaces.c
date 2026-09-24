@@ -8,7 +8,7 @@
  *   the engine's (new-space &family-child (inherits &family-parent)), built
  *   as a term, the model C names through the language's own door.
  * Guarantees: all six claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

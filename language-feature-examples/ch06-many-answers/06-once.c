@@ -4,7 +4,7 @@
  *   From C, mt_first is once: it keeps the first answer of a lazy cursor
  *   and leaves the rest uncomputed.
  * Guarantees: the original's claim holds, and mt_first commits as once
- *   does [tested: make twins; commit=WORKTREE].
+ *   does [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

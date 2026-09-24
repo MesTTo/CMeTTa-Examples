@@ -13,7 +13,7 @@
  * Assumes: GMP, found through pkg-config; the rounding and the root come
  *   from exact_oracle.h, which 35-math_lib shares.
  * Guarantees: all forty-three claims of the original hold [tested: make
- *   twins; commit=WORKTREE].
+ *   twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

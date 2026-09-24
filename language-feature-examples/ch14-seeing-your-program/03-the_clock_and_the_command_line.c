@@ -5,7 +5,7 @@
  *   text. Reading an argument past the end answers nothing, and C, holding
  *   argc of at least one, knows argument 0 is there.
  * Guarantees: all fifteen claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define _XOPEN_SOURCE 700
 #define MT_SHORTHAND

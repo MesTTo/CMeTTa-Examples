@@ -2,7 +2,7 @@
  *   and returns 0; a later success leaves the record standing until
  *   mt_clear(); an empty answer is no failure at all; a false assertion is an
  *   engine error that carries the engine's remedy and its authority.
- * Guarantees: each of those four holds [tested: make check; commit=WORKTREE].
+ * Guarantees: each of those four holds [tested: make check; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

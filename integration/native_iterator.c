@@ -4,7 +4,7 @@
  *   whether the stream ran out or was abandoned.
  * Owns resources: each producer's state, released by close().
  * Guarantees: 0 1 2 then MT_DONE, and close runs once on exhaustion and once
- *   on abandonment [tested: make check; commit=WORKTREE].
+ *   on abandonment [tested: make check; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

@@ -6,7 +6,7 @@
  *   division by zero. if-error asks whether a value is an error, and
  *   return-on-error answers an error itself and anything else's next form.
  * Guarantees: all eight claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

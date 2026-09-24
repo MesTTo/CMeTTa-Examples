@@ -16,7 +16,7 @@
  *   temporary directory, which the last claims delete; C closes its FILE*s
  *   and removes the scratch directory it makes itself.
  * Guarantees: all ninety claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

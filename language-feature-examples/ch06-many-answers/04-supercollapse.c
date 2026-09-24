@@ -3,7 +3,7 @@
  *   concatenating a one-member expression onto the rest; the nine members C
  *   expects are a loop.
  * Guarantees: the original's claim holds [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

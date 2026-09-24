@@ -6,7 +6,7 @@
  *   from C tokens. The original's claim counts the (num $1) atoms; C counts
  *   them by walking the match's cursor, and must find the K it built.
  * Guarantees: the original's claim holds, and the demo answers done as the
- *   original's does [tested: make twins; commit=WORKTREE].
+ *   original's does [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

@@ -8,7 +8,7 @@
  *   the engine cannot resolve to one stored relation is refused rather than
  *   tabled without the guarantee, and C compares the refusal's structure.
  * Guarantees: all six claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

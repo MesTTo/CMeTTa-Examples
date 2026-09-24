@@ -8,7 +8,7 @@
  * Guarantees: every verdict of the original holds, a surplus bracket is a
  *   refusal rather than incomplete, and mt_parse(), the reader sread is,
  *   agrees on every text that parses and refuses the other two
- *   [tested: make twins; commit=WORKTREE].
+ *   [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

@@ -8,7 +8,7 @@
  *   compares the two atoms the engine handed it, and where it allows a
  *   float's error, C measures the distance with fabs.
  * Guarantees: all forty-two claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

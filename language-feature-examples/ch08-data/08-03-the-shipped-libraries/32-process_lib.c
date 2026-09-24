@@ -9,7 +9,7 @@
  *   The engine's own children belong to this process too, so C never waits
  *   on or signals one of them, and signal names are a table C holds.
  * Guarantees: all twenty-four claims of the original hold [tested: make
- *   twins; commit=WORKTREE].
+ *   twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

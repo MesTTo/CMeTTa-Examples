@@ -4,7 +4,7 @@
  *   mt_at(e, 0) and the tail a view over the rest, and decides the bound
  *   binders' cases with mt_unify; the engine's answers must match C's.
  * Guarantees: all ten claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

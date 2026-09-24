@@ -10,7 +10,7 @@
  *   would recurse a million C frames deep for poly, so the C side is its own
  *   loop and the engine's answers must be that loop's.
  * Guarantees: all four claims of the original hold [tested: make twins;
- *   commit=WORKTREE].
+ *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"

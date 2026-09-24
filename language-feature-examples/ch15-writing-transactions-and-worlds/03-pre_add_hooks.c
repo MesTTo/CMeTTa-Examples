@@ -9,7 +9,7 @@
  *   write carrying the rule's own words. A second claimant is refused with
  *   both judges named, and releasing the claim makes the door direct again.
  * Guarantees: all seven claims of the original hold, with its six
- *   unasserted forms checked as well [tested: make twins; commit=WORKTREE].
+ *   unasserted forms checked as well [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
 #define MT_SHORTHAND
 #include "common.h"
