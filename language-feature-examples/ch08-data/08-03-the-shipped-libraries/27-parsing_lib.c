@@ -11,6 +11,8 @@
  *   engine with mt_def as well, and the grammar-valued sum, field and row are
  *   equations C builds and adds. Input is a token array: the text's
  *   codepoints for grammar-parse, and any atoms for a prepared parser.
+ * text: lib_parsing's subject is text a grammar reads, so the inputs C hands
+ *   it, "(1+2)" among them, are arithmetic text, never MeTTa forms.
  * Assumes: libutf8proc, for splitting text into codepoints and for letter?.
  * Guarantees: all seventy-four claims of the original hold [tested: make
  *   twins; commit=WORKTREE].

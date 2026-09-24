@@ -64,6 +64,13 @@ CASES = {
     require("define", mt_do(m, "(= (f $x) (* $x $x))"));
     check_int("(f 1)", mt_one_int(mt_eval(m, E("f", 1))), 1);""",
                     "runs MeTTa source through mt_do"),
+    # A note is a comment field; the same word inside a sentence declares
+    # nothing, so this twin's source door is still reported.
+    "source-text-in-prose": (IDENTITY, """
+    /* The definition, which is text: here it runs through mt_do. */
+    require("define", mt_do(m, "(= (f $x) (* $x $x))"));
+    check_int("(f 1)", mt_one_int(mt_eval(m, E("f", 1))), 1);""",
+                             "runs MeTTa source through mt_do"),
     "false-claim": (IDENTITY, """
     require("lower", mt_lower(m, (f $x), (* $x $x)));
     check_int("(f 1)", mt_one_int(mt_eval(m, E("f", 1))), 2);""",

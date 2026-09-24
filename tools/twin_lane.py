@@ -268,21 +268,44 @@ def c_tokens(source: str):
             index += 1
 
 
+# A comment field: the comment's opening or a line's asterisk, one space, a
+# label and a colon, as an obligation header writes Purpose and Guarantees; a
+# line indented further continues the field before it.
+FIELD = re.compile(r"^(?:/\*|\*) (\S[^:]*):(?: (.*))?$")
+NOTE = re.compile(r"text|engine-free|Divergence ([0-9a-f]{16})")
+
+
 def notes(source: str) -> dict[str, str]:
-    """The lane notes a twin writes in its comments: `text:`, `engine-free:`
-    and `Divergence <digest>:`, each followed by its reason."""
+    """The lane notes a twin writes as fields of its comments: `text:`,
+    `engine-free:` and `Divergence <digest>:`, each with the reason that runs
+    to the next field. The same words inside a sentence are prose: `reads it
+    as text: a String` declares nothing. A divergence answers its digest, and
+    its reason under `divergence-why`."""
     found: dict[str, str] = {}
+
+    def keep(label: str | None, reason: list[str]) -> None:
+        hit = NOTE.fullmatch(label or "")
+        if not hit:
+            return
+        why = " ".join(" ".join(reason).split())
+        if hit.group(1):
+            found["divergence"], found["divergence-why"] = hit.group(1), why
+        else:
+            found[label] = why
+
     for kind, text in c_tokens(source):
         if kind != "comment":
             continue
-        body = " ".join(line.strip(" */") for line in text.splitlines())
-        for key in ("text", "engine-free"):
-            hit = re.search(rf"\b{key}: (.+)", body)
-            if hit:
-                found[key] = hit.group(1).strip()
-        hit = re.search(r"\bDivergence ([0-9a-f]{16}):", body)
-        if hit:
-            found["divergence"] = hit.group(1)
+        label, reason = None, []
+        for raw in text.removesuffix("*/").splitlines():
+            line = raw.strip()
+            field = FIELD.match(line)
+            if field:
+                keep(label, reason)
+                label, reason = field.group(1), [field.group(2) or ""]
+            else:
+                reason.append(line.lstrip("/*").strip())
+        keep(label, reason)
     return found
 
 

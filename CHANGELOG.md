@@ -4,6 +4,17 @@
 
 ## Unreleased
 
+- Read a twin's lane notes as comment fields. The lane took `text:`
+  anywhere in a comment as a note, so prose such as "reads it as text: a
+  String" exempted six twins from the source rule, and each reason ran on
+  into the next field. A note is now written as an obligation header writes
+  a field: the comment's opening or a line's asterisk, one space, the label
+  and a colon, with its reason running to the next field. One twin relied on
+  the accident: the parsing twin hands lib_parsing arithmetic text such as
+  `"(1+2)"`, and it now declares that subject in a `text:` field of its own.
+  The self-test plants a twin whose comment says "text:" in a sentence and
+  runs source through `mt_do`, which the old reading let through.
+
 - Write chapter 22's search twins in C. The tile puzzle's twenty-four move
   equations are one geometry C writes. Its breadth-first search is C's over
   the same geometry, and it dequeues the start twice, because
