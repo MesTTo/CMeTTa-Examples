@@ -6,14 +6,16 @@ Open Obligations: the open issues in ERRORS.md. -->
 
 The corpus at `4fe7740` was verified from a clean copy: a worktree of this
 repository checked out at that commit with every untracked and ignored file
-removed, so every program was built from nothing. Later commits change only
-ERRORS.md, CHANGELOG.md, this record and its receipts. It ran against the
-MeTTa checkout's committed tree, superproject `8bda9d552`, in a battery of
-that checkout carrying no other uncommitted edit, with `extensions/cmetta` at
-`e73dfea`, the seat's install fix, which the superproject pins in place of
-`cf925da` once gate-perf has landed. The host was the patched SWI-Prolog
-10.1.14 at `/home/user/Dev/swipl-patched`, compiled Sep 24 2026 at 09:57:51,
-with GCC 15.2.0, CMake 4.2.3 and Python 3.14.4.
+removed, so every program was built from nothing. Later commits change no
+program: they touch ERRORS.md, CHANGELOG.md and this record with its receipts,
+and `f9418e6` replaces each evidence tag's `WORKTREE` placeholder with the
+commit that supplied it, in comments and in INDEX.md's copy of one. It ran
+against the MeTTa checkout's committed tree, superproject `8bda9d552`, in a
+battery of that checkout carrying no other uncommitted edit, with
+`extensions/cmetta` at `e73dfea`, the seat's install fix, which the
+superproject pins in place of `cf925da` once gate-perf has landed. The host
+was the patched SWI-Prolog 10.1.14 at `/home/user/Dev/swipl-patched`, compiled
+Sep 24 2026 at 09:57:51, with GCC 15.2.0, CMake 4.2.3 and Python 3.14.4.
 
 ## Commands
 
