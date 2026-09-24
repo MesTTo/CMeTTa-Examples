@@ -4,6 +4,12 @@
 
 ## Unreleased
 
+- Write chapter 11's Python twins in C: the same py-call terms, built as
+  atoms, with each answer Python gives held against C's own value (M_PI,
+  toupper, llabs, C loops for numpy's aranges and torch's elementwise
+  operations, relu and sigmoid). bind! names a value for the reader, which C
+  does not use, so a C variable holds each Python callable instead.
+
 - Write chapter 10's error twins in C, where an error is a value as a C
   result is: C computes each sum and division it can and an error for the
   rest, and models if-error, return-on-error and throw, which wraps a reason
