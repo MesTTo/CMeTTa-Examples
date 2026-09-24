@@ -88,6 +88,11 @@ prose. No twin needs the distinction yet.
 | A compound literal passed to `mt_array` | One argument; the preprocessor split it at its commas | `mt_array` takes the array as its variadic part |
 | `memoize energy` before its equation | True; memoize refuses a name that has no equation yet | Add the equation first, as the original's file loads its equations before its commands |
 | Chapter 20's claim audit | `20-07` states nineteen claims, not twenty-one, and `20-04/04-import_error_surface` had no twin | Counted from the original's top-level asserts; the twin written |
+| Chapter 5's backward-arithmetic twin, on a reviewer's reread | `#div` and `#mod` as C's `/` and `%`; those truncate toward zero and CLP(FD)'s floor, so the two disagree whenever the operands' signs differ | The table's column holds `floor_div` and `lowering.h`'s `floor_mod` |
+| Chapter 8's segments twin, on the same reread | Four slots enough for the answers; nothing bounded the array, so a row with more separators would write past it | The array is sized by the row's length |
+| `mt_alpha_eq(held, E(...))` in eight embedding examples | A comparison and nothing more; `mt_alpha_eq` borrows both arguments, so each expectation built in place was never released | `common.h`'s `alpha_equal` borrows the held atom and takes the expectation |
+| Chapter 22's soft twin | One atom per argument of its `SCORE` macro; the macro named each argument twice, so `mt_keep` kept a second atom built only to leak, 154 blocks | A function, which evaluates each argument once |
+| An answer printed (chapter 8), a space reference handed to a helper (chapter 17), a report's child kept (chapter 18) | Released by the call that used them; each call borrowed, and nothing dropped the owner | Each owner is named and dropped; `done()` now fails any program that leaves a block cmetta allocated |
 
 ## Before the rewrite: the generated corpus
 
