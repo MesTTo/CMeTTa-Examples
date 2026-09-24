@@ -4,18 +4,16 @@ Open Obligations: the open issues in ERRORS.md. -->
 
 # Verification
 
-The corpus at `4fe7740` was verified from a clean copy: a worktree of this
+The corpus at `d4affe3` was verified from a clean copy: a worktree of this
 repository checked out at that commit with every untracked and ignored file
 removed, so every program was built from nothing. Later commits change no
-program: they touch ERRORS.md, CHANGELOG.md and this record with its receipts,
-and `f9418e6` replaces each evidence tag's `WORKTREE` placeholder with the
-commit that supplied it, in comments and in INDEX.md's copy of one. It ran
-against the MeTTa checkout's committed tree, superproject `8bda9d552`, in a
-battery of that checkout carrying no other uncommitted edit, with
-`extensions/cmetta` at `e73dfea`, the seat's install fix, which the
-superproject pins in place of `cf925da` once gate-perf has landed. The host
-was the patched SWI-Prolog 10.1.14 at `/home/user/Dev/swipl-patched`, compiled
-Sep 24 2026 at 09:57:51, with GCC 15.2.0, CMake 4.2.3 and Python 3.14.4.
+program: they touch ERRORS.md, CHANGELOG.md and this record with its receipts.
+It ran against the MeTTa checkout's committed tree, superproject `f9c56dbba`,
+which carries the verdict rename of `5bae989df` and the renamed originals at
+examples `84aab62`, and pins `extensions/cmetta` at `8211c57`, in a battery of
+that checkout carrying no uncommitted edit. The host was the patched
+SWI-Prolog 10.1.14 at `/home/user/Dev/swipl-patched`, compiled Sep 24 2026 at
+09:57:51, with GCC 15.2.0, CMake 4.2.3 and Python 3.14.4.
 
 ## Commands
 
@@ -43,7 +41,7 @@ through `tools/run.py`, then the twin lane, the lane's self-test and
 
 | Step | Result |
 | --- | --- |
-| C seat gate | seven lanes ok: `c-binding` (166 public declarations, all defined; 1243 checks, 0 failures), `stranger-c`, `c-sanitize`, `c-bench`, `c-install`, `llms`, and `evidence` (0 unbacked evidence tags in 9674 claims) |
+| C seat gate | seven lanes ok: `c-binding` (166 public declarations, all defined; 1243 checks, 0 failures), `stranger-c`, `c-sanitize`, `c-bench`, `c-install`, `llms`, and `evidence` (0 unbacked evidence tags in 9703 claims) |
 | `make surface` | the C seat's library built from the engine checkout |
 | `make all` | 379 compile and link commands under `-std=c11 -Wall -Wextra -Wpedantic -Werror`, every one of the 374 programs among them |
 | embedding programs | 51/51 passed |
@@ -62,11 +60,12 @@ Beside the gate, three checks over the repository at that commit:
   `text:` note says why it handles MeTTa text, except `tools/original.c`,
   which loads each original and so reads text by definition, and
   `common.c`'s `"(null)"`, printf's spelling of a null string.
-- `git grep` for `check_program` and for `const char *const program[]`
-  finds nothing. The two `program[]` arrays in chapter 22's matespace twins
-  hold atoms built with `E`, not text.
-- `git grep -i` for `generate.py`, `corpus.json` and `auto-generated` finds
-  only history: one line of CHANGELOG.md and four of ERRORS.md.
+- `git grep` over the C sources for `check_program` and for
+  `const char *const program[]` finds nothing. The two `program[]` arrays in
+  chapter 22's matespace twins hold atoms built with `E`, not text.
+- Neither `tools/generate.py` nor `corpus.json` is tracked, and `git grep -i`
+  over the C sources, the Makefile and `tools/` for `generate.py`,
+  `corpus.json` and `auto-generated` finds nothing.
 
 The receipts are [verification/results.json](verification/results.json),
 each embedding program's exit and log;
@@ -76,28 +75,30 @@ C seat gate's whole output.
 
 ## Limits of the result
 
-This is the third run of the verification. The first, at `f7fad19`, failed two
-steps. `make check-consumers` failed because `lane.c` called POSIX `strdup`
-where the consumers compile plain C11, fixed in `2c09a57`. And one twin,
-chapter 20's `13-reference_loading`, died with SIGSEGV while closing its
-engine: SWI's halt raced the loader thread its `background` policy had
-started, the host defect ERRORS.md keeps open. Any program whose engine
-creates a thread just before it closes can fail that way under the parallel
-lane until the live host carries the fix, which is in the native build
-`swipl-patched.5`, due after gate-perf lands. The second run, at `2c09a57`,
-passed every step, and then `git clean -fdx` could not empty its build
-directory: cmetta's `make install` had copied the lib submodule's `.git` into
-the consumers' prefix, making it a nested repository. The seat's `f76b44e`
-keeps version-control metadata out of the install, and this run is against it,
-`extensions/cmetta` at its provenance pin `e73dfea` ahead of the
-superproject's pin.
-
-The shared MeTTa checkout has an uncommitted rename of the judges' verdicts
-to `(Accept)`, `(Refuse W)`, `(Drop)` and `Defer`. Against that live tree
-five twins fail: chapter 9's `16-typing_rules`, chapter 15's
-`03-pre_add_hooks`, `04-admission_pools` and `05-post_add_hooks`, and
-chapter 20's `07-translatorrule_refusal`. They spell every verdict through
-`verdicts.h` and move with it when the rename lands.
+Five runs led here. The first, at `f7fad19`, failed two steps: `make
+check-consumers`, because `lane.c` called POSIX `strdup` where the consumers
+compile plain C11, fixed in `2c09a57`; and chapter 20's `13-reference_loading`
+twin, which died with SIGSEGV while closing its engine when SWI's halt raced
+the loader thread its `background` policy had started. That race is the host
+defect ERRORS.md keeps open: any program whose engine creates a thread just
+before it closes can fail that way under the parallel lane until the live host
+carries the fix, which is in the native build `swipl-patched.5`, due after
+gate-perf lands. The second run, at `2c09a57`, passed every step, and then
+`git clean -fdx` could not empty its build directory, because cmetta's `make
+install` had copied the lib submodule's `.git` into the consumers' prefix; the
+seat's `f76b44e` keeps version-control metadata out of the install. The third,
+at `4fe7740` against superproject `8bda9d552`, passed every step before the
+verdict rename landed. The fourth, the first against the rename, on
+superproject `bc058ca6e` with the seat's link fix carried uncommitted, held
+the five twins that answer a verdict, chapter 9's `16-typing_rules`, chapter
+15's `03-pre_add_hooks`, `04-admission_pools` and `05-post_add_hooks`, and
+chapter 20's `07-translatorrule_refusal`, to their renamed originals through
+`verdicts.h`'s capitalized constructors, and lost `13-reference_loading` to
+the same race as the first run, after the twin had printed its space report
+(core 1509400, `PL_cleanup` in `cleanupFunctors` this time); that twin's lane
+then agreed ten times of ten run alone on the same engine, 5/5 claims each. So
+two of five full runs under `JOBS=4` have lost that twin. This fifth, on the
+tree the superproject pins, passed every step.
 
 `c-bench` declined its three boot comparisons in this configuration, since
 the battery's checkout path is longer than the canonical shape its baseline

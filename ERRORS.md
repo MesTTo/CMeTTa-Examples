@@ -39,9 +39,10 @@ which had moved c-bench's cursor-step row past its band; `9d72d61` decodes
 true and false by length and a fixed-size compare; `12432c3` re-pins the boot
 row's governed QLF inventory from 28 artifacts to 26; `697eff4` adds
 `make runtime-halt-created-thread`, the reproduction of the host defect
-below; and `f76b44e` keeps version-control metadata out of `make install`,
+below; `f76b44e` keeps version-control metadata out of `make install`,
 which had copied lib's `.git` into the corpus consumers' prefix, a nested
-repository `git clean -fdx` would not remove.
+repository `git clean -fdx` would not remove; and `8211c57` links
+README.md's repository files by URL.
 
 ## Reported to the shared engine
 
@@ -74,7 +75,9 @@ program exited 0. The final verification's first run caught it in chapter
 20's `13-reference_loading` twin, whose `background` load policy starts a
 loader thread; the core shows that thread in `start_thread`, `callProlog`
 and `resolveProcedure` while `mt_close`'s `PL_cleanup` is in
-`unallocModule`. `done()` and the originals' runner flush stdout before they
+`unallocModule`. The fourth run, the first against the verdict rename,
+caught the same twin the same way, `PL_cleanup` in `cleanupFunctors` this
+time (core 1509400), so two of four full runs under `JOBS=4` lost it. `done()` and the originals' runner flush stdout before they
 close the engine, so a crash there still hands the lane every claim and the
 space report. It is the host's defect, and it needs nothing from this
 corpus: the fix, a `PL_THREAD_CREATED` case in `exitPrologThreads()`, is in
@@ -105,6 +108,7 @@ prose. No twin needs the distinction yet.
 | `mt_alpha_eq(held, E(...))` in eight embedding examples | A comparison and nothing more; `mt_alpha_eq` borrows both arguments, so each expectation built in place was never released | `common.h`'s `alpha_equal` borrows the held atom and takes the expectation |
 | Chapter 22's soft twin | One atom per argument of its `SCORE` macro; the macro named each argument twice, so `mt_keep` kept a second atom built only to leak, 154 blocks | A function, which evaluates each argument once |
 | `make check-consumers`, first run in the final verification | The installed consumers to build as before; `lane.c` had copied the op names with `strdup` since the lane's first commit, which is POSIX, and the consumers compile the helpers as plain C11, so both failed with an implicit declaration. The target had not been run since that commit | `lane.c` copies through its own text builder, as `head_key` does |
+| The site's docs lane on superproject `3627fd08f` | README.md's links to be followed wherever it is read; the site publishes it from `website/extensions/cmetta/index.md` one directory deeper, where the relative links `vocabularies.h` and `settings.h`, which I added with those headers (`4d9802e`, `4798190`), were dead pages, and `llms.txt` a 404 VitePress does not flag, `.txt` being on its asset list | cmetta `8211c57` writes all three as GitHub URLs, as the `cmetta.h` link beside them always was, and `make docs` refuses a relative link in README.md |
 | An answer printed (chapter 8), a space reference handed to a helper (chapter 17), a report's child kept (chapter 18) | Released by the call that used them; each call borrowed, and nothing dropped the owner | Each owner is named and dropped; `done()` now fails any program that leaves a block cmetta allocated |
 
 ## Before the rewrite: the generated corpus

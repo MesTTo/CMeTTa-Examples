@@ -4,6 +4,18 @@
 
 ## Unreleased
 
+- VERIFICATION.md records the corpus verified against the verdict rename:
+  `d4affe3` from a clean copy on superproject `f9c56dbba` as pinned, the
+  C seat at `8211c57`, where every step passes, 323/323 twins and 3885/3885
+  claims among them, with the receipts replaced by that run's. The repository
+  checks now search what they are about: the program-text grep reads the C
+  sources, and the generator check asks git whether `tools/generate.py` or
+  `corpus.json` is tracked and greps the sources, the Makefile and `tools/`,
+  so neither matches the prose describing it. ERRORS.md records the halt
+  race taking chapter 20's `13-reference_loading` a second time, in the
+  fourth run, and the README links I wrote relative in the C seat, which its
+  site page could not follow, now URLs in cmetta `8211c57`.
+
 - Answer the judges' verdicts as the engine's capitalized constructors,
   `(Accept)`, `(Accept <atom>)`, `(Refuse <words>)` and `(Drop)`, which the
   engine reads since superproject `5bae989df`: a lowercase `(drop)` is a
