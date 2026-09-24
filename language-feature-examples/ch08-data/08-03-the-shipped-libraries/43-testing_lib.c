@@ -98,29 +98,6 @@ static bool a_length(const mt_atom *x)
     return fine;
 }
 
-/* from less take, as a bag: walking from in order, an atom keeps its place
-   unless take still holds an equal one to cancel it, equal meaning the
-   standard order's identity, 1 and 1.0 distinct; subtraction-atom's counted
-   subtraction [source: engine/metta/input_guards.pl, subtract_counted/3;
-   commit=2803a3ecf877ad410ab19a9168e09096eb50ef5a]. Time: n*m comparisons,
-   n and m the two lengths. */
-static mt_atom *bag_minus(const mt_atom *from, const mt_atom *take)
-{
-    size_t n = mt_len(from), m = mt_len(take), kept = 0;
-    bool *spent = calloc(m + 1, sizeof *spent);
-    mt_atom **left = malloc((n + 1) * sizeof *left);
-    require("room for a bag", spent && left);
-    for (size_t i = 0; i < n; i++) {
-        size_t j = 0;
-        while (j < m && (spent[j] || mt_compare(mt_at(from, i), mt_at(take, j)) != 0)) j++;
-        if (j < m) spent[j] = true;
-        else left[kept++] = mt_keep(mt_at(from, i));
-    }
-    mt_atom *out = mt_exprv(kept, left);
-    free(spent), free(left);
-    return out;
-}
-
 /* assertEqualToResult's verdict: nothing missing and nothing in excess. */
 static bool same_bag(const mt_atom *actual, const mt_atom *expected)
 {

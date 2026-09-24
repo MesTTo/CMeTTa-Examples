@@ -1,6 +1,6 @@
 /* Purpose: the claim checks every example states its results through, the
- *   report its last line hands the twin lane, and the metatype MeTTa names an
- *   atom's kind by.
+ *   report its last line hands the twin lane, and the two MeTTa readings the
+ *   twins share: the metatype an atom's kind has, and a bag difference.
  * Assumes: one runtime per process, opened by open_engine() and closed by
  *   done(); claims may be checked from attached worker threads.
  * Guarantees:
@@ -71,6 +71,16 @@ void check_value(const char *claim, mt_answers *answers, mt_atom *value);
    True, "s", &self, (), 1.5]. A symbol the engine resolves to a built-in
    operation, such as +, is Grounded to the engine and a symbol to C. */
 const char *metatype(const mt_atom *atom);
+
+/* from less take, as a bag: walking from in order, an atom keeps its place
+   unless take still holds an identical one to cancel it, identity being the
+   standard order's, so 1 and 1.0 are distinct. This is the counted
+   subtraction subtraction-atom makes, from which assertEqualToResult's
+   verdict and a failed assertion's missing and excess bags are built
+   [source: engine/metta/input_guards.pl, subtract_counted/3;
+   commit=2803a3ecf877ad410ab19a9168e09096eb50ef5a]. Borrows both; the
+   answer is owned. Time: n*m comparisons, n and m the two lengths. */
+mt_atom *bag_minus(const mt_atom *from, const mt_atom *take);
 
 /* A status the program needs before it can go on: a door that must succeed.
    Not a claim, and never counted as one. */

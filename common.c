@@ -36,6 +36,23 @@ static void fail(const char *claim, const char *detail, ...)
 
 static void proved(void) { atomic_fetch_add(&claims, 1); }
 
+mt_atom *bag_minus(const mt_atom *from, const mt_atom *take)
+{
+    size_t n = mt_len(from), m = mt_len(take), kept = 0;
+    bool *spent = calloc(m + 1, sizeof *spent);
+    mt_atom **left = malloc((n + 1) * sizeof *left);
+    require("room for a bag", spent && left);
+    for (size_t i = 0; i < n; i++) {
+        size_t j = 0;
+        while (j < m && (spent[j] || mt_compare(mt_at(from, i), mt_at(take, j)) != 0)) j++;
+        if (j < m) spent[j] = true;
+        else left[kept++] = mt_keep(mt_at(from, i));
+    }
+    mt_atom *out = mt_exprv(kept, left);
+    free(spent), free(left);
+    return out;
+}
+
 const char *metatype(const mt_atom *atom)
 {
     switch (mt_kind_of(atom)) {
