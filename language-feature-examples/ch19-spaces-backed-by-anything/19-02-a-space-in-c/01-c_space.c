@@ -1,8 +1,8 @@
 /* Purpose: a space whose atoms live in C. The original puts four multifile
  *   clauses on the foreign-space seam in cstore.pl and keeps the atoms in
- *   cstore.c as text; in C the store is a C array behind cmetta's own
- *   provider door, mt_provider_open, holding each atom it is given under a
- *   pthread mutex and answering each match with a snapshot of the array, so
+ *   cstore.c as text; in C the store is c_store.h's C array behind cmetta's
+ *   own provider door, mt_provider_open, holding each atom it is given under
+ *   a pthread mutex and answering each match with a snapshot of the array, so
  *   the engine keeps unification for itself and filters what C enumerates.
  *   remove-atom drains every unifying atom through the provider's
  *   one-occurrence remove. The seam's proof harness is held to the report C
@@ -14,121 +14,9 @@
  */
 #define MT_SHORTHAND
 #include "common.h"
-#include <pthread.h>
+#include "c_store.h"
 
-typedef struct store {
-    pthread_mutex_t lock;
-    mt_atom **atoms;
-    size_t n, cap;
-} store;
-
-static store cstore = { .lock = PTHREAD_MUTEX_INITIALIZER };
-
-static mt_status add(void *user, const mt_atom *atom)
-{
-    store *s = user;
-    pthread_mutex_lock(&s->lock);
-    if (s->n == s->cap) {
-        size_t cap = s->cap ? 2 * s->cap : 8;
-        mt_atom **grown = realloc(s->atoms, cap * sizeof *grown);
-        if (!grown) {
-            pthread_mutex_unlock(&s->lock);
-            return mt_error_set(MT_NOMEM, "the C store has no room");
-        }
-        s->atoms = grown;
-        s->cap = cap;
-    }
-    s->atoms[s->n++] = mt_keep(atom);
-    pthread_mutex_unlock(&s->lock);
-    return MT_OK;
-}
-
-/* One occurrence, which is the seam's contract; remove-atom above it drains. */
-static mt_status remove_one(void *user, const mt_atom *atom, bool *removed)
-{
-    store *s = user;
-    *removed = false;
-    pthread_mutex_lock(&s->lock);
-    for (size_t i = 0; i < s->n && !*removed; i++)
-        if (mt_eq(s->atoms[i], atom)) {
-            mt_drop(s->atoms[i]);
-            s->atoms[i] = s->atoms[--s->n];
-            *removed = true;
-        }
-    pthread_mutex_unlock(&s->lock);
-    return MT_OK;
-}
-
-/* A snapshot, so a writer during the walk changes the next match and not
-   this one. */
-typedef struct snapshot {
-    mt_atom **atoms;
-    size_t n, next;
-} snapshot;
-
-static mt_status step(void *state, mt_atom **answer)
-{
-    snapshot *s = state;
-    if (s->next == s->n) return MT_DONE;
-    *answer = s->atoms[s->next];
-    s->atoms[s->next++] = NULL;
-    return MT_ROW;
-}
-
-static void close_snapshot(void *state)
-{
-    snapshot *s = state;
-    for (size_t i = s->next; i < s->n; i++) mt_drop(s->atoms[i]);
-    free(s->atoms);
-    free(s);
-}
-
-static mt_status match(void *user, const mt_atom *pattern, size_t limit, mt_iterator *answers)
-{
-    store *s = user;
-    (void)pattern;
-    (void)limit;
-    snapshot *snap = calloc(1, sizeof *snap);
-    if (!snap) return mt_error_set(MT_NOMEM, "the C store has no room for a snapshot");
-    pthread_mutex_lock(&s->lock);
-    snap->atoms = malloc((s->n ? s->n : 1) * sizeof *snap->atoms);
-    if (snap->atoms)
-        for (size_t i = 0; i < s->n; i++) snap->atoms[snap->n++] = mt_keep(s->atoms[i]);
-    pthread_mutex_unlock(&s->lock);
-    if (!snap->atoms) {
-        free(snap);
-        return mt_error_set(MT_NOMEM, "the C store has no room for a snapshot");
-    }
-    *answers = (mt_iterator){ snap, step, close_snapshot };
-    return MT_OK;
-}
-
-static mt_status clear(void *user)
-{
-    store *s = user;
-    pthread_mutex_lock(&s->lock);
-    while (s->n) mt_drop(s->atoms[--s->n]);
-    pthread_mutex_unlock(&s->lock);
-    return MT_OK;
-}
-
-/* What closing the provider hands back: every atom the store still holds. */
-static void release(void *user)
-{
-    store *s = user;
-    clear(s);
-    free(s->atoms);
-    s->atoms = NULL;
-    s->cap = 0;
-}
-
-static size_t held(void)
-{
-    pthread_mutex_lock(&cstore.lock);
-    size_t n = cstore.n;
-    pthread_mutex_unlock(&cstore.lock);
-    return n;
-}
+static c_store cstore = C_STORE_INIT;
 
 /* The harness's report for this provider: a declared line per capability C
    supplied, in the order the harness reads them, then its behavioural lines
@@ -180,8 +68,7 @@ int main(void)
     for (size_t i = 0; i < sizeof libraries / sizeof *libraries; i++)
         require(libraries[i], mt_one_truth(mt_eval(m, E("import!", "&self", E("library", libraries[i])))));
     require("the store backs &cstore",
-            mt_provider_open(m, "&cstore", (mt_provider){ .user = &cstore, .add = add, .remove = remove_one,
-                                                        .match = match, .clear = clear, .release = release }));
+            mt_provider_open(m, "&cstore", c_store_provider(&cstore, false)));
     mt_space *space = mt_space_open(m, "&cstore");
     require("a handle on &cstore", space != NULL);
 
@@ -199,7 +86,7 @@ int main(void)
     check_answers("and draining again is idempotent", mt_eval(m, E("remove-atom", mt_spaceref("&cstore"), E("dup", 1))), B(true));
 
     check_answers("the seam's harness proves the provider", mt_eval(m, E("check-space-provider", mt_spaceref("&cstore"))),
-                  expected_report(held()));
+                  expected_report(c_store_held(&cstore)));
 
     enum { WRITERS = 4 };
     writer writers[WRITERS];

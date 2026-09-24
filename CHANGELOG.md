@@ -4,6 +4,14 @@
 
 ## Unreleased
 
+- Give chapter 7's exponential fib and chapter 19's C store one header each.
+  The same `FIB` body was written out in chapter 7's and chapter 18's twins,
+  and chapter 20 needs it twice more, once as the atom a definition adds for
+  itself. `fib.h`, beside `fibsmart.h`, holds its C function, its lowering
+  and its atom. Chapter 19's C space kept its store inline. `c_store.h`
+  holds it now, and chapter 20's foreign-rules twin opens the same store
+  promising rules.
+
 - Spell the refusal once for every judge. `verdicts.h` moves from chapter
   15 to the corpus root, because the engine reads `(refuse <words>)` in
   three places: a write hook's verdict, a typing rule's outcome and a
