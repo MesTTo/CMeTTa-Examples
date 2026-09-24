@@ -24,13 +24,13 @@ Every MeTTa original the Python seat twins has a C twin at the same path or an `
 | `ch17-concurrency-and-the-loop` | 13 | 12 | 12 | 0 | 0 |
 | `ch18-performance` | 24 | 20 | 20 | 0 | 0 |
 | `ch19-spaces-backed-by-anything` | 10 | 10 | 10 | 0 | 0 |
-| `ch20-extending-the-engine` | 52 | 38 | 0 | 0 | 0 |
+| `ch20-extending-the-engine` | 52 | 38 | 38 | 0 | 0 |
 | `ch22-a-reasoner-you-can-serve` | 33 | 27 | 0 | 0 | 0 |
-| **all** | 366 | 323 | 258 | 0 | 0 |
+| **all** | 366 | 323 | 296 | 0 | 0 |
 
 ## Residue
 
-65 originals the Python seat twins have neither a C twin nor a residue entry yet.
+27 originals the Python seat twins have neither a C twin nor a residue entry yet.
 
 
 ## The Python seat's own examples

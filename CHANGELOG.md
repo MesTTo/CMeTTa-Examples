@@ -4,6 +4,25 @@
 
 ## Unreleased
 
+- Write chapter 20's thirty-eight twins in C. The translator-rule twins keep
+  the engine's cost fold and orientation rule in `costs.h`, so C decides
+  which way each bidirectional rule turns a call. The MeTTa-in-MeTTa twins
+  model the instruction set in C. `unify-mod` is C's matcher over cmetta's
+  `mt_unify`, with `(:= x)` equality and `...` segments. `mm-switch` is C's
+  walk over its cases, and the Turing machine runs on a C tape. The four
+  control forms are one table in `control_forms.h`, lib_he's math is
+  `math.h` row by row, and lib_strategy's typed schemes read C's
+  declarations. The Prolog twins use cmetta's new doors. The foreign-rules
+  space is chapter 19's C store promising rules through `mt_provider.rules`.
+  The git fixture registers through `mt_register_prolog`. `mt_library`
+  answers for `register_metta_library_path`, and C keeps its own model of
+  the Prolog clause database. The module twins import fixtures named from
+  the engine tree, and two reference twins declare that path spelling as
+  their stored rows' one difference. The reader-token twin classifies
+  tokens with POSIX regular expressions and reads text through `mt_parse`,
+  since reading text is its subject. These twins need extensions/cmetta
+  468f449.
+
 - Give chapter 7's exponential fib and chapter 19's C store one header each.
   The same `FIB` body was written out in chapter 7's and chapter 18's twins,
   and chapter 20 needs it twice more, once as the atom a definition adds for
