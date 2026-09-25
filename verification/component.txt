@@ -3,8 +3,9 @@
 === c-binding [GATE] ===
 surface: 166 declarations, all defined
 docs: every mt_ name in README.md and llms.txt is in a header
+docs: every soname README.md and llms.txt name is libcmetta.so.2
 docs: every link in README.md resolves on the site as it does here
-version: 1.0.0, and mt_version() agrees
+version: 2.0.0, and mt_version() agrees
 hardening: GNU_RELRO and BIND_NOW on both shared libraries
 ERROR: [Thread main] MeTTa assertion failed: (assertEqual 1 2)
 ERROR: [Thread main]   missing: (2)
@@ -15,16 +16,16 @@ ERROR: [Thread main]   excess: (1)
 1249 checks, 0 failures
 bad boot exception barrier ok
 apostrophe boot path ok
-qlf boot: 7873 predicates, identical from source and from .qlf
+qlf boot: 7883 predicates, identical from source and from .qlf
 qlf boot regimes ok
 transactional eager growth ok
 % [1/4] cmetta_cursor_lif..stroys_after_unlock ...... passed (0.002 sec)
 % [2/4] cmetta_cursor_lif..stroys_after_unlock ...... passed (0.000 sec)
 % [3/4] cmetta_cursor_lif..stroys_after_unlock ...... passed (0.000 sec)
 % [4/4] cmetta_cursor_lif.._ownership_transfer ...... passed (0.000 sec)
-closed cursors 2000: registry bytes 0, records 0, atoms 15146 (initial 0/0/15146)
-closed cursors 10000: registry bytes 0, records 0, atoms 15146 (initial 0/0/15146)
-closed cursors 20000: registry bytes 0, records 0, atoms 15146 (initial 0/0/15146)
+closed cursors 2000: registry bytes 0, records 0, atoms 15156 (initial 0/0/15156)
+closed cursors 10000: registry bytes 0, records 0, atoms 15156 (initial 0/0/15156)
+closed cursors 20000: registry bytes 0, records 0, atoms 15156 (initial 0/0/15156)
 cursor ids 32008 then 32009; 40805 concurrent vs 63605 sequential open inferences
 cursor restart ids 34410 then 1 remain generation-safe
 runtime predicate restart ok
@@ -109,9 +110,9 @@ transactional eager growth ok
 % [2/4] cmetta_cursor_lif..stroys_after_unlock ...... passed (0.000 sec)
 % [3/4] cmetta_cursor_lif..stroys_after_unlock ...... passed (0.000 sec)
 % [4/4] cmetta_cursor_lif.._ownership_transfer ...... passed (0.000 sec)
-closed cursors 2000: registry bytes 0, records 0, atoms 15146 (initial 0/0/15146)
-closed cursors 10000: registry bytes 0, records 0, atoms 15146 (initial 0/0/15146)
-closed cursors 20000: registry bytes 0, records 0, atoms 15146 (initial 0/0/15146)
+closed cursors 2000: registry bytes 0, records 0, atoms 15156 (initial 0/0/15156)
+closed cursors 10000: registry bytes 0, records 0, atoms 15156 (initial 0/0/15156)
+closed cursors 20000: registry bytes 0, records 0, atoms 15156 (initial 0/0/15156)
 cursor ids 32008 then 32009; 40805 concurrent vs 63605 sequential open inferences
 cursor restart ids 34410 then 1 remain generation-safe
 runtime predicate restart ok
@@ -137,23 +138,24 @@ NOT MEASURED IN THIS CONFIGURATION boot: inferences not compared; checkout lengt
 NOT MEASURED IN THIS CONFIGURATION boot: instructions not compared; checkout length 65, depth 9; canonical length 29, depth 5; Non-monotonic atom/predicate inventory sensitivity; no fixed inference slope per component. At length29 and depths2,3,4,5,6,7, engine boot reads 296185,296185,296185,296185,296185,296185 and C boot reads 456391,456394,456395,456391,456397,456396, three identical processes per point. Instrumented engine boots make88 absolute_file_name/3 calls at every measured depth; calls times a constant do not explain the C series. At the canonical shape, interning0,1,2,3,5,8,16 fresh atoms before engine boot reads 296185,296185,296185,296158,296185,296185,296185. Instruction counts also depend on path length as recorded by the earlier controls. See the 2026-09-09 boot location section of docs/journal/2026-09-09-runtime-units-compile-beside-their-source.md.
 NOT MEASURED IN THIS CONFIGURATION boot: estimated cycles not compared; checkout length 65, depth 9; canonical length 29, depth 5; Non-monotonic atom/predicate inventory sensitivity; no fixed inference slope per component. At length29 and depths2,3,4,5,6,7, engine boot reads 296185,296185,296185,296185,296185,296185 and C boot reads 456391,456394,456395,456391,456397,456396, three identical processes per point. Instrumented engine boots make88 absolute_file_name/3 calls at every measured depth; calls times a constant do not explain the C series. At the canonical shape, interning0,1,2,3,5,8,16 fresh atoms before engine boot reads 296185,296185,296185,296158,296185,296185,296185. Instruction counts also depend on path length as recorded by the earlier controls. See the 2026-09-09 boot location section of docs/journal/2026-09-09-runtime-units-compile-beside-their-source.md.
 3 comparison(s) declined for the reasons above; every runtime row's comparisons ran
-error-ball: error-ball instruction regression: minimum of [171182241, 171119035, 171149412] is 171119035, baseline 170412819 plus 0.3% is 170924057
+error-ball: error-ball instruction regression: minimum of [171435251, 171504262, 171493414] is 171435251, baseline 170412819 plus 0.3% is 170924057
 note: these seats load into the measured process and differ from HEAD, so they may be what moved a row rather than this seat: mork (extensions/mork/extension.pl), node (extensions/node/bridge.pl), python (extensions/python/extension.pl)
 1 case(s) outside the band
 boot fixture: 26 governed QLF artifacts after the boot's purge and ordinary warmup
-boot: instructions=[1626466962, 1626476876, 1626476313] estimated_cycles=[2457332307, 2457313585, 2457403892] cpu=[0.12535, 0.13085, 0.13897] inferences=[598135, 598135, 598135] NOT MEASURED IN THIS CONFIGURATION
-cursor-step: instructions=[371881271, 371877931, 371876561] estimated_cycles=[636051301, 635718098, 636845792] cpu=[0.02557, 0.02498, 0.02369] inferences=[240006, 240006, 240006]
-term-in: instructions=[438243931, 438349157, 438280061] estimated_cycles=[674847910, 675078764, 674106886] cpu=[0.02175, 0.02664, 0.02392] inferences=[522009, 522009, 522009]
-term-out: instructions=[324297312, 324345118, 324366079] estimated_cycles=[1073806831, 1074349393, 1074461370] cpu=[0.01676, 0.01766, 0.01799] inferences=[156005, 156005, 156005]
-space-pair: instructions=[322005929, 322351387, 322235310] estimated_cycles=[541467313, 537858282, 541930475] cpu=[0.03519, 0.03571, 0.03764] inferences=[200041, 200041, 200041]
-error-ball: instructions=[171182241, 171119035, 171149412] estimated_cycles=[272961566, 273213704, 272959087] cpu=[0.01659, 0.01708, 0.01608] inferences=[67413, 67413, 67413] OUTSIDE BAND
+boot: instructions=[1626715379, 1626705623, 1626706567] estimated_cycles=[2456898856, 2456977503, 2456980145] cpu=[0.10636, 0.10816, 0.10596] inferences=[598326, 598326, 598326] NOT MEASURED IN THIS CONFIGURATION
+cursor-step: instructions=[371905179, 371907448, 371904194] estimated_cycles=[633283479, 637126847, 632905941] cpu=[0.02283, 0.02251, 0.02223] inferences=[240006, 240006, 240006]
+term-in: instructions=[438261527, 438088363, 438166208] estimated_cycles=[674016312, 674032867, 674505873] cpu=[0.02052, 0.0205, 0.02031] inferences=[522009, 522009, 522009]
+term-out: instructions=[324398700, 324419036, 324469643] estimated_cycles=[1074159860, 1073364976, 1073100970] cpu=[0.01644, 0.01574, 0.01546] inferences=[156005, 156005, 156005]
+space-pair: instructions=[324839398, 324686311, 324642367] estimated_cycles=[544620350, 538050786, 537782978] cpu=[0.03312, 0.03086, 0.03326] inferences=[200041, 200041, 200041]
+error-ball: instructions=[171435251, 171504262, 171493414] estimated_cycles=[273550582, 273543393, 273497744] cpu=[0.01528, 0.01579, 0.01559] inferences=[67413, 67413, 67413] OUTSIDE BAND
 --> c-install [GATE]
 
 === c-install [GATE] ===
-version: 1.0.0, and mt_version() agrees
-installed cmetta 1.0.0 under extensions/cmetta/build/install-check
+version: 2.0.0, and mt_version() agrees
+installed cmetta 2.0.0 under extensions/cmetta/build/install-check
 install-check: the install carries no version-control metadata
- 0x0000000000000001 (NEEDED)             Shared library: [libcmetta.so.1]
+install-check: the installed header and cmetta.pc name 2.0.0
+ 0x0000000000000001 (NEEDED)             Shared library: [libcmetta.so.2]
 install-check: a consumer outside this checkout booted the installed engine
 install-check: archive consumer booted the installed engine
 --> llms [GATE]
@@ -163,23 +165,24 @@ install-check: archive consumer booted the installed engine
 llms: 5 cheat sheet(s) read against 325 live engine names; 229 of 257 callable names are corpus-used and 229 are covered, 0 finding(s)
 
 === evidence [GATE] ===
-0 unbacked evidence tag(s) in 9939 claims, against 18288 known test names in 1471 files a runner executes; 1667 tag(s) and pin(s) held to the stamp rule on lines written since 2026-09-24T23:27:42+10:00, in 422 file(s); 313 legacy commit=WORKTREE placeholder(s), which stay until their evidence is re-run; door contracts read through doorgen
+0 unbacked evidence tag(s) in 10050 claims, against 18393 known test names in 1477 files a runner executes; 2013 tag(s) and pin(s) held to the stamp rule on lines written since 2026-09-24T23:27:42+10:00, in 466 file(s); 313 legacy commit=WORKTREE placeholder(s), which stay until their evidence is re-run; door contracts read through doorgen
 
 ================ summary ================
-GATE   c-binding    ok           20s
-GATE   stranger-c   ok            0s
-GATE   c-sanitize   ok           19s
-GATE   c-bench      FAIL         12s
-GATE   c-install    ok            6s
-GATE   llms         ok            5s
-GATE   evidence     ok           44s
+GATE   c-binding    ok           12s
+GATE   stranger-c   ok            1s
+GATE   c-sanitize   ok           15s
+GATE   c-bench      FAIL         11s
+GATE   c-install    ok            4s
+GATE   llms         ok            4s
+GATE   evidence     ok           35s
 
-ran for 112s; the lanes that cost it:
-     44s  evidence
-     20s  c-binding
-     19s  c-sanitize
-     12s  c-bench
-      6s  c-install
-      5s  llms
+ran for 86s; the lanes that cost it:
+     35s  evidence
+     15s  c-sanitize
+     12s  c-binding
+     11s  c-bench
+      4s  c-install
+      4s  llms
+      1s  stranger-c
 
 GATE FAILED: c-bench

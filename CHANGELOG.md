@@ -712,6 +712,11 @@
   and permission notice of PeTTa, whose programs the twins translate and
   one fixture copies.
 
+- VERIFICATION.md records this release verified from a clean copy of `2c714d7`
+  against cmetta 2.0.0 on superproject `dc0c1e91f`, every part a run
+  determines written by `make verification` from that run's own gate output,
+  make output and receipts.
+
 ## Initial corpus
 
 - Add 362 asserted C programs in the eight Python example directories: 311

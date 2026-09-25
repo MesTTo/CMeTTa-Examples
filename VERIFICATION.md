@@ -5,29 +5,14 @@ Open Obligations: the open issues in ERRORS.md. -->
 # Verification
 
 <!-- identity:begin -->
-The corpus at `b094c80`, the head of branch `idiomatic-twins-no-text`, was
-verified from a clean copy of its tree: a worktree of this repository checked
-out at that commit with every untracked and ignored file removed, so every
-program and every translation unit was built from nothing. The branch stacks
-two commits on `65da89f`, which follows 31-system_lib's family claim: `a821e6f`
-builds every twin's equations as atoms, where 72 twins handed `mt_do` MeTTa
-text through `mt_lower`, and `b094c80` makes the twin lane read each
-program's translation unit for doors that read MeTTa source; the commit
-recording this run changes only this file, its receipts and CHANGELOG.md. It
-ran against the MeTTa checkout's committed tree, superproject `3a6b92b40`,
-whose library is lib `49315f8` and whose originals are examples `a35f577`,
-pinning `extensions/cmetta` at `bd75ca8`, with one engine change applied on
-top, `8cc5659d0` (`partial/3` to `partial/11` in `engine/metta/control.pl`,
-the effect walk's reading of a partial closure, and the plunit suite
-`closure_values.plt`, tracked in that tree's index as it is once the change
-lands). Without that change 05-lambda's claim "maplist applies a lambda
-around a C function value" fails on this superproject, on this branch and on
-`main` alike, with `apply:maplist/3: Unknown procedure: partial/4`: since
-`64169238b` a lambda holding a C function value is a partial value, which
-Prolog's `maplist/3` called as `partial/4`. It ran on the host and toolchain
-below, which `tools/verification.py` reads from the run's own `swipl`, its
-declaration of the host patches it was built with, and the compilers' own
-version lines:
+The corpus at `2c714d7` was verified from a checkout holding that commit's
+files and nothing else, every program and translation unit built by the run.
+It ran against the MeTTa checkout at superproject `dc0c1e91f` with no tracked
+change, whose library is lib `05aa50b` and whose originals are examples
+`1e42d9b`, pinning `extensions/cmetta` at `1f0d06a`, cmetta 2.0.0. It ran on
+the host and toolchain below, which `tools/verification.py` reads from the
+run's own `swipl`, its declaration of the host patches it was built with, and
+the compilers' own version lines:
 <!-- identity:end -->
 
 <!-- host:begin -->
@@ -81,14 +66,15 @@ translation unit, and each receipt holds the count its tool printed.
 <!-- results:begin -->
 | Step | Result |
 | --- | --- |
-| C seat gate | six lanes ok: `c-binding` (166 public declarations, all defined; 1249 checks, 0 failures), `stranger-c`, `c-sanitize`, `c-install`, `llms`, and `evidence` (0 unbacked evidence tags in 9939 claims); `c-bench` fails one runtime row, `error-ball`, whose fewest instructions of three runs, 171,119,035, exceed its baseline's 170,412,819 plus 0.3%, and it fails the same on `3a6b92b40` without the engine change (171,156,432 at 2026-09-25T19:38:08+10:00), with its 67,413 inferences unmoved either way |
-| `make surface` | the C seat's library built from the engine checkout |
+| C seat gate | `c-binding` ok (surface: 166 declarations, all defined; 1249 checks, 0 failures), `stranger-c` ok, `c-sanitize` ok, `c-bench` FAIL (error-ball instruction regression: minimum of [171435251, 171504262, 171493414] is 171435251, baseline 170412819 plus 0.3% is 170924057; 3 comparison(s) declined; checkout length 65, depth 9; canonical length 29, depth 5), `c-install` ok, `llms` ok (5 cheat sheet(s) read against 325 live engine names; 229 of 257 callable names are corpus-used and 229 are covered, 0 finding(s)), `evidence` ok (0 unbacked evidence tag(s) in 10050 claims) |
+| `make surface` | the C seat's library built from the engine tree by its `build.sh` |
 | `make all` | 758 commands under `-std=c11 -Wall -Wextra -Wpedantic -Werror`: 379 compile and link commands, every one of the 374 programs among them, and 379 translation units |
-| embedding programs | 51/51 passed |
-| twin lane | 323/323 twins agree with their originals; 3891/3891 claims proved; stored content carried 50, declared 2, equal 271; no finding of the source rule |
+| embedding programs | 51/51 examples passed |
+| twin lane | 323/323 twins agree with their originals; 3891/3891 claims proved; stored content carried 50, declared 2, equal 271; no findings of the source rule |
 | lane self-test | 26/26 planted cases judged as expected |
-| index | INDEX.md, COVERAGE.md and README.md agree with the files |
-| `make check-consumers` | both Make consumers print `OK` (2 claims each), the archive links no `libcmetta.so`, CTest passes 1/1 with `METTA_PATH` unset, and the installed prefix holds no `.git*` entry |
+| index | index, coverage and README verified |
+| record self-test | 38/38 planted cases judged as expected |
+| `make check-consumers` | `shared` prints `OK` (2 claims); `archive` prints `OK` (2 claims); the archive links no `libcmetta.so`; CTest with `METTA_PATH` unset: 100% tests passed, 0 tests failed out of 1; the installed prefix holds no `.git*` entry |
 <!-- results:end -->
 
 Every program ran under `done()`'s ownership check, so none left a block
