@@ -75,8 +75,22 @@ build/support/sqlite_store.o: support/sqlite_store.c
 	@mkdir -p $(@D)
 	$(CC) $(DEPFLAGS) $(CPPFLAGS) $(SQLITE_CFLAGS) $(CFLAGS) -c $< -o $@
 
+# Every program's translation unit as the compiler sees it, macros expanded,
+# written with the flags that compile the program: a program's unit is reached
+# only as its prerequisite, so it inherits the program's PACKAGES and
+# CPPFLAGS. The twin lane reads the units for the doors that hand the engine
+# MeTTa source, which a macro can spell where the source never names one
+# (mt_lower expands to mt_do); common.c and lane.c are linked into every
+# program and the support files into some, so theirs are read too.
+SHARED_UNITS := $(patsubst %.c,build/%.i,$(wildcard support/*.c checks/*.c) common.c lane.c)
+$(PROGRAMS): build/%: build/%.i
+build/support/sqlite_store.i: CPPFLAGS += $(SQLITE_CFLAGS)
+build/%.i: %.c
+	@mkdir -p $(@D)
+	$(CC) -E $(DEPFLAGS) $(CPPFLAGS) $(PACKAGE_CFLAGS) $(CFLAGS) $< -o $@
+
 .PHONY: all check twins list check-helpers check-consumers index surface clean
-all: $(PROGRAMS) build/tools/original
+all: $(PROGRAMS) $(SHARED_UNITS) build/tools/original
 
 surface:
 	ENGINE_PATH=$(CMETTA_ENGINE) sh $(CMETTA_DIR)/build.sh

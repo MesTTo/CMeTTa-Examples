@@ -20,10 +20,15 @@ what the two answer:
            exceptions
   engine   a twin reaches the engine (20 inferences or more) unless it says
            why not with an `engine-free:` note
-  source   no program runs MeTTa source text: no mt_run, mt_do, mt_load,
-           mt_parse, mt_parsen or mt_forms, and no string literal shaped like
-           a MeTTa form, unless its subject is reading or running text and it
-           says so with a `text:` note; this binds the embedding examples too
+  source   no program hands the engine MeTTa source text to read, unless its
+           subject is reading or running text and the file holding the text
+           says so with a `text:` note: no cmetta door that reads source or
+           runs a file, read off the program's translation unit after macro
+           expansion, so a macro such as mt_lower that stringifies tokens into
+           mt_do is seen where it expands, headers included; no engine head
+           that reads a string as MeTTa applied to anything; and no string
+           literal shaped like a MeTTa form; this binds the embedding examples
+           too
   scope    every original the Python seat twins has a C twin or an untwinned
            residue entry, and no twin mirrors an original that is not there
 
@@ -35,13 +40,17 @@ door a twin chose rather than whether it drifted; the lane reports both counts
 and gates only the floor [source: extensions/python/tools/twin_coverage.py,
 compare/_visible/_stored/_price; commit=7d995f762ba535440834d6edd071679f672fdca9].
 
-Assumes: `make all` has built every twin and build/tools/original; the engine
-tree holds examples/ and, for the scope rule, extensions/python/examples.
+Assumes: `make all` has built every twin, its translation unit beside it as
+build/<path>.i, and build/tools/original; the engine tree holds examples/ and,
+for the scope rule, extensions/python/examples.
 Guarantees: exits nonzero on any finding and prints each with its twin's path;
 writes build/twins.json with every verdict [tested: make check;
 commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
 Fails when: an original's answers depend on wall-clock order across threads;
-its space digest then differs run to run and the twin must declare it.
+its space digest then differs run to run and the twin must declare it. The
+source rule cannot follow text through the file system: a text atom built with
+T() and written to a file the engine then reads is text the rule does not see,
+since T()'s strings are exempt as data.
 """
 
 from __future__ import annotations
@@ -84,32 +93,39 @@ ASSERT_HEADS = frozenset({
 #: runs at 5; ch03-atoms-and-expressions/02-string.c at 84]. 20 sits between.
 ENGINE_FLOOR = 20
 
-#: The doors that take MeTTa source text.
-SOURCE_DOORS = ("mt_run", "mt_do", "mt_load", "mt_parse", "mt_parsen", "mt_forms",
-                "mt_self_run", "mt_space_run", "mt_self_do", "mt_space_do",
-                "mt_self_load", "mt_space_load")
+#: The engine heads that read a string argument as MeTTa source: parse and
+#: sread [source: engine/metta/terms.pl:97-98 and engine/parser.pl:882-883;
+#: commit=2ffb3fb391b1b99c9e81a37c94497e6aa036c6bb], parse-command [source:
+#: engine/metta/runtime.pl:276-279; commit=2ffb3fb391b1b99c9e81a37c94497e6aa036c6bb],
+#: and lib_observe's trace-source and observe-source, which take a program as
+#: text [source: lib/lib_observe/lib_observe.pl:35-38 and :55;
+#: commit=b61be90db3bb04313503fb2090406432379dec46].
+READER_HEADS = frozenset({"parse", "sread", "parse-command", "trace-source", "observe-source"})
 
 #: A string literal shaped like MeTTa source: a parenthesised form, a bang
 #: form, or a $variable.
 FORM_LITERAL = re.compile(r'^\s*!?\(.*\)\s*$|\$[A-Za-z_]', re.S)
 
 #: Calls whose string arguments are text or a label, never structure.
-def claim_helpers(header: Path) -> frozenset[str]:
+def claim_helpers(*sources: Path) -> frozenset[str]:
     """The corpus's claim helpers, whose first argument is a claim's words:
-    every function and macro common.h declares with `claim` or `what` as its
-    first parameter. Read rather than listed, so a helper added there is text
-    here too; the list this replaced had missed check_answers_ and
-    check_list_, the array forms behind check_answers and check_list."""
-    source = header.read_text(encoding="utf-8")
-    functions = re.findall(r"^\s*\w+\s+(\w+)\s*\(\s*const char \*(?:claim|what)\b", source, re.M)
-    macros = re.findall(r"^#define\s+(\w+)\(\s*(?:claim|what)\b", source, re.M)
-    return frozenset(functions + macros)
+    every function and macro common.h declares, and common.c defines, with
+    `claim` or `what` as its first parameter, common.c's static fail among
+    them. Read rather than listed, so a helper added there is text here too;
+    the list this replaced had missed check_answers_ and check_list_, the
+    array forms behind check_answers and check_list."""
+    found: list[str] = []
+    for path in sources:
+        source = path.read_text(encoding="utf-8")
+        found += re.findall(r"^\s*(?:\w+\s+)+\**(\w+)\s*\(\s*const char \*(?:claim|what)\b", source, re.M)
+        found += re.findall(r"^#define\s+(\w+)\(\s*(?:claim|what)\b", source, re.M)
+    return frozenset(found)
 
 
 TEXT_CALLS = frozenset({
     "mt_text", "mt_textn", "T", "printf", "fprintf", "puts", "fputs", "snprintf",
     "strcmp", "strncmp", "strstr", "mt_fail", "mt_error_set", "perror",
-}) | claim_helpers(ROOT / "common.h")
+}) | claim_helpers(ROOT / "common.h", ROOT / "common.c")
 
 
 # ---------------------------------------------------------------- the original
@@ -310,18 +326,15 @@ def notes(source: str) -> dict[str, str]:
 
 
 def scan(source: str, allowed_text: bool) -> list[str]:
-    """Source discipline: which MeTTa-source doors and form-shaped literals
-    the twin uses, with the call each literal sits in."""
+    """The literal half of the source rule: each form-shaped string the file
+    writes, with the call it sits in, outside the calls whose strings are text
+    or a claim's words."""
     findings = []
     calls: list[str] = []          # the callee of each open parenthesis
     previous = ""
     for kind, text in c_tokens(source):
         if kind == "ident":
             previous = text
-            if text in SOURCE_DOORS and not allowed_text:
-                findings.append(f"runs MeTTa source through {text}; a twin "
-                                "builds terms, unless its original is about "
-                                "text and it says so with a `text:` note")
             continue
         if kind == "punct":
             if text == "(":
@@ -332,10 +345,108 @@ def scan(source: str, allowed_text: bool) -> list[str]:
             continue
         if kind == "string":
             callee = calls[-1] if calls else ""
-            if (FORM_LITERAL.search(text) and callee not in TEXT_CALLS
-                    and callee != "mt_lower" and not allowed_text):
+            if FORM_LITERAL.search(text) and callee not in TEXT_CALLS and not allowed_text:
                 findings.append(f"the string \"{text[:60]}\" in {callee or 'a '
                                 'declaration'} is shaped like MeTTa source")
+    return findings
+
+
+_DOORS: dict[Path, frozenset[str]] = {}
+
+
+def text_doors(header: Path) -> frozenset[str]:
+    """cmetta's doors that hand the engine MeTTa source to read, derived from
+    the header the program was compiled against rather than listed: every
+    MT_API function taking a C string named `source` reads it as MeTTa, and
+    every one answering a program's answers from a C string named `path` runs
+    a file's. mt_register_prolog's `source` is an mt_prolog, Prolog rather
+    than MeTTa, and is not one. A door the header adds is a door here with
+    no edit."""
+    if header not in _DOORS:
+        doors = set()
+        for prefix, name, parameters in re.findall(
+                r"MT_API\b([^;{}]*?)\b(mt_\w+)\s*\(((?:[^()]|\([^()]*\))*)\)\s*;",
+                header.read_text(encoding="utf-8")):
+            strings = {m.group(1) for m in re.finditer(r"const char \*\s*(\w+)", parameters)}
+            if "source" in strings or ("path" in strings and "mt_answers" in prefix):
+                doors.add(name)
+        _DOORS[header] = frozenset(doors)
+    return _DOORS[header]
+
+
+#: A GCC line marker: the line number and the file the next line comes from.
+MARKER = re.compile(r'^# (\d+) "((?:[^"\\]|\\.)*)"')
+
+
+def unit_uses(unit: Path) -> dict[str, list[str]]:
+    """The doors and reader heads a program's translation unit hands the
+    engine source through, keyed by the corpus file the preprocessor says
+    each came from: its own file or a header it includes, never cmetta.h or
+    a system header. The unit is what the compiler compiled, so a door a macro
+    spells, mt_lower expanding to mt_do among them, is found on the line that
+    invokes it. Time: one pass over the unit's lines, tokenizing only the few
+    hundred of its several thousand that a corpus file wrote."""
+    lines = unit.read_text(encoding="utf-8", errors="replace").splitlines()
+    headers = [m.group(2) for m in map(MARKER.match, lines) if m and m.group(2).endswith("/cmetta.h")]
+    if not headers:
+        if any(re.search(r"\bmt_\w+\s*\(", line) for line in lines if not line.startswith("#")):
+            raise ValueError(f"{unit} calls cmetta but includes no cmetta.h to derive its doors from")
+        return {}
+    doors = text_doors(Path(headers[0]))
+    found: dict[str, list[str]] = {}
+    here, number, calls = None, 0, []
+    for raw in lines:
+        marker = MARKER.match(raw)
+        if marker:
+            number, name = int(marker.group(1)), marker.group(2)
+            path = (ROOT / name).resolve()
+            here = (str(path.relative_to(ROOT))
+                    if not name.startswith("<") and path.is_relative_to(ROOT) else None)
+            calls = []
+            continue
+        if here is not None:
+            # One finding a line: mt_do expands to a _Generic naming both
+            # the metta and the space door, and the line calls one of them.
+            previous, said, named = "", set(), set()
+            for kind, text in c_tokens(raw):
+                if kind == "ident":
+                    previous = text
+                    if text in doors:
+                        named.add(text)
+                    continue
+                if kind == "punct":
+                    if text == "(":
+                        calls.append(previous)
+                    elif text == ")" and calls:
+                        calls.pop()
+                    previous = ""
+                    continue
+                # The nearest call a name opens: an expansion wraps its
+                # arguments in bare parentheses, check_answers_((claim), ...).
+                callee = next((call for call in reversed(calls) if call), "")
+                if kind == "string" and text in READER_HEADS and callee not in TEXT_CALLS:
+                    said.add(f"line {number}: applies {text}, a head that reads its string as MeTTa")
+            if named:
+                said.add(f"line {number}: hands MeTTa source to {' or '.join(sorted(named))}")
+            if said:
+                found.setdefault(here, []).extend(sorted(said))
+        number += 1
+    return found
+
+
+def unit_findings(unit: Path, subject: Path) -> list[str]:
+    """The source rule's door and reader-head half for one program: each use
+    in a file with no `text:` note, named with that file when it is a header
+    rather than the program itself."""
+    if not unit.exists():
+        return [f"was not preprocessed: {unit} is missing; run make all"]
+    findings = []
+    for path, uses in unit_uses(unit).items():
+        if "text" in notes((ROOT / path).read_text(encoding="utf-8")):
+            continue
+        where = "" if (ROOT / path).resolve() == subject.resolve() else f"{path}: "
+        findings += [f"{where}{use}; a twin builds terms, unless its original is about text "
+                     "and it says so with a `text:` note" for use in uses]
     return findings
 
 
@@ -457,6 +568,7 @@ def check_one(twin: Path, engine: Path, entries: list[dict]) -> Verdict:
     if not binary.exists():
         find(f"was not built: {binary} is missing; run make all")
         return verdict
+    verdict.findings.extend(unit_findings(binary.with_name(binary.name + ".i"), twin))
     left = execute([str(RUNNER), verdict.example], engine)
     # A twin runs where its original runs, the engine tree, as the Python
     # lane runs its twins, so a path an original writes relative to the tree,
@@ -527,10 +639,14 @@ def main() -> int:
 
     scope_findings = []
     if not args.only:
-        # The source rule binds every program, not only the twins.
-        for program in sorted(p for d in HANDWRITTEN for p in (ROOT / d).glob("*.c")):
+        # The source rule binds every program, not only the twins, and the
+        # two files linked into each of them.
+        for program in sorted([p for d in HANDWRITTEN for p in (ROOT / d).glob("*.c")]
+                              + [ROOT / "common.c", ROOT / "lane.c"]):
             source = program.read_text(encoding="utf-8")
-            for finding in scan(source, "text" in notes(source)):
+            unit = BUILD / program.relative_to(ROOT).with_suffix(".i")
+            for finding in (scan(source, "text" in notes(source))
+                            + unit_findings(unit, program)):
                 scope_findings.append(f"{program.relative_to(ROOT)}: {finding}")
         twinned = {v.example for v in verdicts}
         untwinned = {e["example"] for e in entries if e["kind"] == "untwinned"}

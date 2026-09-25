@@ -9,7 +9,7 @@ over the cap.
 
 Assumes: `make all` has built build/common.o, build/lane.o and
 build/tools/original; the engine tree is --engine.
-Guarantees: exits nonzero unless every planted defect is reported, the two
+Guarantees: exits nonzero unless every planted defect is reported, the
 planted good twins are not, derived() reads a clause as the specializer's
 exactly when its own head carries the mark, a real report's equations and
 hashes agree with the atoms it lists, and over the enumeration cap the content
@@ -37,11 +37,14 @@ REPR = "ch03-atoms-and-expressions/04-repr"
 
 PRELUDE = '#define MT_SHORTHAND\n#include "common.h"\n'
 
+#: The equation the IDENTITY cases define, built as an atom.
+DEFINE_F = """
+    require("define", mt_add(m, E("=", E("f", V("x")), E("*", V("x"), V("x")))));"""
+
 #: name -> (original, C body of main after open_engine, the finding expected
 #: or None for a twin the lane must accept)
 CASES = {
-    "good-lowered": (IDENTITY, """
-    require("lower", mt_lower(m, (f $x), (* $x $x)));
+    "good-built": (IDENTITY, DEFINE_F + """
     check_int("(f 1)", mt_one_int(mt_eval(m, E("f", 1))), 1);""", None),
     "good-c-operation": (IDENTITY, """
     require("publish", mt_def(m, (mt_op){ .name = "f", .arity = 1,
@@ -65,22 +68,42 @@ CASES = {
     "source-text": (IDENTITY, """
     require("define", mt_do(m, "(= (f $x) (* $x $x))"));
     check_int("(f 1)", mt_one_int(mt_eval(m, E("f", 1))), 1);""",
-                    "runs MeTTa source through mt_do"),
+                    "hands MeTTa source to mt_self_do"),
     # A note is a comment field; the same word inside a sentence declares
     # nothing, so this twin's source door is still reported.
     "source-text-in-prose": (IDENTITY, """
     /* The definition, which is text: here it runs through mt_do. */
     require("define", mt_do(m, "(= (f $x) (* $x $x))"));
     check_int("(f 1)", mt_one_int(mt_eval(m, E("f", 1))), 1);""",
-                             "runs MeTTa source through mt_do"),
-    # An atom made and never dropped outlives the engine, and done() says so.
-    "leak": (IDENTITY, """
+                             "hands MeTTa source to mt_self_do"),
+    # mt_lower spells no door: it stringifies its tokens into mt_do, which the
+    # program's translation unit shows on the line that calls it.
+    "lowered-tokens": (IDENTITY, """
     require("lower", mt_lower(m, (f $x), (* $x $x)));
+    check_int("(f 1)", mt_one_int(mt_eval(m, E("f", 1))), 1);""",
+                       "hands MeTTa source to mt_self_do"),
+    # A door in a header the twin includes is found in the header.
+    "door-in-header": (IDENTITY, """
+    require("define", define_f(m));
+    check_int("(f 1)", mt_one_int(mt_eval(m, E("f", 1))), 1);""",
+                       "planted.h: line 1: hands MeTTa source to mt_self_do"),
+    # parse is a head that reads its string as MeTTa, so a term the engine
+    # reads out of text is text however the head is spelled.
+    "reader-head": (IDENTITY, DEFINE_F + """
+    check_int("(f 1)", mt_one_int(mt_eval(m, E("f", 1))), 1);
+    check_atom("parse reads a product", mt_one(mt_eval(m, E("parse", T("(* 2 21)")))), E("*", 2, 21));""",
+                    "applies parse, a head that reads its string as MeTTa"),
+    # A twin whose original is about text says so, and reads it.
+    "good-text-noted": (IDENTITY, """
+    /* text: the planted original's subject is reading an equation. */
+    require("define", mt_add(m, mt_parse("(= (f $x) (* $x $x))")));
+    check_int("(f 1)", mt_one_int(mt_eval(m, E("f", 1))), 1);""", None),
+    # An atom made and never dropped outlives the engine, and done() says so.
+    "leak": (IDENTITY, DEFINE_F + """
     mt_atom *kept = E("f", 1);
     check_int("(f 1)", mt_one_int(mt_eval(m, mt_keep(kept))), 1);""",
              "release every atom"),
-    "false-claim": (IDENTITY, """
-    require("lower", mt_lower(m, (f $x), (* $x $x)));
+    "false-claim": (IDENTITY, DEFINE_F + """
     check_int("(f 1)", mt_one_int(mt_eval(m, E("f", 1))), 2);""",
                     "the twin failed"),
     "engine-bypass": (REPR, """
@@ -106,12 +129,11 @@ DERIVED = {
 
 #: A twin holding an equation and a fact, whose report is read for real and
 #: held to the atoms it lists.
-REPORTED = """
-    require("lower", mt_lower(m, (f $x), (* $x $x)));
+REPORTED = DEFINE_F + """
     require("a fact", mt_add(m, E("color", "red")));
     check_int("(f 2)", mt_one_int(mt_eval(m, E("f", 2))), 4);"""
 
-#: The lowered (= (f $x) (* $x $x)) as lane.c writes it, variables renumbered.
+#: The equation (= (f $x) (* $x $x)) as lane.c writes it, variables renumbered.
 SQUARED = "(= (f $_0) (* $_0 $_0))"
 
 #: name -> (the original's equations, the twin's, the C operations the twin
@@ -153,21 +175,33 @@ def multiset_hash(lines: list[str]) -> str:
     return f"{sum(map(fnv1a, lines)) % 2**64:016x}"
 
 
+#: The header the door-in-header case includes: an inline definition that
+#: runs its equation through mt_do on the header's first line.
+PLANTED_H = ('static inline bool define_f(metta *m) { return mt_do(m, "(= (f $x) (* $x $x))"); }\n')
+
+
 def plant(name: str, original: str, body: str, cmetta: Path,
           wrong: list[tuple[str, str]]) -> tuple[Path, Path] | None:
-    """Write and build a twin of ORIGINAL whose main runs BODY; the source and
-    binary, or None with the compiler's complaint added to WRONG."""
+    """Write and build a twin of ORIGINAL whose main runs BODY, and write its
+    translation unit beside the binary as the Makefile does; the source and
+    binary, or None with the compiler's complaint added to WRONG. The
+    door-in-header case also writes planted.h beside the twin."""
     twin = lane.TWINS / f"{original}.c"
     binary = lane.BUILD / "language-feature-examples" / original
     twin.parent.mkdir(parents=True, exist_ok=True)
     binary.parent.mkdir(parents=True, exist_ok=True)
-    twin.write_text(PRELUDE + SQUARE + "int main(void)\n{\n    metta *m = open_engine();"
+    header = twin.parent / "planted.h"
+    header.write_text(PLANTED_H, encoding="utf-8")
+    include = '#include "planted.h"\n' if name == "door-in-header" else ""
+    twin.write_text(PRELUDE + include + SQUARE + "int main(void)\n{\n    metta *m = open_engine();"
                     + body + "\n    return done(m);\n}\n", encoding="utf-8")
-    build = subprocess.run(
-        ["cc", "-std=c11", "-Wall", "-Wno-unused-function", "-I", str(lane.ROOT),
-         "-I", str(cmetta), str(twin), str(lane.ROOT / "build" / "common.o"),
-         str(lane.ROOT / "build" / "lane.o"), f"-L{cmetta}",
-         f"-Wl,-rpath,{cmetta}", "-lcmetta", "-lm", "-o", str(binary)],
+    flags = ["-std=c11", "-I", str(lane.ROOT), "-I", str(cmetta)]
+    unit = subprocess.run(["cc", "-E", *flags, str(twin), "-o", str(binary) + ".i"],
+                          capture_output=True, text=True, check=False)
+    build = unit if unit.returncode else subprocess.run(
+        ["cc", *flags, "-Wall", "-Wno-unused-function", str(twin),
+         str(lane.ROOT / "build" / "common.o"), str(lane.ROOT / "build" / "lane.o"),
+         f"-L{cmetta}", f"-Wl,-rpath,{cmetta}", "-lcmetta", "-lm", "-o", str(binary)],
         capture_output=True, text=True, check=False)
     if build.returncode:
         wrong.append((name, f"did not compile: {build.stderr.strip()[:300]}"))

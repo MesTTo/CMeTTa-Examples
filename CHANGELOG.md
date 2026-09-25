@@ -4,6 +4,22 @@
 
 ## Unreleased
 
+- The twin lane's source rule reads each program's translation unit, which
+  `make all` now writes beside the binary as `build/<path>.i` with the
+  program's own flags, for the doors that hand the engine MeTTa source: every
+  function `cmetta.h` declares with a C string named `source`, or answering a
+  program's answers from a `path`, read off the header the unit includes,
+  and the heads `parse`, `sread`, `parse-command`, `trace-source` and
+  `observe-source`, each attributed to the corpus file the preprocessor
+  names. A door a macro spells is found where it expands, so `mt_lower`'s
+  `mt_do` is a finding and the scan's exemption for it is gone, a header's
+  door is named in the header, and `common.c` and `lane.c`, linked into
+  every program, are read as well; `common.c`'s `fail` joins the claim
+  helpers whose strings are text. Only a file whose `text:` note says why
+  may use one. The self-test plants a twin lowered through `mt_lower`, a
+  door in an included header, a `parse` of a text atom and a declared text
+  twin, 26 cases in all.
+
 - Every twin builds its equations as atoms. The 142 `mt_lower` and
   `mt_lower_raw` calls in 65 twins, in `fib.h` and `fibsmart.h`, which seven
   more twins include, and in `operations/lowering.c` stringified MeTTa tokens

@@ -7,9 +7,11 @@ Every file under [`language-feature-examples/`](language-feature-examples) is a
 [the MeTTa corpus](https://github.com/MesTTo/MeTTa-Examples), written again in C
 on [CMeTTa](https://github.com/MesTTo/CMeTTa)'s surface, at its original's
 path. A twin proves every claim its original makes, and it does so with **no
-MeTTa source text**. Terms are built with cmetta's constructors, a computation
-the host can own is a C function the engine calls, and each claim is a C check
-on what the engine answers. So a pair answers a question prose cannot: given a
+MeTTa source text**, except where the text is what its original is about, as
+[the list below](#where-a-twin-cannot-follow) derived from the twins says.
+Terms are built with cmetta's constructors, a computation the host can own is
+a C function the engine calls, and each claim is a C check on what the engine
+answers. So a pair answers a question prose cannot: given a
 thing MeTTa says one way, what does C say?
 
 Each section below is a real pair, the MeTTa original above and its C twin
@@ -302,9 +304,15 @@ make check CMETTA_ENGINE=$HOME/src/MeTTa CMETTA_DIR=$HOME/src/MeTTa/extensions/c
 [`tools/twin_lane.py`](tools/twin_lane.py), which runs every original through
 the C seat and every twin in its own process and compares what they answer:
 the claims each proves, the definitions each makes visible, and the atoms each
-leaves in `&self`. `make twins TWIN=language-feature-examples/ch03-atoms-and-expressions`
-runs the lane over part of the corpus, and `tools/twin_lane_selftest.py`
-proves the lane refuses a twin that drifts.
+leaves in `&self`. It also reads each program's translation unit, which `make
+all` writes beside the binary as the compiler sees it, for MeTTa source handed
+to the engine: a cmetta door that reads source or runs a file, taken from
+`cmetta.h` itself, and a head such as `parse` that reads its string as MeTTa.
+A macro cannot hide one, since the unit holds what the macro expanded to, and
+only a file with a `text:` note may use one. `make twins
+TWIN=language-feature-examples/ch03-atoms-and-expressions` runs the lane over
+part of the corpus, and `tools/twin_lane_selftest.py` proves the lane refuses a
+twin that drifts or hands the engine text.
 
 `common.h` holds the checks every program states its claims through:
 `check`, `check_int`, `check_text`, `check_atom` and `check_answers` are
