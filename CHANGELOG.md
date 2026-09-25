@@ -4,6 +4,20 @@
 
 ## Unreleased
 
+- VERIFICATION.md records the branch verified from a clean copy of
+  `b094c80` on superproject `3a6b92b40` with the engine change `8cc5659d0`
+  applied, which makes a partial function value callable where Prolog's
+  `maplist/3` calls it: without it 05-lambda's claim about a lambda around a
+  C function value fails on that superproject, here and on main alike. Every
+  step of the corpus passes, 323/323 twins and 3891/3891 claims with stored
+  content carried 50, declared 2, equal 271, no finding of the source rule,
+  the self-test 26/26, and the source rule's 51 uses of MeTTa text all in
+  files whose `text:` note says why. The C seat's `c-bench` fails its
+  `error-ball` row the same with and without the engine change. Laid over
+  `64a5bd1`, the same lane fails the 72 twins that lowered through
+  `mt_lower` and `operations/lowering.c`, their claims and stored content
+  still agreeing. The receipts are that run's.
+
 - The twin lane's source rule reads each program's translation unit, which
   `make all` now writes beside the binary as `build/<path>.i` with the
   program's own flags, for the doors that hand the engine MeTTa source: every

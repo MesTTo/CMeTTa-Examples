@@ -12,20 +12,20 @@ ERROR: [Thread main]   excess: (1)
 ERROR: [Thread main] MeTTa assertion failed: (assertEqual 1 2)
 ERROR: [Thread main]   missing: (2)
 ERROR: [Thread main]   excess: (1)
-1243 checks, 0 failures
+1249 checks, 0 failures
 bad boot exception barrier ok
 apostrophe boot path ok
-qlf boot: 7817 predicates, identical from source and from .qlf
+qlf boot: 7873 predicates, identical from source and from .qlf
 qlf boot regimes ok
 transactional eager growth ok
-% [1/4] cmetta_cursor_lif..stroys_after_unlock ...... passed (0.005 sec)
+% [1/4] cmetta_cursor_lif..stroys_after_unlock ...... passed (0.002 sec)
 % [2/4] cmetta_cursor_lif..stroys_after_unlock ...... passed (0.000 sec)
 % [3/4] cmetta_cursor_lif..stroys_after_unlock ...... passed (0.000 sec)
 % [4/4] cmetta_cursor_lif.._ownership_transfer ...... passed (0.000 sec)
-closed cursors 2000: registry bytes 0, records 0, atoms 15075 (initial 0/0/15081)
-closed cursors 10000: registry bytes 0, records 0, atoms 15075 (initial 0/0/15081)
-closed cursors 20000: registry bytes 0, records 0, atoms 15075 (initial 0/0/15081)
-cursor ids 32008 then 32009; 43205 concurrent vs 66005 sequential open inferences
+closed cursors 2000: registry bytes 0, records 0, atoms 15146 (initial 0/0/15146)
+closed cursors 10000: registry bytes 0, records 0, atoms 15146 (initial 0/0/15146)
+closed cursors 20000: registry bytes 0, records 0, atoms 15146 (initial 0/0/15146)
+cursor ids 32008 then 32009; 40805 concurrent vs 63605 sequential open inferences
 cursor restart ids 34410 then 1 remain generation-safe
 runtime predicate restart ok
 internal range, list, stats and limit contracts ok
@@ -101,18 +101,18 @@ ERROR: [Thread main]   excess: (1)
 ERROR: [Thread main] MeTTa assertion failed: (assertEqual 1 2)
 ERROR: [Thread main]   missing: (2)
 ERROR: [Thread main]   excess: (1)
-1243 checks, 0 failures
+1249 checks, 0 failures
 bad boot exception barrier ok
 apostrophe boot path ok
 transactional eager growth ok
-% [1/4] cmetta_cursor_lif..stroys_after_unlock ...... passed (0.003 sec)
+% [1/4] cmetta_cursor_lif..stroys_after_unlock ...... passed (0.002 sec)
 % [2/4] cmetta_cursor_lif..stroys_after_unlock ...... passed (0.000 sec)
 % [3/4] cmetta_cursor_lif..stroys_after_unlock ...... passed (0.000 sec)
 % [4/4] cmetta_cursor_lif.._ownership_transfer ...... passed (0.000 sec)
-closed cursors 2000: registry bytes 0, records 0, atoms 15077 (initial 0/0/15077)
-closed cursors 10000: registry bytes 0, records 0, atoms 15077 (initial 0/0/15077)
-closed cursors 20000: registry bytes 0, records 0, atoms 15077 (initial 0/0/15077)
-cursor ids 32008 then 32009; 43205 concurrent vs 66005 sequential open inferences
+closed cursors 2000: registry bytes 0, records 0, atoms 15146 (initial 0/0/15146)
+closed cursors 10000: registry bytes 0, records 0, atoms 15146 (initial 0/0/15146)
+closed cursors 20000: registry bytes 0, records 0, atoms 15146 (initial 0/0/15146)
+cursor ids 32008 then 32009; 40805 concurrent vs 63605 sequential open inferences
 cursor restart ids 34410 then 1 remain generation-safe
 runtime predicate restart ok
 internal range, list, stats and limit contracts ok
@@ -127,8 +127,8 @@ lower ok
 stream ok
 UBSan diagnostics: none
 LeakSanitizer (standalone, LSAN_OPTIONS=exitcode=0)
-SUMMARY: LeakSanitizer: 65968 byte(s) leaked in 138 allocation(s).
-1243 checks, 0 failures
+SUMMARY: LeakSanitizer: 66034 byte(s) leaked in 142 allocation(s).
+1249 checks, 0 failures
 C-seat allocation origins: none
 --> c-bench [GATE]
 
@@ -137,19 +137,21 @@ NOT MEASURED IN THIS CONFIGURATION boot: inferences not compared; checkout lengt
 NOT MEASURED IN THIS CONFIGURATION boot: instructions not compared; checkout length 65, depth 9; canonical length 29, depth 5; Non-monotonic atom/predicate inventory sensitivity; no fixed inference slope per component. At length29 and depths2,3,4,5,6,7, engine boot reads 296185,296185,296185,296185,296185,296185 and C boot reads 456391,456394,456395,456391,456397,456396, three identical processes per point. Instrumented engine boots make88 absolute_file_name/3 calls at every measured depth; calls times a constant do not explain the C series. At the canonical shape, interning0,1,2,3,5,8,16 fresh atoms before engine boot reads 296185,296185,296185,296158,296185,296185,296185. Instruction counts also depend on path length as recorded by the earlier controls. See the 2026-09-09 boot location section of docs/journal/2026-09-09-runtime-units-compile-beside-their-source.md.
 NOT MEASURED IN THIS CONFIGURATION boot: estimated cycles not compared; checkout length 65, depth 9; canonical length 29, depth 5; Non-monotonic atom/predicate inventory sensitivity; no fixed inference slope per component. At length29 and depths2,3,4,5,6,7, engine boot reads 296185,296185,296185,296185,296185,296185 and C boot reads 456391,456394,456395,456391,456397,456396, three identical processes per point. Instrumented engine boots make88 absolute_file_name/3 calls at every measured depth; calls times a constant do not explain the C series. At the canonical shape, interning0,1,2,3,5,8,16 fresh atoms before engine boot reads 296185,296185,296185,296158,296185,296185,296185. Instruction counts also depend on path length as recorded by the earlier controls. See the 2026-09-09 boot location section of docs/journal/2026-09-09-runtime-units-compile-beside-their-source.md.
 3 comparison(s) declined for the reasons above; every runtime row's comparisons ran
+error-ball: error-ball instruction regression: minimum of [171182241, 171119035, 171149412] is 171119035, baseline 170412819 plus 0.3% is 170924057
+note: these seats load into the measured process and differ from HEAD, so they may be what moved a row rather than this seat: mork (extensions/mork/extension.pl), node (extensions/node/bridge.pl), python (extensions/python/extension.pl)
+1 case(s) outside the band
 boot fixture: 26 governed QLF artifacts after the boot's purge and ordinary warmup
-boot: instructions=[1602927972, 1602950165, 1602969089] estimated_cycles=[2421215851, 2419323693, 2421322135] cpu=[0.17242, 0.20324, 0.20302] inferences=[593957, 593957, 593957] NOT MEASURED IN THIS CONFIGURATION
-cursor-step: instructions=[326067067, 326167048, 326070922] estimated_cycles=[561799917, 561285044, 559092775] cpu=[0.03417, 0.0274, 0.03671] inferences=[240006, 240006, 240006]
-term-in: instructions=[433846576, 433799219, 433841665] estimated_cycles=[668151528, 668829626, 669621324] cpu=[0.03983, 0.03785, 0.02884] inferences=[522009, 522009, 522009]
-term-out: instructions=[324307714, 324159390, 324259725] estimated_cycles=[1073418124, 1072699013, 1074236233] cpu=[0.0256, 0.03055, 0.02389] inferences=[156005, 156005, 156005]
-space-pair: instructions=[323781220, 323852380, 323970456] estimated_cycles=[542756137, 542962649, 542994042] cpu=[0.06034, 0.05725, 0.05937] inferences=[200041, 200041, 200041]
-error-ball: instructions=[168777078, 168640781, 168622013] estimated_cycles=[268903592, 268740888, 268802376] cpu=[0.03149, 0.03319, 0.03037] inferences=[67813, 67813, 67813]
-6 case(s) sampled; 3 comparison(s) declined
+boot: instructions=[1626466962, 1626476876, 1626476313] estimated_cycles=[2457332307, 2457313585, 2457403892] cpu=[0.12535, 0.13085, 0.13897] inferences=[598135, 598135, 598135] NOT MEASURED IN THIS CONFIGURATION
+cursor-step: instructions=[371881271, 371877931, 371876561] estimated_cycles=[636051301, 635718098, 636845792] cpu=[0.02557, 0.02498, 0.02369] inferences=[240006, 240006, 240006]
+term-in: instructions=[438243931, 438349157, 438280061] estimated_cycles=[674847910, 675078764, 674106886] cpu=[0.02175, 0.02664, 0.02392] inferences=[522009, 522009, 522009]
+term-out: instructions=[324297312, 324345118, 324366079] estimated_cycles=[1073806831, 1074349393, 1074461370] cpu=[0.01676, 0.01766, 0.01799] inferences=[156005, 156005, 156005]
+space-pair: instructions=[322005929, 322351387, 322235310] estimated_cycles=[541467313, 537858282, 541930475] cpu=[0.03519, 0.03571, 0.03764] inferences=[200041, 200041, 200041]
+error-ball: instructions=[171182241, 171119035, 171149412] estimated_cycles=[272961566, 273213704, 272959087] cpu=[0.01659, 0.01708, 0.01608] inferences=[67413, 67413, 67413] OUTSIDE BAND
 --> c-install [GATE]
 
 === c-install [GATE] ===
 version: 1.0.0, and mt_version() agrees
-installed cmetta 1.0.0 under /home/user/Dev/PyPeTTa1/PeTTa/ai-tmp/wt-merge/ai-tmp/wt-battery-3/extensions/cmetta/build/install-check
+installed cmetta 1.0.0 under /home/user/Dev/PyPeTTa1/PeTTa/ai-tmp/wt-merge/ai-tmp/wt-battery-1/extensions/cmetta/build/install-check
 install-check: the install carries no version-control metadata
  0x0000000000000001 (NEEDED)             Shared library: [libcmetta.so.1]
 install-check: a consumer outside this checkout booted the installed engine
@@ -161,23 +163,23 @@ install-check: archive consumer booted the installed engine
 llms: 5 cheat sheet(s) read against 325 live engine names; 229 of 257 callable names are corpus-used and 229 are covered, 0 finding(s)
 
 === evidence [GATE] ===
-0 unbacked evidence tag(s) in 9724 claims, against 18065 known test names in 1464 files a runner executes; 309 commit=WORKTREE placeholder(s) awaiting a provenance pin; door contracts read through doorgen
+0 unbacked evidence tag(s) in 9939 claims, against 18288 known test names in 1471 files a runner executes; 1667 tag(s) and pin(s) held to the stamp rule on lines written since 2026-09-24T23:27:42+10:00, in 422 file(s); 313 legacy commit=WORKTREE placeholder(s), which stay until their evidence is re-run; door contracts read through doorgen
 
 ================ summary ================
-GATE   c-binding    ok           23s
+GATE   c-binding    ok           20s
 GATE   stranger-c   ok            0s
-GATE   c-sanitize   ok           26s
-GATE   c-bench      ok           19s
-GATE   c-install    ok            7s
-GATE   llms         ok            7s
-GATE   evidence     ok           15s
+GATE   c-sanitize   ok           19s
+GATE   c-bench      FAIL         12s
+GATE   c-install    ok            6s
+GATE   llms         ok            5s
+GATE   evidence     ok           44s
 
-ran for 110s; the lanes that cost it:
-     26s  c-sanitize
-     23s  c-binding
-     19s  c-bench
-     15s  evidence
-      7s  c-install
-      7s  llms
+ran for 112s; the lanes that cost it:
+     44s  evidence
+     20s  c-binding
+     19s  c-sanitize
+     12s  c-bench
+      6s  c-install
+      5s  llms
 
-all gate checks passed
+GATE FAILED: c-bench
