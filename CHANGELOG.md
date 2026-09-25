@@ -4,6 +4,17 @@
 
 ## Unreleased
 
+- Follow 31-system_lib's family claim, which the MeTTa corpus now states as
+  one of the four families a platform flag names, `"windows"`, `"apple"`,
+  `"unix"` and `"emscripten"`, where it pinned `"unix"`. The twin evaluates
+  the original's `is-member` form over a list built from its own `families`
+  array, and derives the answer from `family()`, which now reads the macros
+  SWI sets its flags from, `_MSC_VER` or `__MINGW32__`, `__EMSCRIPTEN__`,
+  `__APPLE__` and `__unix__`, and answers `"unknown"` for none. It read
+  `__unix__` alone, so on macOS it expected `"other"`, a word lib_system
+  never answers, where the library answers `"apple"`. One `listed()` now
+  decides both of the file's membership tests.
+
 - VERIFICATION.md records the corpus verified on superproject `99bd67a73`,
   the chapter 22 fixes' tree on `swipl-patched.5`: every step passes,
   323/323 twins and 3891/3891 claims, with that run's receipts.

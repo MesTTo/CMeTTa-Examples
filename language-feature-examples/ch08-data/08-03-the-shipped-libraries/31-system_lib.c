@@ -3,12 +3,13 @@
  *   directory, so what the engine writes C reads with getenv, and what C
  *   reads with getcwd is what the engine answers. The whole environment is
  *   environ, a relation because every entry is NAME=VALUE. The platform
- *   answers come from what C knows the same way: the family from C's own
- *   __unix__, the cores from sysconf(_SC_NPROCESSORS_ONLN), which is SWI's own
- *   call for its cpu_count flag (swipl-devel src/os/pl-os.c, CpuCount), and
- *   the dialect from what cmetta embeds. The version's text and numbers are
- *   read apart and compared by C. A directory C cannot stat is one the engine
- *   refuses to move into, and C never moves itself.
+ *   answers come from what C knows the same way: the family from the macros
+ *   SWI sets its platform flags from, the cores from
+ *   sysconf(_SC_NPROCESSORS_ONLN), which is SWI's own call for its cpu_count
+ *   flag (swipl-devel src/os/pl-os.c, CpuCount), and the dialect from what
+ *   cmetta embeds. The version's text and numbers are read apart and compared
+ *   by C. A directory C cannot stat is one the engine refuses to move into,
+ *   and C never moves itself.
  * Guarantees: all twenty-nine claims of the original hold [tested: make
  *   twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
@@ -26,19 +27,44 @@ extern char **environ;
 static const char *const keys[] = { "architecture", "family", "version", "version-numbers", "dialect",
                                     "pid",          "cores",  "bounded-integers", "executable", "prolog-home" };
 
-static bool known_key(const char *key)
+/* The four families a platform flag names; a host with none answers
+   "unknown", which the original's claim leaves out [source
+   2026-09-25T16:38:54+10:00: lib/lib_system/lib_system.pl,
+   platform_value(family, _)]. */
+static const char *const families[] = { "windows", "apple", "unix", "emscripten" };
+
+/* One family as the String the library answers it. */
+static mt_atom *family_text(const void *value) { return T(*(const char *const *)value); }
+
+/* Whether a vocabulary C holds as data has a word in it. */
+static bool listed(const char *const words[], size_t count, const char *word)
 {
-    for (size_t i = 0; i < sizeof keys / sizeof *keys; i++)
-        if (strcmp(keys[i], key) == 0) return true;
+    for (size_t i = 0; i < count; i++)
+        if (strcmp(words[i], word) == 0) return true;
     return false;
 }
 
+/* The family lib_system answers, from the macros SWI sets its platform flags
+   from: windows under __WINDOWS__, which SWI-Prolog.h defines for _MSC_VER
+   and __MINGW32__, and emscripten alone, in place of unix and apple [source
+   2026-09-25T16:48:19+10:00: swipl-devel V10.1.14 src/SWI-Prolog.h:44-48,
+   src/os/pl-prologflag.c:2331-2332 and 2519-2529]; lib_system reads apple
+   before unix. Emscripten defines __unix__ too, so it is read first, and
+   Darwin defines __APPLE__ without __unix__ [measured
+   2026-09-25T16:52:41+10:00: clang 21.1.8 -dM -E for wasm32-unknown-emscripten,
+   x86_64-apple-darwin and arm64-apple-macos]. */
 static const char *family(void)
 {
-#if defined(__unix__)
+#if defined(_MSC_VER) || defined(__MINGW32__)
+    return "windows";
+#elif defined(__EMSCRIPTEN__)
+    return "emscripten";
+#elif defined(__APPLE__)
+    return "apple";
+#elif defined(__unix__)
     return "unix";
 #else
-    return "other";
+    return "unknown";
 #endif
 }
 
@@ -114,7 +140,10 @@ int main(void)
     check_write("cleaned up", m, E("env-unset!", T(name)), name, NULL);
 
     /* The platform. */
-    check_answers("the family", mt_eval(m, E("platform-info", "family")), T(family()));
+    check_answers("the family is one a platform flag names",
+                  mt_eval(m, E("is-member", E("platform-info", "family"),
+                               mt_arrayv(sizeof families / sizeof *families, families, sizeof *families, family_text))),
+                  B(listed(families, sizeof families / sizeof *families, family())));
     check_answers("the dialect cmetta embeds", mt_eval(m, E("platform-info", "dialect")), T("swi"));
     check_answers("the cores are the processors online", mt_eval(m, E("platform-info", "cores")), (int64_t)sysconf(_SC_NPROCESSORS_ONLN));
     mt_atom *version = value_of(m, E("platform-info", "version")), *numbers = value_of(m, E("platform-info", "version-numbers"));
@@ -124,7 +153,7 @@ int main(void)
     for (char *p = strtok_r(copy, ".", &save); p; p = strtok_r(NULL, ".", &save)) parts++;
     check_answers("a version number per part of its text", mt_eval(m, E("size-atom", E("platform-info", "version-numbers"))), (int64_t)parts);
     check_answers("every key", mt_eval(m, E("size-atom", E("platform-keys"))), (int64_t)(sizeof keys / sizeof *keys));
-    check_answers("an unknown key is refused", mt_eval(m, guarded(E("platform-info", "nosuch"))), verdict(known_key("nosuch")));
+    check_answers("an unknown key is refused", mt_eval(m, guarded(E("platform-info", "nosuch"))), verdict(listed(keys, sizeof keys / sizeof *keys, "nosuch")));
     char major[24];
     snprintf(major, sizeof major, "%" PRId64, mt_int(mt_at(numbers, 0)));
     check_answers("the text starts with the major number",
