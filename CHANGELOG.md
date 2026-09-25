@@ -4,6 +4,20 @@
 
 ## Unreleased
 
+- The verification record names no path on the verifying machine, and a
+  tool writes the parts a run determines. `tools/verification.py`, run as
+  `make verification GATE=<gate output>`, copies the lane's receipts, writes
+  the C seat gate's output with the engine's and the corpus's roots
+  repository-relative, and fills VERIFICATION.md's host block from the run's
+  own `swipl` (its version, the build its host declaration names and how many
+  patches it declares) and the compilers' version lines; it refuses a gate
+  line naming any other home-directory path. VERIFICATION.md named the
+  patched SWI by the directory it is installed in and component.txt an
+  install prefix inside a battery, both paths only one machine has, which
+  the release refuses to publish. `make check` now runs
+  `tools/verification.py --check`, refusing any tracked line naming a path
+  in a home directory, and its self-test.
+
 - VERIFICATION.md records the branch verified from a clean copy of
   `b094c80` on superproject `3a6b92b40` with the engine change `8cc5659d0`
   applied, which makes a partial function value callable where Prolog's

@@ -151,7 +151,7 @@ error-ball: instructions=[171182241, 171119035, 171149412] estimated_cycles=[272
 
 === c-install [GATE] ===
 version: 1.0.0, and mt_version() agrees
-installed cmetta 1.0.0 under /home/user/Dev/PyPeTTa1/PeTTa/ai-tmp/wt-merge/ai-tmp/wt-battery-1/extensions/cmetta/build/install-check
+installed cmetta 1.0.0 under extensions/cmetta/build/install-check
 install-check: the install carries no version-control metadata
  0x0000000000000001 (NEEDED)             Shared library: [libcmetta.so.1]
 install-check: a consumer outside this checkout booted the installed engine

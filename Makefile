@@ -89,7 +89,7 @@ build/%.i: %.c
 	@mkdir -p $(@D)
 	$(CC) -E $(DEPFLAGS) $(CPPFLAGS) $(PACKAGE_CFLAGS) $(CFLAGS) $< -o $@
 
-.PHONY: all check twins list check-helpers check-consumers index surface clean
+.PHONY: all check twins list check-helpers check-consumers index surface clean verification
 all: $(PROGRAMS) $(SHARED_UNITS) build/tools/original
 
 surface:
@@ -126,6 +126,14 @@ check: all check-helpers
 	python3 tools/twin_lane.py --jobs $(JOBS) --engine $(CMETTA_ENGINE)
 	python3 tools/twin_lane_selftest.py --engine $(CMETTA_ENGINE)
 	python3 tools/index.py --engine $(CMETTA_ENGINE) --check
+	python3 tools/verification_selftest.py
+	python3 tools/verification.py --check
+
+# The verification record's parts a run determines, written from the run: the
+# receipts, the host block and, given GATE, the C seat gate's output with its
+# paths repository-relative.
+verification:
+	python3 tools/verification.py --engine $(CMETTA_ENGINE) --receipts $(if $(GATE),--gate $(GATE))
 
 twins: all
 	python3 tools/twin_lane.py --jobs $(JOBS) --engine $(CMETTA_ENGINE) $(TWIN)

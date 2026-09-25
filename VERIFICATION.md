@@ -23,10 +23,17 @@ lands). Without that change 05-lambda's claim "maplist applies a lambda
 around a C function value" fails on this superproject, on this branch and on
 `main` alike, with `apply:maplist/3: Unknown procedure: partial/4`: since
 `64169238b` a lambda holding a C function value is a partial value, which
-Prolog's `maplist/3` called as `partial/4`. The host was the patched
-SWI-Prolog 10.1.14 at `/home/user/Dev/swipl-patched`, now `swipl-patched.6`,
-compiled Sep 25 2026 at 12:27:40. GCC 15.2.0, CMake 4.2.3 and Python 3.14.4
-built and ran it.
+Prolog's `maplist/3` called as `partial/4`. It ran on the host and toolchain
+below, which `tools/verification.py` reads from the run's own `swipl`, its
+declaration of the host patches it was built with, and the compilers' own
+version lines:
+
+<!-- host:begin -->
+- SWI-Prolog 10.1.14, the build of Sep 25 2026, 12:27:40, declaring 37 host patches
+- cc (Ubuntu 15.2.0-16ubuntu1) 15.2.0
+- cmake version 4.2.3
+- Python 3.14.4
+<!-- host:end -->
 
 ## Commands
 
@@ -49,7 +56,18 @@ make check-consumers
 `make all` also writes each program's translation unit, `build/<path>.i`,
 which the lane's source rule reads. `make check` builds and runs
 `check-helpers`, runs the 51 embedding programs through `tools/run.py`, then
-the twin lane, the lane's self-test and `tools/index.py --check`.
+the twin lane, the lane's self-test, `tools/index.py --check` and
+`tools/verification.py --check`, which refuses a tracked line naming a path in
+a home directory. Then the record's run-determined parts are written from the
+run itself:
+
+```sh
+make verification GATE=<the C seat gate's output>
+```
+
+which copies the lane's receipts out of `build/`, writes the gate's output as
+`verification/component.txt` with the engine's and this corpus's paths
+repository-relative, and fills the host block above.
 
 ## Results
 
