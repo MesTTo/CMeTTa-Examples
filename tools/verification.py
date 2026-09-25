@@ -21,7 +21,7 @@ Guarantees:
     corpus is refused with the line, so the writer never ships one silently
   - --check exits nonzero naming each tracked line that names a path in a home
     directory, which is what the release refuses to publish
-  [tested 2026-09-25T22:53:46+10:00: tools/verification_selftest.py, 11 planted
+  [tested 2026-09-25T23:00:22+10:00: tools/verification_selftest.py, 13 planted
   cases]
 Fails when: the gate output names a machine path outside the engine tree and
   this corpus, which it refuses until the lane that printed it is fixed.
@@ -39,11 +39,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 BEGIN, END = "<!-- host:begin -->", "<!-- host:end -->"
 # The part of a line only the verifying machine has: a path into a home
-# directory, on Linux or macOS. It is the release's own rule, which refuses
-# any tracked line holding the Linux form, widened to the macOS one, so a
-# record this checker passes is one the release publishes. Written so git
-# grep -E and Python's re read it alike.
-HOME_PATH = re.compile(r"/(home|Users)/")
+# directory, on Linux or macOS, or a Windows checkout's root. It is the
+# release's own rule, which refuses any tracked line holding the Linux form,
+# widened as the engine's own tracked-path test widens it: a Windows root is
+# one drive letter, which the lookbehind requires, so a URI scheme's tail is
+# not read as a drive [source 2026-09-25T22:59:40+10:00: the MeTTa checkout's
+# extensions/python/tests/repository/test_workspace_paths.py, _WINDOWS_ROOT].
+HOME_PATH = re.compile(r"/(home|Users)/|(?<![A-Za-z])[A-Za-z]:[\\/](Users|home|a)[\\/]")
 IDENTITY_GOAL = (
     "current_prolog_flag(version, V), current_prolog_flag(compiled_at, C), "
     "current_prolog_flag(home, H), atom_concat(H, '/metta-host.pl', F), "
@@ -116,14 +118,18 @@ def copy_receipts(root: Path) -> None:
 def check(root: Path) -> list[str]:
     """What keeps the record from shipping: every tracked line naming a
     home-directory path, and a VERIFICATION.md without its host block."""
-    # git grep reads the tracked files in the working tree, by the same
-    # pattern the writer refuses with.
-    tracked = subprocess.run(
-        ["git", "-C", str(root), "grep", "-n", "-I", "-E", "-e", HOME_PATH.pattern],
-        capture_output=True, text=True, check=False,
-    )
-    wrong = [f"a tracked line names a path in a home directory: {line}"
-             for line in tracked.stdout.splitlines()]
+    # The tracked files as the working tree holds them, read by the pattern
+    # the writer refuses with; a file that is not text names no path.
+    tracked = subprocess.run(["git", "-C", str(root), "ls-files", "-z"],
+                             capture_output=True, text=True, check=True).stdout.split("\0")
+    wrong = []
+    for name in filter(None, tracked):
+        try:
+            text = (root / name).read_text(encoding="utf-8")
+        except (UnicodeDecodeError, OSError):
+            continue
+        wrong += [f"a tracked line names a path in a home directory: {name}:{number}: {line.strip()[:120]}"
+                  for number, line in enumerate(text.splitlines(), 1) if HOME_PATH.search(line)]
     text = (root / "VERIFICATION.md").read_text(encoding="utf-8")
     if not 0 <= text.find(BEGIN) < text.find(END):
         wrong.append(f"VERIFICATION.md has no {BEGIN} ... {END} block")

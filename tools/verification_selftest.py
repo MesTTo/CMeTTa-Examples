@@ -6,8 +6,8 @@ instead of passing every record.
 
 Assumes: git and `swipl` on PATH, as `make check` has them.
 Guarantees: exits nonzero unless every planted case is judged as expected
-[tested 2026-09-25T22:53:52+10:00: with verification.relative and HOME_PATH
-disabled it read 4/11 and exited 1; intact it reads 11/11].
+[tested 2026-09-25T23:00:22+10:00: with verification.relative and HOME_PATH
+disabled it read 5/13 and exited 1; intact it reads 13/13].
 Owns resources: a scratch repository under ai-tmp/, removed on success and
 kept on failure for inspection.
 """
@@ -28,6 +28,7 @@ SCRATCH = ROOT / "ai-tmp" / "verification-selftest"
 # checker it tests holds it to the rule like any other tracked file.
 HOMES = Path("/home"), Path("/Users")
 ENGINE = HOMES[0] / "verifier" / "MeTTa"
+WINDOWS = "C:" + "\\" + "Users" + "\\" + "someone"
 
 
 def refused(action) -> bool:
@@ -74,6 +75,10 @@ CASES = {
     "a macOS home path is refused too":
         lambda: refused(lambda: record.component(gate([f"under {HOMES[1] / 'someone' / 'prefix' / 'lib'}"]),
                                                  [ENGINE, ROOT])),
+    "a Windows checkout root is refused too":
+        lambda: refused(lambda: record.component(gate([f"under {WINDOWS}\\prefix"]), [ENGINE, ROOT])),
+    "a URI scheme's tail is not read as a drive":
+        lambda: record.component(gate(["see " + "foo:" + "/a" + "//b"]), [ENGINE, ROOT]) == "see foo:/a//b\n",
     "a gate output inside the roots is kept":
         lambda: record.component(gate([f"under {ENGINE}/extensions/cmetta/build", "GATE c-binding ok"]),
                                  [ENGINE, ROOT]) == "under extensions/cmetta/build\nGATE c-binding ok\n",
