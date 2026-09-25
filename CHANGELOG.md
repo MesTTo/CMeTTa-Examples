@@ -4,6 +4,8 @@
 
 ## Unreleased
 
+## 2026-09-26
+
 - The verification record is written from the run it describes, and names
   no path on the verifying machine. `tools/verification.py`, run as `make
   verification GATE=<gate output> LOG=<make output>`, writes VERIFICATION.md's
