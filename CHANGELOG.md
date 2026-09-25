@@ -699,6 +699,10 @@
   shares: the twins compare them against terms C builds and read a payload
   by position with mt_at, where they held opaque handles.
 
+- LICENSE is the Apache License 2.0, and NOTICE keeps the MIT copyright
+  and permission notice of PeTTa, whose programs the twins translate and
+  one fixture copies.
+
 ## Initial corpus
 
 - Add 362 asserted C programs in the eight Python example directories: 311
