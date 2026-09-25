@@ -4,19 +4,26 @@
 
 ## Unreleased
 
-- The verification record names no path on the verifying machine, and a
-  tool writes the parts a run determines. `tools/verification.py`, run as
-  `make verification GATE=<gate output>`, copies the lane's receipts, writes
-  the C seat gate's output with the engine's and the corpus's roots
-  repository-relative, and fills VERIFICATION.md's host block from the run's
-  own `swipl` (its version, the build its host declaration names and how many
-  patches it declares) and the compilers' version lines; it refuses a gate
-  line naming any other home-directory path. VERIFICATION.md named the
+- The verification record is written from the run it describes, and names
+  no path on the verifying machine. `tools/verification.py`, run as `make
+  verification GATE=<gate output> LOG=<make output>`, writes VERIFICATION.md's
+  identity paragraph from both checkouts' commits and the cmetta version the
+  C seat gate printed, its host block from the run's own `swipl` (its
+  version, the build its host declaration names and how many patches it
+  declares) and the compilers' version lines, and its Results table, each
+  cell the verdict line that step's own tool printed in the make or gate
+  output; copies the lane's receipts; and writes the gate's output with the
+  engine's and the corpus's roots repository-relative. It writes nothing
+  unless the corpus checkout holds its commit's files alone, the engine
+  checkout has no tracked change, the make output built every program and
+  translation unit, each receipt holds the count its tool printed, and no
+  quoted line names another home-directory path. VERIFICATION.md named the
   patched SWI by the directory it is installed in and component.txt an
   install prefix inside a battery, both paths only one machine has, which
-  the release refuses to publish. `make check` now runs
-  `tools/verification.py --check`, refusing any tracked line naming a path
-  in a home directory, and its self-test.
+  the release refuses to publish, and its identity paragraph and Results
+  table were written by hand. `make check` now runs `tools/verification.py
+  --check`, refusing any tracked line naming a path in a home directory or a
+  record missing one of its three blocks, and the writer's self-test.
 
 - VERIFICATION.md records the branch verified from a clean copy of
   `b094c80` on superproject `3a6b92b40` with the engine change `8cc5659d0`

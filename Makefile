@@ -129,11 +129,12 @@ check: all check-helpers
 	python3 tools/verification_selftest.py
 	python3 tools/verification.py --check
 
-# The verification record's parts a run determines, written from the run: the
-# receipts, the host block and, given GATE, the C seat gate's output with its
+# The verification record's parts a run determines, written from one run's
+# C seat gate output, GATE, and make output, LOG: the identity paragraph, the
+# host block, the Results table, the receipts, and the gate's output with its
 # paths repository-relative.
 verification:
-	python3 tools/verification.py --engine $(CMETTA_ENGINE) --receipts $(if $(GATE),--gate $(GATE))
+	python3 tools/verification.py --engine $(CMETTA_ENGINE) $(if $(GATE),--gate $(GATE)) $(if $(LOG),--make $(LOG))
 
 twins: all
 	python3 tools/twin_lane.py --jobs $(JOBS) --engine $(CMETTA_ENGINE) $(TWIN)

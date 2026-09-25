@@ -4,6 +4,7 @@ Open Obligations: the open issues in ERRORS.md. -->
 
 # Verification
 
+<!-- identity:begin -->
 The corpus at `b094c80`, the head of branch `idiomatic-twins-no-text`, was
 verified from a clean copy of its tree: a worktree of this repository checked
 out at that commit with every untracked and ignored file removed, so every
@@ -27,6 +28,7 @@ Prolog's `maplist/3` called as `partial/4`. It ran on the host and toolchain
 below, which `tools/verification.py` reads from the run's own `swipl`, its
 declaration of the host patches it was built with, and the compilers' own
 version lines:
+<!-- identity:end -->
 
 <!-- host:begin -->
 - SWI-Prolog 10.1.14, the build of Sep 25 2026, 12:27:40, declaring 37 host patches
@@ -56,21 +58,27 @@ make check-consumers
 `make all` also writes each program's translation unit, `build/<path>.i`,
 which the lane's source rule reads. `make check` builds and runs
 `check-helpers`, runs the 51 embedding programs through `tools/run.py`, then
-the twin lane, the lane's self-test, `tools/index.py --check` and
-`tools/verification.py --check`, which refuses a tracked line naming a path in
-a home directory. Then the record's run-determined parts are written from the
-run itself:
+the twin lane, the lane's self-test, `tools/index.py --check`, the record's
+self-test and `tools/verification.py --check`, which refuses a tracked line
+naming a path in a home directory. Then the record's run-determined parts are
+written from the run itself:
 
 ```sh
-make verification GATE=<the C seat gate's output>
+make verification GATE=<the C seat gate's output> LOG=<the make output of the four steps above>
 ```
 
-which copies the lane's receipts out of `build/`, writes the gate's output as
-`verification/component.txt` with the engine's and this corpus's paths
-repository-relative, and fills the host block above.
+which writes the paragraph above from both checkouts' commits and the cmetta
+version the gate printed, the host block, and the table below, each cell the
+verdict line its step's own tool printed; copies the lane's receipts out of
+`build/`; and writes the gate's output as `verification/component.txt` with
+the engine's and this corpus's paths repository-relative. It writes none of
+them unless the corpus checkout holds its commit's files and nothing else, the
+engine checkout has no tracked change, the make output built every program and
+translation unit, and each receipt holds the count its tool printed.
 
 ## Results
 
+<!-- results:begin -->
 | Step | Result |
 | --- | --- |
 | C seat gate | six lanes ok: `c-binding` (166 public declarations, all defined; 1249 checks, 0 failures), `stranger-c`, `c-sanitize`, `c-install`, `llms`, and `evidence` (0 unbacked evidence tags in 9939 claims); `c-bench` fails one runtime row, `error-ball`, whose fewest instructions of three runs, 171,119,035, exceed its baseline's 170,412,819 plus 0.3%, and it fails the same on `3a6b92b40` without the engine change (171,156,432 at 2026-09-25T19:38:08+10:00), with its 67,413 inferences unmoved either way |
@@ -81,11 +89,13 @@ repository-relative, and fills the host block above.
 | lane self-test | 26/26 planted cases judged as expected |
 | index | INDEX.md, COVERAGE.md and README.md agree with the files |
 | `make check-consumers` | both Make consumers print `OK` (2 claims each), the archive links no `libcmetta.so`, CTest passes 1/1 with `METTA_PATH` unset, and the installed prefix holds no `.git*` entry |
+<!-- results:end -->
 
 Every program ran under `done()`'s ownership check, so none left a block
 cmetta allocated for it once its engine had closed.
 
-Beside the gate, three checks over the repository at that commit:
+Beside the gate, the ninth run below made three checks over the repository at
+`b094c80`:
 
 - The lane's source rule, both halves, over all 409 tracked C files and
   the 379 translation units `make all` wrote: 51 uses of MeTTa text, every
@@ -145,13 +155,19 @@ superproject `2ffb3fb39`, fails the 72 twins that lowered equations through
 `mt_lower` and `operations/lowering.c`, while their claims and stored
 content still agree, so the text alone fails them. Once the branch was
 stacked on `65da89f`, the run on `4a357180e` passed every step but one twin:
-05-lambda failed the partial-value defect described above, which `main`'s
-twin fails too on `64169238b` and later. This ninth, on `3a6b92b40` with the
-engine change that makes a partial value callable, passes every step of the
-corpus with the eighth's counts.
+05-lambda's claim "maplist applies a lambda around a C function value" failed
+with `apply:maplist/3: Unknown procedure: partial/4`, as `main`'s twin fails
+too on `64169238b` and later, since that commit made a lambda holding a C
+function value a partial value, which Prolog's `maplist/3` called as
+`partial/4`. The ninth, on `3a6b92b40` with one engine change applied on top,
+`8cc5659d0` (`partial/3` to `partial/11` in `engine/metta/control.pl`, the
+effect walk's reading of a partial closure, and the plunit suite
+`closure_values.plt`), passed every step of the corpus with the eighth's
+counts. Its gate's `c-bench` failed its `error-ball` row, whose fewest
+instructions of three runs, 171,119,035, exceeded its baseline's 170,412,819
+plus 0.3%, and it failed the same on `3a6b92b40` without the engine change
+(171,156,432 at 2026-09-25T19:38:08+10:00), with its 67,413 inferences
+unmoved either way.
 
-`c-bench` declined its three boot comparisons in this configuration, since
-the battery's checkout path is longer than the canonical shape its baseline
-was measured at, and its one failing runtime row, `error-ball`, is the
-superproject's and not this corpus's: the table above gives the reading
-without the engine change.
+The C seat gate runs in the MeTTa checkout, so a lane it fails, or a
+comparison it declines, is the engine's and not this corpus's.
