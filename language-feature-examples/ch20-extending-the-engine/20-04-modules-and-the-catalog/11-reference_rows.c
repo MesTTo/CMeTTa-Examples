@@ -2,7 +2,7 @@
  *   holds a public module-answer calling an internal module-helper, and
  *   &self its own module-helper; a (from &reference-home) row makes the
  *   home's public heads callable here while their bodies keep calling the
- *   home's helper. HELPER is one body over lowering.h's operators, lowered
+ *   home's helper. HELPER is one body over lowering.h's operators, built
  *   into each space with that space's offset and compiled for C, so each
  *   call answers what C computes with the offset of the space whose
  *   definition runs. The home's data and equations stay home, the
@@ -34,7 +34,7 @@ int main(void)
     require("open &reference-home", home != NULL);
     require("the helper is internal", mt_add(home, E("internal", "module-helper")));
     require("its type", mt_add(home, E(":", "module-helper", arrow())));
-    require("the home's helper", mt_lower(home, (module-helper $x), HELPER(M_ADD, $x, 1)));
+    require("the home's helper", mt_add(home, E("=", E("module-helper", V("x")), HELPER(T_ADD, V("x"), HOME_OFFSET))));
     require("the answer's type", mt_add(home, E(":", "module-answer", arrow())));
     require("the answer calls the helper", mt_add(home, E("=", E("module-answer", V("x")), E("module-helper", V("x")))));
     require("its doc", mt_add(home, E("@doc", "module-answer", E("@desc", T("Add one at home")))));
@@ -42,7 +42,7 @@ int main(void)
 
     require("this space's helper is internal too", mt_add(m, E("internal", "module-helper")));
     require("its type", mt_add(m, E(":", "module-helper", arrow())));
-    require("this space's helper", mt_lower(m, (module-helper $x), HELPER(M_ADD, $x, 100)));
+    require("this space's helper", mt_add(m, E("=", E("module-helper", V("x")), HELPER(T_ADD, V("x"), SELF_OFFSET))));
     mt_atom *reference = E("from", mt_spaceref("&reference-home"));
     require("the reference row", mt_add(m, mt_keep(reference)));
 

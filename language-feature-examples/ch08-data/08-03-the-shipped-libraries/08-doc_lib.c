@@ -70,8 +70,8 @@ int main(void)
     require("import lib_doc", mt_one_truth(mt_eval(m, E("import!", "&self", E("library", "lib_doc")))));
     for (size_t i = 0; i < COUNT(DOCUMENTED); i++)
         require(DOCUMENTED[i].name, mt_add(m, doc_atom(&DOCUMENTED[i])));
-    require("greet", mt_lower(m, (greet $who), $who));
-    require("add-two", mt_lower(m, (add-two $a $b), (+ $a $b)));
+    require("greet", mt_add(m, E("=", E("greet", V("who")), V("who"))));
+    require("add-two", mt_add(m, E("=", E("add-two", V("a"), V("b")), E("+", V("a"), V("b")))));
 
     check_doc(m, "a one-part doc comes back as written", "greet");
     check_doc(m, "so does a four-part one", "add-two");

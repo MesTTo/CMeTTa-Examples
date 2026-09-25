@@ -1,7 +1,7 @@
 /* Purpose: four million-step kernels in MeTTa's recursive style, run by the
  *   engine under the raised branch budget the original states, each held
  *   against what C computes the way C computes it. The equations are the
- *   original's, lowered from C tokens. C writes each kernel as a loop over an
+ *   original's, built as atoms. C writes each kernel as a loop over an
  *   array and passes the function as a C function pointer where the original
  *   passes (+ 1) or +: map-flat over range is a map over the array range
  *   fills, fold-nested over deep-nest is a fold over its rows' cells,
@@ -15,8 +15,8 @@
 #define MT_SHORTHAND
 #include "common.h"
 
-/* deep-nest's row is (range 50); a macro, so the lowered equation and the C
-   fold read one width. */
+/* deep-nest's row is (range 50); a macro, so the equation and the C fold
+   read one width. */
 #define ROW 50
 
 typedef int64_t (*unary)(int64_t);
@@ -67,18 +67,26 @@ static mt_atom *deep(mt_atom *goal) { return E("with-pragma!", E(E("max-stack-de
 int main(void)
 {
     metta *m = open_engine();
-    require("map-flat", mt_lower(m, (map-flat $f ()), ()));
-    require("map-flat", mt_lower(m, (map-flat $f (cons $x $xs)),
-                                 (let $head ($f $x) (let $rest (map-flat $f $xs) (cons $head $rest)))));
-    require("range", mt_lower(m, (range $n), (if (== $n 0) () (let $rest (range (- $n 1)) (cons $n $rest)))));
-    require("fold-nested", mt_lower(m, (fold-nested $f $init ()), $init));
-    require("fold-nested", mt_lower(m, (fold-nested $f $init (cons $x $xs)),
-                                    (if (is-expr $x) (fold-nested $f (fold-nested $f $init $x) $xs)
-                                                     (fold-nested $f ($f $init $x) $xs))));
-    require("deep-nest", mt_lower(m, (deep-nest $n),
-                                  (if (== $n 0) () (let $row (range ROW) (let $rest (deep-nest (- $n 1)) (cons $row $rest))))));
-    require("apply-many", mt_lower(m, (apply-many $f $n $x), (if (== $n 0) $x (apply-many $f (- $n 1) ($f $x)))));
-    require("poly", mt_lower(m, (poly $f $n), (if (== $n 0) 0 (+ ($f $n) (poly $f (- $n 1))))));
+    require("map-flat", mt_add(m, E("=", E("map-flat", V("f"), mt_unit()), mt_unit())));
+    require("map-flat", mt_add(m, E("=", E("map-flat", V("f"), E("cons", V("x"), V("xs"))),
+                                   E("let", V("head"), E(V("f"), V("x")),
+                                     E("let", V("rest"), E("map-flat", V("f"), V("xs")), E("cons", V("head"), V("rest")))))));
+    require("range", mt_add(m, E("=", E("range", V("n")),
+                                E("if", E("==", V("n"), 0), mt_unit(),
+                                  E("let", V("rest"), E("range", E("-", V("n"), 1)), E("cons", V("n"), V("rest")))))));
+    require("fold-nested", mt_add(m, E("=", E("fold-nested", V("f"), V("init"), mt_unit()), V("init"))));
+    require("fold-nested", mt_add(m, E("=", E("fold-nested", V("f"), V("init"), E("cons", V("x"), V("xs"))),
+                                      E("if", E("is-expr", V("x")),
+                                        E("fold-nested", V("f"), E("fold-nested", V("f"), V("init"), V("x")), V("xs")),
+                                        E("fold-nested", V("f"), E(V("f"), V("init"), V("x")), V("xs"))))));
+    require("deep-nest", mt_add(m, E("=", E("deep-nest", V("n")),
+                                    E("if", E("==", V("n"), 0), mt_unit(),
+                                      E("let", V("row"), E("range", ROW),
+                                        E("let", V("rest"), E("deep-nest", E("-", V("n"), 1)), E("cons", V("row"), V("rest"))))))));
+    require("apply-many", mt_add(m, E("=", E("apply-many", V("f"), V("n"), V("x")),
+                                     E("if", E("==", V("n"), 0), V("x"), E("apply-many", V("f"), E("-", V("n"), 1), E(V("f"), V("x")))))));
+    require("poly", mt_add(m, E("=", E("poly", V("f"), V("n")),
+                               E("if", E("==", V("n"), 0), 0, E("+", E(V("f"), V("n")), E("poly", V("f"), E("-", V("n"), 1)))))));
 
     const int64_t n = 1000000, rows = 20000, steps = 100000;
     int64_t *cells = malloc((size_t)(n > rows * ROW ? n : rows * ROW) * sizeof *cells);

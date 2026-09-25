@@ -19,9 +19,12 @@ int main(void)
 {
     metta *m = open_engine();
     require("import lib_patrick", mt_one_truth(mt_eval(m, E("import!", "&self", E("library", "lib_patrick")))));
-    require("quad-step", mt_lower(m, (quad-step $dummy ($t $i $sum)),
-                                  (if (== $i $t) ((+ $t 1) 1 (+ $sum (* $t $i))) ($t (+ $i 1) (+ $sum (* $t $i))))));
-    require("quad-sum", mt_lower(m, (quad-sum $n), (last (iterate 0 (/ (* $n (+ $n 1)) 2) (1 1 0) quad-step))));
+    require("quad-step", mt_add(m, E("=", E("quad-step", V("dummy"), E(V("t"), V("i"), V("sum"))),
+                                    E("if", E("==", V("i"), V("t")),
+                                      E(E("+", V("t"), 1), 1, E("+", V("sum"), E("*", V("t"), V("i")))),
+                                      E(V("t"), E("+", V("i"), 1), E("+", V("sum"), E("*", V("t"), V("i"))))))));
+    require("quad-sum", mt_add(m, E("=", E("quad-sum", V("n")),
+                                   E("last", E("iterate", 0, E("/", E("*", V("n"), E("+", V("n"), 1)), 2), E(1, 1, 0), "quad-step")))));
     check_answers("(quad-sum 1000)", mt_eval(m, E("quad-sum", 1000)), quad_sum(1000));
     return done(m);
 }

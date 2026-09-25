@@ -2,7 +2,7 @@
  *   capability only when it is granted. Both spaces are the engine's
  *   (new-space &name (restricted ...)) built as terms, the capability named
  *   from vocabularies.h's SpaceCapability words. &locked's double is a body
- *   lowering.h's operators compile to C and lower to the equation. Its file
+ *   lowering.h's operators compile to C and build as the equation. Its file
  *   read is refused, and a refusal reaches C as the error state every door
  *   reports through, naming the capability it wanted; &reader, granted file,
  *   answers the read, and C decides the answer by asking the file system
@@ -27,7 +27,7 @@ int main(void)
     const char *file = mt_space_capability_names[MT_SPACE_CAPABILITY_FILE];
 
     mt_space *locked = new_space(m, "&locked", E("restricted"));
-    require("its own double", mt_lower(locked, (double $x), DOUBLE(M_MUL, $x)));
+    require("its own double", mt_add(locked, E("=", E("double", V("x")), DOUBLE(T_MUL, V("x")))));
     check_answers("computation is kept", mt_eval(locked, E("double", 21)), DOUBLE(C_MUL, 21));
 
     mt_clear();

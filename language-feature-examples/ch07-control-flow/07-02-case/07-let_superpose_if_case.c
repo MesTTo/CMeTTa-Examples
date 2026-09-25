@@ -19,11 +19,11 @@ int main(void)
 {
     metta *m = open_engine();
     require("publish f", mt_def(m, (mt_op){ .name = "f", .arity = 1, .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = f }));
-    require("progme", mt_lower(m, (progme),
-                               (let $y (superpose (2 3 4 5))
-                                    (if (> $y 2)
-                                        (case (1 $y) (((1 3) (f 0)) ((1 4) (42 42)) ($else (42 42 42))))
-                                        answertoeverything))));
+    require("progme", mt_add(m, E("=", E("progme"),
+                                 E("let", V("y"), E("superpose", E(2, 3, 4, 5)),
+                                   E("if", E(">", V("y"), 2),
+                                     E("case", E(1, V("y")), E(E(E(1, 3), E("f", 0)), E(E(1, 4), E(42, 42)), E(V("else"), E(42, 42, 42)))),
+                                     "answertoeverything")))));
 
     mt_atom *want[4];
     size_t n = 0;

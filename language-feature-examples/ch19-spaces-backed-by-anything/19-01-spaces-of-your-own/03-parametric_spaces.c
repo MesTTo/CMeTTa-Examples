@@ -1,7 +1,7 @@
 /* Purpose: ground expressions as space names, each parameter set a space of
  *   its own. C keeps the two cache instances as a table of base, limit and
  *   entry, and opens each with mt_space_of, which declares a parametric name
- *   through the engine's new-space. One equation, lowered into both, reads
+ *   through the engine's new-space. One equation, added to both, reads
  *   the parameters of whichever instance holds it by destructuring
  *   context-space, so each answers its own row of the table, as does each
  *   instance's entry, and the engine types a parametric name as a space.
@@ -30,7 +30,8 @@ int main(void)
     for (size_t i = 0; i < CACHES; i++) {
         spaces[i] = mt_space_of(m, name_of(&caches[i]));
         require("open the instance", spaces[i] != NULL);
-        require("its cache-config", mt_lower(spaces[i], (cache-config), (let (cache $base $limit) (context-space) (config $base $limit))));
+        require("its cache-config", mt_add(spaces[i], E("=", E("cache-config"),
+                                                      E("let", E("cache", V("base"), V("limit")), E("context-space"), E("config", V("base"), V("limit"))))));
         require("its entry", mt_add(spaces[i], E("entry", caches[i].entry)));
     }
     for (size_t i = 0; i < CACHES; i++)

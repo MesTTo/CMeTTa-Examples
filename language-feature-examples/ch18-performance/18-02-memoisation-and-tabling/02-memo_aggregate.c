@@ -1,5 +1,5 @@
 /* Purpose: an aggregating cache folds a function's answers into one value.
- *   choices answers x, x + 1 and x + 2, each an equation lowered from a body
+ *   choices answers x, x + 1 and x + 2, each an equation built from a body
  *   lowering.h's operators also compile, and with lib_memo told to aggregate
  *   by sum a ground call answers the sum, which C folds from the same three
  *   bodies. The aggregate is named from vocabularies.h, the engine's own
@@ -25,9 +25,9 @@ int main(void)
 {
     metta *m = open_engine();
     require("import lib_memo", mt_one_truth(mt_eval(m, E("import!", "&self", E("library", "lib_memo")))));
-    require("choices is $x", mt_lower(m, (choices $x), $x));
-    require("and x + 1", mt_lower(m, (choices $x), CHOICE(M_ADD, $x, 1)));
-    require("and x + 2", mt_lower(m, (choices $x), CHOICE(M_ADD, $x, 2)));
+    require("choices is $x", mt_add(m, E("=", E("choices", V("x")), V("x"))));
+    require("and x + 1", mt_add(m, E("=", E("choices", V("x")), CHOICE(T_ADD, V("x"), 1))));
+    require("and x + 2", mt_add(m, E("=", E("choices", V("x")), CHOICE(T_ADD, V("x"), 2))));
     require("aggregate by sum", mt_one_truth(mt_eval(m, E("config-memoize", aggregate(MT_MEMO_AGGREGATE_SUM)))));
     require("memoize choices", mt_one_truth(mt_eval(m, E("memoize", "choices"))));
 

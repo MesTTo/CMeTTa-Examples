@@ -1,7 +1,7 @@
 /* Purpose: xor inside an equation, written once. CHECK_XOR is a macro body
  *   over its operators: with C's ?:, != on booleans for xor, == and > it is
- *   the C function check_xor, and with MeTTa's tokens it is the equation
- *   mt_lower installs under the same name, underscore and all. The engine's
+ *   the C function check_xor, and with the atom builders it is the equation
+ *   mt_add installs under the same name, underscore and all. The engine's
  *   answers must be the C function's.
  * Guarantees: both claims of the original hold [tested: make twins;
  *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
@@ -17,8 +17,8 @@ static int64_t check_xor(int64_t s, int64_t d) { return CHECK_XOR(C_IF, C_XOR, C
 int main(void)
 {
     metta *m = open_engine();
-    require("check_xor", mt_lower(m, (check_xor $source $destination),
-                                  CHECK_XOR(M_IF, M_XOR, M_EQ, M_GT, $source, $destination)));
+    require("check_xor", mt_add(m, E("=", E("check_xor", V("source"), V("destination")),
+                                    CHECK_XOR(T_IF, T_XOR, T_EQ, T_GT, V("source"), V("destination")))));
     check_answers("(check_xor 2 2)", mt_eval(m, E("check_xor", 2, 2)), check_xor(2, 2));
     check_answers("(check_xor 4 2)", mt_eval(m, E("check_xor", 4, 2)), check_xor(4, 2));
     return done(m);

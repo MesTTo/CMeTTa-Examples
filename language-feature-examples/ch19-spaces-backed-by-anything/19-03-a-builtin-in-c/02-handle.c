@@ -4,7 +4,7 @@
  *   the last owner lets go, and printed by mt_repr as what it is, never its
  *   contents. vector-new, vector-nth, vector-bump and vector-length are C
  *   functions over the struct, published with mt_def; bump-thrice is the
- *   original's equation over them, lowered from C tokens, so three bumps
+ *   original's equation over them, built as an atom, so three bumps
  *   through three MeTTa calls land on the one C buffer. The handle is an
  *   ordinary grounded value that compares by identity.
  * Guarantees: all five guarded claims of the original hold, each also read
@@ -108,7 +108,9 @@ int main(void)
     for (size_t i = 0; i < sizeof published / sizeof *published; i++)
         require(published[i].name, mt_def(m, (mt_op){ .name = published[i].name, .arity = published[i].arity,
                                                        .effect = published[i].effect, .fn = published[i].fn }));
-    require("bump-thrice", mt_lower(m, (bump-thrice), (let $v (vector-new 4) (progn (vector-bump $v 0) (vector-bump $v 0) (vector-bump $v 0)))));
+    require("bump-thrice", mt_add(m, E("=", E("bump-thrice"),
+                                      E("let", V("v"), E("vector-new", 4),
+                                        E("progn", E("vector-bump", V("v"), 0), E("vector-bump", V("v"), 0), E("vector-bump", V("v"), 0))))));
 
     check_answers("a thousand elements are one value", mt_eval(m, E("vector-length", E("vector-new", 1000))), 1000);
     check_answers("reading one is a call into C", mt_eval(m, E("vector-nth", E("vector-new", 1000), 700)), 700);

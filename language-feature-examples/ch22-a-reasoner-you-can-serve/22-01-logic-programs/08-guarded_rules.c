@@ -1,7 +1,7 @@
 /* Purpose: a tagged rule with a side condition over its premise tags. The
  *   scored facts are C's table and the threshold is ABOVE_HALF, one body
- *   over lowering.h's operators, lowered as above-half for the rule's guard
- *   and compiled for C; C admits exactly the facts its own threshold admits,
+ *   over lowering.h's operators, built as above-half's equation for the
+ *   rule's guard and compiled for C; C admits exactly the facts its own threshold admits,
  *   each answering its score times the rule's tag. Under bool the guard
  *   reads the same score. Under the product of prob and polynomial each
  *   answer carries its one derivation's monomial, whose two variables carry
@@ -28,7 +28,7 @@ int main(void)
 {
     metta *m = open_engine();
     for (size_t i = 0; i < SCORES; i++) require("a scored fact", mt_add(m, E("fact", scores[i].score, E("score", scores[i].who))));
-    require("above-half", mt_lower(m, (above-half $s), ABOVE_HALF(M_GT, $s)));
+    require("above-half", mt_add(m, E("=", E("above-half", V("s")), ABOVE_HALF(T_GT, V("s")))));
     require("the guarded rule", mt_add(m, E("rule", RULE_TAG, E("trusted", V("x")), E("premises", E("score", V("x"))),
                                             E("where", "above-half"))));
     mt_atom *want[SCORES];

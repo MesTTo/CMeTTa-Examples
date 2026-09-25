@@ -11,7 +11,7 @@
 int main(void)
 {
     metta *m = open_engine();
-    require("f", mt_lower(m, (f), (let* ((($f1 $c1 3) (1 2 $d1))) ($f1 $c1 $d1))));
+    require("f", mt_add(m, E("=", E("f"), E("let*", E(E(E(V("f1"), V("c1"), 3), E(1, 2, V("d1")))), E(V("f1"), V("c1"), V("d1"))))));
 
     mt_atom *pattern = E(V("f1"), V("c1"), 3), *value = E(1, 2, V("d1")), *body = E(V("f1"), V("c1"), V("d1"));
     mt_bindings *theta = mt_unify(pattern, value);

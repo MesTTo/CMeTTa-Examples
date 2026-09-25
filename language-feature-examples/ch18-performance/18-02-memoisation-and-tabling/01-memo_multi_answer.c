@@ -1,5 +1,5 @@
 /* Purpose: a memoized function with two answers keeps both. choose's two
- *   equations are lowered from C tokens and memoized once they exist, since
+ *   equations are built as atoms, added, and memoized once they exist, since
  *   lib_memo instruments a defined function and refuses a name that is not
  *   one yet. The first ask computes x and (Pair x x); the second answers
  *   both from the cache, in the same order, and the library's own counters
@@ -15,8 +15,8 @@ int main(void)
 {
     metta *m = open_engine();
     require("import lib_memo", mt_one_truth(mt_eval(m, E("import!", "&self", E("library", "lib_memo")))));
-    require("(choose $x) is $x", mt_lower(m, (choose $x), $x));
-    require("and (Pair $x $x)", mt_lower(m, (choose $x), (Pair $x $x)));
+    require("(choose $x) is $x", mt_add(m, E("=", E("choose", V("x")), V("x"))));
+    require("and (Pair $x $x)", mt_add(m, E("=", E("choose", V("x")), E("Pair", V("x"), V("x")))));
     require("memoize choose", mt_one_truth(mt_eval(m, E("memoize", "choose"))));
 
     const int64_t x = 7;

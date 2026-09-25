@@ -136,8 +136,8 @@ which is `Bool` whichever of the two C builds.
 #include "common.h"
 #include "lowering.h"
 
-/* One body, two languages: MUL is C's * in one expansion and MeTTa's (* a b)
-   in the other, so the definition cannot say two different things. */
+/* One body, two languages: MUL is C's * in one expansion and the atom
+   (* a b) in the other, so the definition cannot say two different things. */
 #define SQUARE(MUL, x) MUL(x, x)
 
 static int64_t square(int64_t x) { return SQUARE(C_MUL, x); }
@@ -145,7 +145,7 @@ static int64_t square(int64_t x) { return SQUARE(C_MUL, x); }
 int main(void)
 {
     metta *m = open_engine();
-    require("lower f", mt_lower(m, (f $x), SQUARE(M_MUL, $x)));
+    require("define f", mt_add(m, E("=", E("f", V("x")), SQUARE(T_MUL, V("x")))));
 
     check_int("(f 1) is 1", mt_one_int(mt_eval(m, E("f", 1))), 1);
 
@@ -159,10 +159,12 @@ int main(void)
 <!-- pair:end -->
 
 `SQUARE` is written once over its operator. With `lowering.h`'s `C_MUL` it is
-the C function `square()`, and with `M_MUL` it is the equation `mt_lower`
-adds, `(= (f $x) (* $x $x))`, so the program the engine runs and the function
-C checks it against cannot say two different things. `mt_one_int` takes the
-answer as a C integer and claims there is exactly one.
+the C function `square()`, and with `T_MUL`, which builds the atom `(* a b)`,
+it is the body of the equation `mt_add` installs, `(= (f $x) (* $x $x))`, so
+the program the engine runs and the function C checks it against cannot say
+two different things. The equation is built as an atom, so no text is written
+or read on the way. `mt_one_int` takes the answer as a C integer and claims
+there is exactly one.
 
 ## C is a host, not a foreign country
 
@@ -369,8 +371,8 @@ their examples. Across the rest, the twins teach this C:
 
 - **Atoms and spaces** (3, 4): the constructors, a space's writes and what a
   later match sees, and a pattern's shape selecting.
-- **Equations** (5, 6, 7): one body lowered to MeTTa and compiled to C, many
-  answers as a cursor, and control as the terms the engine runs.
+- **Equations** (5, 6, 7): one body built as an equation and compiled to C,
+  many answers as a cursor, and control as the terms the engine runs.
 - **Data** (8): lists and folds as C loops, sequence variables, and each
   shipped library held to the C library that does its job.
 - **Types and errors** (9, 10, 12): types as terms, refusals as data, and

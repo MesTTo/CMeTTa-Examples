@@ -1,5 +1,5 @@
 /* Purpose: evaluation from lib_he's side. double is one body over lowering.h's
- *   operators, lowered for the engine and compiled for C; eval, evalc in
+ *   operators, built for the engine and compiled for C; eval, evalc in
  *   &self and chain each answer the sum or product C computes, and
  *   for-each-in-atom maps println! over C's six items, answering the true
  *   println! answers once per item.
@@ -19,7 +19,7 @@ int main(void)
 {
     metta *m = open_engine();
     require("import lib_he", mt_one_truth(mt_eval(m, E("import!", "&self", E("library", "lib_he")))));
-    require("double", mt_lower(m, (double $x), DOUBLE(M_ADD, $x)));
+    require("double", mt_add(m, E("=", E("double", V("x")), DOUBLE(T_ADD, V("x")))));
     check_int("eval of a call", mt_one_int(mt_eval(m, E("eval", E("double", 5)))), DOUBLE(C_ADD, 5));
     check_int("evalc in &self", mt_one_int(mt_eval(m, E("evalc", T_ADD(5, 5), mt_spaceref("&self")))), C_ADD(5, 5));
     check_int("chain binds and continues", mt_one_int(mt_eval(m, E("chain", T_ADD(2, 3), V("x"), T_MUL(V("x"), 2)))),

@@ -1,5 +1,5 @@
 /* Purpose: what the cache counted. SQUARE is one body lowering.h's operators
- *   compile to the C function square() and lower to sq's equation; sq is
+ *   compile to the C function square() and build as sq's equation; sq is
  *   memoized and asked three times on one key, each answer what C computes,
  *   and the library's counters say one miss and two hits, over one stored
  *   entry holding one answer.
@@ -19,7 +19,7 @@ int main(void)
 {
     metta *m = open_engine();
     require("import lib_memo", mt_one_truth(mt_eval(m, E("import!", "&self", E("library", "lib_memo")))));
-    require("sq", mt_lower(m, (sq $x), SQUARE(M_MUL, $x)));
+    require("sq", mt_add(m, E("=", E("sq", V("x")), SQUARE(T_MUL, V("x")))));
     require("memoize sq", mt_one_truth(mt_eval(m, E("memoize", "sq"))));
 
     for (int i = 0; i < 3; i++) check_answers("(sq 9)", mt_eval(m, E("sq", 9)), square(9));

@@ -24,7 +24,7 @@ int main(void)
     metta *m = open_engine();
     require("import lib_patrick", mt_one_truth(mt_eval(m, E("import!", "&self", E("library", "lib_patrick")))));
     require("fib-step", mt_add(m, E("=", E("fib-step", V("i"), E(V("a"), V("b"))), E(V("b"), E("+", V("a"), V("b"))))));
-    require("fib", mt_lower(m, (fib $n), (first (iterate 0 $n (0 1) fib-step))));
+    require("fib", mt_add(m, E("=", E("fib", V("n")), E("first", E("iterate", 0, V("n"), E(0, 1), "fib-step")))));
 
     check_answers("C and the engine agree where int64_t holds fib", mt_eval(m, E("fib", 90)), fib(90));
     check_answers("(fib 100)", mt_eval(m, E("fib", 100)), mt_bigint("354224848179261915075"));

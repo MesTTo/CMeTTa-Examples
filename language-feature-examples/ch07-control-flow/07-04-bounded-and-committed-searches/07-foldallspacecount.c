@@ -17,9 +17,9 @@ int main(void)
 {
     metta *m = open_engine();
     for (int64_t n = 1; n <= 3; n++) require("(foo n)", mt_add(m, E("foo", n)));
-    require("countitem", mt_lower(m, (countitem), (let $x (match &self (foo $1) (foo $1)) 1)));
+    require("countitem", mt_add(m, E("=", E("countitem"), E("let", V("x"), E("match", "&self", E("foo", V("1")), E("foo", V("1"))), 1))));
     require("publish merge", mt_def(m, (mt_op){ .name = "merge", .arity = 2, .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = merge }));
-    require("spacecount", mt_lower(m, (spacecount $x), (foldall merge (countitem) 0)));
+    require("spacecount", mt_add(m, E("=", E("spacecount", V("x")), E("foldall", "merge", E("countitem"), 0))));
 
     int64_t facts = 0;
     mt_each (fact, mt_match(m, E("foo", V("n")))) {

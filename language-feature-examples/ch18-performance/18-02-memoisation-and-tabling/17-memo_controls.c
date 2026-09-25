@@ -68,7 +68,7 @@ int main(void)
     metta *m = engine = open_engine();
     require("import lib_memo", mt_one_truth(mt_eval(m, E("import!", "&self", E("library", "lib_memo")))));
     require("(: sq (-> Number Number))", mt_add(m, E(":", "sq", E("->", "Number", "Number"))));
-    require("sq", mt_lower(m, (sq $x), SQUARE(M_MUL, $x)));
+    require("sq", mt_add(m, E("=", E("sq", V("x")), SQUARE(T_MUL, V("x")))));
     require("memoize-exact sq", mt_one_truth(mt_run_goal(m, E("memoize-exact", "sq"))));
     still_memoized();
 

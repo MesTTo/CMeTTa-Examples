@@ -2,7 +2,7 @@
  *   (stored atom); &guarded redefines store to refuse bad and let anything
  *   else through with super, the next definition up the space's chain, and
  *   &wrapping redefines the engine's own car-atom around its original. The
- *   equations are the original's, lowered into each space from C tokens.
+ *   equations are the original's, built as atoms and added to each space.
  *   C writes what each space must answer as C: the guard is a C conditional
  *   over the atom's name, the wrapper C's own first element of its array,
  *   and every other space keeps the definition it had. evalc is mt_eval with
@@ -23,10 +23,11 @@ static mt_atom *guarded_store(const char *atom)
 int main(void)
 {
     metta *m = open_engine();
-    require("&self's store", mt_lower(m, (store $atom), (stored $atom)));
+    require("&self's store", mt_add(m, E("=", E("store", V("atom")), E("stored", V("atom")))));
     mt_space *guarded = mt_space_open(m, "&guarded");
     require("open &guarded", guarded != NULL);
-    require("the guard", mt_lower(guarded, (store $atom), (if (== $atom bad) refused (super (store $atom)))));
+    require("the guard", mt_add(guarded, E("=", E("store", V("atom")),
+                                           E("if", E("==", V("atom"), "bad"), "refused", E("super", E("store", V("atom")))))));
 
     check_answers("the guard lets an ordinary atom through", mt_eval(guarded, E("store", "good")), guarded_store("good"));
     check_answers("and refuses the one it was written for", mt_eval(guarded, E("store", "bad")), guarded_store("bad"));
@@ -34,7 +35,7 @@ int main(void)
 
     mt_space *wrapping = mt_space_open(m, "&wrapping");
     require("open &wrapping", wrapping != NULL);
-    require("the wrapper", mt_lower(wrapping, (car-atom $expr), (wrapped (super (car-atom $expr)))));
+    require("the wrapper", mt_add(wrapping, E("=", E("car-atom", V("expr")), E("wrapped", E("super", E("car-atom", V("expr")))))));
     static const int64_t items[] = { 1, 2, 3 };
     check_answers("super reaches the engine's own car-atom", mt_eval(wrapping, E("car-atom", E(items[0], items[1], items[2]))),
                   E("wrapped", items[0]));

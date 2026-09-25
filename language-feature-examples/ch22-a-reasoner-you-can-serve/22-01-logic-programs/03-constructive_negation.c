@@ -224,7 +224,7 @@ int main(void)
         bound_later(m, "an equality negated", E("not-provable", E("#=", V("y"), 4)), "y", N(equal[i]), !C_EQ(equal[i], 4));
 
     require("(: mask-example-double (-> Number Number))", mt_add(m, E(":", "mask-example-double", E("->", "Number", "Number"))));
-    require("mask-example-double", mt_lower(m, (mask-example-double $x), M_MUL($x, 2)));
+    require("mask-example-double", mt_add(m, E("=", E("mask-example-double", V("x")), T_MUL(V("x"), 2))));
     require("(: mask-example-holds (-> Atom Bool))", mt_add(m, E(":", "mask-example-holds", E("->", "Atom", "Bool"))));
     require("mask-example-holds", mt_add(m, E("=", E("mask-example-holds", 10), B(true))));
     require("it fails where it does not hold", mt_add(mt_catalog(m), E("dispatch-policy", "mask-example-holds", "NoMatchEnum",

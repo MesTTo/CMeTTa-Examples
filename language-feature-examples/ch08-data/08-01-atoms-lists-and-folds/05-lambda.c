@@ -29,11 +29,12 @@ int main(void)
     metta *m = open_engine();
     require("(: apply (-> Atom %Undefined% %Undefined%))",
             mt_add(m, E(":", "apply", E("->", "Atom", "%Undefined%", "%Undefined%"))));
-    require("apply", mt_lower(m, (apply (lambda $var $body) $arg), (eval (let $var $arg $body))));
-    require("applyL1", mt_lower(m, (applyL1), (apply (lambda $x (+ $x 1)) 2)));
-    require("applyL2", mt_lower(m, (applyL2), (apply (lambda ($x $y) (+ $x $y)) (2 7))));
-    require("myfunc", mt_lower(m, (myfunc $a $b), (cons $a $b)));
-    require("myfunc2", mt_lower(m, (myfunc2 $mylambda), ($mylambda 43 44)));
+    require("apply", mt_add(m, E("=", E("apply", E("lambda", V("var"), V("body")), V("arg")),
+                                E("eval", E("let", V("var"), V("arg"), V("body"))))));
+    require("applyL1", mt_add(m, E("=", E("applyL1"), E("apply", E("lambda", V("x"), E("+", V("x"), 1)), 2))));
+    require("applyL2", mt_add(m, E("=", E("applyL2"), E("apply", E("lambda", E(V("x"), V("y")), E("+", V("x"), V("y"))), E(2, 7)))));
+    require("myfunc", mt_add(m, E("=", E("myfunc", V("a"), V("b")), E("cons", V("a"), V("b")))));
+    require("myfunc2", mt_add(m, E("=", E("myfunc2", V("mylambda")), E(V("mylambda"), 43, 44))));
 
     check_answers("the fake lambda of one variable", mt_eval(m, E("applyL1")), 3);
     check_answers("and of two", mt_eval(m, E("applyL2")), 9);

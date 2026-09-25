@@ -1,4 +1,4 @@
-/* Purpose: four ways to hand one call over. fib is chapter 7's, lowered
+/* Purpose: four ways to hand one call over. fib is chapter 7's, installed
  *   from fib.h, and myfunc answers C's constant; each of call, quote, eval
  *   and reduce wraps (fib (myfunc)) in a definition C builds from its row
  *   of control_forms.h. The claims wrap each answer in a symbol of its own,

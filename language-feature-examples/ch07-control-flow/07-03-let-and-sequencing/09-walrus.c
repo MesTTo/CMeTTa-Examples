@@ -24,9 +24,11 @@ static mt_atom *guarded_half(int64_t n)
 int main(void)
 {
     metta *m = open_engine();
-    require("double-used", mt_lower(m, (double-used $n), (let* (($big (* $n 10))) (+ $big $big))));
-    require("guarded-half", mt_lower(m, (guarded-half $n),
-                                     (let* (($half (floor-div $n 2))) (if (< $half 10) $half nope))));
+    require("double-used", mt_add(m, E("=", E("double-used", V("n")),
+                                      E("let*", E(E(V("big"), E("*", V("n"), 10))), E("+", V("big"), V("big"))))));
+    require("guarded-half", mt_add(m, E("=", E("guarded-half", V("n")),
+                                       E("let*", E(E(V("half"), E("floor-div", V("n"), 2))),
+                                         E("if", E("<", V("half"), 10), V("half"), "nope")))));
     check_answers("(double-used 3)", mt_eval(m, E("double-used", 3)), double_used(3));
     check_answers("(guarded-half 8)", mt_eval(m, E("guarded-half", 8)), guarded_half(8));
     check_answers("(guarded-half 40)", mt_eval(m, E("guarded-half", 40)), guarded_half(40));

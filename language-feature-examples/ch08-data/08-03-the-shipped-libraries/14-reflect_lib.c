@@ -186,7 +186,7 @@ int main(void)
 {
     metta *m = open_engine();
     require("import lib_reflect", mt_one_truth(mt_eval(m, E("import!", "&self", E("library", "lib_reflect")))));
-    require("mine", mt_lower(m, (mine $x), $x));
+    require("mine", mt_add(m, E("=", E("mine", V("x")), V("x"))));
     static const char *const RULES[][2] = { { "a", "b" }, { "a", "c" } };
     for (size_t i = 0; i < COUNT(RULES); i++)
         require("a reflect-rule", mt_add(m, E("reflect-rule", mt_sym(RULES[i][0]), mt_sym(RULES[i][1]))));

@@ -2,8 +2,8 @@
  *   C loop building (r K (mod K 10)) for K from the count down to 1, in the
  *   order the original's recursion writes them, stored by one mt_add_all
  *   batch, the bulk door a C loader takes where the original adds one atom a
- *   step. The five questions stay the original's equations, lowered from C
- *   tokens: a collapse over a match is the engine's own work, and a C
+ *   step. The five questions stay the original's equations, built as atoms:
+ *   a collapse over a match is the engine's own work, and a C
  *   function walking the match's cursor to collect it costs 4.4 seconds for
  *   the million where the engine's collapse costs 0.5. indexing-demo is a C
  *   function asking the engine for each question's length and building the
@@ -18,7 +18,7 @@
 #include "lowering.h"
 
 /* The relation q-rel's pattern fixes the rest of: ($r 643 3). Macros, so the
-   lowered equation and the C predicate read one number. */
+   equation and the C predicate read one number. */
 #define REL_FIRST 643
 #define REL_SECOND 3
 
@@ -105,11 +105,12 @@ int main(void)
 {
     metta *m = open_engine();
     require("addK", mt_def(m, (mt_op){ .name = "addK", .arity = 1, .effect = MT_EFFECT_CLASS_WRITES_STATE, .fn = add_k }));
-    require("q-all", mt_lower(m, (q-all), (collapse (match &self (r $x $y) (r $x $y)))));
-    require("q-first", mt_lower(m, (q-first $a), (collapse (match &self (r $a $y) (r $a $y)))));
-    require("q-second", mt_lower(m, (q-second $b), (collapse (match &self (r $x $b) (r $x $b)))));
-    require("q-both", mt_lower(m, (q-both $a $b), (collapse (match &self (r $a $b) (r $a $b)))));
-    require("q-rel", mt_lower(m, (q-rel $r), (collapse (match &self ($r REL_FIRST REL_SECOND) ($r REL_FIRST REL_SECOND)))));
+    require("q-all", mt_add(m, E("=", E("q-all"), E("collapse", E("match", "&self", E("r", V("x"), V("y")), E("r", V("x"), V("y")))))));
+    require("q-first", mt_add(m, E("=", E("q-first", V("a")), E("collapse", E("match", "&self", E("r", V("a"), V("y")), E("r", V("a"), V("y")))))));
+    require("q-second", mt_add(m, E("=", E("q-second", V("b")), E("collapse", E("match", "&self", E("r", V("x"), V("b")), E("r", V("x"), V("b")))))));
+    require("q-both", mt_add(m, E("=", E("q-both", V("a"), V("b")), E("collapse", E("match", "&self", E("r", V("a"), V("b")), E("r", V("a"), V("b")))))));
+    require("q-rel", mt_add(m, E("=", E("q-rel", V("r")),
+                                E("collapse", E("match", "&self", E(V("r"), REL_FIRST, REL_SECOND), E(V("r"), REL_FIRST, REL_SECOND))))));
     require("indexing-demo", mt_def(m, (mt_op){ .name = "indexing-demo", .arity = 1,
                                                 .effect = MT_EFFECT_CLASS_WRITES_STATE, .fn = indexing_demo }));
 

@@ -1,6 +1,6 @@
 /* Purpose: the exponential fib, tabled. FIB is chapter 7's body, shared
  *   through its fib.h: with lowering.h's C operators it is the recursive C
- *   function fib(), and with MeTTa's tokens the equation mt_lower installs,
+ *   function fib(), and with its atom builders the equation install_fib adds,
  *   which tabled then instruments, so the engine reuses each (fib n) it has
  *   answered and asks each once. It must answer what C's exponential
  *   recursion computes. Declared after the definition, because tabling

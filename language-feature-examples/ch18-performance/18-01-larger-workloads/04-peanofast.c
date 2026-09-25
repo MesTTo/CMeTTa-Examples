@@ -2,8 +2,8 @@
  *   wraps one more S around the numeral before it for each of its K atoms,
  *   so each numeral shares the one below it rather than copying it, and it
  *   stores all K through one mt_add_all batch where the original adds one a
- *   step. demo-peano stays the original's equation, expandK from Z, lowered
- *   from C tokens. The original's claim counts the (num $1) atoms; C counts
+ *   step. demo-peano stays the original's equation, expandK from Z, built as
+ *   an atom. The original's claim counts the (num $1) atoms; C counts
  *   them by walking the match's cursor, and must find the K it built.
  * Guarantees: the original's claim holds, and the demo answers done as the
  *   original's does [tested: make twins; commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
@@ -36,7 +36,7 @@ int main(void)
     metta *m = open_engine();
     require("expandK", mt_def(m, (mt_op){ .name = "expandK", .arity = 2, .effect = MT_EFFECT_CLASS_WRITES_STATE,
                                           .fn = expand_k }));
-    require("demo-peano", mt_lower(m, (demo-peano $K), (expandK Z $K)));
+    require("demo-peano", mt_add(m, E("=", E("demo-peano", V("K")), E("expandK", "Z", V("K")))));
 
     const int64_t count = 2500;
     check_answers("the demo builds its numerals", mt_eval(m, E("demo-peano", count)), S("done"));

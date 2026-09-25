@@ -4,7 +4,7 @@
  *   builds each child term once and shares it with its subtree, and stores
  *   all 3 * (2^K - 1) atoms through one mt_add_all batch, where the original
  *   adds three atoms a step. mate-space-demo stays the original's equation,
- *   lowered from C tokens, and the engine counts its answers where they are,
+ *   built as an atom, and the engine counts its answers where they are,
  *   collapsing the million and a half into one list under the seats' 8 GB
  *   stack as the original does; C checks the count against the one the
  *   tree's shape gives. Walking the answers across to C instead converts
@@ -70,9 +70,9 @@ int main(void)
     metta *m = open_engine();
     require("rewriteK", mt_def(m, (mt_op){ .name = "rewriteK", .arity = 2, .effect = MT_EFFECT_CLASS_WRITES_STATE,
                                            .fn = rewrite_k }));
-    require("mate-space-demo", mt_lower(m, (mate-space-demo $K),
-                                        (let* (($s (add-atom &self (num Z))) ($g (rewriteK Z $K)))
-                                              (match &self (num $1) (num $1)))));
+    require("mate-space-demo", mt_add(m, E("=", E("mate-space-demo", V("K")),
+                                          E("let*", E(E(V("s"), E("add-atom", "&self", E("num", "Z"))), E(V("g"), E("rewriteK", "Z", V("K")))),
+                                            E("match", "&self", E("num", V("1")), E("num", V("1")))))));
     const int64_t steps = 19;
     check_answers("every (num $1) the demo stored answers once",
                   mt_eval(m, E("length", E("collapse", E("mate-space-demo", steps)))), (int64_t)rewritten(steps) + 1);

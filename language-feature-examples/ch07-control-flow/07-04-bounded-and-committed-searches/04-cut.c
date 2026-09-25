@@ -15,8 +15,8 @@ int main(void)
     metta *m = open_engine();
     for (size_t i = 0; i < sizeof FOO / sizeof *FOO; i++)
         require("(foo n)", mt_add(m, E("foo", FOO[i])));
-    require("match-single", mt_lower(m, (match-single $space $pat $ret),
-                                     (let* (($x (match $space $pat $ret)) ($temp (cut))) $x)));
+    require("match-single", mt_add(m, E("=", E("match-single", V("space"), V("pat"), V("ret")),
+                                       E("let*", E(E(V("x"), E("match", V("space"), V("pat"), V("ret"))), E(V("temp"), E("cut"))), V("x")))));
 
     mt_atom *first = mt_one(mt_eval(m, E("match-single", "&self", E("foo", V("n")), V("n"))));
     require("store (bar first)", first && mt_add(m, E("bar", first)));

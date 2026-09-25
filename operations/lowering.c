@@ -1,10 +1,10 @@
 /* Purpose: one body, two languages. POLY is written once over its operators;
  *   expanded with lowering.h's C operators it is the C function poly(),
- *   expanded with MeTTa's it is the equation mt_lower() installs, and the two
- *   agree on every input tried. The equation is visible to the engine as
- *   data, which a C function published with mt_def() would not be. The
+ *   expanded with its atom builders it is the equation mt_add() installs, and
+ *   the two agree on every input tried. The equation is visible to the engine
+ *   as data, which a C function published with mt_def() would not be. The
  *   operators agree only where their spellings do, and % is where C and
- *   MeTTa part: WRAP lowers MeTTa's %, and C_MOD agrees with it on every
+ *   MeTTa part: WRAP builds MeTTa's %, and C_MOD agrees with it on every
  *   combination of signs, where C's own % would not. The float operators get
  *   the same grid: /, a zero divisor included, min, max, <= and and.
  * Guarantees: C and the equation agree on -20..20, the equation is stored as
@@ -32,7 +32,7 @@ static bool within(double lo, double x, double hi) { return WITHIN(C_AND, C_LE, 
 int main(void)
 {
     metta *m = open_engine();
-    require("lower the shared body", mt_lower(m, (poly $x), POLY(M_ADD, M_MUL, $x)));
+    require("lower the shared body", mt_add(m, E("=", E("poly", V("x")), POLY(T_ADD, T_MUL, V("x")))));
     bool agree = true;
     for (int64_t x = -20; x <= 20 && agree; x++)
         agree = mt_one_int(mt_eval(m, E("poly", x))) == poly(x);
@@ -41,7 +41,7 @@ int main(void)
                   mt_match(m, E("=", E("poly", V("x")), V("body"))),
                   E("=", E("poly", V("x")), E("+", E("*", 3, V("x")), 1)));
 
-    require("lower the remainder", mt_lower(m, (wrap $x $n), WRAP(M_MOD, $x, $n)));
+    require("lower the remainder", mt_add(m, E("=", E("wrap", V("x"), V("n")), WRAP(T_MOD, V("x"), V("n")))));
     static const int64_t divisors[] = { -3, -2, 2, 3 };
     bool same_sign_rule = true;
     for (int64_t x = -7; x <= 7; x++)
@@ -50,9 +50,10 @@ int main(void)
     check("C_MOD is MeTTa's % for every combination of signs", same_sign_rule);
     check_int("(% -7 3) is 2, where C's -7 % 3 is -1", mt_one_int(mt_eval(m, E("wrap", -7, 3))), 2);
 
-    require("lower the ratio", mt_lower(m, (ratio $x $y), RATIO(M_DIV, $x, $y)));
-    require("lower the span", mt_lower(m, (span $x $y), SPAN(M_SUB, M_MIN, M_MAX, $x, $y)));
-    require("lower the bounds test", mt_lower(m, (within $lo $x $hi), WITHIN(M_AND, M_LE, $lo, $x, $hi)));
+    require("lower the ratio", mt_add(m, E("=", E("ratio", V("x"), V("y")), RATIO(T_DIV, V("x"), V("y")))));
+    require("lower the span", mt_add(m, E("=", E("span", V("x"), V("y")), SPAN(T_SUB, T_MIN, T_MAX, V("x"), V("y")))));
+    require("lower the bounds test",
+            mt_add(m, E("=", E("within", V("lo"), V("x"), V("hi")), WITHIN(T_AND, T_LE, V("lo"), V("x"), V("hi")))));
     static const double grid[] = { -2.5, -1.0, 0.0, 0.5, 3.0 };
     enum { GRID = sizeof grid / sizeof *grid };
     bool divides = true, spans = true, bounds = true;

@@ -5,7 +5,7 @@
  *   there, so a rule in the C store is the same compiled clause a native one
  *   is, and it answers in the space that holds it, asked through (metta goal
  *   type space). Each rule's body is written once over lowering.h's
- *   operators, lowered into the store and compiled for C, and each answer is
+ *   operators, built into the store as an atom and compiled for C, and each answer is
  *   what C computes: fdouble's double, fpick's answers as a set, sorted by
  *   mt_order against C's own, fplain's bare symbol, fnest's arithmetic
  *   evaluated inside out, and ffact's factorial with if taking only its
@@ -22,7 +22,7 @@
 #define FDOUBLE(MUL, x) MUL(2, x)
 #define FNEST(ADD, MUL) ADD(1, MUL(2, 3))
 #define FFACT(IF, GT, MUL, SUB, SELF, x) IF(GT(x, 0), MUL(x, SELF(SUB(x, 1))), 1)
-#define M_FFACT(x) (ffact x)
+#define T_FFACT(x) E("ffact", x)
 
 static int64_t ffact(int64_t x) { return FFACT(C_IF, C_GT, C_MUL, C_SUB, ffact, x); }
 
@@ -45,7 +45,7 @@ int main(void)
     mt_space *demo = mt_space_open(m, "&rule_demo");
     require("a handle on &rule_demo", demo != NULL);
 
-    require("fdouble", mt_lower(demo, (fdouble $x), FDOUBLE(M_MUL, $x)));
+    require("fdouble", mt_add(demo, E("=", E("fdouble", V("x")), FDOUBLE(T_MUL, V("x")))));
     const int64_t doubled = 21;
     check_int("a rule in the foreign space evaluates", mt_one_int(in_space(m, E("fdouble", doubled))),
               FDOUBLE(C_MUL, doubled));
@@ -61,10 +61,10 @@ int main(void)
     require("fplain", mt_add(demo, E("=", E("fplain"), "settled")));
     check_answers("a body that is not a call is the answer", in_space(m, E("fplain")), "settled");
 
-    require("fnest", mt_lower(demo, (fnest), FNEST(M_ADD, M_MUL)));
+    require("fnest", mt_add(demo, E("=", E("fnest"), FNEST(T_ADD, T_MUL))));
     check_int("a nested body is evaluated inside out", mt_one_int(in_space(m, E("fnest"))), FNEST(C_ADD, C_MUL));
 
-    require("ffact", mt_lower(demo, (ffact $x), FFACT(M_IF, M_GT, M_MUL, M_SUB, M_FFACT, $x)));
+    require("ffact", mt_add(demo, E("=", T_FFACT(V("x")), FFACT(T_IF, T_GT, T_MUL, T_SUB, T_FFACT, V("x")))));
     const int64_t n = 5;
     check_int("a rule recurses, if taking only its branch", mt_one_int(in_space(m, E("ffact", n))), ffact(n));
 

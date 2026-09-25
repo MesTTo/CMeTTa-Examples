@@ -1,7 +1,7 @@
 /* Purpose: the accumulator fib as one body, shared by the twin that defines
  *   it and the twin that imports it, which is what an #include is: another
  *   file's definitions compiled into this one. FIB_TR expands to a C
- *   function over int64_t and to the equations install_fibsmart() lowers.
+ *   function over int64_t and to the equation atoms install_fibsmart() adds.
  * Assumes: the includer defines MT_SHORTHAND and includes common.h first.
  */
 #ifndef FIBSMART_H
@@ -9,7 +9,7 @@
 #include "lowering.h"
 
 #define FIB_TR(IF, EQ, ADD, SUB, SELF, n, a, b) IF(EQ(n, 0), a, SELF(SUB(n, 1), b, ADD(a, b)))
-#define M_FIB_TR(n, a, b) (fib-tr n a b)
+#define T_FIB_TR(n, a, b) mt_expr("fib-tr", n, a, b)
 
 /* int64_t holds fib(n) up to n = 92; the engine's integers are unbounded. */
 static inline int64_t fib_tr(int64_t n, int64_t a, int64_t b) { return FIB_TR(C_IF, C_EQ, C_ADD, C_SUB, fib_tr, n, a, b); }
@@ -17,7 +17,8 @@ static inline int64_t fib(int64_t n) { return fib_tr(n, 0, 1); }
 
 static inline bool install_fibsmart(metta *m)
 {
-    return mt_lower(m, (fib-tr $n $a $b), FIB_TR(M_IF, M_EQ, M_ADD, M_SUB, M_FIB_TR, $n, $a, $b)) &&
-           mt_lower(m, (fib $n), (fib-tr $n 0 1));
+    return mt_add(m, mt_expr("=", T_FIB_TR(mt_var("n"), mt_var("a"), mt_var("b")),
+                             FIB_TR(T_IF, T_EQ, T_ADD, T_SUB, T_FIB_TR, mt_var("n"), mt_var("a"), mt_var("b")))) &&
+           mt_add(m, mt_expr("=", mt_expr("fib", mt_var("n")), T_FIB_TR(mt_var("n"), 0, 1)));
 }
 #endif

@@ -10,7 +10,8 @@
 int main(void)
 {
     metta *m = open_engine();
-    require("compile", mt_lower(m, (compile $stmt), (case $stmt (($stmt (superpose (what what2)))))));
+    require("compile", mt_add(m, E("=", E("compile", V("stmt")),
+                                  E("case", V("stmt"), E(E(V("stmt"), E("superpose", E("what", "what2"))))))));
     check_answers("(compile wat) answers twice", mt_eval(m, E("compile", "wat")), "what", "what2");
     return done(m);
 }

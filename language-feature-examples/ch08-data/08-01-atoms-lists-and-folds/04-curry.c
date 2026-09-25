@@ -28,12 +28,12 @@ static void refused(metta *m, const char *claim, mt_atom *call, const char *arit
 int main(void)
 {
     metta *m = open_engine();
-    require("f", mt_lower(m, (f $a $b), (+ $a $b)));
-    require("g", mt_lower(m, (g $a $b $c), (+ $c (+ $a $b))));
-    require("show", mt_lower(m, (show), (repr (f 1))));
-    require("h", mt_lower(m, (h $A $B), (append ($A) $B)));
-    require("overloaded-curry/1", mt_lower(m, (overloaded-curry $a), $a));
-    require("overloaded-curry/3", mt_lower(m, (overloaded-curry $a $b $c), (+ $a (+ $b $c))));
+    require("f", mt_add(m, E("=", E("f", V("a"), V("b")), E("+", V("a"), V("b")))));
+    require("g", mt_add(m, E("=", E("g", V("a"), V("b"), V("c")), E("+", V("c"), E("+", V("a"), V("b"))))));
+    require("show", mt_add(m, E("=", E("show"), E("repr", E("f", 1)))));
+    require("h", mt_add(m, E("=", E("h", V("A"), V("B")), E("append", E(V("A")), V("B")))));
+    require("overloaded-curry/1", mt_add(m, E("=", E("overloaded-curry", V("a")), V("a"))));
+    require("overloaded-curry/3", mt_add(m, E("=", E("overloaded-curry", V("a"), V("b"), V("c")), E("+", V("a"), E("+", V("b"), V("c"))))));
 
     check_answers("(f 1) is a partial", mt_eval(m, E("f", 1)), partial("f", E(1)));
     check_answers("applied to the rest it answers", mt_eval(m, E(E("f", 1), 2)), 3);

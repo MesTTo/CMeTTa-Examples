@@ -12,12 +12,13 @@
 int main(void)
 {
     metta *m = open_engine();
-    require("f", mt_lower(m, (f $L $a $b), (let $result (+ $a $b) (append ($result) $L))));
-    require("evalCustom", mt_lower(m, (evalCustom $body),
-                                   (let* (($a (add-atom &self (= (myfunc) $body)))
-                                          ($res (reduce (myfunc)))
-                                          ($r (remove-atom &self (= (myfunc) $body))))
-                                         $res)));
+    require("f", mt_add(m, E("=", E("f", V("L"), V("a"), V("b")),
+                            E("let", V("result"), E("+", V("a"), V("b")), E("append", E(V("result")), V("L"))))));
+    require("evalCustom", mt_add(m, E("=", E("evalCustom", V("body")),
+                                     E("let*", E(E(V("a"), E("add-atom", "&self", E("=", E("myfunc"), V("body")))),
+                                                 E(V("res"), E("reduce", E("myfunc"))),
+                                                 E(V("r"), E("remove-atom", "&self", E("=", E("myfunc"), V("body"))))),
+                                       V("res")))));
 
     mt_atom *body = NULL;
     mt_rows (row, mt_match(m, E("=", E("f", E(42), 40.7, 2), V("x")))) {

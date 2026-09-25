@@ -51,8 +51,8 @@ int main(void)
         require("(= (age p) n)", mt_add(m, E("=", E("age", PEOPLE[i].name), PEOPLE[i].age)));
         require("(= (registered? p) b)", mt_add(m, E("=", E("registered?", PEOPLE[i].name), B(PEOPLE[i].registered))));
     }
-    require("adult?", mt_lower(m, (adult? $p), (> (age $p) 17)));
-    require("may-vote?", mt_lower(m, (may-vote? $p), (implies (registered? $p) (adult? $p))));
+    require("adult?", mt_add(m, E("=", E("adult?", V("p")), E(">", E("age", V("p")), 17))));
+    require("may-vote?", mt_add(m, E("=", E("may-vote?", V("p")), E("implies", E("registered?", V("p")), E("adult?", V("p"))))));
     for (size_t i = 0; i < sizeof PEOPLE / sizeof *PEOPLE; i++)
         check_answers("may-vote? guards with implies", mt_eval(m, E("may-vote?", PEOPLE[i].name)),
                       B(!PEOPLE[i].registered || PEOPLE[i].age > 17));

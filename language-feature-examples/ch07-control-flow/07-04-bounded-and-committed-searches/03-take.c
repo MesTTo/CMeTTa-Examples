@@ -29,7 +29,7 @@ int main(void)
     check_list("nine of two is two", take(mt_eval(m, E("superpose", E("a", "b"))), 9), "a", "b");
     check_list_("zero is none", take(mt_eval(m, E("superpose", E("a", "b"))), 0), 0, NULL);
 
-    require("from", mt_lower(m, (from $n), (superpose ($n (from (+ $n 1))))));
+    require("from", mt_add(m, E("=", E("from", V("n")), E("superpose", E(V("n"), E("from", E("+", V("n"), 1)))))));
     check_list("four of an endless count", take(mt_eval(m, E("from", 0)), 4), 0, 1, 2, 3);
 
     mt_clear();

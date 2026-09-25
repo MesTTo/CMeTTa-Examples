@@ -7,7 +7,7 @@
  *   its cases with that matcher, answering nothing where no case matches
  *   and NotReducible from the internal worker. mm-reduce's loop is C's
  *   step_down(), STEP_DOWN compiled over lowering.h's operators, the body
- *   lowered for the engine. collapse-bind's rows and what superpose-bind
+ *   built as the engine's equation. collapse-bind's rows and what superpose-bind
  *   restores are C's edge table. The Turing machine is C's: a tape of two
  *   stacks and the cell under the machine, moved by the library's rule,
  *   a blank read past either end, run by the rule table C also turns into
@@ -139,7 +139,7 @@ static mt_atom *switched_internal(const mt_atom *atom, const mt_atom *pair)
 /* ------------------------------------------------------------------ reduce */
 
 #define STEP_DOWN(IF, GT, SUB, SELF, DONE, n) IF(GT(n, 0), SELF(SUB(n, 1)), DONE)
-#define M_STEP_DOWN(n) (step-down n)
+#define T_STEP_DOWN(n) E("step-down", n)
 static const char *step_down(int64_t n) { return STEP_DOWN(C_IF, C_GT, C_SUB, step_down, "done", n); }
 
 /* TEMPLATE with VAR bound to VALUE, as mm-subst answers. Borrows all. */
@@ -298,7 +298,7 @@ int main(void)
     require("C's walk finds no case for 9", missed == NULL);
     check_none("so mm-switch answers nothing", mt_eval(m, E("mm-switch", mt_keep(nine), mt_keep(cases))));
 
-    require("step-down", mt_lower(m, (step-down $n), STEP_DOWN(M_IF, M_GT, M_SUB, M_STEP_DOWN, done, $n)));
+    require("step-down", mt_add(m, E("=", T_STEP_DOWN(V("n")), STEP_DOWN(T_IF, T_GT, T_SUB, T_STEP_DOWN, "done", V("n")))));
     const int64_t steps = 3;
     mt_atom *done_atom = S(step_down(steps));
     check_answers("mm-reduce reduces until nothing changes", mt_eval(m, E("mm-reduce", E("step-down", steps), V("x"), V("x"))),

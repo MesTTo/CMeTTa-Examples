@@ -25,8 +25,9 @@ static void expected(mt_atom **want)
 int main(void)
 {
     metta *m = open_engine();
-    require("if-nondet", mt_lower(m, (if-nondet $y), (if (superpose $y) a b)));
-    require("case-nondet", mt_lower(m, (case-nondet $y), (case (superpose $y) ((True a) (False b)))));
+    require("if-nondet", mt_add(m, E("=", E("if-nondet", V("y")), E("if", E("superpose", V("y")), "a", "b"))));
+    require("case-nondet", mt_add(m, E("=", E("case-nondet", V("y")),
+                                      E("case", E("superpose", V("y")), E(E(B(true), "a"), E(B(false), "b"))))));
 
     mt_atom *want[N_CONDITIONS];
     expected(want);

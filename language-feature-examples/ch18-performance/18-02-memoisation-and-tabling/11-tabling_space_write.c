@@ -80,8 +80,9 @@ int main(void)
     require("import lib_tabling", mt_one_truth(mt_eval(m, E("import!", "&self", E("library", "lib_tabling")))));
     add_edge(m, "a", "b");
     add_edge(m, "b", "c");
-    require("reach", mt_lower(m, (reach $x $y), (match &self (edge $x $y) $y)));
-    require("twohop", mt_lower(m, (twohop $x $z), (match &self (, (edge $x $y) (edge $y $z)) $z)));
+    require("reach", mt_add(m, E("=", E("reach", V("x"), V("y")), E("match", "&self", E("edge", V("x"), V("y")), V("y")))));
+    require("twohop", mt_add(m, E("=", E("twohop", V("x"), V("z")),
+                                 E("match", "&self", E(",", E("edge", V("x"), V("y")), E("edge", V("y"), V("z"))), V("z")))));
     require("table reach", mt_one_truth(mt_eval(m, E("tabled", E("reach", V("x"), V("y"))))));
     require("table twohop", mt_one_truth(mt_eval(m, E("tabled", E("twohop", V("x"), V("z"))))));
 
@@ -94,7 +95,7 @@ int main(void)
     add_edge(m, "c", "d");
     agree(m, "a conjunction tracks both its patterns", "twohop", "b", twohop("b"));
 
-    require("bypattern", mt_lower(m, (bypattern $p), (match &self $p $p)));
+    require("bypattern", mt_add(m, E("=", E("bypattern", V("p")), E("match", "&self", V("p"), V("p")))));
     check_answers("a read no stored relation resolves is refused",
                   mt_eval(m, E("catch", E("tabled", E("bypattern", V("p"))))),
                   E("Error", E("metta_tabling_unresolved_read", "match", V("p")), "none"));

@@ -1,6 +1,6 @@
 /* Purpose: memoization is per arity. add has a two-place and a three-place
  *   equation, each a body lowering.h's operators compile to a C function
- *   and lower to the equation, and only the two-place one is memoized. Every
+ *   and build as the equation, and only the two-place one is memoized. Every
  *   call must answer what C computes, the cached arity on its miss and its
  *   hit alike, and the other arity untouched by the cache.
  * Guarantees: all five claims of the original hold, and only the two-place
@@ -21,8 +21,8 @@ int main(void)
 {
     metta *m = open_engine();
     require("import lib_memo", mt_one_truth(mt_eval(m, E("import!", "&self", E("library", "lib_memo")))));
-    require("add/2", mt_lower(m, (add $x $y), ADD2(M_ADD, $x, $y)));
-    require("add/3", mt_lower(m, (add $x $y $z), ADD3(M_ADD, $x, $y, $z)));
+    require("add/2", mt_add(m, E("=", E("add", V("x"), V("y")), ADD2(T_ADD, V("x"), V("y")))));
+    require("add/3", mt_add(m, E("=", E("add", V("x"), V("y"), V("z")), ADD3(T_ADD, V("x"), V("y"), V("z")))));
     require("memoize add/2", mt_one_truth(mt_eval(m, E("memoize", "add", 2))));
 
     check_answers("(add 3 4) misses", mt_eval(m, E("add", 3, 4)), add2(3, 4));

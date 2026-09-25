@@ -17,8 +17,8 @@ int main(void)
 {
     metta *m = open_engine();
     require("publish f", mt_def(m, (mt_op){ .name = "f", .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = f }));
-    require("wu", mt_lower(m, (wu), (case (empty) ((1 2) (Empty 42)))));
-    require("wu2", mt_lower(m, (wu2), (case (f) ((42 ok) (Empty nok)))));
+    require("wu", mt_add(m, E("=", E("wu"), E("case", E("empty"), E(E(1, 2), E("Empty", 42))))));
+    require("wu2", mt_add(m, E("=", E("wu2"), E("case", E("f"), E(E(42, "ok"), E("Empty", "nok"))))));
     check_answers("a key with no answers takes Empty", mt_eval(m, E("wu")), 42);
     check_answers("a key that answers takes its own branch", mt_eval(m, E("wu2")), "ok");
     return done(m);

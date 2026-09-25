@@ -1,6 +1,6 @@
 /* Purpose: evaluation in a space you name. &self measures in feet and
  *   &metric in metres, one body DISTANCE over lowering.h's operators and a
- *   unit, lowered into each space and compiled to the C function C holds
+ *   unit, built as each space's equation and compiled to the C function C holds
  *   each answer to. evalc is mt_eval with a space's handle as its target,
  *   and the goal crosses unevaluated, so (distance (+ 1 1)) is reduced in
  *   the space named. context-space answers the space evaluating it. A space
@@ -27,8 +27,8 @@ int main(void)
     metta *m = open_engine();
     mt_space *metric = mt_space_open(m, "&metric");
     require("open &metric", metric != NULL);
-    require("&metric's distance", mt_lower(metric, (distance $x), DISTANCE(M_MUL, $x, METRES)));
-    require("&self's", mt_lower(m, (distance $x), DISTANCE(M_MUL, $x, FEET)));
+    require("&metric's distance", mt_add(metric, E("=", E("distance", V("x")), DISTANCE(T_MUL, V("x"), METRES))));
+    require("&self's", mt_add(m, E("=", E("distance", V("x")), DISTANCE(T_MUL, V("x"), FEET))));
 
     check_answers("&self answers in feet", mt_eval(m, E("distance", 2)), distance(2, FEET));
     check_answers("&metric in metres", mt_eval(metric, E("distance", 2)), distance(2, METRES));
@@ -38,7 +38,7 @@ int main(void)
     check_answers("context-space is &self here", mt_eval(m, E("context-space")), mt_spaceref("&self"));
     check_answers("and &metric there", mt_eval(metric, E("context-space")), mt_spaceref("&metric"));
 
-    require("a function answering a space", mt_lower(m, (preferred-space), &metric));
+    require("a function answering a space", mt_add(m, E("=", E("preferred-space"), "&metric")));
     mt_atom *preferred = mt_first(mt_eval(m, E("preferred-space")));
     require("it answers one", preferred != NULL);
     mt_space *chosen = mt_space_open(m, mt_name(preferred));

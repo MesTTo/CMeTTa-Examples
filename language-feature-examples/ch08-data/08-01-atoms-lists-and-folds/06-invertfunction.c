@@ -25,8 +25,8 @@ static mt_atom *split(mt_answers *rows, const char *head, const char *tail)
 int main(void)
 {
     metta *m = open_engine();
-    require("f", mt_lower(m, (f $X $Y), (append ($X) $Y)));
-    require("g", mt_lower(m, (g $X $Y $Z), (append ((#+ $X $Z)) $Y)));
+    require("f", mt_add(m, E("=", E("f", V("X"), V("Y")), E("append", E(V("X")), V("Y")))));
+    require("g", mt_add(m, E("=", E("g", V("X"), V("Y"), V("Z")), E("append", E(E("#+", V("X"), V("Z"))), V("Y")))));
 
     mt_atom *items = E(1, 2, 3, 4, 5, 6);
     mt_atom *c_split = E(mt_keep(mt_at(items, 0)),

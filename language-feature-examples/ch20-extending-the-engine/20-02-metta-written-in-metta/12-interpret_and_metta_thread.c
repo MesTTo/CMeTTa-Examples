@@ -49,7 +49,7 @@ int main(void)
 {
     metta *m = open_engine();
     require("(: twice (-> Number Number))", mt_add(m, E(":", "twice", E("->", "Number", "Number"))));
-    require("twice", mt_lower(m, (twice $x), TWICE(M_MUL, $x)));
+    require("twice", mt_add(m, E("=", E("twice", V("x")), TWICE(T_MUL, V("x")))));
     const door *doors[] = { &metta_door, &interpret, &metta_thread };
     enum { DOORS = sizeof doors / sizeof *doors };
     for (size_t i = 0; i < DOORS; i++)
@@ -80,7 +80,7 @@ int main(void)
 
     mt_space *elsewhere = mt_space_open(m, "&elsewhere");
     require("open &elsewhere", elsewhere != NULL);
-    require("twice elsewhere", mt_lower(elsewhere, (twice $x), TWICE_ELSEWHERE(M_ADD, $x)));
+    require("twice elsewhere", mt_add(elsewhere, E("=", E("twice", V("x")), TWICE_ELSEWHERE(T_ADD, V("x")))));
     for (size_t i = 0; i < 2; i++)
         check_int("the space handed in decides", mt_one_int(asked(m, branching[i], E("twice", 5), "%Undefined%", "&elsewhere")),
                   TWICE_ELSEWHERE(C_ADD, 5));

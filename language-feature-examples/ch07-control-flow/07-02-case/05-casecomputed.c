@@ -31,10 +31,10 @@ static mt_atom *cases(const branch *table, size_t n)
 int main(void)
 {
     metta *m = open_engine();
-    require("switch", mt_lower(m, (switch $value $cases), (case $value $cases)));
-    require("numbered-cases", mt_lower(m, (numbered-cases), (cons-atom (1 one) ((2 two)))));
-    require("key-of-nothing", mt_lower(m, (key-of-nothing $cases), (case (empty) $cases)));
-    require("one-case", mt_lower(m, (one-case $pair), (case 1 ($pair))));
+    require("switch", mt_add(m, E("=", E("switch", V("value"), V("cases")), E("case", V("value"), V("cases")))));
+    require("numbered-cases", mt_add(m, E("=", E("numbered-cases"), E("cons-atom", E(1, "one"), E(E(2, "two"))))));
+    require("key-of-nothing", mt_add(m, E("=", E("key-of-nothing", V("cases")), E("case", E("empty"), V("cases")))));
+    require("one-case", mt_add(m, E("=", E("one-case", V("pair")), E("case", 1, E(V("pair"))))));
 
     check_answers("handed over", mt_eval(m, E("switch", 2, CASES(NUMBERS))), "two");
     check_answers("written out", mt_eval(m, E("case", 2, CASES(NUMBERS))), "two");

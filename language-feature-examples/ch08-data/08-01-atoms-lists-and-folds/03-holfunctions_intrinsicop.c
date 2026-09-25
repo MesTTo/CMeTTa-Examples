@@ -20,8 +20,9 @@ int main(void)
 {
     metta *m = open_engine();
     require("(= (mymap $f ()) ())", mt_add(m, E("=", E("mymap", V("f"), mt_unit()), mt_unit())));
-    require("mymap's cons case", mt_lower(m, (mymap $f (cons $x $xs)),
-                                          (let $head ($f $x) (let $rest (mymap $f $xs) (cons $head $rest)))));
+    require("mymap's cons case", mt_add(m, E("=", E("mymap", V("f"), E("cons", V("x"), V("xs"))),
+                                            E("let", V("head"), E(V("f"), V("x")),
+                                              E("let", V("rest"), E("mymap", V("f"), V("xs")), E("cons", V("head"), V("rest")))))));
     require("publish eq", mt_def(m, (mt_op){ .name = "eq", .arity = 2, .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = eq }));
 
     mt_atom *mapped[3];

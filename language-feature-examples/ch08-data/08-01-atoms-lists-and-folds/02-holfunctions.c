@@ -55,16 +55,16 @@ static mt_atom *filter(const int64_t *xs, size_t n, bool (*keep)(int64_t))
 int main(void)
 {
     metta *m = open_engine();
-    require("f1a", mt_lower(m, (f1a), (foldl-atom (1 2 3 4) 0 $acc $x (+ $acc $x))));
-    require("f2a", mt_lower(m, (f2a), (map-atom (1 2 3) $x (+ $x 1))));
-    require("f3a", mt_lower(m, (f3a), (filter-atom (1 2 3 4 5) $x (> $x 3))));
+    require("f1a", mt_add(m, E("=", E("f1a"), E("foldl-atom", E(1, 2, 3, 4), 0, V("acc"), V("x"), E("+", V("acc"), V("x"))))));
+    require("f2a", mt_add(m, E("=", E("f2a"), E("map-atom", E(1, 2, 3), V("x"), E("+", V("x"), 1)))));
+    require("f3a", mt_add(m, E("=", E("f3a"), E("filter-atom", E(1, 2, 3, 4, 5), V("x"), E(">", V("x"), 3)))));
     require("publish foldfun", mt_def(m, (mt_op){ .name = "foldfun", .arity = 2, .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = foldfun }));
     require("publish mapfun", mt_def(m, (mt_op){ .name = "mapfun", .arity = 1, .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = mapfun }));
     require("publish filterfun", mt_def(m, (mt_op){ .name = "filterfun", .arity = 1, .effect = MT_EFFECT_CLASS_PURE_STRUCTURAL, .fn = filterfun }));
-    require("f1b", mt_lower(m, (f1b), (foldl-atom (1 2 3 4) 0 foldfun)));
-    require("f2b", mt_lower(m, (f2b), (map-atom (1 2 3) mapfun)));
-    require("f3b", mt_lower(m, (f3b), (filter-atom (1 2 3 4 5) filterfun)));
-    require("foldfun2", mt_lower(m, (foldfun2 $a $b), (append $a $b)));
+    require("f1b", mt_add(m, E("=", E("f1b"), E("foldl-atom", E(1, 2, 3, 4), 0, "foldfun"))));
+    require("f2b", mt_add(m, E("=", E("f2b"), E("map-atom", E(1, 2, 3), "mapfun"))));
+    require("f3b", mt_add(m, E("=", E("f3b"), E("filter-atom", E(1, 2, 3, 4, 5), "filterfun"))));
+    require("foldfun2", mt_add(m, E("=", E("foldfun2", V("a"), V("b")), E("append", V("a"), V("b")))));
 
     check_answers("fold, inline", mt_eval(m, E("f1a")), fold(FOUR, COUNT(FOUR), 0, add));
     check_answers("map, inline", mt_eval(m, E("f2a")), map(THREE, COUNT(THREE), inc));

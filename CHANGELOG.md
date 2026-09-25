@@ -4,6 +4,20 @@
 
 ## Unreleased
 
+- Every twin builds its equations as atoms. The 142 `mt_lower` and
+  `mt_lower_raw` calls in 65 twins, in `fib.h` and `fibsmart.h`, which seven
+  more twins include, and in `operations/lowering.c` stringified MeTTa tokens
+  into one `mt_do` source string the engine parsed; each is now `mt_add` of
+  an `(= head body)` atom, a one-body macro expanded with `lowering.h`'s `T_`
+  operators and every other body built with `E` and `V`, so one body still
+  compiles to the C function and builds the equation. `lowering.h` drops its
+  `M_` operators and the twins their local ones, `06-if_branch_binding`'s
+  `let*` names its variable through `T_LET`, and `11-reference_rows` reads
+  its offsets from the enum C checks against, which the token form could
+  not. On superproject
+  `2ffb3fb39` the lane reads what it read before the change: 323/323 twins
+  agree, 3891/3891 claims, stored content carried 50, declared 2, equal 271.
+
 - Follow 31-system_lib's family claim, which the MeTTa corpus now states as
   one of the four families a platform flag names, `"windows"`, `"apple"`,
   `"unix"` and `"emscripten"`, where it pinned `"unix"`. The twin evaluates

@@ -13,7 +13,7 @@ int main(void)
 {
     metta *m = open_engine();
     require("import lib_memo", mt_one_truth(mt_eval(m, E("import!", "&self", E("library", "lib_memo")))));
-    require("shape-kind", mt_lower(m, (shape-kind (Pair $x $y)), pair));
+    require("shape-kind", mt_add(m, E("=", E("shape-kind", E("Pair", V("x"), V("y"))), S("pair"))));
     require("memoize shape-kind", mt_one_truth(mt_eval(m, E("memoize", "shape-kind"))));
 
     check_answers("(Pair $a 2) is a pair", mt_eval(m, E("shape-kind", E("Pair", V("a"), 2))), S("pair"));

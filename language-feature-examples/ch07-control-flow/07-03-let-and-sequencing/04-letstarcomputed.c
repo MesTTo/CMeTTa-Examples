@@ -20,8 +20,9 @@ int main(void)
     metta *m = open_engine();
     require("(: mylet (-> Atom Atom %Undefined%))",
             mt_add(m, E(":", "mylet", E("->", "Atom", "Atom", "%Undefined%"))));
-    require("mylet", mt_lower(m, (mylet $bindings $body), (let* $bindings $body)));
-    require("mylet-evaluating", mt_lower(m, (mylet-evaluating $bindings $body), (let* $bindings $body)));
+    require("mylet", mt_add(m, E("=", E("mylet", V("bindings"), V("body")), E("let*", V("bindings"), V("body")))));
+    require("mylet-evaluating",
+            mt_add(m, E("=", E("mylet-evaluating", V("bindings"), V("body")), E("let*", V("bindings"), V("body")))));
 
     check_answers("handed over", mt_eval(m, E("mylet", x_and_y(), E("+", V("x"), V("y")))), 3);
     check_answers("written out", mt_eval(m, E("let*", x_and_y(), E("+", V("x"), V("y")))), 3);

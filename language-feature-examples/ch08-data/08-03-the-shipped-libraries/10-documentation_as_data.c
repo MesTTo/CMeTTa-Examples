@@ -94,8 +94,8 @@ int main(void)
     metta *m = open_engine();
     require("the @doc", mt_add(m, as_written(&TWICE)));
     require("its type", mt_add(m, E(":", "twice", arrow_of(TWICE_ARROW, TWICE.arity))));
-    require("twice", mt_lower(m, (twice $x), (* 2 $x)));
-    require("undocumented-here", mt_lower(m, (undocumented-here $x), $x));
+    require("twice", mt_add(m, E("=", E("twice", V("x")), E("*", 2, V("x")))));
+    require("undocumented-here", mt_add(m, E("=", E("undocumented-here", V("x")), V("x"))));
 
     const char *documented[MOST], *undocumented[MOST];
     size_t n_doc = 0, n_undoc = 0;

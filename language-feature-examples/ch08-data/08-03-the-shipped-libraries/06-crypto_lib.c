@@ -72,7 +72,7 @@ int main(void)
     const char *hello = "hello";
     check_answers("sha256", mt_eval(m, E("crypto-hash", "sha256", T(hello))), digest("SHA256", hello, 5));
     check_answers("sha512", mt_eval(m, E("crypto-hash", "sha512", T(hello))), digest("SHA512", hello, 5));
-    require("content-key", mt_lower(m, (content-key $text), (crypto-hash sha256 $text)));
+    require("content-key", mt_add(m, E("=", E("content-key", V("text")), E("crypto-hash", "sha256", V("text")))));
     check_answers("a content key is its payload's digest", mt_eval(m, E("content-key", T(hello))),
                   digest("SHA256", hello, 5));
 

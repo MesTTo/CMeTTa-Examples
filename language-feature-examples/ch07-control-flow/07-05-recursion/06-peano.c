@@ -24,16 +24,17 @@ static int depth(const mt_atom *numeral)
 int main(void)
 {
     metta *m = open_engine();
-    require("add-atom-no-duplicate", mt_lower(m, (add-atom-no-duplicate $Space $Atom),
-                                              (if (== () (collapse (once (match $Space $Atom $Atom))))
-                                                  (add-atom $Space $Atom) (empty))));
-    require("expand-once", mt_lower(m, (expand-once),
-                                    (case (match &self (num $t) $t) (($x (add-atom-no-duplicate &self (num (S $x))))))));
-    /* Raw, because `done (let ...)` is a call of common.h's done() macro to
-       the preprocessor, which mt_lower would expand into the equation. */
-    require("expandK", mt_lower_raw(m, (expandK $n), (if (== $n 0) done (let $temp1 (expand-once) (expandK (- $n 1))))));
-    require("demo-peano", mt_lower(m, (demo-peano $K),
-                                   (let* (($s (add-atom &self (num Z))) ($g (expandK $K))) (match &self (num $1) $1))));
+    require("add-atom-no-duplicate", mt_add(m, E("=", E("add-atom-no-duplicate", V("Space"), V("Atom")),
+                                                E("if", E("==", mt_unit(), E("collapse", E("once", E("match", V("Space"), V("Atom"), V("Atom"))))),
+                                                  E("add-atom", V("Space"), V("Atom")), E("empty")))));
+    require("expand-once", mt_add(m, E("=", E("expand-once"),
+                                      E("case", E("match", "&self", E("num", V("t")), V("t")),
+                                        E(E(V("x"), E("add-atom-no-duplicate", "&self", E("num", E("S", V("x"))))))))));
+    require("expandK", mt_add(m, E("=", E("expandK", V("n")),
+                                  E("if", E("==", V("n"), 0), "done", E("let", V("temp1"), E("expand-once"), E("expandK", E("-", V("n"), 1)))))));
+    require("demo-peano", mt_add(m, E("=", E("demo-peano", V("K")),
+                                     E("let*", E(E(V("s"), E("add-atom", "&self", E("num", "Z"))), E(V("g"), E("expandK", V("K")))),
+                                       E("match", "&self", E("num", V("1")), V("1"))))));
 
     bool seen[ROUNDS + 1] = { false };
     int64_t numerals = 0, distinct = 0;

@@ -1,10 +1,10 @@
 /* Purpose: a call computed at compile time. fib-tr and fib are chapter 7's
  *   accumulator fib, included from its fibsmart.h, one body that is both a
- *   C function and the equations it lowers. compilefib is a translator rule,
+ *   C function and the equations it builds. compilefib is a translator rule,
  *   so the (compilefib 10) inside smartfun is expanded and evaluated while
  *   smartfun is compiled, never per call; SMART is smartfun's body over
- *   lowering.h's operators, lowered around that call and compiled in C
- *   around C's own fib(10), and the engine must answer what C computes.
+ *   lowering.h's operators, built around that call as an atom and compiled
+ *   in C around C's own fib(10), and the engine must answer what C computes.
  * Guarantees: the original's claim holds [tested: make twins;
  *   commit=4fe77404069bc1a630ecc9e7860856a1117a200c].
  */
@@ -21,7 +21,7 @@ int main(void)
     require("compilefib", mt_add(m, E("=", E("compilefib", V("n")), E("fib", V("n")))));
     require("a rule, so its calls run while compiling",
             mt_one_truth(mt_eval(m, E("add-translator-rule!", "compilefib"))));
-    require("smartfun", mt_lower(m, (smartfun $b), SMART(M_MUL, (compilefib 10), $b)));
+    require("smartfun", mt_add(m, E("=", E("smartfun", V("b")), SMART(T_MUL, E("compilefib", 10), V("b")))));
     const int64_t b = 42;
     check_int("smartfun multiplies by fib 10", mt_one_int(mt_eval(m, E("smartfun", b))), SMART(C_MUL, fib(10), b));
     return done(m);

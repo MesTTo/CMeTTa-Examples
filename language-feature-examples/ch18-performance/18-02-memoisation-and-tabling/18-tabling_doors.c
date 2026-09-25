@@ -41,7 +41,7 @@ int main(void)
     require("import lib_tabling", mt_one_truth(mt_eval(m, E("import!", "&self", E("library", "lib_tabling")))));
     require("import lib_spaces", mt_one_truth(mt_eval(m, E("import!", "&self", E("library", "lib_spaces")))));
     require("(edge a b)", mt_add(m, E("edge", "a", "b")));
-    require("reach", mt_lower(m, (reach $x $y), (match &self (edge $x $y) $y)));
+    require("reach", mt_add(m, E("=", E("reach", V("x"), V("y")), E("match", "&self", E("edge", V("x"), V("y")), V("y")))));
     require("table reach", mt_one_truth(mt_eval(m, E("tabled", reach()))));
 
     answers_b("the table answers b");
