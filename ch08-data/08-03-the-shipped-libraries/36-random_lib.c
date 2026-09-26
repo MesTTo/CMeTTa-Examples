@@ -1,0 +1,495 @@
+/* Purpose: lib_random, held against C. A sampler is a program held as an
+ *   expression, which C reads apart with mt_at and rewrites. Randomness is an
+ *   input: for a seed, C asks the engine for the same uniform stream its
+ *   samplers draw from, (repeat K (random-float 0 1)) under that seed, and
+ *   runs the library's own recipes over it in C, ported with GMP where the
+ *   library is exact: Marsaglia and Tsang's gamma with shape boosting whose
+ *   power correction stays separate until the scale is applied, Box-Muller
+ *   with two draws, NumPy's log-difference beta, and the exact products and
+ *   log-sums that keep extreme values representable (lib/_support/random.metta).
+ *   A property any draw has, a bound or a sign or a class, C checks on the
+ *   engine's own draw; a seed's determinism C checks by comparing two runs'
+ *   answers; and a degenerate sampler is its parameter, which C computes.
+ *   Each refusal is a parameter C's own check of that sampler rejects.
+ * Build: cc 36-random_lib.c $(pkg-config --cflags --libs cmetta gmp) -lm
+ * Assumes: GMP, found through pkg-config; exact_oracle.h rounds exact
+ *   values once.
+ * Guarantees: all sixty-eight claims of the original hold
+ *   [tested 2026-09-27T00:35:58+10:00: make -C extensions/cmetta corpus-check].
+ */
+#define _XOPEN_SOURCE 700 /* M_PI and M_E are XSI's */
+#define MT_SHORTHAND
+#if __has_include(<gmp.h>)
+#include <assert.h>
+#include <cmetta.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include "_fixtures/exact_oracle.h"
+
+/* A door the program needs before it can go on: on refusal, say why and stop. */
+#define require(what, ok) \
+    ((ok) ? (void)0 : (fprintf(stderr, "%s: %s\n", (what), mt_errmsg()), exit(EXIT_FAILURE)))
+
+/* Whether a list holds exactly the children of want, in order, each equal
+   up to renaming variables; takes both, and shows them when they differ. */
+static inline bool list_is(mt_list got, mt_atom *want)
+{
+    bool holds = mt_ok() && want && got.len == mt_len(want);
+    for (size_t i = 0; holds && i < got.len; i++)
+        holds = mt_alpha_eq(got.items[i], mt_at(want, i));
+    if (!holds) {
+        fprintf(stderr, "  got");
+        for (size_t i = 0; i < got.len; i++) fprintf(stderr, " %s", mt_show(got.items[i]));
+        fprintf(stderr, "\n  want %s\n", want ? mt_show(want) : "nothing");
+    }
+    mt_list_free(got);
+    mt_drop(want);
+    return holds;
+}
+
+/* Whether a query answers exactly the children of want; takes both. */
+static inline bool answers_are(mt_answers *answers, mt_atom *want)
+{
+    return list_is(mt_all(answers), want);
+}
+
+enum { STREAM = 64, MOST = 8 };
+
+/* ---- the engine's stream, and the library's recipes over it ------------- */
+
+typedef struct stream {
+    double at[STREAM];
+    size_t n, next;
+} stream;
+
+static stream stream_of(metta *m, int64_t seed)
+{
+    stream s = { .n = 0, .next = 0 };
+    mt_atom *draws = mt_one(mt_eval(m, E("with-seed", seed, E("collapse", E("repeat", STREAM, E("random-float", 0, 1))))));
+    require("the engine's stream", draws && mt_len(draws) == STREAM);
+    for (size_t i = 0; i < STREAM; i++) s.at[s.n++] = mt_float(mt_at(draws, i));
+    mt_drop(draws);
+    return s;
+}
+
+static double draw(stream *s)
+{
+    require("enough of the stream", s->next < s->n);
+    return s->at[s->next++];
+}
+
+/* log-math with base e is log(x) / log(e), as the engine's log/2 divides. */
+static double ln(double x) { return log(x) / log(M_E); }
+
+static double standard_normal(stream *s)
+{
+    double u = draw(s), v = draw(s);
+    return cos(2 * M_PI * u) * sqrt(-2 * ln(v));
+}
+
+/* Marsaglia and Tsang's acceptance for d and c. */
+static double accepted(stream *s, double d, double c)
+{
+    for (;;) {
+        double z = standard_normal(s), root = 1.0 + c * z;
+        if (!(root > 0.0)) continue;
+        double v = root * root * root, u = draw(s), z2 = z * z;
+        if (u < 1.0 - 0.0331 * z2 * z2 || ln(u) < 0.5 * z2 + d * (1.0 - v + ln(v))) return v;
+    }
+}
+
+/* A gamma draw as factors and a power correction, the correction an exact
+   rational: log(u) / shape for a boosted shape below one, else zero. */
+typedef struct parts {
+    double factor[2];
+    size_t n;
+    mpq_t correction;
+} parts;
+
+static void gamma_factors(stream *s, double shape, parts *p)
+{
+    if (shape == 1.0) {
+        p->factor[0] = 0.0 - ln(draw(s));
+        p->n = 1;
+        return;
+    }
+    double d = shape - 1.0 / 3.0, c = 1.0 / 3.0 / sqrt(d);
+    p->factor[0] = d;
+    p->factor[1] = accepted(s, d, c);
+    p->n = 2;
+}
+
+static void gamma_parts(stream *s, double shape, parts *p)
+{
+    mpq_init(p->correction);
+    if (shape < 1.0) {
+        gamma_factors(s, shape + 1.0, p);
+        mpq_t divisor;
+        mpq_init(divisor);
+        mpq_set_d(p->correction, ln(draw(s)));
+        mpq_set_d(divisor, shape);
+        mpq_div(p->correction, p->correction, divisor);
+        mpq_clear(divisor);
+    } else
+        gamma_factors(s, shape, p);
+}
+
+/* The exact product of doubles, and the exact sum of a correction and the
+   factors' logarithms. */
+static void product(mpq_t out, const double *f, size_t n)
+{
+    mpq_t x;
+    mpq_init(x);
+    mpq_set_ui(out, 1, 1);
+    for (size_t i = 0; i < n; i++) mpq_set_d(x, f[i]), mpq_mul(out, out, x);
+    mpq_clear(x);
+}
+
+static void log_product(mpq_t out, const double *f, size_t n, const mpq_t correction)
+{
+    mpq_t x;
+    mpq_init(x);
+    mpq_set(out, correction);
+    for (size_t i = 0; i < n; i++) mpq_set_d(x, ln(f[i])), mpq_add(out, out, x);
+    mpq_clear(x);
+}
+
+/* Ordinary powers multiply exactly; a power that is not normal goes through
+   the exact log-sum instead, so a representable result stays representable. */
+static double positive_value(const double *f, size_t n, const mpq_t correction)
+{
+    double power = exp(rounded(correction)), with[MOST];
+    mpq_t exact_value;
+    mpq_init(exact_value);
+    double out;
+    if (fpclassify(power) == FP_NORMAL) {
+        with[0] = power;
+        for (size_t i = 0; i < n; i++) with[i + 1] = f[i];
+        product(exact_value, with, n + 1);
+        out = rounded(exact_value);
+    } else {
+        log_product(exact_value, f, n, correction);
+        out = exp(rounded(exact_value));
+    }
+    mpq_clear(exact_value);
+    return out;
+}
+
+static double gamma_draw(stream *s, double shape, double scale)
+{
+    parts p;
+    gamma_parts(s, shape, &p);
+    double f[MOST] = { scale };
+    for (size_t i = 0; i < p.n; i++) f[i + 1] = p.factor[i];
+    double out = positive_value(f, p.n + 1, p.correction);
+    mpq_clear(p.correction);
+    return out;
+}
+
+static double beta_draw(stream *s, double alpha, double beta)
+{
+    parts a, b;
+    gamma_parts(s, alpha, &a);
+    gamma_parts(s, beta, &b);
+    mpq_t x, y, sum;
+    mpq_inits(x, y, sum, NULL);
+    double out;
+    if (mpq_equal(a.correction, b.correction)) {
+        product(x, a.factor, a.n);
+        product(y, b.factor, b.n);
+        mpq_add(sum, x, y);
+        mpq_div(x, x, sum);
+        out = rounded(x);
+    } else {
+        log_product(x, a.factor, a.n, a.correction);
+        log_product(y, b.factor, b.n, b.correction);
+        mpq_sub(x, x, y);
+        double delta = rounded(x), tail = exp(-fabs(delta));
+        out = mpq_sgn(x) >= 0 ? 1.0 / (1.0 + tail) : tail / (1.0 + tail);
+    }
+    mpq_clears(x, y, sum, a.correction, b.correction, NULL);
+    return out;
+}
+
+static double weibull_draw(stream *s, double scale, double shape)
+{
+    mpq_t correction, divisor;
+    mpq_inits(correction, divisor, NULL);
+    mpq_set_d(correction, ln(0.0 - ln(draw(s))));
+    mpq_set_d(divisor, shape);
+    mpq_div(correction, correction, divisor);
+    double out = positive_value(&scale, 1, correction);
+    mpq_clears(correction, divisor, NULL);
+    return out;
+}
+
+/* ---- the samplers' parameter checks ------------------------------------- */
+
+static bool finite(const mt_atom *x) { return (mt_kind_of(x) == MT_INT || mt_kind_of(x) == MT_FLOAT) && isfinite(mt_float(x)); }
+static double num(const mt_atom *x) { return mt_float(x); }
+
+typedef bool precondition(const mt_atom *const *p);
+static bool normal_ok(const mt_atom *const *p) { return finite(p[0]) && finite(p[1]) && num(p[1]) >= 0; }
+static bool uniform_ok(const mt_atom *const *p) { return finite(p[0]) && finite(p[1]) && num(p[0]) <= num(p[1]); }
+static bool triangular_ok(const mt_atom *const *p)
+{
+    return finite(p[0]) && finite(p[1]) && finite(p[2]) && num(p[0]) <= num(p[2]) && num(p[2]) <= num(p[1]);
+}
+static bool positive_ok(const mt_atom *const *p) { return finite(p[0]) && num(p[0]) > 0; }
+static bool two_positive_ok(const mt_atom *const *p) { return positive_ok(p) && positive_ok(p + 1); }
+static bool probability_ok(const mt_atom *const *p) { return finite(p[0]) && num(p[0]) >= 0 && num(p[0]) <= 1; }
+
+static bool sample_ok(const mt_atom *items, const mt_atom *count)
+{
+    return mt_kind_of(items) == MT_EXPR && mt_kind_of(count) == MT_INT && mt_int(count) >= 0 && (size_t)mt_int(count) <= mt_len(items);
+}
+
+static mt_atom *verdict(bool holds) { return S(holds ? "fine" : "refused"); }
+static mt_answers *refusal(metta *m, mt_atom *goal) { return mt_eval(m, E("if-error", E("catch", goal), "refused", "fine")); }
+
+static mt_atom *value_of(metta *m, mt_atom *goal)
+{
+    mt_atom *v = mt_one(mt_eval(m, goal));
+    require("a value", v != NULL);
+    return v;
+}
+
+/* A sampler's draw: its program evaluated once, under a seed or none. */
+static mt_atom *drawn(mt_atom *sampler) { return E("let", V("drawn"), sampler, E("eval", V("drawn"))); }
+static mt_atom *seeded(int64_t seed, mt_atom *goal) { return E("with-seed", seed, goal); }
+
+static mt_atom *sorted(const mt_atom *items)
+{
+    mt_atom *kids[MOST];
+    for (size_t i = 0; i < mt_len(items); i++) kids[i] = mt_keep(mt_at(items, i));
+    qsort(kids, mt_len(items), sizeof *kids, mt_order);
+    return mt_exprv(mt_len(items), kids);
+}
+
+static mt_atom *repeated(const mt_atom *x, size_t n)
+{
+    mt_atom *kids[MOST];
+    for (size_t i = 0; i < n; i++) kids[i] = mt_keep(x);
+    return mt_exprv(n, kids);
+}
+
+/* Two runs of a goal answer alike: C compares them. */
+static bool alike(metta *m, mt_atom *goal)
+{
+    mt_atom *first = value_of(m, mt_keep(goal)), *second = value_of(m, goal);
+    bool same = mt_eq(first, second);
+    mt_drop(first);
+    mt_drop(second);
+    return same;
+}
+
+int main(void)
+{
+    metta *m = mt_open(NULL);
+    if (!m) return fprintf(stderr, "boot: %s\n", mt_errmsg()), 1;
+    require("import lib_random", mt_one_truth(mt_eval(m, E("import!", "&self", E("library", "lib_random")))));
+
+    /* A sampler is a program. */
+    mt_atom *program = value_of(m, E("random-normal", 0, 1));
+    assert(answers_are(mt_eval(m, E("let", V("sample"), E("random-normal", 0, 1), E("get-metatype", V("sample")))), E(S(mt_kind_of(program) == MT_EXPR ? "Expression" : "Grounded")))
+           && "a program is an expression");
+    assert(answers_are(mt_eval(m, E("get-type", "random-normal")), E(E("->", "Number", "Number", "Expression"))) && "taking two numbers");
+    mt_atom *only = E(T("only")), *sum = E(E("+", 1, 2));
+    assert(answers_are(mt_eval(m, drawn(E("random-choice", mt_keep(only)))), E(mt_keep(mt_at(only, 0)))) && "a singleton is its choice");
+    assert(answers_are(mt_eval(m, E("size-atom", drawn(E("random-choice", mt_keep(sum))))), E((int64_t)mt_len(mt_at(sum, 0)))) && "runnable data stays data");
+    assert(answers_are(mt_eval(m, E("random-shuffle!", mt_unit())), E(mt_unit())) && "no shuffle of nothing");
+    mt_atom *four = E(1, 1, 2, 3), *fours = E(1, 2, 3, 4);
+    assert(answers_are(mt_eval(m, seeded(42, E("sort-atom", E("random-shuffle!", mt_keep(four))))), E(sorted(four))) && "a shuffle is a permutation");
+    assert(alike(m, seeded(42, E("random-shuffle!", mt_keep(fours)))) && "a seed replays a shuffle");
+    assert(answers_are(mt_eval(m, E("random-sample!", mt_unit(), 0)), E(mt_unit())) && "no sample of nothing");
+    assert(answers_are(mt_eval(m, seeded(42, E("sort-atom", E("random-sample!", mt_keep(four), 4)))), E(sorted(four))) && "a full sample is a permutation");
+    mt_atom *x = E(T("x"));
+    assert(answers_are(mt_eval(m, E("let", V("choice"), E("random-choice", mt_keep(x)), E("collapse", E("repeat", 3, V("choice"))))), E(repeated(mt_at(x, 0), 3)))
+           && "repeat owns repetition");
+    mt_atom *five = E(1, 2, 3, 4, 5), *xx = E(T("x"), T("x"));
+    assert(answers_are(mt_eval(m, seeded(42, E("size-atom", E("random-sample!", mt_keep(five), 3)))), E((int64_t)3)) && "a sample's size");
+    assert(answers_are(mt_eval(m, seeded(42, E("random-sample!", mt_keep(xx), 2))), E(mt_keep(xx))) && "equal values are separate occurrences");
+    assert(alike(m, seeded(9, drawn(E("random-choice", E(1, 2, 3, 4))))) && "a seed replays a choice");
+    mt_atom *var = E(V("x")), *vars = E(V("x"), V("x")), *error = E(E("Error", "data", "code"));
+    /* A singleton's every choice is its element, and a full sample is a
+       permutation, so C's expectations are the population's own atoms. */
+    mt_atom *three_x = repeated(mt_at(var, 0), 3), *xs = E(V("x"), V("x"), V("x")), *vars_sorted = sorted(vars), *error_sorted = sorted(error);
+    assert(answers_are(mt_eval(m, E("let", V("choice"), E("random-choice", mt_keep(var)),
+                                    E("==", E("map-atom", E(0, 1, 2), V("i"), E("eval", V("choice"))), E("quote", mt_keep(xs))))), E(B(mt_eq(three_x, xs))))
+           && "a variable keeps its identity");
+    assert(answers_are(mt_eval(m, E("let", V("sample"), seeded(42, E("random-sample!", mt_keep(vars), 2)), E("==", V("sample"), E("quote", mt_keep(vars))))), E(B(mt_eq(vars_sorted, vars))))
+           && "in a sample too");
+    assert(answers_are(mt_eval(m, E("let", V("sample"), E("random-sample!", mt_keep(error), 1), E("==", V("sample"), E("quote", mt_keep(error))))), E(B(mt_eq(error_sorted, error))))
+           && "an Error expression is data");
+
+    /* Degenerate samplers are their parameters; repeat 0 draws nothing. */
+    assert(answers_are(mt_eval(m, E("let", V("sample"), E("random-normal", 0, 1), E("collapse", E("repeat", 0, V("sample"))))), E(mt_unit())) && "no samples");
+    mt_atom *fours_f = E(4.0, 4.0, 4.0);
+    assert(answers_are(mt_eval(m, E("let", V("sample"), E("random-uniform", 4, 4), E("collapse", E("repeat", 3, V("sample"))))), E(mt_keep(fours_f)))
+           && "a zero-width uniform");
+    assert(answers_are(mt_eval(m, drawn(E("random-normal", 7, 0))), E((double)7)) && "a zero-deviation normal");
+    assert(answers_are(mt_eval(m, drawn(E("random-lognormal", 0, 0))), E(exp(0.0))) && "a zero-deviation lognormal");
+    assert(answers_are(mt_eval(m, drawn(E("random-triangular", 3, 3, 3))), E((double)3)) && "a point triangle");
+    assert(answers_are(mt_eval(m, E("let", V("sample"), E("random-bernoulli", 0), E("collapse", E("repeat", 2, V("sample"))))), E(E(B(false), B(false))))
+           && "never");
+    assert(answers_are(mt_eval(m, E("let", V("sample"), E("random-bernoulli", 1), E("collapse", E("repeat", 2, V("sample"))))), E(E(B(true), B(true))))
+           && "always");
+    assert(answers_are(mt_eval(m, E("let", V("sample"), E("random-normal", 0, 1), seeded(42, E("size-atom", E("collapse", E("repeat", 5, V("sample"))))))), E((int64_t)5))
+           && "a seeded stream's length");
+    assert(alike(m, E("let", V("sample"), E("random-normal", 0, 1), seeded(42, E("collapse", E("repeat", 4, V("sample")))))) && "a seed replays a stream");
+    mt_atom *first = value_of(m, E("let", V("sample"), E("random-normal", 0, 1), seeded(42, E("once", E("repeat", 100, V("sample"))))));
+    mt_atom *one = value_of(m, E("let", V("sample"), E("random-normal", 0, 1), seeded(42, E("eval", V("sample")))));
+    assert(mt_eq(first, one) && "the first of a stream is one draw");
+    assert(answers_are(mt_eval(m, drawn(E("random-normal", E("math-rational", 1, 2), 0))), E(0.5)) && "an exact mean");
+
+    /* Properties of any draw, checked in C on the engine's draw under seed 11. */
+    mt_atom *u = value_of(m, seeded(11, drawn(E("random-uniform", -4, 9))));
+    assert(mt_float(u) >= -4 && mt_float(u) <= 9 && "a uniform draw lies within its bounds");
+    mt_atom *n = value_of(m, seeded(11, drawn(E("random-normal", 0, 1))));
+    assert(fpclassify(mt_float(n)) == FP_NORMAL && "a normal draw is a normal double");
+    static const struct {
+        const char *claim, *sampler;
+        double p[2];
+        size_t count;
+        double at_least;
+        bool strict;
+    } positive[] = {
+        { "a lognormal draw is positive", "random-lognormal", { 0, 1 }, 2, 0, true },
+        { "an exponential draw is positive", "random-exponential", { 2 }, 1, 0, true },
+        { "a gamma draw is positive", "random-gamma", { 2, 3 }, 2, 0, true },
+        { "a Pareto draw is at least one", "random-pareto", { 3 }, 1, 1, false },
+        { "a Weibull draw is positive", "random-weibull", { 2, 3 }, 2, 0, true },
+    };
+    for (size_t i = 0; i < sizeof positive / sizeof *positive; i++) {
+        mt_atom *sampler = positive[i].count == 1 ? E(positive[i].sampler, positive[i].p[0]) : E(positive[i].sampler, positive[i].p[0], positive[i].p[1]);
+        mt_atom *d = value_of(m, seeded(11, drawn(sampler)));
+        assert((positive[i].strict ? mt_float(d) > positive[i].at_least : mt_float(d) >= positive[i].at_least) && positive[i].claim);
+        mt_drop(d);
+    }
+    mt_atom *t = value_of(m, seeded(11, drawn(E("random-triangular", -4, 9, 2))));
+    assert(mt_float(t) >= -4 && mt_float(t) <= 9 && "a triangular draw lies within its bounds");
+    mt_atom *b = value_of(m, seeded(11, drawn(E("random-beta", 2, 5))));
+    assert(mt_float(b) > 0 && mt_float(b) < 1 && "a beta draw lies strictly inside the unit interval");
+    mt_atom *coin = value_of(m, seeded(11, drawn(E("random-bernoulli", 0.25))));
+    assert(mt_kind_of(coin) == MT_BOOL && "a Bernoulli draw is a Bool");
+
+    /* Values that depend on the draws: C runs the library's recipes over the
+       engine's own stream for the seed. */
+    stream s42 = stream_of(m, 42), s2 = stream_of(m, 2);
+    stream s = s42;
+    assert(answers_are(mt_eval(m, seeded(42, drawn(E("random-gamma", 1.0e308, 1)))), E(gamma_draw(&s, 1.0e308, 1))) && "gamma at an enormous shape");
+    s = s42;
+    assert(answers_are(mt_eval(m, seeded(42, drawn(E("random-beta", 1.0e308, 1.0e308)))), E(beta_draw(&s, 1.0e308, 1.0e308))) && "beta at enormous shapes");
+    s = s2;
+    assert(answers_are(mt_eval(m, seeded(2, drawn(E("random-gamma", 0.001, 1)))), E(gamma_draw(&s, 0.001, 1))) && "a tiny shape underflows");
+    s = s2;
+    double rescued = gamma_draw(&s, 0.001, 1.0e300);
+    assert(answers_are(mt_eval(m, seeded(2, E(">", drawn(E("random-gamma", 0.001, 1.0e300)), 0))), E(B(rescued > 0))) && "and a large scale rescues it");
+    s = s42;
+    assert(answers_are(mt_eval(m, seeded(42, drawn(E("random-weibull", 1.0e308, 1.0e308)))), E(weibull_draw(&s, 1.0e308, 1.0e308)))
+           && "Weibull at enormous parameters");
+    assert(answers_are(mt_eval(m, E("math-class", drawn(E("random-lognormal", 1000, 0)))), E(S(isinf(exp(1000.0)) ? "infinite" : "normal")))
+           && "a lognormal overflows to infinity");
+    assert(answers_are(mt_eval(m, drawn(E("random-lognormal", -1000, 0))), E(exp(-1000.0))) && "and underflows to zero");
+
+    /* Programs are data: stored, read back, rewritten, rebuilt. */
+    mt_atom *twelve = value_of(m, E("random-normal", 12, 0));
+    require("store the sampler", mt_add(m, E("saved-sampler", twelve)));
+    assert(answers_are(mt_eval(m, E("let", V("sample"), E("match", "&self", E("saved-sampler", V("code")), V("code")), E("eval", V("sample")))), E((double)12))
+           && "a stored sampler draws");
+    mt_atom *uniform = value_of(m, E("random-uniform", 2, 10));
+    require("an interpolation of an entropy between two bounds", mt_len(uniform) == 4);
+    double r = 0.25, low = mt_float(mt_at(uniform, 2)), high = mt_float(mt_at(uniform, 3));
+    mt_atom *rewritten = E(mt_keep(mt_at(uniform, 0)), r, mt_keep(mt_at(uniform, 2)), mt_keep(mt_at(uniform, 3)));
+    mpq_t exact_r, lo, hi, dot;
+    mpq_inits(exact_r, lo, hi, dot, NULL);
+    mpq_set_d(exact_r, r), mpq_set_d(lo, low), mpq_set_d(hi, high);
+    mpq_sub(hi, hi, lo), mpq_mul(hi, hi, exact_r), mpq_add(dot, lo, hi);
+    assert(answers_are(mt_eval(m, E("eval", mt_keep(rewritten))), E(rounded(dot))) && "a rewritten entropy");
+    mpq_clears(exact_r, lo, hi, dot, NULL);
+    mt_atom *make = NULL;
+    mt_rows (row, mt_match(m, E("=", E("random-normal", V("mean"), V("deviation")), V("body")))) {
+        mt_drop(make);
+        make = E("|->", E(mt_keep(mt_bound(row, "mean")), mt_keep(mt_bound(row, "deviation"))), mt_keep(mt_bound(row, "body")));
+    }
+    require("random-normal is an equation", make != NULL);
+    mt_atom *constructor = value_of(m, make);
+    assert(answers_are(mt_eval(m, E("let", V("sample"), E(mt_keep(constructor), 9, 0), E("eval", V("sample")))), E((double)9)) && "a rebuilt constructor");
+    assert(answers_are(mt_eval(m, E("collapse", E("let", V("sample"), E("random-normal", E("superpose", E(1, 2)), 0), E("eval", V("sample"))))), E(E((double)1, (double)2)))
+           && "one program per alternative");
+    mt_atom *ab = E("a", "b");
+    assert(answers_are(mt_eval(m, E("let", V("sample"), E("quote", E("superpose", mt_keep(ab))), E("collapse", E("repeat", 2, V("sample"))))), E(E("a", "b", "a", "b")))
+           && "a superposed program repeats every answer");
+    assert(answers_are(mt_eval(m, E("let*", E(E(V("a"), E("random-normal", 2, 0)), E(V("b"), E("random-uniform", 3, 3)),
+                                              E(V("sum"), E("quote", E("+", E("eval", V("a")), E("eval", V("b")))))),
+                                    E("eval", V("sum")))), E((double)2 + (double)3))
+           && "programs compose");
+
+    /* Refusals: each sampler's own check. */
+    mt_atom *text = T("text"), *pair = E(1, 2), *single = E(1);
+    mt_atom *nothing = mt_unit();
+    assert(answers_are(refusal(m, E("random-choice", mt_keep(nothing))), E(verdict(mt_len(nothing) > 0))) && "no choice from nothing");
+    assert(answers_are(refusal(m, E("random-shuffle!", mt_keep(text))), E(verdict(mt_kind_of(text) == MT_EXPR))) && "a population is a collection");
+    static const struct {
+        const char *claim;
+        int count_kind;
+        double count;
+        int pop;
+    } counts[] = { { "a count past the population", 0, 1, 0 }, { "and past it again", 0, 3, 2 },
+                   { "a negative count", 0, -1, 1 },          { "a fractional count", 1, 1.0, 1 } };
+    mt_atom *pops[] = { mt_unit(), mt_keep(single), mt_keep(pair) };
+    for (size_t i = 0; i < 4; i++) {
+        mt_atom *count = counts[i].count_kind ? mt_real(counts[i].count) : mt_num((int64_t)counts[i].count);
+        const mt_atom *population = pops[counts[i].pop == 2 ? 2 : counts[i].pop == 1 ? 1 : 0];
+        assert(answers_are(refusal(m, E("random-sample!", mt_keep(population), mt_keep(count))), E(verdict(sample_ok(population, count)))) && counts[i].claim);
+        mt_drop(count);
+    }
+    for (size_t i = 0; i < 3; i++) mt_drop(pops[i]);
+    static const struct {
+        const char *claim, *sampler;
+        double p[3];
+        size_t n;
+        precondition *ok;
+    } bad[] = {
+        { "a negative deviation", "random-normal", { 0, -1 }, 2, normal_ok },
+        { "bounds out of order", "random-uniform", { 2, 1 }, 2, uniform_ok },
+        { "a mode outside", "random-triangular", { 0, 1, 2 }, 3, triangular_ok },
+        { "a zero rate", "random-exponential", { 0 }, 1, positive_ok },
+        { "a negative shape", "random-gamma", { -1, 2 }, 2, two_positive_ok },
+        { "a zero beta", "random-beta", { 2, 0 }, 2, two_positive_ok },
+        { "a probability past one", "random-bernoulli", { 1.1 }, 1, probability_ok },
+        { "a zero Pareto shape", "random-pareto", { 0 }, 1, positive_ok },
+        { "a zero Weibull scale", "random-weibull", { 0, 1 }, 2, two_positive_ok },
+    };
+    for (size_t i = 0; i < sizeof bad / sizeof *bad; i++) {
+        mt_atom *p[3];
+        for (size_t k = 0; k < bad[i].n; k++)
+            p[k] = bad[i].p[k] == trunc(bad[i].p[k]) ? mt_num((int64_t)bad[i].p[k]) : mt_real(bad[i].p[k]);
+        mt_atom *goal = bad[i].n == 1 ? E(bad[i].sampler, mt_keep(p[0])) : bad[i].n == 2 ? E(bad[i].sampler, mt_keep(p[0]), mt_keep(p[1]))
+                                                                                          : E(bad[i].sampler, mt_keep(p[0]), mt_keep(p[1]), mt_keep(p[2]));
+        assert(answers_are(refusal(m, goal), E(verdict(bad[i].ok((const mt_atom *const *)p)))) && bad[i].claim);
+        for (size_t k = 0; k < bad[i].n; k++) mt_drop(p[k]);
+    }
+    mt_atom *mean_x[] = { T("x"), mt_num(1) }, *infinite[] = { mt_real(INFINITY), mt_num(1) }, *minus[] = { mt_num(0), mt_num(-1) };
+    assert(answers_are(refusal(m, E("random-normal", mt_keep(mean_x[0]), mt_keep(mean_x[1]))), E(verdict(normal_ok((const mt_atom *const *)mean_x)))) && "a text mean");
+    assert(answers_are(refusal(m, E("random-normal", E("math-real", "inf", mt_unit()), 1)), E(verdict(normal_ok((const mt_atom *const *)infinite)))) && "an infinite mean");
+    assert(answers_are(refusal(m, E("let", V("sample"), E("random-normal", 0, -1), E("repeat", 0, V("sample")))), E(verdict(normal_ok((const mt_atom *const *)minus))))
+           && "refused before any draw");
+
+    mt_atom *held[] = { program, only, sum, three_x, xs, vars_sorted, error_sorted, nothing, four, fours, x, five, xx, var, vars, error, fours_f, first, one, u, n, t, b, coin, uniform, rewritten,
+                        constructor, ab, text, pair, single, mean_x[0], mean_x[1], infinite[0], infinite[1], minus[0], minus[1] };
+    for (size_t i = 0; i < sizeof held / sizeof *held; i++) mt_drop(held[i]);
+    mt_close(m);
+    return 0;
+}
+#else
+#include <stdio.h>
+
+/* Without GMP's headers the program only says what it needs. */
+int main(void)
+{
+    fputs("36-random_lib.c needs GMP: install its development files, then build with\n"
+          "cc 36-random_lib.c $(pkg-config --cflags --libs cmetta gmp) -lm\n", stderr);
+    return 77;
+}
+#endif

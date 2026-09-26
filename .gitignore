@@ -1,7 +1,11 @@
-# Purpose: keep build products and local verification records out of releases.
-# Open Obligations: None.
-/build/
+# Purpose: keep what a reader builds beside a program, and local records, out
+#   of git. A program built in place is its file name less .c, a plugin is a
+#   .so, and a.out is what cc writes when told no name.
+/ch*/**/*
+!/ch*/**/
+!/ch*/**/*.*
+*.so
+a.out
 /ai-tmp/
 /ai-battery-*/
 /agenticmind.json
-__pycache__/

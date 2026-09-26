@@ -5,8 +5,8 @@ This repository is licensed under the Apache License, Version 2.0, in
 LICENSE. Its twins of the programs that MeTTa-Examples,
 https://github.com/MesTTo/MeTTa-Examples, derives from PeTTa,
 https://github.com/patham9/PeTTa, translate PeTTa's MeTTa sources,
-that corpus's ORIGINS.tsv names those programs, and one fixture is a
-copy of a PeTTa file. PeTTa is distributed under the MIT License, whose
+and that corpus's ORIGINS.tsv names those programs. PeTTa is
+distributed under the MIT License, whose
 copyright notice and permission notice must be included in all copies
 or substantial portions of it, so its LICENSE follows unchanged, as
 https://github.com/patham9/PeTTa/blob/43705f5d9ff8958ffe7f0aa6777fb8477f2401f2/LICENSE

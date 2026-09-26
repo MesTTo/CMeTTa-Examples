@@ -1,0 +1,59 @@
+/* Purpose: growing a space 300 times. demo-peano seeds (num Z) and expands
+ *   it, each round adding the successor of every numeral not yet stored;
+ *   C then measures each answered numeral's depth by walking its S layers
+ *   with mt_at and checks the depths are exactly 0 to 300, each once.
+ * Guarantees: the original's claim holds, as a count and as the set of
+ *   depths [tested 2026-09-27T00:35:58+10:00:
+ *   make -C extensions/cmetta corpus-check].
+ */
+#define MT_SHORTHAND
+#include <assert.h>
+#include <cmetta.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+/* A door the program needs before it can go on: on refusal, say why and stop. */
+#define require(what, ok) \
+    ((ok) ? (void)0 : (fprintf(stderr, "%s: %s\n", (what), mt_errmsg()), exit(EXIT_FAILURE)))
+
+enum { ROUNDS = 300 };
+
+/* How many S wrap Z, or -1 for anything that is not a numeral. */
+static int depth(const mt_atom *numeral)
+{
+    int d = 0;
+    while (mt_kind_of(numeral) == MT_EXPR && mt_len(numeral) == 2 && strcmp(mt_name(mt_at(numeral, 0)), "S") == 0) {
+        numeral = mt_at(numeral, 1);
+        d++;
+    }
+    return mt_kind_of(numeral) == MT_SYMBOL && strcmp(mt_name(numeral), "Z") == 0 ? d : -1;
+}
+
+int main(void)
+{
+    metta *m = mt_open(NULL);
+    if (!m) return fprintf(stderr, "boot: %s\n", mt_errmsg()), 1;
+    require("add-atom-no-duplicate", mt_add(m, E("=", E("add-atom-no-duplicate", V("Space"), V("Atom")),
+                                                E("if", E("==", mt_unit(), E("collapse", E("once", E("match", V("Space"), V("Atom"), V("Atom"))))),
+                                                  E("add-atom", V("Space"), V("Atom")), E("empty")))));
+    require("expand-once", mt_add(m, E("=", E("expand-once"),
+                                      E("case", E("match", "&self", E("num", V("t")), V("t")),
+                                        E(E(V("x"), E("add-atom-no-duplicate", "&self", E("num", E("S", V("x"))))))))));
+    require("expandK", mt_add(m, E("=", E("expandK", V("n")),
+                                  E("if", E("==", V("n"), 0), "done", E("let", V("temp1"), E("expand-once"), E("expandK", E("-", V("n"), 1)))))));
+    require("demo-peano", mt_add(m, E("=", E("demo-peano", V("K")),
+                                     E("let*", E(E(V("s"), E("add-atom", "&self", E("num", "Z"))), E(V("g"), E("expandK", V("K")))),
+                                       E("match", "&self", E("num", V("1")), V("1"))))));
+
+    bool seen[ROUNDS + 1] = { false };
+    int64_t numerals = 0, distinct = 0;
+    mt_each (numeral, mt_eval(m, E("demo-peano", ROUNDS))) {
+        int d = depth(numeral);
+        numerals++;
+        if (d >= 0 && d <= ROUNDS && !seen[d]) seen[d] = true, distinct++;
+    }
+    assert((numerals == distinct ? numerals : -1) == ROUNDS + 1 && "one numeral per depth, 0 to 300");
+    mt_close(m);
+    return 0;
+}
