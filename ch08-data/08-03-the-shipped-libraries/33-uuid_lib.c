@@ -10,7 +10,7 @@
  * Build: cc 33-uuid_lib.c $(pkg-config --cflags --libs cmetta uuid libcrypto)
  * Assumes: libuuid and libcrypto (for the shared hex), through pkg-config.
  * Guarantees: all forty-nine claims of the original hold
- *   [tested 2026-09-27T00:35:58+10:00: make -C extensions/cmetta corpus-check].
+ *   [tested 2026-09-27T07:03:56+10:00: make -C extensions/cmetta corpus-check].
  */
 #define MT_SHORTHAND
 #if __has_include(<uuid.h>) && __has_include(<openssl/evp.h>)
@@ -251,9 +251,9 @@ int main(void)
     /* The equations read back out of &self. */
     const char *id[] = { "id" }, *three_params[] = { "v", "ns", "name" };
     mt_atom *inspect = recipe(m, E("uuid-version", V("id")), id, 1);
-    assert(answers_are(mt_eval(m, E(inspect, E("uuid-nil"))), E((int64_t)uuid_type(nil))) && "a version recipe");
+    assert(answers_are(mt_eval(m, E(mt_keep(inspect), E("uuid-nil"))), E((int64_t)uuid_type(nil))) && "a version recipe");
     mt_atom *derive = recipe(m, E("uuid-name", V("v"), V("ns"), V("name")), three_params, 3);
-    assert(answers_are(mt_eval(m, E(derive, 5, "dns", mt_keep(example))), E(named(5, dns, example))) && "a name recipe");
+    assert(answers_are(mt_eval(m, E(mt_keep(derive), 5, "dns", mt_keep(example))), E(named(5, dns, example))) && "a name recipe");
     assert(answers_are(mt_eval(m, E("collapse", E("uuid-version", E("superpose", E(T("00000000-0000-0000-0000-000000000000"), T("ffffffff-ffff-ffff-ffff-ffffffffffff")))))), E(E((int64_t)uuid_type(nil), (int64_t)uuid_type(all_ones))))
            && "one version per alternative");
     assert(answers_are(mt_eval(m, E("uuid-name", 3, mt_keep(dns), E("string-from-codes", mt_keep(nul_codes)))), E(named(3, dns, with_nul)))

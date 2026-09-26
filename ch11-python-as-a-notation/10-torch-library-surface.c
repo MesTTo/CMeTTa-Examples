@@ -8,7 +8,7 @@
  *   original's tolerance. Where torch is absent the twin says so and checks
  *   only that the recorded status is the probe's verdict.
  * Guarantees: the original's claims hold where torch is importable
- *   [tested 2026-09-27T00:35:58+10:00: make -C extensions/cmetta corpus-check].
+ *   [tested 2026-09-27T07:03:56+10:00: make -C extensions/cmetta corpus-check].
  * Build: cc 10-torch-library-surface.c $(pkg-config --cflags --libs cmetta) -lm
  */
 #define MT_SHORTHAND
@@ -127,7 +127,7 @@ int main(void)
     for (size_t i = 0; i < 3; i++) shifted[i] = fmax(0, three[i] - twos[i]);
     mt_atom *third = mt_one(mt_eval(m, E("torch-item", E("torch-mean", E("torch-relu", E("torch-sub", tensor(three, 3), tensor(twos, 3)))))));
     assert(third && fabs(mt_float(third) - mean(shifted, 3)) < 0.000001 && "a pipeline within float32 of C's double");
-    mt_drop(third), mt_drop(probe);
+    mt_drop(third);
     mt_close(m);
     return 0;
 }

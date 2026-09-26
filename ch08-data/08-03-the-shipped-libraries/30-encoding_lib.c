@@ -13,7 +13,7 @@
  *   libutf8proc)
  * Assumes: libcrypto and libutf8proc, found through pkg-config.
  * Guarantees: all forty-three claims of the original hold
- *   [tested 2026-09-27T00:35:58+10:00: make -C extensions/cmetta corpus-check].
+ *   [tested 2026-09-27T07:03:56+10:00: make -C extensions/cmetta corpus-check].
  */
 #define MT_SHORTHAND
 #if __has_include(<openssl/evp.h>) && __has_include(<utf8proc.h>)
@@ -243,7 +243,7 @@ int main(void)
     require("hex-encode is an equation", lambda != NULL);
     mt_atom *format = mt_one(mt_eval(m, lambda)), *edge = E(0, 255);
     require("which evaluates", format != NULL);
-    assert(answers_are(mt_eval(m, E(format, mt_keep(edge))), E(hex_of(edge))) && "the recipe applied");
+    assert(answers_are(mt_eval(m, E(mt_keep(format), mt_keep(edge))), E(hex_of(edge))) && "the recipe applied");
     assert(answers_are(mt_eval(m, E("collapse", E("hex-encode", E("superpose", E(mt_unit(), mt_keep(edge)))))), E(E(hex_of(none), hex_of(edge))))
            && "one answer per alternative");
 
