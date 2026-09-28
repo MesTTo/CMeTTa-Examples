@@ -72,7 +72,7 @@ int main(void)
 
     mt_atom *written[] = { S("cat"), S("min"), N(1), T("text"), E("f", 1) };
     for (size_t i = 0; i < sizeof written / sizeof *written; i++) {
-        assert(answers_are(mt_eval(m, E("soft-symbol?", mt_keep(written[i]))), E(B(soft_symbol(written[i])))) && "soft-symbol?");
+        assert(answers_are(mt_eval(m, E("is-symbol", mt_keep(written[i]))), E(B(soft_symbol(written[i])))) && "is-symbol");
         mt_drop(written[i]);
     }
 

@@ -1,6 +1,6 @@
-/* Purpose: C's model of lib_soft's weak unification [source:
- *   lib/lib_soft/lib.metta, sym-sim to soft-best, and lib/lib_soft/lib_soft.pl,
- *   soft-symbol?; commit=8d651070dedaa190e25cc388c029172a63e967be]:
+/* Purpose: C's model of lib_soft's weak unification [source
+ *   2026-09-29T04:48:10+10:00: lib/lib_soft/lib.metta, sym-sim to soft-best,
+ *   and engine/metta/space_hooks.pl, is-symbol]:
  *   - two symbols are 1.0 close when they are one symbol, and otherwise as
  *     close as the closest declared similarity between them, read both
  *     ways, or 0.0;
