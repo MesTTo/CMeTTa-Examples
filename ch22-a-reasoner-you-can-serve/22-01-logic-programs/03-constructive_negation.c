@@ -3,16 +3,23 @@
  *   True, and each rule is the term it is. C decides each answer from its
  *   tables: the birds that fly are the birds that are not penguins, the
  *   unmarried students the students nobody married, a person's entitlements
- *   the pensions the rules give, or nothing where they give none. A
- *   negation on an unbound variable leaves a constraint, and binding the
- *   variable afterwards keeps it exactly when C's own predicate says the
- *   bound value satisfies the negation: no outgoing edge, a dif that holds,
- *   no passing mark, no child in &kin, a CLP(FD) bound that fails. != asks
- *   now and binds later, so a later binding never contradicts it. A case, a
- *   superpose and the comparisons negate by what each answers, the latter by
- *   C's own comparison. An Atom-typed argument stays written on both sides.
- * Guarantees: all fifty claims of the original hold
- *   [tested 2026-09-27T00:35:58+10:00: make -C extensions/cmetta corpus-check].
+ *   the pensions the rules give, or nothing where they give none, and one
+ *   node reaches another when a walk over the links that visits each node
+ *   once gets there, round a cycle included. A negation on an unbound
+ *   variable leaves a constraint, and binding the variable afterwards keeps
+ *   it exactly when C's own predicate says the bound value satisfies the
+ *   negation: no outgoing edge, a dif that holds, no passing mark, no child
+ *   in &kin, a CLP(FD) bound that fails. != asks now and leaves nothing
+ *   behind, so a later binding may contradict it; under a negation it is
+ *   read both ways, so a value bound afterwards gets C's own comparison
+ *   negated. A case, a superpose and the comparisons negate by what each
+ *   answers, the latter by C's own comparison. A builtin or a special form
+ *   with its variables bound negates by failure: it is provable when an
+ *   answer is True. A negation answers once per question, however many
+ *   proofs it has. An Atom-typed argument stays written on both sides.
+ * Guarantees: all fifty-seven claims of the original hold
+ *   [tested 2026-09-28T15:37:31+10:00: extensions/cmetta/tools/twin_lane.py
+ *   --engine . ch22-a-reasoner-you-can-serve/22-01-logic-programs/03-constructive_negation.c].
  */
 #define MT_SHORTHAND
 #include <assert.h>
@@ -55,6 +62,8 @@ static inline bool answers_are(mt_answers *answers, mt_atom *want)
 #define C_LT(a, b) ((a) < (b))
 #define C_GT(a, b) ((a) > (b))
 #define T_GT(a, b) mt_expr(">", a, b)
+#define C_ADD(a, b) ((a) + (b))
+#define T_ADD(a, b) mt_expr("+", a, b)
 #define T_MUL(a, b) mt_expr("*", a, b)
 
 typedef struct fact {
@@ -102,6 +111,36 @@ static bool has_outgoing(const char *who)
     return false;
 }
 
+/* The links reaches/2 walks, a loop at a among them. */
+static const char *const links[][2] = { { "a", "a" }, { "a", "b" }, { "b", "c" } };
+#define LINKS (sizeof links / sizeof *links)
+
+/* Whether TO is one link or more from FROM: a depth-first walk that records
+   FROM as seen before the first move and every node it reaches after, so
+   each node leaves the stack once and the loop at a is taken once, not
+   forever. Time: at most LINKS (2 LINKS + 3) strcmp calls. At most
+   LINKS + 1 nodes leave the stack, each scanning every link, and each link
+   is followed at most once, checked against TO and at most LINKS + 1 seen
+   nodes. */
+static bool reaches(const char *from, const char *to)
+{
+    const char *stack[LINKS + 1], *seen[LINKS + 1] = { from };
+    size_t top = 0, nseen = 1;
+    stack[top++] = from;
+    while (top > 0) {
+        const char *at = stack[--top];
+        for (size_t i = 0; i < LINKS; i++) {
+            if (strcmp(links[i][0], at) != 0) continue;
+            const char *next = links[i][1];
+            if (strcmp(next, to) == 0) return true;
+            bool known = false;
+            for (size_t j = 0; j < nseen && !known; j++) known = strcmp(seen[j], next) == 0;
+            if (!known) seen[nseen++] = next, stack[top++] = next;
+        }
+    }
+    return false;
+}
+
 static const struct { const char *who; int64_t mark; } marks[] = { { "carol", 90 }, { "carol", 30 }, { "dave", 10 }, { "dave", 20 } };
 #define MARKS (sizeof marks / sizeof *marks)
 enum { PASS = 50 };
@@ -121,6 +160,16 @@ static bool has_child(const char *who)
 }
 
 static mt_answers *truly(metta *m, mt_atom *goal, mt_atom *answer) { return mt_eval(m, E("let", B(true), goal, answer)); }
+
+/* Whether a value is True, the one answer that proves a goal; takes it. */
+static bool is_true(mt_atom *value)
+{
+    mt_atom *yes = B(true);
+    bool is = mt_eq(value, yes);
+    mt_drop(yes);
+    mt_drop(value);
+    return is;
+}
 
 static void negated(metta *m, const char *claim, mt_atom *goal, bool provable)
 {
@@ -251,9 +300,35 @@ int main(void)
         for (size_t j = 0; j < superposed[i].n; j++) items[j] = B(superposed[i].items[j]), any = any || superposed[i].items[j];
         negated(m, "a superpose is not True when none is", E("superpose", mt_exprv(superposed[i].n, items)), any);
     }
+    negated(m, "a builtin is negated by failure", T_ADD(1, 2), is_true(N(C_ADD(1, 2))));
+    negated(m, "and so is a special form", E("once", E("bird", "tweety")), holds("bird", "tweety"));
     negated(m, "comparisons negate to comparisons", T_GT(1, 2), C_GT(1, 2));
     negated(m, "both ways", T_GT(2, 1), C_GT(2, 1));
     negated(m, "and equality", T_EQ(1, 1), C_EQ(1, 1));
+
+    size_t proofs = 0;
+    for (size_t i = 0; i < PENSIONS; i++) proofs += gets(&pensions[i], "mc-tavish");
+    assert(answers_are(mt_eval(m, E("not-provable", E("pension", "mc-tavish", V("any")))), E(B(proofs == 0)))
+           && "one answer to the question, however many proofs");
+
+    for (size_t i = 0; i < LINKS; i++) require("a link", mt_add(m, E("link", links[i][0], links[i][1])));
+    require("reaches in one link", mt_add(m, E("=", E("reaches", V("x"), V("y")),
+                                               E("match", mt_spaceref("&self"), E("link", V("x"), V("y")), B(true)))));
+    require("or through the next node",
+            mt_add(m, E("=", E("reaches", V("x"), V("y")),
+                        E("and", E("match", mt_spaceref("&self"), E("link", V("x"), V("z")), B(true)),
+                          E("reaches", V("z"), V("y"))))));
+    static const char *const journeys[][2] = { { "a", "c" }, { "c", "a" } };
+    for (size_t i = 0; i < 2; i++)
+        negated(m, "a recursion over a cycle is decided by its dual", E("reaches", journeys[i][0], journeys[i][1]),
+                reaches(journeys[i][0], journeys[i][1]));
+
+    static const int64_t opened[] = { 1, 2 };
+    for (size_t i = 0; i < 2; i++)
+        assert(answers_are(mt_eval(m, E("let", V("r"), E("not-provable", E("!=", V("x"), 1)),
+                                        E("let", V("x"), N(opened[i]), V("r")))),
+                           E(B(!(opened[i] != 1))))
+               && "an open != answers at each value");
 
     negated(m, "a CLP(FD) bound negates", E("#<", 5, 1), C_LT(5, 1));
     static const int64_t below[] = { 7, 3 };
